@@ -255,7 +255,7 @@ def tex_footer(texf):
 """)
 
 if __name__ == "__main__":
-    for T in [ 100, 10 ]:
+    for T in [ 10, 100 ]:
             outtex = ("espfit%d.tex" % T)
             with open(outtex, "w") as texf:
                     tex_header(T, texf)

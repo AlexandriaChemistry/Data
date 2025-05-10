@@ -1,7 +1,7 @@
 # Accurate-Electrostatics-for-Biomolecular-Systems
 Scripts, force field files for widely-used and Alexandria force fields (only electrostatic part), and electrostatic potential (ESP) fitting for reproducing results in the scientific article
 [_Accurate Electrostatics for Biomolecular Systems through Machine Learning_].
-
+Here's the [preprint] (https://chemrxiv.org/engage/chemrxiv/article-details/67f82e8e81d2151a02e49d35)
 
 ## Directory Layout
 
