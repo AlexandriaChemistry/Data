@@ -9,21 +9,21 @@ train   = "Train"
 test    = "Test"
 
 acmparm = {
-    "Mulliken": { "ref": "Mulliken1955a", "ff": "coul-p2.xml" },
-    "Hirshfeld": { "ref": "Hirshfeld1977a",  "ff": "coul-p2.xml" },
-    "ESP": { "ref": "Besler1990a", "ff": "coul-p2.xml" },
-    "CM5": { "ref": "Marenich2012a",  "ff": "coul-p2.xml" },
-    "BCC": { "ref": "Jakalian2000a", "ff": "coul-p2.xml" },
-    "RESP": { "ref": "Bayly1993a", "ff": "coul-p2.xml" },
-    "ACM1": { "ff": "esp-g.xml", "nparm": 48, "label": "GC", "target": "ESP" },
-    "ACM2": { "ff": "esp-gv.xml", "nparm": 54, "label": "GC+PGV", "target": "ESP" },
-    "ACM3": { "ff": "coul-p2.xml", "nparm": 32, "label": "PC", "target": "Elec" },
-    "ACM4": { "ff": "all-p2.xml", "nparm": 32, "label": "PC", "target": "Elec+Induc" },
-    "ACM5": { "ff": "coul-g2.xml", "nparm": 48, "label": "GC", "target": "Elec" },
-    "ACM6": { "ff": "all-g2.xml", "nparm": 48, "label": "GC", "target": "Elec+Induc" },
-    "ACM7": { "ff": "coul-gv2.xml", "nparm": 54, "label": "GC+PGV", "target": "Elec" },
-    "ACM8": { "ff": "all-gv2.xml", "nparm": 54, "label": "GC+PGV", "target": "Elec+Induc" },
-    "ACM9": { "ff": "all-pg.xml", "nparm": 123, "label": "PC+GVS", "target": "Elec,Induc" }
+    "Mulliken":  { "ref": "Mulliken1955a", "ff": "coul-p.xml" },
+    "Hirshfeld": { "ref": "Hirshfeld1977a",  "ff": "coul-p.xml" },
+    "ESP":       { "ref": "Besler1990a", "ff": "coul-p.xml" },
+    "CM5":       { "ref": "Marenich2012a",  "ff": "coul-p.xml" },
+    "BCC":       { "ref": "Jakalian2000a", "ff": "coul-p.xml" },
+    "RESP":      { "ref": "Bayly1993a", "ff": "coul-p.xml" },
+    "ACM-esp-G":      { "ff": "esp-g.xml", "nparm": 48, "label": "GC", "target": "ESP" },
+    "ACM-esp-GV":     { "ff": "esp-gv.xml", "nparm": 54, "label": "GC+PGV", "target": "ESP" },
+    "ACM-elec-P":     { "ff": "coul-p.xml", "nparm": 32, "label": "PC", "target": "Elec" },
+    "ACM-allelec-P":  { "ff": "all-p.xml", "nparm": 32, "label": "PC", "target": "Elec+Induc" },
+    "ACM-elec-G":     { "ff": "coul-g.xml", "nparm": 48, "label": "GC", "target": "Elec" },
+    "ACM-allelec-G":  { "ff": "all-g.xml", "nparm": 48, "label": "GC", "target": "Elec+Induc" },
+    "ACM-elec-GV":    { "ff": "coul-gv.xml", "nparm": 54, "label": "GC+PGV", "target": "Elec" },
+    "ACM-allelec-GV": { "ff": "all-gv.xml", "nparm": 54, "label": "GC+PGV", "target": "Elec+Induc" },
+    "ACM-all-PG":     { "ff": "all-pg.xml", "nparm": 123, "label": "PC+GVS", "target": "Elec,Induc" }
 }
 
 def run_one(qtype:str) -> dict:
@@ -84,11 +84,13 @@ charge_models = [
     ("BCC", ""),
     ("RESP",""),
     ("header", "Non-polarizable ESP-based ACT models" ),
-    ("ACM", "1"), ("ACM", "2"),
+    ("ACM", "-esp-G"), ("ACM", "-esp-GV"),
     ("header", "Non-polarizable SAPT-based ACT models" ),
-    ("ACM", "3"), ("ACM", "4"), ("ACM", "5"), ("ACM", "6"), ("ACM", "7"), ("ACM", "8"),
+    ("ACM", "-elec-P"), ("ACM", "-allelec-P"),
+    ("ACM", "-elec-G"), ("ACM", "-allelec-G"),
+    ("ACM", "-elec-GV"), ("ACM", "-allelec-GV"),
     ("header", "Polarizable SAPT-based ACT model" ),
-    ("ACM", "9")
+    ("ACM", "-all-PG")
 ]
 
 for qt, suffix in charge_models:
