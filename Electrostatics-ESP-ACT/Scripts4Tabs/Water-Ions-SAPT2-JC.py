@@ -49,9 +49,9 @@ file_path = "ion-water-SAPT2-TIP4Pew-ACT4S.tex"
 with open(file_path, "w") as file:
     file.write("\\begin{table}[ht]\n")
     file.write("\\centering\n")
-    file.write("\\caption{\\textbf{Water-ion energies at their energy minimum.} Minimum energy distance (\\AA) between ions and water oxygen/hydrogen from Experiment (ref.~\\citenum{Heyrovska2006a}), and minimized water dimer (ref.~\\citenum{temelso2011benchmark}). Electrostatic energies are reported in kJ/mol from the SAPT2+(CCD)-$\delta$MP2 method with an aug-cc-pVTZ basis set, TIP4P-Ew~\cite{Horn2004a} with point charges representing ions, and SWM4-NDP~\cite{Lamoureux2006a} with ions due to Yu {\\em et al.}~\\cite{Yu2010a}, point core+Gaussian vsite (GC+PGV), and point charge + Gaussian vsite and shell (PC+GVS) using ACT.}")
+    file.write("\\caption{\\textbf{Water-ion energies at their energy minimum.} Minimum energy distance (\\AA) between ions and water oxygen/hydrogen from Experiment (ref.~\\citenum{Heyrovska2006a}), and minimized water dimer (ref.~\\citenum{temelso2011benchmark}). Electrostatic energies are reported in kJ/mol from the SAPT2+(CCD)-$\\delta$MP2 method with an aug-cc-pVTZ basis set, TIP4P-Ew~\\cite{Horn2004a} with point charges representing ions, and SWM4-NDP~\\cite{Lamoureux2006a} with ions due to Yu {\\em et al.}~\\cite{Yu2010a}, point core+Gaussian vsite (GC+PGV), and point charge + Gaussian vsite and shell (PC+GVS) using ACT.}")
     file.write("\n")
-    file.write("\label{tab:ion_water2}")
+    file.write("\\label{tab:ion_water2}")
     file.write("\n")
     file.write("\\begin{tabular}{lcccccc} \n")
     file.write("\\hline \n")

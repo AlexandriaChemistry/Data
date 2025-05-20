@@ -235,16 +235,17 @@ def doit(T:int, texf):
         print("Please check %s" % outpdf)
 
 def tex_header(T:int, texf):
+        fbegin = { 10: "2.0", 100: "0.0" }
         texf.write("""
 \\begin{table}[htb]
 \\centering
-\\caption{ESP parameters for ions and charge models (CM), charge on core q$_c$ and shells q$_s$ $i$ and $ii$, respectively, distribution widths $\\zeta$ in 1/\\text{\\AA}. Charge models include a positive point charge with either one Gaussian (PC+G) or 1S Slater distributed charge (PC+1S), and a point charge with two Gaussian charges (PC+G+G), or a point charge with a 1S and a 2S Slater charge (PC+1S+2S). Root mean square error (kJ/mol e) after fitting from 0.0 to 4.5 {\\AA}.}   
+\\caption{ESP parameters for ions and charge models (CM), charge on core q$_c$ and shells q$_s$ $i$ and $ii$, respectively, distribution widths $\\zeta$ in 1/\\text{\\AA}. Charge models include a positive point charge with either one Gaussian (PC+G) or 1S Slater distributed charge (PC+1S), and a point charge with two Gaussian charges (PC+G+G), or a point charge with a 1S and a 2S Slater charge (PC+1S+2S). Root mean square error (kJ/mol e) after fitting from %s to 4.5 {\\AA}.}   
 \\label{tab:ESP%d}
 \\begin{tabular}{cccccccccccccccc}
 \\hline
 Ion & CM & $q_c$ & $q_s{i}$ & $q_s{ii}$ & $\\zeta_s{i}$ & $\\zeta_s{ii}$ & RMSE \\\\
 \\hline
-""" % T)
+""" % ( fbegin[T], T ) )
 
 def tex_footer(texf):
         texf.write("""

@@ -113,23 +113,23 @@ if __name__ == "__main__":
         filename = ( "electable-%d.tex" % T)
 
         ctext       = { 0: "  a Gaussian charge", 1: "  a 1S Slater charge", 2: "  two Gaussian charges", 3: "  a 1S and a 2S Slater charge" }
-        caption     = "Electrostatic energies at the experimental minimum energy distance~\cite{NISTa} based on the SAPT0~\cite{Sherill2013a} level of theory. Point charge (PC) energy follows from Coulomb's law. ESP indicates model  consisting of a point charge, combined with "
+        caption     = "Electrostatic energies at the experimental minimum energy distance~\\cite{NISTa} based on the SAPT0~\\cite{Sherill2013a} level of theory. Point charge (PC) energy follows from Coulomb's law. ESP indicates model consisting of a point charge, combined with "
     
         abcd   = "ABCD"
         myesps = ""
         for ppp in range(len(print_funcs)):
             pf = print_funcs[ppp]
             myesps += (" & ESP %c " % abcd[ppp] )
-            caption += str(abcd[ppp]) + ":"
+            caption += " " + str(abcd[ppp]) + ":"
             caption += ctext[pf]
             if ppp < len(print_funcs)-2:
                 caption += ","
             elif ppp == len(print_funcs)-2:
                 caption += " or "
         if T == 10:
-            caption += " fitted to the Hartree-Fock electrostatic potential from 2.0 to 4.5 {\AA}."
+            caption += " fitted to the Hartree-Fock electrostatic potential from 2.0 to 4.5 {\\AA}."
         elif T == 100:
-            caption += " fitted to the Hartree-Fock electrostatic potential from 0.0 to 4.5 {\AA}."
+            caption += " fitted to the Hartree-Fock electrostatic potential from 0.0 to 4.5 {\\AA}."
         with open(filename, "w") as outf:
             outf.write("""\\begin{table}[ht]
 \\centering

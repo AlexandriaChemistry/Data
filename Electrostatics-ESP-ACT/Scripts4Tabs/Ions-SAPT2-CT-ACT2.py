@@ -32,17 +32,17 @@ def mse(data, ref_key1, ref_key2):
 def dict_to_list_of_lists(data):
     rows = []
     for key, value in data.items():
-        rows.append([key, value.get("rmin", "N/A"),  f"{value.get('eelec-SAPT', 'N/A'):.1f}", f"{value.get('eelec-CT', 'N/A'):.1f}", f"{value.get('eelec-Walz2018a', 'N/A'):.1f}",  f"{value.get('eelec-ACT-G', 'N/A'):.1f}", f"{value.get('eelec-ACT-S', 'N/A'):.1f}"])
+        rows.append([key.replace("-",""), value.get("rmin", "N/A"),  f"{value.get('eelec-SAPT', 'N/A'):.1f}", f"{value.get('eelec-CT', 'N/A'):.1f}", f"{value.get('eelec-Walz2018a', 'N/A'):.1f}",  f"{value.get('eelec-ACT-G', 'N/A'):.1f}", f"{value.get('eelec-ACT-S', 'N/A'):.1f}"])
     return rows
 
 
-headers = ["Ions", "r$_{min}$", "SAPT", "PC", "Walz {\em et al.}", "GC+PGV", "PC+GVS"]
+headers = ["Ions", "r$_{min}$", "SAPT", "PC", "Walz {\\em et al.}", "GC+PGV", "PC+GVS"]
 
 
 table_string= tabulate(dict_to_list_of_lists(sapt2), headers, tablefmt="latex_raw")
 
 
-caption= "\\caption{Minimum energy distance (\AA) between ions and electrostatic energies from SAPT2+(CCD)$\delta$MP2 with the aug-cc-pVTZ basis set, for point charges (PC), the Walz {\em et al.} model with a Gaussian charge distribution~\cite{Walz2018a}, and the ACT models GC+PVG and PC+GVS consisting of a point charge and virtual site with a Gaussian charge (K$^+$ and halide ions only) and a Drude particle with a Gaussian charge (PC+GVS only). The RMSD and MSE were calculated with respect to the SAPT2+(CCD)$\delta$MP2 with the aug-cc-pVTZ basis set electrostatic energy. }"
+caption= "\\caption{Minimum energy distance (\\AA) between ions and electrostatic energies from SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set, for point charges (PC), the Walz {\\em et al.} model with a Gaussian charge distribution~\\cite{Walz2018a}, and the ACT models GC+PVG and PC+GVS consisting of a point charge and virtual site with a Gaussian charge (K$^+$ and halide ions only) and a Drude particle with a Gaussian charge (PC+GVS only). The RMSD and MSE were calculated with respect to the SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set electrostatic energy. Note that the level of theory is different from Tables~\\ref{tab:sapt100} and~\\ref{tab:sapt10} and the results cannot be compared directly. In addition, the results in Tables~\\ref{tab:sapt100} and~\\ref{tab:sapt10} are from fitting models to the ESP, whereas in this table training was done on SAPT data as indicated above.}"
 
 
 label = "\\label{tab:sapt2_ions}"

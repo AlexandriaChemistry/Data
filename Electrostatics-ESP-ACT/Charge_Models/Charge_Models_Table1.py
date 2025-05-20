@@ -1,86 +1,87 @@
 #!/usr/bin/env python3
 
-import os
-import sys
+import os, glob, sys
 
 def run_command(command):
     os.system(command)
 
-def run_one(qtype: str, suffix: str = "") -> dict:
-    molprops = "../AlexandriaFF/merged6.xml" #sapt-0.015.xml"
-    log_filename = f"{qtype}{suffix}.log"
-    base_command = f"alexandria train_ff -mp {molprops} -nooptimize -g {log_filename}"
+train   = "Train"
+test    = "Test"
 
-    suffix_commands = {
-        "1": " -sel ../Selection/ac-train.dat -ff ../AlexandriaFF/coul-p.xml -fc_elec 1",
-        "2": " -sel ../Selection/ac-test.dat -ff ../AlexandriaFF/coul-p.xml -fc_elec 1",
-        "3": " -sel ../Selection/ac-train.dat -ff ../AlexandriaFF/all-p.xml -fc_elec 1",
-        "4": " -sel ../Selection/ac-test.dat -ff ../AlexandriaFF/all-p.xml -fc_elec 1",
-        "5": " -sel ../Selection/ac-train.dat -ff ../AlexandriaFF/coul-g.xml -fc_elec 1",
-        "6": " -sel ../Selection/ac-test.dat -ff ../AlexandriaFF/coul-g.xml -fc_elec 1",
-        "7": " -sel ../Selection/ac-train.dat -ff ../AlexandriaFF/all-g.xml -fc_elec 1",
-        "8": " -sel ../Selection/ac-test.dat -ff ../AlexandriaFF/all-g.xml -fc_elec 1",
-        "9": " -sel ../Selection/ac-train.dat -ff ../AlexandriaFF/coul-gv.xml -fc_elec 1",
-        "10": " -sel ../Selection/ac-test.dat -ff ../AlexandriaFF/coul-gv.xml -fc_elec 1",
-        "11": " -sel ../Selection/ac-train.dat -ff ../AlexandriaFF/all-gv.xml -fc_elec 1",
-        "12": " -sel ../Selection/ac-test.dat -ff ../AlexandriaFF/all-gv.xml -fc_elec 1",
-        "13": " -sel ../Selection/ac-train.dat -ff ../AlexandriaFF/all-pg.xml -fc_elec 1",
-        "14": " -sel ../Selection/ac-test.dat -ff ../AlexandriaFF/all-pg.xml -fc_elec 1"
-    }
+acmparm = {
+    "Mulliken":  { "ref": "Mulliken1955a", "ff": "coul-p.xml" },
+    "Hirshfeld": { "ref": "Hirshfeld1977a",  "ff": "coul-p.xml" },
+    "ESP":       { "ref": "Besler1990a", "ff": "coul-p.xml" },
+    "CM5":       { "ref": "Marenich2012a",  "ff": "coul-p.xml" },
+    "BCC":       { "ref": "Jakalian2000a", "ff": "coul-p.xml" },
+    "RESP":      { "ref": "Bayly1993a", "ff": "coul-p.xml" },
+    "ACM-esp-G":      { "ff": "esp-g.xml", "nparm": 48, "label": "GC", "target": "ESP" },
+    "ACM-esp-GV":     { "ff": "esp-gv.xml", "nparm": 54, "label": "GC+PGV", "target": "ESP" },
+    "ACM-elec-P":     { "ff": "coul-p.xml", "nparm": 32, "label": "PC", "target": "Elec" },
+    "ACM-allelec-P":  { "ff": "all-p.xml", "nparm": 32, "label": "PC", "target": "Elec+Induc" },
+    "ACM-elec-G":     { "ff": "coul-g.xml", "nparm": 48, "label": "GC", "target": "Elec" },
+    "ACM-allelec-G":  { "ff": "all-g.xml", "nparm": 48, "label": "GC", "target": "Elec+Induc" },
+    "ACM-elec-GV":    { "ff": "coul-gv.xml", "nparm": 54, "label": "GC+PGV", "target": "Elec" },
+    "ACM-allelec-GV": { "ff": "all-gv.xml", "nparm": 54, "label": "GC+PGV", "target": "Elec+Induc" },
+    "ACM-all-PG":     { "ff": "all-pg.xml", "nparm": 123, "label": "PC+GVS", "target": "Elec,Induc" }
+}
 
-    suffix_commands2 = {
-        "1": " -sel ../Selection/ac-train.dat ",
-        "2": " -sel ../Selection/ac-test.dat "
-    }
+def run_one(qtype:str) -> dict:
+    if not qtype in acmparm:
+        sys.exit("Unknown qtype %s" % qtype)
+    molprops = "../AlexandriaFF/sapt-esp.xml"
+    #"../AlexandriaFF/sapt2-aug-cc-pvtz-0.015Hartree-noIC.xml"
+    log_filename = f"{qtype}.log"
+    base_command = f"alexandria train_ff -nooptimize -g {log_filename} -sel ../Selection/ac-total.dat -mp {molprops} -ff ../AlexandriaFF/{acmparm[qtype]['ff']}"
 
-    if qtype == "qACM" and suffix in suffix_commands:
-        print(f"Running command for {qtype}{suffix} - COUL")
-        run_command(base_command + suffix_commands[suffix])
-    elif qtype != "qACM" and suffix in suffix_commands2:
-        run_command(base_command + suffix_commands2[suffix]+ f"-charges ../AlexandriaFF/esp-paper-gaussian.xml -fc_elec 1  -ff ../ForceFields/GAFF.xml -qtype {qtype} ")
+    print(f"Running command for {qtype}")
+    if "ACM" in qtype:
+        mycmd = base_command + " -charges ../AlexandriaFF/hf-aug-cc-pvtz.xml "
+    else:
+        mycmd = base_command + f" -qtype q{qtype} -charges ../AlexandriaFF/esp-paper-gaussian.xml "
+    run_command(mycmd)
 
-    print(f"Reading log file {log_filename} for COUL")
-    mydict = {"COUL": {}, "ALLELEC": {}}
+    print(f"Reading log file {log_filename}")
+    mydict = {}
+    for dataset in [ train, test ]:
+        mydict[dataset] = {"COUL": {}, "ALLELEC": {}}
     with open(log_filename, "r") as inf:
+        dset = None
         for line in inf:
-            if "COULOMB (kJ" in line:
+            if "Results for" in line:
+                words = line.strip().split()
+                dset = words[3]
+            elif "COULOMB (kJ" in line:
                 words = line.strip().split()
                 try:
-                    mydict["COUL"]["N"] = int(words[2])
-                    mydict["COUL"]["RMSD"] = round(float(words[5]),1)
-                    mydict["COUL"]["MSE"] = round(float(words[6]),1)
+                    mydict[dset]["COUL"]["N"] = int(words[2])
+                    mydict[dset]["COUL"]["RMSD"] = round(float(words[5]),1)
+                    mydict[dset]["COUL"]["MSE"] = round(float(words[6]),1)
                 except ValueError:
                     sys.exit(f"Strange line {line.strip()}")
-
-    if qtype == "qACM" and suffix in suffix_commands:
-        print(f"Running command for {qtype}{suffix} - ALLELEC")
-        run_command(base_command + suffix_commands[suffix].replace("-fc_elec", "-fc_allelec"))
-    elif qtype != "qACM" and suffix in suffix_commands2:
-        run_command(base_command + suffix_commands2[suffix]+ f"-charges ../AlexandriaFF/esp-paper-gaussian.xml -fc_allelec 1  -ff ../ForceFields/GAFF.xml -qtype {qtype} ")
-
-    print(f"Reading log file {log_filename} for ALLELEC")
-    with open(log_filename, "r") as inf:
-        for line in inf:
-            if "ALLELEC (kJ" in line:
+            elif "ALLELEC (kJ" in line:
                 words = line.strip().split()
                 try:
-                    mydict["ALLELEC"]["N"] = int(words[2])
-                    mydict["ALLELEC"]["RMSD"] = round(float(words[5]),1)
-                    mydict["ALLELEC"]["MSE"] = round(float(words[6]),1)
+                    mydict[dset]["ALLELEC"]["N"] = int(words[2])
+                    mydict[dset]["ALLELEC"]["RMSD"] = round(float(words[5]),1)
+                    mydict[dset]["ALLELEC"]["MSE"] = round(float(words[6]),1)
                 except ValueError:
                     sys.exit(f"Strange line {line.strip()}")
 
     return mydict
 
-myqt = {
-    "Mulliken": "Mulliken1955a",
-    "Hirshfeld": "Hirshfeld1977a",
-    "ESP": "Besler1990a",
-    "CM5": "Marenich2012a",
-    "BCC": "Jakalian2000a",
-    "RESP": "Bayly1993a",
-    "ACM": "ACT"
-}
+def get_train_test(logfn:str):
+    ntrain = 0
+    ntest  = 0
+    with open(logfn, "r") as inf:
+        for line in inf:
+            if "COULOMB (kJ/mol)" in line:
+                words = line.split()
+                if "Train" in line:
+                    ntrain = int(words[2])
+                else:
+                    ntest = int(words[2])
+    return ntrain, ntest
 
 mytable = {}
 couls = ""
@@ -89,107 +90,111 @@ labels = ""
 
 charge_models = [
     ("header", "Existing charge models" ),
-    ("Mulliken", "1"), ("Mulliken", "2"),
-    ("Hirshfeld", "1"), ("Hirshfeld", "2"),
-    ("ESP", "1"), ("ESP", "2"),
-    ("CM5", "1"), ("CM5", "2"),
-    ("BCC", "1"), ("BCC","2"),
-    ("RESP","1"), ("RESP","2"),
-    ("header", "Non-polarizable ACT models" ),
-    ("ACM", "1"), ("ACM", "2"), ("ACM", "3"),
-    ("ACM", "4"), ("ACM", "5"), ("ACM", "6"),
-    ("ACM", "7"), ("ACM", "8"), ("ACM", "9"),
-    ("ACM", "10"), ("ACM", "11"), ("ACM", "12"), 
-    ("header", "Polarizable ACT model" ),
-    ("ACM", "13"), ("ACM", "14")
+    ("Mulliken", ""),
+    ("Hirshfeld", ""),
+    ("ESP", ""),
+    ("CM5", ""),
+    ("BCC", ""),
+    ("RESP",""),
+    ("header", "Non-polarizable ESP-based ACT models" ),
+    ("ACM", "-esp-G"), ("ACM", "-esp-GV"),
+    ("header", "Non-polarizable SAPT-based ACT models" ),
+    ("ACM", "-elec-P"), ("ACM", "-allelec-P"),
+    ("ACM", "-elec-G"), ("ACM", "-allelec-G"),
+    ("ACM", "-elec-GV"), ("ACM", "-allelec-GV"),
+    ("header", "Polarizable SAPT-based ACT model" ),
+    ("ACM", "-all-PG")
 ]
-
-nparams = { "1": 32, "3": 32, "5": 48, "7": 48, "9": 55, "11": 55, "13": 123 }
 
 for qt, suffix in charge_models:
     if qt == "header":
         continue
-    mytable[qt + suffix] = run_one("q" + qt, suffix)
-    newcoul = f"COULOMB-{qt}{suffix}.xvg"
+    qtsuf = qt+suffix
+    mytable[qtsuf] = run_one(qtsuf)
+    newcoul = f"COULOMB-{qtsuf}.xvg"
     run_command(f"mv COULOMB.xvg {newcoul}")
     couls += f" {newcoul}"
-    newallelec = f"ALLELEC-{qt}{suffix}.xvg"
+    newallelec = f"ALLELEC-{qtsuf}.xvg"
     run_command(f"mv ALLELEC.xvg {newallelec}")
     allelecs += f" {newallelec}"
-    labels += f" {qt}{suffix}"
-    for fn in [ "EXCHANGE.xvg", "DISPERSION.xvg", "INDUCTIONCORRECTION.xvg", "EPOT.xvg", "INDUCTION.xvg" ]:
+    labels += f" {qtsuf}"
+    for fn in [ "EXCHANGE.xvg", "EXCHIND.xvg", "DISPERSION.xvg", "INDUCTIONCORRECTION.xvg", "EPOT.xvg", "INDUCTION.xvg" ] + glob.glob("#*#"):
         if os.path.exists(fn):
             os.unlink(fn)
 
 run_command(f"viewxvg -f {couls} -label {labels} -ls None -mk -res -noshow -pdf legacy_coul.pdf")
 run_command(f"viewxvg -f {allelecs} -label {labels} -ls None -mk -res -noshow -pdf legacy_allelec.pdf")
 
+ntrain, ntest = get_train_test("ESP.log")
+
 with open("legacy.tex", "w") as outf:
     outf.write("\\begin{table}[htb]\n")
     outf.write("\\centering\n")
-    
-    outf.write("\\caption{Root mean square deviation (RMSE) and mean signed error (MSE) of electrostatic energies (Elec, kJ/mol) and the sum of electrostatics and induction (Elec+Induc, kJ/mol) for popular charge models compared to SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set. The dataset consisted of 77 dimers (Table S5), and the number of data points (energies) is indicated as N. For the point charge (PC) and Gaussian charge (GC) models, the training targets are indicated, and RMSD and MSE values corresponding to the training set are indicated in bold. A non-polarizable model with virtual sites with a Gaussian distributed charge (on anions and potassium ion only) is labeled as GC+PGV. The polarizable point charge + Gaussian virtual site and shell (PC+GVS) model was trained on electrostatic and induction energies in one step. The \"test\" and \"train\" labels in the table for Mulliken, Hirshfeld, ESP, CM5, BCC, and RESP do not imply that we trained them. Instead, they indicate that we evaluated the models using compounds in the test or training sets (Table S5). The RMSD and MSE were calculated with respect to the SAPT electrostatic energy. \#P indicates the number of parameters in the model.}\n")
+    outf.write("\\caption{Root mean square deviation (RMSE) and mean signed error (MSE) of electrostatic energies (Elec, kJ/mol) and the sum of electrostatics and induction (Elec+Induc, kJ/mol) for popular charge models compared to SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set. The dataset consisted of 77 dimers (Table S5), with %d data points for training and %d for testing (for ESP training see Methods). \\#P indicates the number of parameters in the model. The training targets are indicated and RMSD and MSE values that correspond to the training set are indicated in {\\bf bold font}. A non-polarizable model with virtual sites with a Gaussian distributed charge (on anions and potassium ion only) is labeled as GC+PGV. The polarizable point charge + Gaussian virtual site and shell (PC+GVS) model was trained on electrostatic and induction energies in one step.}\n" % ( ntrain, ntest ) )
     
     
     outf.write("\\label{legacy}\n")
-    outf.write("\\begin{tabular}{lccccccc}\n")
+    outf.write("\\begin{tabular}{lcccccccc}\n")
     outf.write("\\hline\n")
-    outf.write(" & Target & \# P & N & \\multicolumn{2}{c}{Elec}  & \\multicolumn{2}{c}{Elec+Induc}\\\\\n")
-    outf.write("Model & & & & RMSD & MSE & RMSD & MSE \\\\\n")
-
-    label_map = {
-        "ACM1": ("PC (Train)", "Elec"),
-        "ACM2": ("PC (Test)", ""),
-        "ACM3": ("PC (Train)", "Elec+Induc"),
-        "ACM4": ("PC (Test)", ""),
-        "ACM5": ("GC (Train)", "Elec"),
-        "ACM6": ("GC (Test)", ""),
-        "ACM7": ("GC (Train)", "Elec+Induc"),
-        "ACM8": ("GC (Test)", ""),
-        "ACM9": ("GC+PGV (Train)", "Elec"),
-        "ACM10": ("GC+PGV (Test)", ""),
-        "ACM11": ("GC+PGV (Train)", "Elec+Induc"),
-        "ACM12": ("GC+PGV (Test)", ""),
-        "ACM13": ("PC+GVS (Train)", "Elec,Induc"),
-        "ACM14": ("PC+GVS (Test)", "")
-    }
+    outf.write(" & Dataset & Training & \\#P & \\multicolumn{2}{c}{Elec}  & \\multicolumn{2}{c}{Elec+Induc}\\\\\n")
+    outf.write("Model & & target & & RMSD & MSE & RMSD & MSE \\\\\n")
 
     for qt, suffix in charge_models:
         if qt == "header":
             outf.write("\\hline\n")
             outf.write("\\multicolumn{8}{c}{\\bf %s}\\\\\n" % suffix)
             continue
-        qt_with_suffix = qt + suffix
-        cite = f"~\\cite{{{myqt[qt]}}}" if qt != "ACM" else ""
-        label = label_map.get(qt_with_suffix, (qt, ""))[0]
-        star = label_map.get(qt_with_suffix, (qt, ""))[1]
+        qtsuf = qt + suffix
+        label = qt
+        if "label" in acmparm[qtsuf]:
+            label = acmparm[qtsuf]["label"]
+        star  = None
+        if "target" in acmparm[qtsuf]:
+            star  = acmparm[qtsuf]["target"]
 
-        coul_data = mytable[qt_with_suffix]["COUL"]
-        elec_data = mytable[qt_with_suffix]["ALLELEC"]
-
-        rmsd = 'RMSD'
-        mse  = 'MSE'
-        na   = 'N/A'
-        if rmsd in coul_data:
-            rmsd_coul_str = f"\\textbf{{{coul_data['RMSD']}}}" if "Train" in label else f"{coul_data['RMSD']}"
-        else:
-            rmsd_coul_str = na
-        if mse in coul_data:
-            mse_coul_str = f"\\textbf{{{coul_data['MSE']}}}" if "Train" in label else f"{coul_data['MSE']}"
-        else:
-            mse_coul_str = na
-        if rmsd in elec_data:
-            rmsd_elec_str = f"\\textbf{{{elec_data['RMSD']}}}" if "Train" in label else f"{elec_data['RMSD']}"
-        else:
-            rmsd_elec_str = na
-        if mse in elec_data:
-            mse_elec_str = f"\\textbf{{{elec_data['MSE']}}}" if "Train" in label else f"{elec_data['MSE']}"
-        else:
-            mse_elec_str = na
-        np = ""
-        if qt == "ACM" and suffix in nparams:
-            np = nparams[suffix]
-        outf.write(f"{label}{cite} & {star} & {coul_data['N']} & {np} & {rmsd_coul_str} & {mse_coul_str} & {rmsd_elec_str} & {mse_elec_str} \\\\\n")
+        rmsd     = 'RMSD'
+        mse      = 'MSE'
+        na       = 'N/A'
+        rmsd_str = {}
+        mse_str  = {}
+        for mydata in [ "COUL", "ALLELEC" ]:
+            rmsd_str[mydata] = {}
+            mse_str[mydata]  = {}
+            for dataset in [ train, test ]:
+                ttable = mytable[qtsuf][dataset][mydata]
+                if rmsd in ttable and mse in ttable:
+                    bold    = False
+                    if star and "nparm" in acmparm[qtsuf] and dataset == train:
+                        if "Elec,Induc" in star:
+                            bold = True
+                        elif "Elec+Induc" in star:
+                            bold = mydata == "ALLELEC"
+                        else:
+                            bold = mydata == "COUL"
+                        
+                    if  bold:
+                        rmsd_str[mydata][dataset] = f"\\textbf{{{ttable[rmsd]}}}"
+                        mse_str[mydata][dataset]  = f"\\textbf{{{ttable[mse]}}}"
+                    else:
+                        rmsd_str[mydata][dataset] = f"{ttable[rmsd]}"
+                        mse_str[mydata][dataset]  = f"{ttable[mse]}"
+                else:
+                    print("Something wrong with table for %s" % qtsuf)
+                    sys.exit(ttable)
+                np = ""
+                if "nparm" in acmparm[qtsuf] and dataset == train:
+                    np = acmparm[qtsuf]["nparm"]
+        N = mytable[qtsuf][train][mydata]["N"]
+        print(rmsd_str)
+        print(mse_str)
+        for dataset in [ train, test ]:
+            target = ""
+            if star:
+                target = star
+            cite = ""
+            if "ref" in acmparm[qtsuf] and dataset == train:
+                cite = f"~\\cite{{{acmparm[qtsuf]['ref']}}}"
+            outf.write(f"{label}{cite} & {dataset} &{target} & {np} & {rmsd_str['COUL'][dataset]} & {mse_str['COUL'][dataset]} & {rmsd_str['ALLELEC'][dataset]} & {mse_str['ALLELEC'][dataset]} \\\\\n")
 
     outf.write("\\hline\n")
     outf.write("\\end{tabular}\n")
