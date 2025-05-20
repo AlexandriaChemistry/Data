@@ -29,37 +29,33 @@ def run_legacy(filenm: str) -> dict:
 
 
 if __name__ == "__main__":
-    basefn = "train-Inter6.log"
     alldata = {}
-    for mydir in ["PC", "GC", "GC+PGV", "PC+GVS"]:
-        alldata[mydir] = run_one("Elec/" + mydir + "/" + basefn)
-    
-    legacy_files = {
-        "qMulliken2": "Models/Mulliken.log",
-        "qHirshfeld2": "Models/Hirshfeld.log",
-         "qESP2": "Models/ESP.log",
-         "qCM52": "Models/CM5.log"
-    }
-    legacy_data = {key: run_legacy(path) for key, path in legacy_files.items()}
+    mydirs = { "PC": "ACM-elec-P.log",
+               "GC": "ACM-elec-G.log",
+               "GC+PGV": "ACM-elec-GV.log",
+               "PC+GVS": "ACM-all-PG.log",
+               "Mulliken": "Mulliken.log",
+               "Hirshfeld": "Hirshfeld.log",
+               "ESP": "ESP.log",
+               "CM5": "CM5.log" }
+    for mydir in mydirs.keys():
+        alldata[mydir] = run_one(mydirs[mydir])
     
     texfn = "rmsdtable.tex"
     with open(texfn, "w") as outf:
         outf.write("\\begin{longtable}{lcccccccccc}\n")
-        outf.write("\\caption{Root mean square deviation (kJ/mol) from SAPT2+(CCD)$\delta$MP2 electrostatics per compound dimer for the different ACT models and widely-used models, Mulliken, Hirshfeld, ESP, and CM5. N is the number of conformations of each dimer used.}\\\\\n")
+        outf.write("\\caption{Root mean square deviation (kJ/mol) from SAPT2+(CCD)$\\delta$MP2 electrostatics per compound dimer for the different ACT models and widely-used models, Mulliken, Hirshfeld, ESP, and CM5. N is the number of conformations of each dimer used.}\\\\\n")
         outf.write("\\hline\n")
         outf.write("Dimer & N ")
         for md in alldata.keys():
             outf.write(" & %s" % md)
-        for legacy in legacy_data.keys():
-            outf.write(" & %s" % legacy)
         outf.write("\\\\\n")
         outf.write("\\hline\n")
         for dimer in sorted(alldata["PC"].keys()):
             outf.write("%s & %s " % (dimer.replace("#", "-"), alldata["PC"][dimer]["N"]))
-            for legacy in legacy_data.keys():
-                outf.write(" & %s" % legacy_data[legacy].get(dimer, "-"))
             for md in alldata.keys():
                 outf.write(" & %s" % alldata[md][dimer]["RMSD"])
             outf.write("\\\\\n")
         outf.write("\\hline\n")
         outf.write("\\end{longtable}\n")
+    print("Please check %s" % texfn)

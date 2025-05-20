@@ -70,6 +70,19 @@ def run_one(qtype:str) -> dict:
 
     return mydict
 
+def get_train_test(logfn:str):
+    ntrain = 0
+    ntest  = 0
+    with open(logfn, "r") as inf:
+        for line in inf:
+            if "COULOMB (kJ/mol)" in line:
+                words = line.split()
+                if "Train" in line:
+                    ntrain = int(words[2])
+                else:
+                    ntest = int(words[2])
+    return ntrain, ntest
+
 mytable = {}
 couls = ""
 allelecs = ""
@@ -112,11 +125,12 @@ for qt, suffix in charge_models:
 run_command(f"viewxvg -f {couls} -label {labels} -ls None -mk -res -noshow -pdf legacy_coul.pdf")
 run_command(f"viewxvg -f {allelecs} -label {labels} -ls None -mk -res -noshow -pdf legacy_allelec.pdf")
 
+ntrain, ntest = get_train_test("ESP.log")
+
 with open("legacy.tex", "w") as outf:
     outf.write("\\begin{table}[htb]\n")
     outf.write("\\centering\n")
-    
-    outf.write("\\caption{Root mean square deviation (RMSE) and mean signed error (MSE) of electrostatic energies (Elec, kJ/mol) and the sum of electrostatics and induction (Elec+Induc, kJ/mol) for popular charge models compared to SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set. The dataset consisted of 77 dimers (Table S5), with 8602 data points for training and 2717 for testing (for ESP training see Methods). \\#P indicates the number of parameters in the model. The training targets are indicated and RMSD and MSE values that correspond to the training set are indicated in {\\bf bold font}. A non-polarizable model with virtual sites with a Gaussian distributed charge (on anions and potassium ion only) is labeled as GC+PGV. The polarizable point charge + Gaussian virtual site and shell (PC+GVS) model was trained on electrostatic and induction energies in one step. The \"test\" and \"train\" labels in the table for Mulliken, Hirshfeld, ESP, CM5, BCC, and RESP do not imply that we trained them. Instead, they indicate that we evaluated the models using compounds in the test or training sets (Table S5). The RMSD and MSE were calculated with respect to the SAPT electrostatic energy.}\n")
+    outf.write("\\caption{Root mean square deviation (RMSE) and mean signed error (MSE) of electrostatic energies (Elec, kJ/mol) and the sum of electrostatics and induction (Elec+Induc, kJ/mol) for popular charge models compared to SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set. The dataset consisted of 77 dimers (Table S5), with %d data points for training and %d for testing (for ESP training see Methods). \\#P indicates the number of parameters in the model. The training targets are indicated and RMSD and MSE values that correspond to the training set are indicated in {\\bf bold font}. A non-polarizable model with virtual sites with a Gaussian distributed charge (on anions and potassium ion only) is labeled as GC+PGV. The polarizable point charge + Gaussian virtual site and shell (PC+GVS) model was trained on electrostatic and induction energies in one step.}\n" % ( ntrain, ntest ) )
     
     
     outf.write("\\label{legacy}\n")

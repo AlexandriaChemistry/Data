@@ -74,7 +74,7 @@ def extract_data_from_log(log_files):
     return data
 
 def save_data_as_latex(data):
-    combined_output_file = 'combined_data.tex'
+    combined_output_file = 'particle_charges.tex'
 
     with open(combined_output_file, 'w') as file:
         for compound in compounds_of_interest:
@@ -85,7 +85,7 @@ def save_data_as_latex(data):
 #            file.write("\\hspace{-1cm}\n")
             file.write("\\begin{tabular}{lcccccccc}\n")
             file.write("\\hline\n")
-            file.write(fr" Atom type & ESP & PC$_{{e}}$ & PC$_{{ei}}$ & GC$_{{e}}$ & GC$_{{ei}}$ & GC+PGV$_{{e}}$ & GC+PGV$_{{ei}}$ & PC+GVS \\\\")
+            file.write(fr"Particle & ESP & PC$_{{e}}$ & PC$_{{ei}}$ & GC$_{{e}}$ & GC$_{{ei}}$ & GC+PGV$_{{e}}$ & GC+PGV$_{{ei}}$ & PC+GVS \\\\")
             file.write("\n")
             file.write("\\hline\n")
 
