@@ -1,5 +1,5 @@
 {
-    "Li-F": {
+    "lithium#fluoride": {
         "rmin": 1.564,
         "eelec-SAPT": -850.53,
         "QM": -850.53,
@@ -8,7 +8,7 @@
         "eelec-ACT-G": -881.21,
         "eelec-CT": -888.34
     },
-    "Li-Cl": {
+    "lithium#chloride": {
         "rmin": 2.021,
         "eelec-SAPT": -656.85,
         "QM": -656.85,
@@ -17,7 +17,7 @@
         "eelec-ACT-G": -658.6,
         "eelec-CT": -687.46
     },
-    "Li-Br": {
+    "lithium#bromide": {
         "rmin": 2.17,
         "eelec-SAPT": -609.54,
         "QM": -609.54,
@@ -26,7 +26,7 @@
         "eelec-ACT-G": -608.11,
         "eelec-CT": -640.26
     },
-    "Na-F": {
+    "sodium#fluoride": {
         "rmin": 1.926,
         "eelec-SAPT": -750.62,
         "QM": -750.62,
@@ -35,16 +35,13 @@
         "eelec-ACT-G": -721.03,
         "eelec-CT": -721.37
     },
-    "Na-Cl": {
+    "sodium#chloride": {
         "rmin": 2.361,
         "eelec-SAPT": -607.9,
         "QM": -607.9,
-        "eelec-Walz2018a": -563.898,
-	"eelec-ACT-S": -601.6,
-        "eelec-ACT-G": -582.94,
-        "eelec-CT": -588.46
+        "eelec-Walz2018a": -563.898
     },
-    "Na-Br": {
+    "sodium#bromide": {
         "rmin": 2.502,
         "eelec-SAPT": -572.68,
         "QM": -572.68,
@@ -53,16 +50,12 @@
         "eelec-ACT-G": -547.85,
         "eelec-CT": -555.3
     },
-    "K-F": {
+    "potassium#fluoride": {
         "rmin": 2.171,
         "eelec-SAPT": -719.8,
-        "QM": -719.8,
-	"eelec-Walz2018a": -624.69,
-        "eelec-ACT-S": -712.43,
-        "eelec-ACT-G": -672.77,
-        "eelec-CT": -639.96
+        "QM": -719.8
     },
-    "K-Cl": {
+    "potassium#chloride": {
         "rmin": 2.667,
         "eelec-SAPT": -570.19,
         "QM": -570.19,
@@ -71,7 +64,7 @@
         "eelec-ACT-G": -566.87,
         "eelec-CT": -520.94
     },
-    "K-Br": {
+    "potassium#bromide": {
         "rmin": 2.821,
         "eelec-SAPT": -538.38,
         "QM": -538.38,
