@@ -1,0 +1,51 @@
+[
+    {
+        "name": "water#lithium",
+        "index": "0458",
+        "latex": "Li$^+$",
+        "rmin": 2.04,
+        "sapt2": -111.55
+    },
+    {
+        "name": "water#sodium",
+        "index": "0451",
+        "latex": "Na$^+$",
+        "rmin": 2.39,
+        "sapt2": -88.71
+    },
+    {
+        "name": "water#potassium",
+        "index": "0442",
+        "latex": "K$^+$",
+        "rmin": 2.78,
+        "sapt2": -68.5
+    },
+    {
+        "name": "water#fluoride",
+        "index": "0965",
+        "latex": "F$^-$",
+        "rmin": 2.64,
+        "sapt2": -146.66
+    },
+    {
+        "name": "water#chloride",
+        "index": "0427",
+        "latex": "Cl$^-$",
+        "rmin": 3.173,
+        "sapt2": -76.85
+    },
+    {
+        "name": "water#bromide",
+        "index": "0843",
+        "latex": "Br$^-$",
+        "rmin": 3.36,
+        "sapt2": -60.49
+    },
+    {
+        "name": "water#water",
+        "index": "0000",
+        "latex": "water$_O$",
+        "rmin": 2.97,
+        "sapt2": -31.59
+    }
+]

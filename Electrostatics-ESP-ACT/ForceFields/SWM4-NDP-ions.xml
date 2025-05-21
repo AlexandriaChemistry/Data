@@ -57,7 +57,7 @@
       <parameter type="charge" unit="e" value="1" uncertainty="0" minimum="1" maximum="1" ntrain="0" mutability="Fixed" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="22.9897" uncertainty="0" minimum="22.9897" maximum="22.9897" ntrain="1" mutability="Fixed" nonnegative="yes"/>
     </particletype>	  
-    <particletype identifier="ho" type="Atom" description="hydrogen">
+    <particletype identifier="hw" type="Atom" description="hydrogen">
       <option key="acmtype" value="ho_z"/>
       <option key="atomnumber" value="1"/>
       <option key="bondtype" value="h_b"/>
@@ -68,7 +68,7 @@
       <parameter type="charge" unit="e" value="0.55733" uncertainty="0" minimum="0.52134" maximum="0.62134" ntrain="0" mutability="Fixed" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="1.007947" uncertainty="0" minimum="1.007947" maximum="1.007947" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </particletype>
-    <particletype identifier="o3" type="Atom" description="sp3 oxygen">
+    <particletype identifier="ow" type="Atom" description="sp3 oxygen">
       <option key="acmtype" value="o3_z"/>
       <option key="atomnumber" value="8"/>
       <option key="bondtype" value="o3_b"/>

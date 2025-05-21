@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 import os
 import csv
 
-xmlfile = "merged6.xml"
+xmlfile = "../AlexandriaFF/sapt-esp.xml"
 
 dimers = [
     "water#water", "water#bromide", "water#lithium", "water#potassium", "potassium#chloride",
