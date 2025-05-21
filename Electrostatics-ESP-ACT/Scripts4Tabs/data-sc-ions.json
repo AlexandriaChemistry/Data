@@ -1,0 +1,114 @@
+[
+    {
+        "name": "formate#lithium",
+        "index": "0044",
+        "latex": "$\\text{HCOO}^- \\text{-Li}^+$",
+        "rmin": 1.848,
+        "sapt2": -734.5
+    },
+    {
+        "name": "formate#sodium",
+        "index": "0040",
+        "latex": "$\\text{HCOO}^- \\text{-Na}^+$",
+        "rmin": 2.175,
+        "sapt2": -673.98
+    },
+    {
+        "name": "formate#potassium",
+        "index": "0032",
+        "latex": "$\\text{HCOO}^- \\text{-K}^+$",
+        "rmin": 2.521,
+        "sapt2": -604.73
+    },
+    {
+        "name": "formate#water",
+        "index": "0040",
+        "latex": "$\\text{HCOO}^- \\text{-H}_2\\text{O}$",
+        "rmin": 3.109,
+        "sapt2": -136.61
+    },
+    {
+        "name": "acetate#lithium",
+        "index": "0010",
+        "latex": "$\\text{CH}_3\\text{COO}^- \\text{-Li}^+$",
+        "rmin": 2.032,
+        "sapt2": -624.68
+    },
+    {
+        "name": "acetate#sodium",
+        "index": "0061",
+        "latex": "$\\text{CH}_3\\text{COO}^- \\text{-Na}^+$",
+        "rmin": 2.031,
+        "sapt2": -646.24
+    },
+    {
+        "name": "acetate#potassium",
+        "index": "0009",
+        "latex": "$\\text{CH}_3\\text{COO}^- \\text{-K}^+$",
+        "rmin": 2.519,
+        "sapt2": -574.45
+    },
+    {
+        "name": "acetate#water",
+        "index": "0040",
+        "latex": "$\\text{CH}_3\\text{COO}^- \\text{-H}_2\\text{O}$",
+        "rmin": 3.098,
+        "sapt2": -142.25
+    },
+    {
+        "name": "methylammonium#fluoride",
+        "index": "0310",
+        "latex": "$\\text{CH}_3\\text{NH}_3^+ \\text{-F}^-$",
+        "rmin": 2.551,
+        "sapt2": -540.68
+    },
+    {
+        "name": "methylammonium#chloride",
+        "index": "0055",
+        "latex": "$\\text{CH}_3\\text{NH}_3^+ \\text{-Cl}^-$",
+        "rmin": 2.853,
+        "sapt2": -530.52
+    },
+    {
+        "name": "methylammonium#bromide",
+        "index": "0003",
+        "latex": "$\\text{CH}_3\\text{NH}_3^+ \\text{-Br}^-$",
+        "rmin": 2.915,
+        "sapt2": -519.63
+    },
+    {
+        "name": "methylammonium#water",
+        "index": "0044",
+        "latex": "$\\text{CH}_3\\text{NH}_3^+ \\text{-H}_2\\text{O}$",
+        "rmin": 2.65,
+        "sapt2": -100.75
+    },
+    {
+        "name": "ethylammonium#fluoride",
+        "index": "0421",
+        "latex": "$\\text{C}_2\\text{H}_7\\text{NH}_3^+ \\text{-F}^-$",
+        "rmin": 2.41,
+        "sapt2": -559.03
+    },
+    {
+        "name": "ethylammonium#chloride",
+        "index": "0039",
+        "latex": "$\\text{C}_2\\text{H}_7\\text{NH}_3^+ \\text{-Cl}^-$",
+        "rmin": 2.866,
+        "sapt2": -518.10
+    },
+    {
+        "name": "ethylammonium#bromide",
+        "index": "0039",
+        "latex": "$\\text{C}_2\\text{H}_7\\text{NH}_3^+ \\text{-Br}^-$",
+        "rmin": 2.987,
+        "sapt2": -493.44
+    },
+    {
+        "name": "ethylammonium#water",
+        "index": "0037",
+        "latex": "$\\text{C}_2\\text{H}_7\\text{NH}_3^+ \\text{-H}_2\\text{O}$",
+        "rmin": 2.651,
+        "sapt2": -99.48
+    }
+]

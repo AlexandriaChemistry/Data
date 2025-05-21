@@ -4,28 +4,20 @@ import json, math, os, sys
 
 debug = False
 
-models = { "TIP4P-Ew": "../ForceFields/TIP4PEW-JC.xml",
-           "SWM4-NDP": "../ForceFields/SWM4-NDP-ions.xml",
-           "GC+PGV": "../AlexandriaFF/coul-gv.xml",
-           "PC+GVS": "../AlexandriaFF/all-pg.xml" }
-
-def get_data()->list:
-    mydata = []
-    newfn = "data-water-ions.json"
-    if not os.path.exists(newfn):
-        sys.exit("Cannot find %s" % newfn)
-    with open(newfn, "r") as inf:
-        mydata = json.load(inf)
-
-    return mydata
-
-def add_calcs(mydata:list):
-    mymp  = "../AlexandriaFF/hf-aug-cc-pvtz.xml"
+def add_calcs(mydata:list, models:dict):
     for m in models.keys():
         for dim in range(len(mydata)):
             mylog = mydata[dim]["name"] + "-" + m + ".log"
-            os.system("alexandria simulate -ff %s -charges %s  -f Conformations/%s.sdf -minimize -g %s" %
-                      ( models[m], mymp, mydata[dim]["name"], mylog ) )
+            myconf = ( "Conformations/%s.sdf" % mydata[dim]["name"])
+            if not os.path.exists(myconf):
+                print("File %s is missing" % myconf)
+                continue
+            mycmd = ("alexandria simulate -ff %s -charges %s  -f %s  -minimize -g %s" %
+                     ( models[m]["ff"], models[m]["mp"], myconf, mylog ) )
+            if "qtype" in models[m]:
+                mycmd += ( " -qtype %s" % models[m]["qtype"] )
+            print(mycmd)
+            os.system(mycmd)
             with open(mylog, "r") as inf:
                 for line in inf:
                     coul = 'COULOMB'
@@ -40,19 +32,12 @@ def add_calcs(mydata:list):
             if not debug:
                 os.unlink(mylog)
 
-if __name__ == "__main__":
-    mydata = get_data()
-    add_calcs(mydata)
-    if debug:
-        print(mydata)
-    file_path = "ion-water-SAPT2-TIP4Pew-ACT4S.tex"
+def wtable(file_path:str, models:dict, mydata:list, caption:str, label:str):
     with open(file_path, "w") as file:
         file.write("\\begin{table}[ht]\n")
         file.write("\\centering\n")
-        file.write("\\caption{\\textbf{Water-ion energies at their energy minimum.} Minimum energy distance (\\AA) between ions and water oxygen/hydrogen from Experiment (ref.~\\citenum{Heyrovska2006a}), and minimized water dimer (ref.~\\citenum{temelso2011benchmark}). Electrostatic energies are reported in kJ/mol from the SAPT2+(CCD)-$\\delta$MP2 method with an aug-cc-pVTZ basis set, TIP4P-Ew~\\cite{Horn2004a} with point charges representing ions, and SWM4-NDP~\\cite{Lamoureux2006a} with ions due to Yu {\\em et al.}~\\cite{Yu2010a}, point core+Gaussian vsite (GC+PGV), and point charge + Gaussian vsite and shell (PC+GVS) using ACT.}")
-        file.write("\n")
-        file.write("\\label{tab:ion_water2}")
-        file.write("\n")
+        file.write("\\caption{%s}\n" % caption)
+        file.write("\\label{%s}\n" % label)
         file.write("\\begin{tabular}{lcccccc} \n")
         file.write("\\hline \n")
         file.write("Ion & r$_{min}$ & SAPT ")
@@ -70,8 +55,12 @@ if __name__ == "__main__":
             file.write("%s & %g & %.1f " %
                        ( mydata[i]["latex"], mydata[i]["rmin"], mydata[i]["sapt2"] ) )
             for m in models.keys():
-                file.write(" & %.1f" % mydata[i][m])
-                diff = mydata[i][m] - mydata[i]["sapt2"]
+                if not m in mydata[i]:
+                    file.write("& - ")
+                    diff = 0
+                else:
+                    file.write(" & %.1f" % mydata[i][m])
+                    diff = mydata[i][m] - mydata[i]["sapt2"]
                 rmsd[m] += diff**2
                 mse[m]  += diff
             file.write("\\\\\n")
@@ -90,3 +79,46 @@ if __name__ == "__main__":
         file.write("\\end{table}")
 
     print("Please check file %s" % file_path)
+
+def water_ions():
+    mymp  = "../AlexandriaFF/hf-aug-cc-pvtz.xml"
+    models = { "TIP4P-Ew": { "ff": "../ForceFields/TIP4PEW-JC.xml", "mp": mymp },
+               "SWM4-NDP": { "ff": "../ForceFields/SWM4-NDP-ions.xml", "mp": mymp },
+               "GC+PGV": { "ff": "../AlexandriaFF/coul-gv.xml", "mp": mymp },
+               "PC+GVS": { "ff": "../AlexandriaFF/all-pg.xml", "mp": mymp } }
+    newfn = "data-water-ions.json"
+    if not os.path.exists(newfn):
+        sys.exit("Cannot find %s" % newfn)
+    with open(newfn, "r") as inf:
+        mydata = json.load(inf)
+
+    add_calcs(mydata, models)
+    if debug:
+        print(mydata)
+    file_path = "ion-water-SAPT2-TIP4Pew-ACT4S.tex"
+    caption = "\\textbf{Water-ion energies at their energy minimum.} Minimum energy distance (\\AA) between ions and water oxygen/hydrogen from Experiment (ref.~\\citenum{Heyrovska2006a}), and minimized water dimer (ref.~\\citenum{temelso2011benchmark}). Electrostatic energies are reported in kJ/mol from the SAPT2+(CCD)-$\\delta$MP2 method with an aug-cc-pVTZ basis set, TIP4P-Ew~\\cite{Horn2004a} with point charges representing ions, and SWM4-NDP~\\cite{Lamoureux2006a} with ions due to Yu {\\em et al.}~\\cite{Yu2010a}, point core+Gaussian vsite (GC+PGV), and point charge + Gaussian vsite and shell (PC+GVS) using ACT."
+    label = "tab:ion_water2"
+    wtable(file_path, models, mydata, caption, label)
+    
+def ac_mt_gaff():
+    mymp  = "../AlexandriaFF/hf-aug-cc-pvtz.xml"
+    epg   = "../AlexandriaFF/esp-paper-gaussian.xml"
+    models = { "RESP": { "ff": "../AlexandriaFF/coul-p.xml", "mp": epg, "qtype": "qRESP" },
+               "BCC": { "ff": "../AlexandriaFF/coul-p.xml", "mp": epg, "qtype": "qBCC" },
+               "GC+PGV": { "ff": "../AlexandriaFF/coul-gv.xml", "mp": mymp },
+               "PC+GVS": { "ff": "../AlexandriaFF/all-pg.xml", "mp": mymp } }
+    newfn = "data-sc-ions.json"
+    if not os.path.exists(newfn):
+        sys.exit("Cannot find %s" % newfn)
+    with open(newfn, "r") as inf:
+        mydata = json.load(inf)
+    add_calcs(mydata, models)
+
+    file_path = "AC-MA-IONS-GAFF.tex"
+    caption = "Electrostatic energy (kJ/mol) between alkali halides or water (oxygen) and amino acid side chain analogs, formate (oxygen), acetate (oxygen), methylammonium (nitrogen), ethylammonium (nitrogen) from SAPT2+(CCD)$\\delta$MP2/aug-cc-pVTZ, and charges determined using either RESP~\\cite{Bayly1993a} or BCC~\\cite{Jakalian2000a}, as well as two models generated using the ACT."
+    label = "tab:ac_ma_ions"
+    wtable(file_path, models, mydata, caption, label)
+    
+if __name__ == "__main__":
+#    water_ions()
+    ac_mt_gaff()
