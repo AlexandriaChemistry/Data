@@ -57,7 +57,7 @@
       <parameter type="charge" unit="e" value="1" uncertainty="0" minimum="1" maximum="1" ntrain="0" mutability="Fixed" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="22.9897" uncertainty="0" minimum="22.9897" maximum="22.9897" ntrain="1" mutability="Fixed" nonnegative="yes"/>
     </particletype>
-    <particletype identifier="ho" type="Atom" description="hydrogen">
+    <particletype identifier="hw" type="Atom" description="hydrogen">
       <option key="acmtype" value="ho_z"/>
       <option key="atomnumber" value="1"/>
       <option key="bondtype" value="h_b"/>
@@ -68,13 +68,13 @@
       <parameter type="charge" unit="e" value="0.52422" uncertainty="0" minimum="0.52422" maximum="0.52422" ntrain="0" mutability="Fixed" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="1.0079" uncertainty="0" minimum="1.0079" maximum="1.0079" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </particletype>
-    <particletype identifier="o3" type="Atom" description="sp3 oxygen">
+    <particletype identifier="ow" type="Atom" description="sp3 oxygen">
       <option key="acmtype" value="o3_z"/>
       <option key="atomnumber" value="8"/>
       <option key="bondtype" value="o3_b"/>
       <option key="element" value="O"/>
       <option key="row" value="2"/>
-      <option key="vdwtype" value="o3"/>
+      <option key="vdwtype" value="ow"/>
       <option key="zetatype" value="o3_z"/>
       <parameter type="charge" unit="e" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="15.9994" uncertainty="0" minimum="15.9994" maximum="15.9994" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -138,7 +138,7 @@
       <parameter type="epsilon" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="sigma" unit="nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
-    <parameterlist identifier="o3">
+    <parameterlist identifier="ow">
       <parameter type="epsilon" unit="kJ/mol" value="0.680946" uncertainty="0" minimum="0.680946" maximum="0.680946" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="sigma" unit="nm" value="0.316435" uncertainty="0" minimum="0.316435" maximum="0.316435" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
