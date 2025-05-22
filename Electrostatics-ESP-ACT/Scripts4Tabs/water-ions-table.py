@@ -2,7 +2,7 @@
 
 import json, math, os, sys
 
-debug = False
+debug = True
 
 def add_calcs(mydata:list, models:dict):
     for m in models.keys():
@@ -12,19 +12,18 @@ def add_calcs(mydata:list, models:dict):
             if not os.path.exists(myconf):
                 print("File %s is missing" % myconf)
                 continue
-            mycmd = ("alexandria simulate -ff %s -charges %s  -f %s  -minimize -g %s" %
+            mycmd = ("alexandria simulate -ff %s -charges %s  -f %s  -nsteps 0 -g %s" %
                      ( models[m]["ff"], models[m]["mp"], myconf, mylog ) )
             if "qtype" in models[m]:
-                mycmd += ( " -qtype %s" % models[m]["qtype"] )
+                mycmd += ( " -qqm %s" % models[m]["qtype"] )
             print(mycmd)
             os.system(mycmd)
             with open(mylog, "r") as inf:
                 for line in inf:
-                    coul = 'COULOMB'
-                    if coul in line and not "Force" in line and not "Interaction" in line:
+                    if "Info: Interaction energy COULOMB:" in line:
                         words = line.split()
                         try:
-                            value = float(words[2][:-1])
+                            value = float(words[4])
                             mydata[dim][m] = value
                             break
                         except ValueError:
