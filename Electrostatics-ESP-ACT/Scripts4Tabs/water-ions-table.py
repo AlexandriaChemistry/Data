@@ -82,7 +82,7 @@ def wtable(file_path:str, models:dict, mydata:list, caption:str, label:str):
 def water_ions():
     mymp  = "../AlexandriaFF/hf-aug-cc-pvtz.xml"
     models = { "TIP4P-Ew": { "ff": "../ForceFields/TIP4PEW-JC.xml", "mp": mymp },
-               "SWM4-NDP": { "ff": "../ForceFields/SWM4-NDP-ions.xml", "mp": mymp },
+               "Charmm": { "ff": "../ForceFields/CharmmDrude.xml", "mp": mymp },
                "GC+PGV": { "ff": "../AlexandriaFF/coul-gv.xml", "mp": mymp },
                "PC+GVS": { "ff": "../AlexandriaFF/all-pg.xml", "mp": mymp } }
     newfn = "data-water-ions.json"
