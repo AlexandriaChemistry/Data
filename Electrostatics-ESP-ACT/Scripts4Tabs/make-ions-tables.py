@@ -111,7 +111,7 @@ def wtable(file_path:str, models:dict, mydata:list, caption:str, label:str):
 def water_ions():
     mymp  = "../AlexandriaFF/hf-aug-cc-pvtz.xml"
     models = { "TIP4P-Ew": { "ff": "../ForceFields/TIP4PEW-JC.xml", "mp": mymp },
-               "Charmm": { "ff": "../ForceFields/CharmmDrude.xml", "mp": mymp },
+               "CHARMM": { "ff": "../ForceFields/CharmmDrude.xml", "mp": mymp },
                "GC+PGV": { "ff": "../AlexandriaFF/coul-gv.xml", "mp": mymp },
                "PC+GVS": { "ff": "../AlexandriaFF/all-pg.xml", "mp": mymp } }
     newfn = "data-water-ions.json"
@@ -123,7 +123,7 @@ def water_ions():
     add_calcs(mydata, models)
 
     file_path = "ion-water-SAPT2-TIP4Pew-ACT4S.tex"
-    caption = "\\textbf{Water-ion energies at their energy minimum.} Minimum energy distance (\\AA) between ions and water oxygen/hydrogen from Experiment (ref.~\\citenum{Heyrovska2006a}), and minimized water dimer (ref.~\\citenum{temelso2011benchmark}). Electrostatic energies are reported in kJ/mol from the SAPT2+(CCD)-$\\delta$MP2 method with an aug-cc-pVTZ basis set, TIP4P-Ew~\\cite{Horn2004a} with point charges representing ions, and SWM4-NDP~\\cite{Lamoureux2006a} with ions due to Yu {\\em et al.}~\\cite{Yu2010a}, point core+Gaussian vsite (GC+PGV), and point charge + Gaussian vsite and shell (PC+GVS) using ACT."
+    caption = "\\textbf{Water-ion electrostatic energies at distances close to their energy minimum.} Minimum energy distance (\\AA) between ions and water oxygen/hydrogen from Experiment (ref.~\\citenum{Heyrovska2006a}), and minimized water dimer (ref.~\\citenum{temelso2011benchmark}). Electrostatic energies are reported in kJ/mol from the SAPT2+(CCD)-$\\delta$MP2 method with an aug-cc-pVTZ basis set, TIP4P-Ew~\\cite{Horn2004a} with point charges representing ions, for the CHARMM drude model of water (SWM4-NDP~\\cite{Lamoureux2006a}) with ions due to Yu {\\em et al.}~\\cite{Yu2010a}, as well as point core+Gaussian vsite (GC+PGV), and point charge + Gaussian vsite and shell (PC+GVS) derived here using ACT."
     label = "tab:ion_water2"
     wtable(file_path, models, mydata, caption, label)
     
