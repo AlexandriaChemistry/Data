@@ -97,7 +97,7 @@ def save_data_as_latex(data):
             # We use homodimers for reference and therefore only one half of the atoms is sufficient.
             for ipart in range(int(npart/2)):
                 particle = data["ACM-all-PG"][compound][ipart]
-                mystr = particle["type"].replace("_", "\_")
+                mystr = particle["type"].replace("_", "\\_")
                 for method in data.keys():
                     value = None
                     if not compound in data[method]:

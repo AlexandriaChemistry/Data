@@ -4,7 +4,7 @@ import json, math, os, sys
 
 debug = True
 
-def logToEner(logfn:str)->float:
+def logToCoulomb(logfn:str)->float:
     with open(logfn, "r") as inf:
         for line in inf:
             if "Info: Interaction energy COULOMB:" in line:
@@ -15,6 +15,21 @@ def logToEner(logfn:str)->float:
                     return float(words[4])
                 except ValueError:
                     sys.exit("Cannot interpret line '%s'" % line.strip())
+
+def logToInduction(logfn:str)->float:
+    einduc = 0
+    with open(logfn, "r") as inf:
+        for line in inf:
+            if ( "Info: Interaction energy INDUCTION:" in line or
+                 "Info: Interaction energy INDUCTIONCORRECTION:" in line):
+                words = line.split()
+                if len(words) != 5:
+                    sys.exit("Expected 5 words on line '%s'" % line.strip())
+                try:
+                    einduc += float(words[4])
+                except ValueError:
+                    sys.exit("Cannot interpret line '%s'" % line.strip())
+    return einduc
 
 def xvgToEner(xvgfn:str)->float:
     with open(xvgfn, "r") as inf:
@@ -52,7 +67,7 @@ def add_calcs(mydata:list, models:dict):
                 mycmd += ( " -qqm %s" % models[m]["qtype"] )
             print(mycmd)
             os.system(mycmd)
-            mydata[dim][m] = logToEner(mylog)
+            mydata[dim][m] = logToCoulomb(mylog)
 
             if not debug:
                 for myfn in [ mylog, mytrj,myxvg ]:
@@ -127,6 +142,30 @@ def water_ions():
     label = "tab:ion_water2"
     wtable(file_path, models, mydata, caption, label)
     
+def water_ions_induction():
+    mymp  = "../AlexandriaFF/hf-aug-cc-pvtz.xml"
+    models = { "CHARMM": { "ff": "../ForceFields/CharmmDrude.xml", "mp": mymp },
+               "PC+GVS": { "ff": "../AlexandriaFF/all-pg.xml", "mp": mymp } }
+    newfn = "data-water-ions-induction.json"
+    if not os.path.exists(newfn):
+        sys.exit("Cannot find %s" % newfn)
+    with open(newfn, "r") as inf:
+        mydata = json.load(inf)
+
+    tdir = "simulation_output"
+    for i in range(len(mydata)):
+        for m in models.keys():
+            mylog = tdir + "/" + mydata[i]["name"] + "-" + m + ".log"
+            if os.path.exists(mylog):
+                mydata[i][m] = logToInduction(mylog)
+            else:
+                mydata[i][m] = None
+
+    file_path = "ion-water-induction.tex"
+    caption = "\\textbf{Water-ion induction energies at distances close to their energy minimum.} Minimum energy distance (\\AA) between ions and water oxygen/hydrogen from Experiment (ref.~\\citenum{Heyrovska2006a}), and minimized water dimer (ref.~\\citenum{temelso2011benchmark}). Induction energies are reported in kJ/mol from the SAPT2+(CCD)-$\\delta$MP2 method with an aug-cc-pVTZ basis set, for the CHARMM drude model of water (SWM4-NDP~\\cite{Lamoureux2006a}) with ions due to Yu {\\em et al.}~\\cite{Yu2010a}, as well the point charge + Gaussian vsite and shell (PC+GVS) derived here using ACT."
+    label = "tab:ion_inducs"
+    wtable(file_path, models, mydata, caption, label)
+    
 def ac_mt_gaff():
     mymp  = "../AlexandriaFF/hf-aug-cc-pvtz.xml"
     epg   = "../AlexandriaFF/esp-paper-gaussian.xml"
@@ -148,4 +187,5 @@ def ac_mt_gaff():
     
 if __name__ == "__main__":
     water_ions()
-    ac_mt_gaff()
+    water_ions_induction()
+#    ac_mt_gaff()
