@@ -19940,7 +19940,7 @@
   </molecule>
   <molecule molname="ammonium">
     <fragments>
-      <fragment identifier="InChI=1S/H4N/h1H4" mass="18.0385" charge="1" multiplicity="1" symmetry_number="1" formula="H4N"> 1 2 3 4 5</fragment>
+      <fragment identifier="InChI=1S/H3N/h1H3/p+1" mass="18.0385" charge="1" multiplicity="1" symmetry_number="1" formula="H4N"> 1 2 3 4 5</fragment>
     </fragments>
     <molinfo iupac="ammonium" cas="" cid="" inchi=""/>
     <bond ai="4" aj="2" bondorder="1"/>
@@ -33313,7 +33313,7 @@
   </molecule>
   <molecule molname="ethylammonium">
     <fragments>
-      <fragment identifier="InChI=1S/C2H8N/c1-2-3/h2H2,1,3H3" mass="46.0916" charge="1" multiplicity="1" symmetry_number="1" formula="C2H8N"> 1 2 3 4 5 6 7 8 9 10 11</fragment>
+      <fragment identifier="InChI=1S/C2H7N/c1-2-3/h2-3H2,1H3/p+1" mass="46.0916" charge="1" multiplicity="1" symmetry_number="1" formula="C2H8N"> 1 2 3 4 5 6 7 8 9 10 11</fragment>
     </fragments>
     <molinfo iupac="ethylammonium" cas="" cid="" inchi=""/>
     <bond ai="11" aj="8" bondorder="1"/>
@@ -70763,7 +70763,7 @@
   </molecule>
   <molecule molname="methylammonium">
     <fragments>
-      <fragment identifier="InChI=1S/CH6N/c1-2/h1-2H3" mass="32.065" charge="1" multiplicity="1" symmetry_number="1" formula="CH6N"> 1 2 3 4 5 6 7 8</fragment>
+      <fragment identifier="InChI=1S/CH5N/c1-2/h2H2,1H3/p+1" mass="32.065" charge="1" multiplicity="1" symmetry_number="1" formula="CH6N"> 1 2 3 4 5 6 7 8</fragment>
     </fragments>
     <molinfo iupac="methylammonium" cas="" cid="" inchi=""/>
     <bond ai="6" aj="2" bondorder="1"/>
@@ -99814,7 +99814,7 @@
         <average>60.339</average>
         <error>0</error>
       </energy>
-      <atom name="O" obtype="o3" atomid="1" coord_unit="pm" force_unit="Hartree/Bohr">
+      <atom name="O" obtype="ow" atomid="1" coord_unit="pm" force_unit="Hartree/Bohr">
         <x>0</x>
         <y>0</y>
         <z>11.2851</z>
@@ -99828,7 +99828,7 @@
         <qRESP>-0.834</qRESP>
         <qBCC>-0.834</qBCC>
       </atom>
-      <atom name="H" obtype="ho" atomid="2" coord_unit="pm" force_unit="Hartree/Bohr">
+      <atom name="H" obtype="hw" atomid="2" coord_unit="pm" force_unit="Hartree/Bohr">
         <x>-0</x>
         <y>75.3089</y>
         <z>-45.1403</z>
@@ -99842,7 +99842,7 @@
         <qRESP>0.417</qRESP>
         <qBCC>0.417</qBCC>
       </atom>
-      <atom name="H" obtype="ho" atomid="3" coord_unit="pm" force_unit="Hartree/Bohr">
+      <atom name="H" obtype="hw" atomid="3" coord_unit="pm" force_unit="Hartree/Bohr">
         <x>-0</x>
         <y>-75.3089</y>
         <z>-45.1403</z>

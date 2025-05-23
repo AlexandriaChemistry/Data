@@ -4,32 +4,60 @@ import json, math, os, sys
 
 debug = True
 
+def logToEner(logfn:str)->float:
+    with open(logfn, "r") as inf:
+        for line in inf:
+            if "Info: Interaction energy COULOMB:" in line:
+                words = line.split()
+                if len(words) != 5:
+                    sys.exit("Expected 5 words on line '%s'" % line.strip())
+                try:
+                    return float(words[4])
+                except ValueError:
+                    sys.exit("Cannot interpret line '%s'" % line.strip())
+
+def xvgToEner(xvgfn:str)->float:
+    with open(xvgfn, "r") as inf:
+        myset = -1
+        for line in inf:
+            if "COULOMB" in line and "legend" in line:
+                words = line.split()
+                myset = int(words[1][1:])
+            elif not ("#" in line) and not ("@" in line):
+                words = line.split()
+                try:
+                    if len(words) > myset+1:
+                        return float(words[myset+1])
+                    else:
+                        continue
+                        #sys.exit("Stange line '%s'" % line.strip())
+                except ValueError:
+                    sys.exit("Cannot interpret line '%s'" % line.strip())
+
 def add_calcs(mydata:list, models:dict):
+    tdir = "simulation_output"
+    os.makedirs(tdir, exist_ok=True)
     for m in models.keys():
         for dim in range(len(mydata)):
-            mylog = mydata[dim]["name"] + "-" + m + ".log"
+            mylog = tdir + "/" + mydata[dim]["name"] + "-" + m + ".log"
+            mytrj = mylog[:-3] + "pdb"
+            myxvg = mylog[:-3] + "xvg"
             myconf = ( "Conformations/%s.sdf" % mydata[dim]["name"])
             if not os.path.exists(myconf):
                 print("File %s is missing" % myconf)
                 continue
-            mycmd = ("alexandria simulate -ff %s -charges %s  -f %s  -nsteps 0 -g %s" %
-                     ( models[m]["ff"], models[m]["mp"], myconf, mylog ) )
+            mycmd = ("alexandria simulate -ff %s -charges %s  -f %s  -sp -g %s -o %s -e %s" %
+                     ( models[m]["ff"], models[m]["mp"], myconf, mylog, mytrj, myxvg ) )
             if "qtype" in models[m]:
                 mycmd += ( " -qqm %s" % models[m]["qtype"] )
             print(mycmd)
             os.system(mycmd)
-            with open(mylog, "r") as inf:
-                for line in inf:
-                    if "Info: Interaction energy COULOMB:" in line:
-                        words = line.split()
-                        try:
-                            value = float(words[4])
-                            mydata[dim][m] = value
-                            break
-                        except ValueError:
-                            sys.exit("Cannot interpret line '%s'" % line.strip())
+            mydata[dim][m] = logToEner(mylog)
+
             if not debug:
-                os.unlink(mylog)
+                for myfn in [ mylog, mytrj,myxvg ]:
+                    if os.path.exists(myfn):
+                        os.unlink(myfn)
 
 def wtable(file_path:str, models:dict, mydata:list, caption:str, label:str):
     with open(file_path, "w") as file:
@@ -54,12 +82,13 @@ def wtable(file_path:str, models:dict, mydata:list, caption:str, label:str):
             file.write("%s & %g & %.1f " %
                        ( mydata[i]["latex"], mydata[i]["rmin"], mydata[i]["sapt2"] ) )
             for m in models.keys():
-                if not m in mydata[i]:
+                if not m in mydata[i] or not mydata[i][m]:
                     file.write("& - ")
                     diff = 0
                 else:
                     file.write(" & %.1f" % mydata[i][m])
                     diff = mydata[i][m] - mydata[i]["sapt2"]
+                    
                 rmsd[m] += diff**2
                 mse[m]  += diff
             file.write("\\\\\n")
@@ -92,8 +121,7 @@ def water_ions():
         mydata = json.load(inf)
 
     add_calcs(mydata, models)
-    if debug:
-        print(mydata)
+
     file_path = "ion-water-SAPT2-TIP4Pew-ACT4S.tex"
     caption = "\\textbf{Water-ion energies at their energy minimum.} Minimum energy distance (\\AA) between ions and water oxygen/hydrogen from Experiment (ref.~\\citenum{Heyrovska2006a}), and minimized water dimer (ref.~\\citenum{temelso2011benchmark}). Electrostatic energies are reported in kJ/mol from the SAPT2+(CCD)-$\\delta$MP2 method with an aug-cc-pVTZ basis set, TIP4P-Ew~\\cite{Horn2004a} with point charges representing ions, and SWM4-NDP~\\cite{Lamoureux2006a} with ions due to Yu {\\em et al.}~\\cite{Yu2010a}, point core+Gaussian vsite (GC+PGV), and point charge + Gaussian vsite and shell (PC+GVS) using ACT."
     label = "tab:ion_water2"
@@ -114,10 +142,10 @@ def ac_mt_gaff():
     add_calcs(mydata, models)
 
     file_path = "AC-MA-IONS-GAFF.tex"
-    caption = "Electrostatic energy (kJ/mol) between alkali halides or water (oxygen) and amino acid side chain analogs, formate (oxygen), acetate (oxygen), methylammonium (nitrogen), ethylammonium (nitrogen) from SAPT2+(CCD)$\\delta$MP2/aug-cc-pVTZ, and charges determined using either RESP~\\cite{Bayly1993a} or BCC~\\cite{Jakalian2000a}, as well as two models generated using the ACT."
+    caption = "Electrostatic energy (kJ/mol) between alkali ions, halides or water (oxygen) and amino acid side chain analogs, formate (oxygen), acetate (oxygen), methylammonium (nitrogen), ethylammonium (nitrogen) from SAPT2+(CCD)$\\delta$MP2/aug-cc-pVTZ, and charges determined using either RESP~\\cite{Bayly1993a} or BCC~\\cite{Jakalian2000a}, as well as two models generated using the ACT."
     label = "tab:ac_ma_ions"
     wtable(file_path, models, mydata, caption, label)
     
 if __name__ == "__main__":
-#    water_ions()
+    water_ions()
     ac_mt_gaff()
