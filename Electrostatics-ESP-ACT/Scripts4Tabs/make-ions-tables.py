@@ -121,7 +121,6 @@ def wtable(file_path:str, models:dict, mydata:list, caption:str, label:str):
         file.write("\\end{tabular} \n")
         file.write("\\end{table}")
 
-    print("Please check file %s" % file_path)
 
 def water_ions():
     mymp  = "../AlexandriaFF/hf-aug-cc-pvtz.xml"
@@ -141,6 +140,7 @@ def water_ions():
     caption = "\\textbf{Water-ion electrostatic energies at distances close to their energy minimum.} Minimum energy distance (\\AA) between ions and water oxygen/hydrogen from Experiment (ref.~\\citenum{Heyrovska2006a}), and minimized water dimer (ref.~\\citenum{temelso2011benchmark}). Electrostatic energies are reported in kJ/mol from the SAPT2+(CCD)-$\\delta$MP2 method with an aug-cc-pVTZ basis set, TIP4P-Ew~\\cite{Horn2004a} with point charges representing ions, for the CHARMM drude model of water (SWM4-NDP~\\cite{Lamoureux2006a}) with ions due to Yu {\\em et al.}~\\cite{Yu2010a}, as well as point core+Gaussian vsite (GC+PGV), and point charge + Gaussian vsite and shell (PC+GVS) derived here using ACT."
     label = "tab:ion_water2"
     wtable(file_path, models, mydata, caption, label)
+    return file_path
     
 def water_ions_induction():
     mymp  = "../AlexandriaFF/hf-aug-cc-pvtz.xml"
@@ -165,6 +165,7 @@ def water_ions_induction():
     caption = "\\textbf{Water-ion induction energies at distances close to their energy minimum.} Minimum energy distance (\\AA) between ions and water oxygen/hydrogen from Experiment (ref.~\\citenum{Heyrovska2006a}), and minimized water dimer (ref.~\\citenum{temelso2011benchmark}). Induction energies are reported in kJ/mol from the SAPT2+(CCD)-$\\delta$MP2 method with an aug-cc-pVTZ basis set, for the CHARMM drude model of water (SWM4-NDP~\\cite{Lamoureux2006a}) with ions due to Yu {\\em et al.}~\\cite{Yu2010a}, as well the point charge + Gaussian vsite and shell (PC+GVS) derived here using ACT."
     label = "tab:ion_inducs"
     wtable(file_path, models, mydata, caption, label)
+    return file_path
     
 def ac_mt_gaff():
     mymp  = "../AlexandriaFF/hf-aug-cc-pvtz.xml"
@@ -184,8 +185,14 @@ def ac_mt_gaff():
     caption = "Electrostatic energy (kJ/mol) between alkali ions, halides or water (oxygen) and amino acid side chain analogs, formate (oxygen), acetate (oxygen), methylammonium (nitrogen), ethylammonium (nitrogen) from SAPT2+(CCD)$\\delta$MP2/aug-cc-pVTZ, and charges determined using either RESP~\\cite{Bayly1993a} or BCC~\\cite{Jakalian2000a}, as well as two models generated using the ACT."
     label = "tab:ac_ma_ions"
     wtable(file_path, models, mydata, caption, label)
+    return file_path
     
 if __name__ == "__main__":
-    water_ions()
-    water_ions_induction()
-#    ac_mt_gaff()
+    files = []
+    files.append(water_ions())
+    files.append(water_ions_induction())
+    files.append(ac_mt_gaff())
+    print("Please check files:")
+    for fn in files:
+        printf("  %s" % fn)
+
