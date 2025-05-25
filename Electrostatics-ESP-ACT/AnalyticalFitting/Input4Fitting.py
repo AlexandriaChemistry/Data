@@ -1,6 +1,8 @@
 #!/usr/bin/env python
-import json
+import json, sys
 import numpy as np
+
+sys.exit("Do not use this script since it will remove the hand-tuned starting values for fitting")
 
 def process_data(filename_prefix, filename_prefix_esp, skiprows):
     grid_data = np.loadtxt(f'ESP_Alkali_Halides/{filename_prefix}000.dat', skiprows=skiprows)
