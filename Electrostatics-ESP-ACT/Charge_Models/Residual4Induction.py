@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import re
+import re, os
 import json
 import subprocess
 import sys
@@ -51,11 +51,12 @@ for log_filename, ff_xml in forcefield_map.items():
     subprocess.run(command, check=True)
 
 
+    cmd = "grep -v Alexandria INDUCTION.xvg | grep -v Train"
     if "SWM4" in log_filename:
-        subprocess.run(["mv", "INDUCTION.xvg", "INDUCTION-SW.xvg"], check=True)
+        cmd += " > INDUCTION-SW.xvg"
     else:
-        subprocess.run(["mv", "INDUCTION.xvg", "INDUCTION-ACM.xvg"], check=True)
-
+        cmd += " > INDUCTION-ACM.xvg"
+    os.system(cmd)
 
 rmsd_swm4 = extract_rmsd("SWM4.log")
 rmsd_acm = extract_rmsd("ACM-PG.log")
@@ -68,7 +69,8 @@ viewxvg_command = [
     "-labels",
     f"CHARMM Drude (RMSD:{rmsd_swm4})", f"PC+GVS (RMSD:{rmsd_acm})",
     "-tickfs", "32", "-color", "crimson", "cornflowerblue",
-    "-legend_y", "0.3", "-legend_x", "0.2"
+    "-legend_y", "0.3", "-legend_x", "0.2",
+    "-pdf", "fig3.pdf"
 ]
 print("Running:", " ".join(viewxvg_command))
 subprocess.run(viewxvg_command, check=True)
