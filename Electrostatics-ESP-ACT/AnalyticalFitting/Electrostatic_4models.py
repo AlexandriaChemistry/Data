@@ -97,7 +97,7 @@ def main(T:int):
 
 
 
-                        axes[i].plot(x1, y1, label=f"SAPT", color='crimson')
+                        axes[i].plot(x1, y1, label=f"SAPT", color='crimson', linewidth=3)
                         ener_pc = []
                         for j in range(len(x1)):
                             ener = 0
