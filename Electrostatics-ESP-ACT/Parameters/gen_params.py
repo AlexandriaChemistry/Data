@@ -14,6 +14,28 @@ acmparm = {
     "ACM-all-PG":     { "ff": "all-pg.xml", "nparm": 123, "label": "PC+GVS", "target": "Elec,Induc" }
 }
 
+def prune_eem(tab:str):
+    temp = "koko.tex"
+    os.system("cp %s %s" % ( tab, temp ))
+    with open(temp, "r") as inf:
+        with open(tab, "w") as outf:
+            foundchi = False
+            for line in inf:
+                skipLine = False
+                if "chi" in line and not "delta" in line:
+                    foundchi = True
+                if foundchi:
+                    if "longtable" in line:
+                        foundchi = False
+                    else:
+                        words = line.split("&")
+                        if len(words) == 3:
+                            four = "4.000"
+                            if four in words[1] and four in words[2]:
+                                skipLine = True
+                if not skipLine:
+                    outf.write(line)
+    
 if __name__ == "__main__":
     atoms = ""
     for aa in [ "Ar", "he", "ar", "kr", "xe", "ne", "Be2+", "Ca2+", "Cs+", "He", "I-", "Kr", "Mg2+", "Ne", "Rb+", "Xe", "b", "br", "cl", "c1", "f", "h3", "h4", "h5", "h6",
@@ -28,4 +50,7 @@ if __name__ == "__main__":
         if model == "ACM-all-PG":
             os.system("grep -v a2dexp %s | grep -v hyper > koko.xml" % myff)
             os.system("mv koko.xml %s" % myff)
-        os.system("alexandria merge_ff -ff %s -latex params-%s -info '%s' -merge '%s'" % ( myff, model, myinfo, params ) )
+        
+        texfn = ( "params-%s.tex" % model )
+        os.system("alexandria merge_ff -ff %s -latex %s -info '%s' -merge '%s'" % ( myff, texfn, myinfo, params ) )
+        prune_eem(texfn)
