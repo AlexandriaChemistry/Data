@@ -170,7 +170,6 @@ def water_ions_induction():
 def ah_ions():
     mymp  = "../AlexandriaFF/hf-aug-cc-pvtz.xml"
     models = { "PC": { "ff": "../ForceFields/TIP4PEW-JC.xml", "mp": mymp },
-               "CHARMM": { "ff": "../ForceFields/CharmmDrude.xml", "mp": mymp },
                "Walz":   { "ff": "../ForceFields/Walz2018a.xml", "mp": mymp },
                "GC+PGV": { "ff": "../AlexandriaFF/coul-gv.xml", "mp": mymp },
                "PC+GVS": { "ff": "../AlexandriaFF/all-pg.xml", "mp": mymp } }
@@ -183,7 +182,7 @@ def ah_ions():
     add_calcs(mydata, models)
 
     file_path = "Ions-sapt2-JC-Walz2018a-ACT.tex"
-    caption= "\\textbf{Ion-pair electrostatic energies at distances close to their energy minimum.} Distance r (\\AA) between ions and electrostatic energies from SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set, for point charges (PC), for the CHARMM drude model of water (SWM4-NDP~\\cite{Lamoureux2006a}) with ions due to Yu {\\em et al.}~\\cite{Yu2010a}, the Walz {\\em et al.} model with a Gaussian charge distribution~\\cite{Walz2018a}, and the ACT models GC+PVG and PC+GVS consisting of a point charge and virtual site with a Gaussian charge (Na$^+$, K$^+$ and halide ions only) and a Drude particle with a Gaussian charge (PC+GVS only). The RMSD and MSE were calculated with respect to the SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set electrostatic energy. Note that the level of theory is different from Tables~\\ref{tab:sapt100} and~\\ref{tab:sapt10} and the results cannot be compared directly. In addition, the results in Tables~\\ref{tab:sapt100} and~\\ref{tab:sapt10} are from fitting models to the ESP, whereas in this table training was done on SAPT data as indicated above."
+    caption= "\\textbf{Ion-pair electrostatic energies at distances close to their energy minimum.} Distance r (\\AA) between ions and electrostatic energies from SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set, for point charges (PC), for the Walz {\\em et al.} model with a Gaussian charge distribution~\\cite{Walz2018a}, and the ACT models GC+PVG and PC+GVS consisting of a point charge and virtual site with a Gaussian charge (Na$^+$, K$^+$ and halide ions only) and a Drude particle with a Gaussian charge (PC+GVS only). The RMSD and MSE were calculated with respect to the SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set electrostatic energy. Note that the level of theory is different from Tables~\\ref{tab:sapt100} and~\\ref{tab:sapt10} and the results cannot be compared directly. In addition, the results in Tables~\\ref{tab:sapt100} and~\\ref{tab:sapt10} are from fitting models to the ESP, whereas in this table training was done on SAPT data as indicated above."
 
     label = "tab:ion_ah"
     wtable(file_path, models, mydata, caption, label)
