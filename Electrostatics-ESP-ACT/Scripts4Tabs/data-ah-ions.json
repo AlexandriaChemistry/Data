@@ -1,0 +1,65 @@
+[
+    {
+        "name": "lithium#fluoride",
+        "index": "0010",
+        "latex": "Li-F",
+        "rmin": 1.6,
+        "sapt2": -834.36
+    },
+    {
+        "name": "lithium#chloride",
+        "index": "0008",
+        "latex": "Li-Cl",
+        "rmin": 2.04,
+        "sapt2": -652.06
+    },
+    {
+        "name": "lithium#bromide",
+        "index": "0008",
+        "latex": "Li-Br",
+        "rmin": 2.22,
+        "sapt2": -599.13
+    },
+    {
+        "name": "sodium#fluoride",
+        "index": "0005",
+        "latex": "Na-F",
+        "rmin": 1.95,
+        "sapt2": -739.36
+    },
+    {
+        "name": "sodium#chloride",
+        "index": "0008",
+        "latex": "Na-Cl",
+        "rmin": 2.4,
+        "sapt2": -596.10
+    },
+    {
+        "name": "sodium#bromide",
+        "index": "0007",
+        "latex": "Na-Br",
+        "rmin": 2.55,
+        "sapt2": -559.91
+    },
+    {
+        "name": "potassium#fluoride",
+        "index": "0005",
+        "latex": "K-F",
+        "rmin": 2.25,
+        "sapt2": -679.65
+    },
+    {
+        "name": "potassium#chloride",
+        "index": "0213",
+        "latex": "K-Cl",
+        "rmin": 2.74,
+        "sapt2": -546.93
+    },
+    {
+        "name": "potassium#bromide",
+        "index": "0214",
+        "latex": "K-Br",
+        "rmin": 2.9,
+        "sapt2": -516.02
+    }
+]
