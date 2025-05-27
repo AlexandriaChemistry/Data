@@ -25,4 +25,7 @@ if __name__ == "__main__":
         myinfo = ("Model: %s, training target: %s." % ( acmparm[model]["label"], acmparm[model]["target"] ) )
         myff   = acmparm[model]["ff"]
         os.system("alexandria edit_ff -ff ../AlexandriaFF/%s -o %s -del -a '%s'" % ( myff, myff, atoms ) ) 
+        if model == "ACM-all-PG":
+            os.system("grep -v a2dexp %s | grep -v hyper > koko.xml" % myff)
+            os.system("mv koko.xml %s" % myff)
         os.system("alexandria merge_ff -ff %s -latex params-%s -info '%s' -merge '%s'" % ( myff, model, myinfo, params ) )
