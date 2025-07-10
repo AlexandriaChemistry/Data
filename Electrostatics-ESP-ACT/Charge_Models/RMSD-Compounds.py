@@ -2,6 +2,14 @@
 
 import os
 
+def get_train()->list:
+    mylist = []
+    with open("../Selection/ac-train.dat", "r") as inf:
+        for line in inf:
+            ww = line.strip().split("|")
+            mylist.append(ww[0])
+    return mylist
+        
 def run_one(filenm: str) -> dict:
     tempf = "rmsd.txt"
     os.system("grep 'COULOMB RMSD' %s > %s" % (filenm, tempf))
@@ -41,10 +49,11 @@ if __name__ == "__main__":
     for mydir in mydirs.keys():
         alldata[mydir] = run_one(mydirs[mydir])
     
+    train = get_train()
     texfn = "rmsdtable.tex"
     with open(texfn, "w") as outf:
         outf.write("\\begin{longtable}{lcccccccccc}\n")
-        outf.write("\\caption{Root mean square deviation (kJ/mol) from SAPT2+(CCD)$\\delta$MP2 electrostatics per compound dimer for the different ACT models and widely-used models, Mulliken, Hirshfeld, ESP, and CM5. N is the number of conformations of each dimer used.}\\\\\n")
+        outf.write("\\caption{Root mean square deviation (kJ/mol) from SAPT2+(CCD)$\\delta$MP2 electrostatics per compound dimer for the different ACT models and widely-used models, Mulliken, Hirshfeld, ESP, and CM5. N is the number of conformations of each dimer used. Compound dimers used in training are printed in {\\bf bold font}.}\\\\\n")
         outf.write("\\hline\n")
         outf.write("Dimer & N ")
         for md in alldata.keys():
@@ -52,7 +61,10 @@ if __name__ == "__main__":
         outf.write("\\\\\n")
         outf.write("\\hline\n")
         for dimer in sorted(alldata["PC"].keys()):
-            outf.write("%s & %s " % (dimer.replace("#", "-"), alldata["PC"][dimer]["N"]))
+            ddd = dimer.replace("#", "-")
+            if dimer in train:
+                ddd = ("{\\bf %s}" % ddd)
+            outf.write("%s & %s " % (ddd, alldata["PC"][dimer]["N"]))
             for md in alldata.keys():
                 outf.write(" & %s" % alldata[md][dimer]["RMSD"])
             outf.write("\\\\\n")
