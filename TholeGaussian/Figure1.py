@@ -10,7 +10,7 @@ def gauss(r:float, beta:float)->float:
     
 if __name__ == "__main__":
     mytab = [ { "alpha": 0.0005, "beta": 12 },
-              { "alpha": 0.001, "beta": 10 },
+#              { "alpha": 0.001, "beta": 10 },
               { "alpha": 0.002, "beta": 8 } ]
     for mt in mytab:
         alpha = mt["alpha"]
@@ -21,8 +21,8 @@ if __name__ == "__main__":
         outfn = ( "tg%g.xvg" % beta )
         with open(outfn, "w") as outf:
             outf.write("@ xaxis label \"Distance (nm)\"\n")
-            outf.write("@ s0 legend \"Thole, alpha = %g nm3\"\n" % alpha)
-            outf.write("@ s1 legend \"Gaussian, zeta = %g/nm\"\n" % beta)
+            outf.write("@ s0 legend \"Thole, alpha = %g nm$^3$\"\n" % alpha)
+            outf.write("@ s1 legend \"Gaussian, zeta = %g nm$^{-1}$\"\n" % beta)
             for ir in range(36):
                 r = 0.01*ir
                 outf.write("%10g  %10g  %10g\n" %
