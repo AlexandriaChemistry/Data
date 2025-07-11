@@ -43,6 +43,7 @@
     <particletype identifier="Br-" type="Atom" description="bromide ion">
       <option key="acmtype" value="Br-_z"/>
       <option key="atomnumber" value="35"/>
+      <option key="bondtype" value="Br-"/>
       <option key="element" value="Br"/>
       <option key="induccorrtype" value="Br-"/>
       <option key="poltype" value="Br-_s"/>
@@ -91,6 +92,7 @@
     <particletype identifier="Cl-" type="Atom" description="chloride ion">
       <option key="acmtype" value="Cl-_z"/>
       <option key="atomnumber" value="17"/>
+      <option key="bondtype" value="Cl-"/>
       <option key="element" value="Cl"/>
       <option key="induccorrtype" value="Cl-"/>
       <option key="poltype" value="Cl-_s"/>
@@ -139,6 +141,7 @@
     <particletype identifier="F-" type="Atom" description="fluoride ion">
       <option key="acmtype" value="F-_z"/>
       <option key="atomnumber" value="9"/>
+      <option key="bondtype" value="F-"/>
       <option key="element" value="F"/>
       <option key="induccorrtype" value="F-"/>
       <option key="poltype" value="F-_s"/>
@@ -200,6 +203,7 @@
     <particletype identifier="K+" type="Atom" description="potassium ion">
       <option key="acmtype" value="K+_z"/>
       <option key="atomnumber" value="19"/>
+      <option key="bondtype" value="K+"/>
       <option key="element" value="K"/>
       <option key="induccorrtype" value="K+"/>
       <option key="poltype" value="K+_s"/>
@@ -237,6 +241,7 @@
     <particletype identifier="Li+" type="Atom" description="lithium ion">
       <option key="acmtype" value="Li+_z"/>
       <option key="atomnumber" value="3"/>
+      <option key="bondtype" value="Li+"/>
       <option key="element" value="Li"/>
       <option key="induccorrtype" value="Li+"/>
       <option key="poltype" value="Li+_s"/>
@@ -285,6 +290,7 @@
     <particletype identifier="Na+" type="Atom" description="sodium ion">
       <option key="acmtype" value="Na+_z"/>
       <option key="atomnumber" value="11"/>
+      <option key="bondtype" value="Na+"/>
       <option key="element" value="Na"/>
       <option key="induccorrtype" value="Na+"/>
       <option key="poltype" value="Na+_s"/>
@@ -4965,7 +4971,7 @@
     <parameterlist identifier="K+!v1K+">
       <parameter type="vs1a" unit="" value="1" uncertainty="0" minimum="1" maximum="1" ntrain="0" mutability="Fixed" nonnegative="no"/>
     </parameterlist>
-    <parameterlist identifier="o2!v1o2">
+    <parameterlist identifier="o2_b!v1o2">
       <parameter type="vs1a" unit="" value="1" uncertainty="0" minimum="1" maximum="1" ntrain="0" mutability="Fixed" nonnegative="no"/>
     </parameterlist>
   </interaction>
