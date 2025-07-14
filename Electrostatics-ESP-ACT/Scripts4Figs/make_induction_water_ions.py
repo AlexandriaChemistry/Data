@@ -31,5 +31,5 @@ if __name__ == "__main__":
         ffs[ff]["label"] += ( " RMSD %.1f kJ/mol" % ( rmsd(logfn) ) )
 
     pdf = "fig3.pdf"
-    os.system("viewxvg -ls None -mk -alfs 32 -lfs 32 -tickfs 28 -f %s %s -label '%s' '%s' -pdf %s -noshow -res -legend_x 0.26 -legend_y 0.26" % ( ffs[0]["xvg"], ffs[1]["xvg"], ffs[0]["label"], ffs[1]["label"], pdf ) )
+    os.system("viewxvg -ls None -mk o x -alfs 32 -lfs 32 -tickfs 28 -f %s %s -label '%s' '%s' -pdf %s -noshow -res -legend_x 0.26 -legend_y 0.26" % ( ffs[0]["xvg"], ffs[1]["xvg"], ffs[0]["label"], ffs[1]["label"], pdf ) )
     print("Please check %s" % pdf)
