@@ -122,8 +122,8 @@ for qt, suffix in charge_models:
         if os.path.exists(fn):
             os.unlink(fn)
 
-run_command(f"viewxvg -f {couls} -label {labels} -ls None -mk -res -noshow -pdf legacy_coul.pdf")
-run_command(f"viewxvg -f {allelecs} -label {labels} -ls None -mk -res -noshow -pdf legacy_allelec.pdf")
+run_command(f"viewxvg -f {couls} -label {labels} -ls None -mk o + x -res -noshow -pdf legacy_coul.pdf")
+run_command(f"viewxvg -f {allelecs} -label {labels} -ls None -mk o + x -res -noshow -pdf legacy_allelec.pdf")
 
 ntrain, ntest = get_train_test("ESP.log")
 
