@@ -13,4 +13,6 @@ In addition:
 
 - `coul-g.xml`, `coul-gv.xml`, and  `coul-p.xml` were trained only on the electrostatic energy from SAPT.
 
-- `esp-paper-gaussian.xml` includes available charge models,  and `merged6.xml` serve as reference XML files.
+- `esp-paper-gaussian.xml` includes available charge models, and `sapt-esp.xml` serve as reference XML files.
+
+- `hf-aug-cc-pvtz.xml` serves as reference optimized strucrure for charge calculations. 
