@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE alexandria_chemistry.dtd PUBLIC "alexandria_chemistry.dtd" "alexandria_chemistry.dtd">
 <alexandria_chemistry>
-  <version checksum="74163edec3b77f5e17e67a30729bb81f" timestamp="2025-07-14 01:16:27"/>
+  <version checksum="5d829b37c6e165692072e615c2cf170d" timestamp="2025-05-21 07:34:04"/>
   <particletypes>
     <particletype identifier="Ar" type="Atom" description="ar">
       <option key="acmtype" value="ar_z"/>
@@ -62,7 +62,7 @@
       <option key="vdwcorrtype" value="Br-_s"/>
       <option key="vdwtype" value="Br-_s"/>
       <option key="zetatype" value="Br-_s_z"/>
-      <parameter type="charge" unit="e" value="-5.126266854683" uncertainty="0" minimum="-9" maximum="-2" ntrain="10" mutability="Bounded" nonnegative="no"/>
+      <parameter type="charge" unit="e" value="-6.3054716404604" uncertainty="0" minimum="-9" maximum="-2" ntrain="10" mutability="Bounded" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="1" mutability="Fixed" nonnegative="yes"/>
     </particletype>
     <particletype identifier="Ca2+" type="Atom" description="calcium ion">
@@ -111,7 +111,7 @@
       <option key="vdwcorrtype" value="Cl-_s"/>
       <option key="vdwtype" value="Cl-_s"/>
       <option key="zetatype" value="Cl-_s_z"/>
-      <parameter type="charge" unit="e" value="-2.914953525604" uncertainty="0" minimum="-9" maximum="-2" ntrain="11" mutability="Bounded" nonnegative="no"/>
+      <parameter type="charge" unit="e" value="-3.1381832667935" uncertainty="0" minimum="-9" maximum="-2" ntrain="11" mutability="Bounded" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="1" mutability="Fixed" nonnegative="yes"/>
     </particletype>
     <particletype identifier="Cs+" type="Atom" description="cesium ion">
@@ -160,7 +160,7 @@
       <option key="vdwcorrtype" value="F-_s"/>
       <option key="vdwtype" value="F-_s"/>
       <option key="zetatype" value="F-_s_z"/>
-      <parameter type="charge" unit="e" value="-7.886904804249" uncertainty="0" minimum="-9" maximum="-2" ntrain="6" mutability="Bounded" nonnegative="no"/>
+      <parameter type="charge" unit="e" value="-9" uncertainty="0" minimum="-9" maximum="-2" ntrain="6" mutability="Bounded" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="1" mutability="Fixed" nonnegative="yes"/>
     </particletype>
     <particletype identifier="He" type="Atom" description="he">
@@ -222,7 +222,7 @@
       <option key="vdwcorrtype" value="K+_s"/>
       <option key="vdwtype" value="K+_s"/>
       <option key="zetatype" value="K+_s_z"/>
-      <parameter type="charge" unit="e" value="-2.078610587456" uncertainty="0" minimum="-7" maximum="-2" ntrain="8" mutability="Bounded" nonnegative="no"/>
+      <parameter type="charge" unit="e" value="-2.4872638376293" uncertainty="0" minimum="-7" maximum="-2" ntrain="8" mutability="Bounded" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="1" mutability="Fixed" nonnegative="yes"/>
     </particletype>
     <particletype identifier="Kr" type="Atom" description="kr">
@@ -309,7 +309,7 @@
       <option key="vdwcorrtype" value="Na+_s"/>
       <option key="vdwtype" value="Na+_s"/>
       <option key="zetatype" value="Na+_s_z"/>
-      <parameter type="charge" unit="e" value="-3.501382761614" uncertainty="0" minimum="-7" maximum="-2" ntrain="7" mutability="Bounded" nonnegative="no"/>
+      <parameter type="charge" unit="e" value="-2.142735816008" uncertainty="0" minimum="-7" maximum="-2" ntrain="7" mutability="Bounded" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="1" mutability="Fixed" nonnegative="yes"/>
     </particletype>
     <particletype identifier="Ne" type="Atom" description="ne">
@@ -470,7 +470,7 @@
       <option key="vdwcorrtype" value="c2_s"/>
       <option key="vdwtype" value="c2_s"/>
       <option key="zetatype" value="c2_s_z"/>
-      <parameter type="charge" unit="e" value="-1.64687520103" uncertainty="0" minimum="-4" maximum="-1" ntrain="12" mutability="Bounded" nonnegative="no"/>
+      <parameter type="charge" unit="e" value="-1.671149181503" uncertainty="0" minimum="-4" maximum="-1" ntrain="12" mutability="Bounded" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="1" mutability="Fixed" nonnegative="yes"/>
     </particletype>
     <particletype identifier="c3" type="Atom" description="sp3 carbon">
@@ -495,7 +495,7 @@
       <option key="vdwcorrtype" value="c3_s"/>
       <option key="vdwtype" value="c3_s"/>
       <option key="zetatype" value="c3_s_z"/>
-      <parameter type="charge" unit="e" value="-1.732797854169" uncertainty="0" minimum="-4" maximum="-1" ntrain="30" mutability="Bounded" nonnegative="no"/>
+      <parameter type="charge" unit="e" value="-1.1255997211937" uncertainty="0" minimum="-4" maximum="-1" ntrain="30" mutability="Bounded" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="1" mutability="Fixed" nonnegative="yes"/>
     </particletype>
     <particletype identifier="cl" type="Atom" description="chlorine">
@@ -570,7 +570,7 @@
       <option key="vdwcorrtype" value="h1_s"/>
       <option key="vdwtype" value="h1_s"/>
       <option key="zetatype" value="h1_s_z"/>
-      <parameter type="charge" unit="e" value="-1.286732239077" uncertainty="0" minimum="-2" maximum="-0.6" ntrain="41" mutability="Bounded" nonnegative="no"/>
+      <parameter type="charge" unit="e" value="-1.2049824572738" uncertainty="0" minimum="-2" maximum="-0.6" ntrain="41" mutability="Bounded" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="1" mutability="Fixed" nonnegative="yes"/>
     </particletype>
     <particletype identifier="h2" type="Atom" description="hydrogen">
@@ -595,7 +595,7 @@
       <option key="vdwcorrtype" value="h2_s"/>
       <option key="vdwtype" value="h2_s"/>
       <option key="zetatype" value="h2_s_z"/>
-      <parameter type="charge" unit="e" value="-1.070410508861" uncertainty="0" minimum="-2" maximum="-0.6" ntrain="5" mutability="Bounded" nonnegative="no"/>
+      <parameter type="charge" unit="e" value="-1.2716787804074" uncertainty="0" minimum="-2" maximum="-0.6" ntrain="5" mutability="Bounded" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="1" mutability="Fixed" nonnegative="yes"/>
     </particletype>
     <particletype identifier="h3" type="Atom" description="hydrogen">
@@ -745,7 +745,7 @@
       <option key="vdwcorrtype" value="hc_s"/>
       <option key="vdwtype" value="hc_s"/>
       <option key="zetatype" value="hc_s_z"/>
-      <parameter type="charge" unit="e" value="-1.35538528404" uncertainty="0" minimum="-2" maximum="-0.6" ntrain="42" mutability="Bounded" nonnegative="no"/>
+      <parameter type="charge" unit="e" value="-1.3852754182454" uncertainty="0" minimum="-2" maximum="-0.6" ntrain="42" mutability="Bounded" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="1" mutability="Fixed" nonnegative="yes"/>
     </particletype>
     <particletype identifier="hcl" type="Atom" description="hydrogen">
@@ -856,7 +856,7 @@
       <option key="vdwcorrtype" value="hn_s"/>
       <option key="vdwtype" value="hn_s"/>
       <option key="zetatype" value="hn_s_z"/>
-      <parameter type="charge" unit="e" value="-1.373058184494" uncertainty="0" minimum="-2" maximum="-0.6" ntrain="76" mutability="Bounded" nonnegative="no"/>
+      <parameter type="charge" unit="e" value="-1.0715476214371" uncertainty="0" minimum="-2" maximum="-0.6" ntrain="76" mutability="Bounded" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="1" mutability="Fixed" nonnegative="yes"/>
     </particletype>
     <particletype identifier="ho" type="Atom" description="hydrogen">
@@ -956,7 +956,7 @@
       <option key="vdwcorrtype" value="hw_s"/>
       <option key="vdwtype" value="hw_s"/>
       <option key="zetatype" value="hw_s_z"/>
-      <parameter type="charge" unit="e" value="-1.025991518235" uncertainty="0" minimum="-2" maximum="-0.6" ntrain="26" mutability="Bounded" nonnegative="no"/>
+      <parameter type="charge" unit="e" value="-0.99643742812204" uncertainty="0" minimum="-2" maximum="-0.6" ntrain="26" mutability="Bounded" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="1" mutability="Fixed" nonnegative="yes"/>
     </particletype>
     <particletype identifier="i" type="Atom" description="iodine">
@@ -1092,7 +1092,7 @@
       <option key="vdwcorrtype" value="n4_s"/>
       <option key="vdwtype" value="n4_s"/>
       <option key="zetatype" value="n4_s_z"/>
-      <parameter type="charge" unit="e" value="-1.221538649154" uncertainty="0" minimum="-4" maximum="-1" ntrain="23" mutability="Bounded" nonnegative="no"/>
+      <parameter type="charge" unit="e" value="-1.4365202584703" uncertainty="0" minimum="-4" maximum="-1" ntrain="23" mutability="Bounded" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="1" mutability="Fixed" nonnegative="yes"/>
     </particletype>
     <particletype identifier="ne_s" type="Shell" description="ne shell">
@@ -1153,7 +1153,7 @@
       <option key="vdwcorrtype" value="o2_s"/>
       <option key="vdwtype" value="o2_s"/>
       <option key="zetatype" value="o2_s_z"/>
-      <parameter type="charge" unit="e" value="-1.309870656086" uncertainty="0" minimum="-4" maximum="-1" ntrain="24" mutability="Bounded" nonnegative="no"/>
+      <parameter type="charge" unit="e" value="-1.2219013449" uncertainty="0" minimum="-4" maximum="-1" ntrain="24" mutability="Bounded" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="1" mutability="Fixed" nonnegative="yes"/>
     </particletype>
     <particletype identifier="o3" type="Atom" description="sp3 oxygen">
@@ -1203,7 +1203,7 @@
       <option key="vdwcorrtype" value="ow_s"/>
       <option key="vdwtype" value="ow_s"/>
       <option key="zetatype" value="ow_s_z"/>
-      <parameter type="charge" unit="e" value="-1.936004024869" uncertainty="0" minimum="-4" maximum="-1" ntrain="13" mutability="Bounded" nonnegative="no"/>
+      <parameter type="charge" unit="e" value="-2.1501602212252" uncertainty="0" minimum="-4" maximum="-1" ntrain="13" mutability="Bounded" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="1" mutability="Fixed" nonnegative="yes"/>
     </particletype>
     <particletype identifier="p1" type="Atom" description="sp phosphor">
@@ -1365,7 +1365,7 @@
       <option key="vdwcorrtype" value="v1Br-"/>
       <option key="vdwtype" value="v1Br-"/>
       <option key="zetatype" value="v1Br-_z"/>
-      <parameter type="charge" unit="e" value="-1.952491075552" uncertainty="0" minimum="-2" maximum="-0.1" ntrain="10" mutability="Bounded" nonnegative="no"/>
+      <parameter type="charge" unit="e" value="-1.0044168856767" uncertainty="0" minimum="-2" maximum="-0.1" ntrain="10" mutability="Bounded" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="1" mutability="Fixed" nonnegative="yes"/>
     </particletype>
     <particletype identifier="v1Cl-" type="VSite" description="bond virtual site">
@@ -1377,7 +1377,7 @@
       <option key="vdwcorrtype" value="v1Cl-"/>
       <option key="vdwtype" value="v1Cl-"/>
       <option key="zetatype" value="v1Cl-_z"/>
-      <parameter type="charge" unit="e" value="-1.999641858786" uncertainty="0" minimum="-2" maximum="-0.1" ntrain="11" mutability="Bounded" nonnegative="no"/>
+      <parameter type="charge" unit="e" value="-1.969695433016" uncertainty="0" minimum="-2" maximum="-0.1" ntrain="11" mutability="Bounded" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="1" mutability="Fixed" nonnegative="yes"/>
     </particletype>
     <particletype identifier="v1Cs+" type="VSite" description="bond virtual site">
@@ -1401,7 +1401,7 @@
       <option key="vdwcorrtype" value="v1F-"/>
       <option key="vdwtype" value="v1F-"/>
       <option key="zetatype" value="v1F-_z"/>
-      <parameter type="charge" unit="e" value="-1.928467440924" uncertainty="0" minimum="-2" maximum="-0.1" ntrain="6" mutability="Bounded" nonnegative="no"/>
+      <parameter type="charge" unit="e" value="-1.7592677237172" uncertainty="0" minimum="-2" maximum="-0.1" ntrain="6" mutability="Bounded" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="1" mutability="Fixed" nonnegative="yes"/>
     </particletype>
     <particletype identifier="v1I-" type="VSite" description="bond virtual site">
@@ -1425,7 +1425,7 @@
       <option key="vdwcorrtype" value="v1K+"/>
       <option key="vdwtype" value="v1K+"/>
       <option key="zetatype" value="v1K+_z"/>
-      <parameter type="charge" unit="e" value="-0.5867480223103" uncertainty="0" minimum="-2" maximum="-0.1" ntrain="8" mutability="Bounded" nonnegative="no"/>
+      <parameter type="charge" unit="e" value="-0.10863937376107" uncertainty="0" minimum="-2" maximum="-0.1" ntrain="8" mutability="Bounded" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="1" mutability="Fixed" nonnegative="yes"/>
     </particletype>
     <particletype identifier="v1Rb+" type="VSite" description="bond virtual site">
@@ -1449,7 +1449,7 @@
       <option key="vdwcorrtype" value="v1o2"/>
       <option key="vdwtype" value="v1o2"/>
       <option key="zetatype" value="v1o2_z"/>
-      <parameter type="charge" unit="e" value="-0.6203599250271" uncertainty="0" minimum="-2" maximum="-0.1" ntrain="24" mutability="Bounded" nonnegative="no"/>
+      <parameter type="charge" unit="e" value="-0.70647003344411" uncertainty="0" minimum="-2" maximum="-0.1" ntrain="24" mutability="Bounded" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="1" mutability="Fixed" nonnegative="yes"/>
     </particletype>
     <particletype identifier="v2br1" type="VSite" description="bond virtual site">
@@ -1629,7 +1629,7 @@
       <option key="vdwcorrtype" value="v3bw"/>
       <option key="vdwtype" value="v3bw"/>
       <option key="zetatype" value="v3bw_z"/>
-      <parameter type="charge" unit="e" value="-0.9218376197831" uncertainty="0" minimum="-1.5" maximum="-0.5" ntrain="13" mutability="Bounded" nonnegative="no"/>
+      <parameter type="charge" unit="e" value="-0.90563730605199" uncertainty="0" minimum="-1.5" maximum="-0.5" ntrain="13" mutability="Bounded" nonnegative="no"/>
       <parameter type="mass" unit="Da" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="1" mutability="Fixed" nonnegative="yes"/>
     </particletype>
     <particletype identifier="xe_s" type="Shell" description="xe shell">
@@ -1648,37 +1648,37 @@
     <parameterlist identifier="br_b~br_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="226.9" uncertainty="0" minimum="215.555" maximum="238.8421052632" ntrain="1" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="226.9" uncertainty="0" minimum="215.555" maximum="238.84210526316" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="br_b~c3_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="191.5" uncertainty="0" minimum="181.925" maximum="201.5789473684" ntrain="1" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="191.5" uncertainty="0" minimum="181.925" maximum="201.57894736842" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="br_b~cl_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="216.9" uncertainty="0" minimum="206.055" maximum="228.3157894737" ntrain="1" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="216.9" uncertainty="0" minimum="206.055" maximum="228.31578947368" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="br_b~h_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="139.9" uncertainty="0" minimum="132.905" maximum="147.2631578947" ntrain="1" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="139.9" uncertainty="0" minimum="132.905" maximum="147.26315789474" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c2_b:c2_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="139.8" uncertainty="3" minimum="132.81" maximum="147.1578947368" ntrain="19" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="139.8" uncertainty="3" minimum="132.81" maximum="147.15789473684" ntrain="19" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c2_b:n2_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="135.1" uncertainty="3" minimum="128.345" maximum="142.2105263158" ntrain="4" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="135.1" uncertainty="3" minimum="128.345" maximum="142.21052631579" ntrain="4" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c2_b:o2_b">
@@ -1690,25 +1690,25 @@
     <parameterlist identifier="c2_b=o2_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="121.7" uncertainty="0.6" minimum="115.615" maximum="128.1052631579" ntrain="2" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="121.7" uncertainty="0.6" minimum="115.615" maximum="128.10526315789" ntrain="2" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c2_b~c3_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="151.3" uncertainty="3" minimum="143.735" maximum="159.2631578947" ntrain="3" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="151.3" uncertainty="3" minimum="143.735" maximum="159.26315789474" ntrain="3" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c2_b~h_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="108.5" uncertainty="2.1" minimum="103.075" maximum="114.2105263158" ntrain="21" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="108.5" uncertainty="2.1" minimum="103.075" maximum="114.21052631579" ntrain="21" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c2_b~n2_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="135.5" uncertainty="0.2" minimum="128.725" maximum="142.6315789474" ntrain="2" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="135.5" uncertainty="0.2" minimum="128.725" maximum="142.63157894737" ntrain="2" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c2_b~n3_b">
@@ -1720,49 +1720,49 @@
     <parameterlist identifier="c3_b~c3_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="153.7" uncertainty="6.1" minimum="146.015" maximum="161.7894736842" ntrain="91" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="153.7" uncertainty="6.1" minimum="146.015" maximum="161.78947368421" ntrain="91" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c3_b~cl_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="177.2" uncertainty="0" minimum="168.34" maximum="186.5263157895" ntrain="1" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="177.2" uncertainty="0" minimum="168.34" maximum="186.52631578947" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c3_b~f_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="134.2" uncertainty="8.4" minimum="127.49" maximum="141.2631578947" ntrain="11" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="134.2" uncertainty="8.4" minimum="127.49" maximum="141.26315789474" ntrain="11" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c3_b~h_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="109" uncertainty="3.5" minimum="103.55" maximum="114.7368421053" ntrain="285" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="109" uncertainty="3.5" minimum="103.55" maximum="114.73684210526" ntrain="285" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c3_b~i_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="211.6" uncertainty="0" minimum="201.02" maximum="222.7368421053" ntrain="1" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="211.6" uncertainty="0" minimum="201.02" maximum="222.73684210526" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c3_b~n2_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="144.1" uncertainty="0" minimum="136.895" maximum="151.6842105263" ntrain="1" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="144.1" uncertainty="0" minimum="136.895" maximum="151.68421052632" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c3_b~n3_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="145.8" uncertainty="0" minimum="138.51" maximum="153.4736842105" ntrain="2" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="145.8" uncertainty="0" minimum="138.51" maximum="153.47368421053" ntrain="2" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c3_b~n4_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="150.2" uncertainty="0.7" minimum="142.69" maximum="158.1052631579" ntrain="2" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="150.2" uncertainty="0.7" minimum="142.69" maximum="158.10526315789" ntrain="2" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c3_b~o3_b">
@@ -1774,25 +1774,25 @@
     <parameterlist identifier="cl_b~cl_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="199.2" uncertainty="0" minimum="189.24" maximum="209.6842105263" ntrain="1" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="199.2" uncertainty="0" minimum="189.24" maximum="209.68421052632" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="cl_b~h_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="127.1" uncertainty="0" minimum="120.745" maximum="133.7894736842" ntrain="1" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="127.1" uncertainty="0" minimum="120.745" maximum="133.78947368421" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="f_b~f_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="139.8" uncertainty="0" minimum="132.81" maximum="147.1578947368" ntrain="1" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="139.8" uncertainty="0" minimum="132.81" maximum="147.15789473684" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="f_b~h_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="91.9" uncertainty="0" minimum="87.305" maximum="96.73684210526" ntrain="1" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="91.9" uncertainty="0" minimum="87.305" maximum="96.736842105263" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="h_b~i_b">
@@ -1804,57 +1804,57 @@
     <parameterlist identifier="h_b~n2_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="100.2" uncertainty="0.1" minimum="95.19" maximum="105.4736842105" ntrain="4" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="100.2" uncertainty="0.1" minimum="95.19" maximum="105.47368421053" ntrain="4" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="h_b~n3_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="100.2" uncertainty="1.8" minimum="95.19" maximum="105.4736842105" ntrain="6" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="100.2" uncertainty="1.8" minimum="95.19" maximum="105.47368421053" ntrain="6" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="h_b~n4_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="101.9" uncertainty="0" minimum="96.805" maximum="107.2631578947" ntrain="10" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="101.9" uncertainty="0" minimum="96.805" maximum="107.26315789474" ntrain="10" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="h_b~o3_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="96.3" uncertainty="3.7" minimum="91.485" maximum="101.3684210526" ntrain="19" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="96.3" uncertainty="3.7" minimum="91.485" maximum="101.36842105263" ntrain="19" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="hw_b~ow_b">
       <parameter type="De" unit="kJ/mol" value="400" uncertainty="0" minimum="200" maximum="800" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="b" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="40" ntrain="1" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bondlength" unit="pm" value="95.8" uncertainty="0" minimum="91.01" maximum="100.8421052632" ntrain="2" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="bondlength" unit="pm" value="95.8" uncertainty="0" minimum="91.01" maximum="100.84210526316" ntrain="2" mutability="Bounded" nonnegative="yes"/>
       <parameter type="c" unit="" value="0" uncertainty="0" minimum="-1" maximum="1" ntrain="1" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
   </interaction>
   <interaction type="ANGLES" function="HARMONIC_ANGLES" canswap="true">
     <parameterlist identifier="br_b~c3_b~h_b">
-      <parameter type="angle" unit="degree" value="108" uncertainty="0" minimum="102.6" maximum="113.6842105263" ntrain="3" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="108" uncertainty="0" minimum="102.6" maximum="113.68421052632" ntrain="3" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c2_b:c2_b:c2_b">
-      <parameter type="angle" unit="degree" value="119.9" uncertainty="2.6" minimum="113.905" maximum="126.2105263158" ntrain="18" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="119.9" uncertainty="2.6" minimum="113.905" maximum="126.21052631579" ntrain="18" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c2_b:c2_b:n2_b">
-      <parameter type="angle" unit="degree" value="107.8" uncertainty="4.2" minimum="102.41" maximum="113.4736842105" ntrain="2" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="107.8" uncertainty="4.2" minimum="102.41" maximum="113.47368421053" ntrain="2" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c2_b:c2_b~c3_b">
-      <parameter type="angle" unit="degree" value="120.8" uncertainty="0" minimum="114.76" maximum="127.1578947368" ntrain="2" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="120.8" uncertainty="0" minimum="114.76" maximum="127.15789473684" ntrain="2" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c2_b:c2_b~h_b">
-      <parameter type="angle" unit="degree" value="120.2" uncertainty="6.1" minimum="114.19" maximum="126.5263157895" ntrain="34" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="120.2" uncertainty="6.1" minimum="114.19" maximum="126.52631578947" ntrain="34" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c2_b:c2_b~n3_b">
-      <parameter type="angle" unit="degree" value="121.8" uncertainty="0.8" minimum="115.71" maximum="128.2105263158" ntrain="2" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="121.8" uncertainty="0.8" minimum="115.71" maximum="128.21052631579" ntrain="2" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c2_b:n2_b:c2_b">
@@ -1862,155 +1862,155 @@
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c2_b:n2_b~h_b">
-      <parameter type="angle" unit="degree" value="126.1" uncertainty="0" minimum="119.795" maximum="132.7368421053" ntrain="2" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="126.1" uncertainty="0" minimum="119.795" maximum="132.73684210526" ntrain="2" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c2_b~c3_b~h_b">
-      <parameter type="angle" unit="degree" value="110.3" uncertainty="2.2" minimum="104.785" maximum="116.1052631579" ntrain="9" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="110.3" uncertainty="2.2" minimum="104.785" maximum="116.10526315789" ntrain="9" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c2_b~n2_b~c3_b">
-      <parameter type="angle" unit="degree" value="122.3" uncertainty="0" minimum="116.185" maximum="128.7368421053" ntrain="1" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="122.3" uncertainty="0" minimum="116.185" maximum="128.73684210526" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c2_b~n2_b~h_b">
-      <parameter type="angle" unit="degree" value="119.5" uncertainty="1.8" minimum="113.525" maximum="125.7894736842" ntrain="3" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="119.5" uncertainty="1.8" minimum="113.525" maximum="125.78947368421" ntrain="3" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c2_b~n3_b~h_b">
-      <parameter type="angle" unit="degree" value="117.9" uncertainty="4.9" minimum="112.005" maximum="124.1052631579" ntrain="2" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="117.9" uncertainty="4.9" minimum="112.005" maximum="124.10526315789" ntrain="2" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c3_b~c2_b:o2_b">
-      <parameter type="angle" unit="degree" value="115.5" uncertainty="0.9" minimum="109.725" maximum="121.5789473684" ntrain="2" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="115.5" uncertainty="0.9" minimum="109.725" maximum="121.57894736842" ntrain="2" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c3_b~c2_b=o2_b">
-      <parameter type="angle" unit="degree" value="121.8" uncertainty="0" minimum="115.71" maximum="128.2105263158" ntrain="1" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="121.8" uncertainty="0" minimum="115.71" maximum="128.21052631579" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c3_b~c2_b~n2_b">
-      <parameter type="angle" unit="degree" value="115.2" uncertainty="0" minimum="109.44" maximum="121.2631578947" ntrain="1" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="115.2" uncertainty="0" minimum="109.44" maximum="121.26315789474" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c3_b~c3_b~c3_b">
-      <parameter type="angle" unit="degree" value="106.2" uncertainty="24.3" minimum="100.89" maximum="111.7894736842" ntrain="74" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="106.2" uncertainty="24.3" minimum="100.89" maximum="111.78947368421" ntrain="74" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c3_b~c3_b~f_b">
-      <parameter type="angle" unit="degree" value="112.6" uncertainty="9.1" minimum="106.97" maximum="118.5263157895" ntrain="5" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="112.6" uncertainty="9.1" minimum="106.97" maximum="118.52631578947" ntrain="5" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c3_b~c3_b~h_b">
-      <parameter type="angle" unit="degree" value="110" uncertainty="7.9" minimum="104.5" maximum="115.7894736842" ntrain="366" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="110" uncertainty="7.9" minimum="104.5" maximum="115.78947368421" ntrain="366" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c3_b~c3_b~n3_b">
-      <parameter type="angle" unit="degree" value="109.9" uncertainty="0" minimum="104.405" maximum="115.6842105263" ntrain="1" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="109.9" uncertainty="0" minimum="104.405" maximum="115.68421052632" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c3_b~c3_b~n4_b">
-      <parameter type="angle" unit="degree" value="109.8" uncertainty="0" minimum="104.31" maximum="115.5789473684" ntrain="1" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="109.8" uncertainty="0" minimum="104.31" maximum="115.57894736842" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c3_b~c3_b~o3_b">
-      <parameter type="angle" unit="degree" value="110.1" uncertainty="5.4" minimum="104.595" maximum="115.8947368421" ntrain="25" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="110.1" uncertainty="5.4" minimum="104.595" maximum="115.89473684211" ntrain="25" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c3_b~n2_b~h_b">
-      <parameter type="angle" unit="degree" value="119.5" uncertainty="0" minimum="113.525" maximum="125.7894736842" ntrain="1" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="119.5" uncertainty="0" minimum="113.525" maximum="125.78947368421" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c3_b~n3_b~h_b">
-      <parameter type="angle" unit="degree" value="110.4" uncertainty="0.4" minimum="104.88" maximum="116.2105263158" ntrain="4" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="110.4" uncertainty="0.4" minimum="104.88" maximum="116.21052631579" ntrain="4" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c3_b~n4_b~h_b">
-      <parameter type="angle" unit="degree" value="111.2" uncertainty="0.6" minimum="105.64" maximum="117.0526315789" ntrain="6" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="111.2" uncertainty="0.6" minimum="105.64" maximum="117.05263157895" ntrain="6" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c3_b~o3_b~h_b">
-      <parameter type="angle" unit="degree" value="109" uncertainty="6.6" minimum="103.55" maximum="114.7368421053" ntrain="19" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="109" uncertainty="6.6" minimum="103.55" maximum="114.73684210526" ntrain="19" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="cl_b~c3_b~h_b">
-      <parameter type="angle" unit="degree" value="108.4" uncertainty="0" minimum="102.98" maximum="114.1052631579" ntrain="3" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="108.4" uncertainty="0" minimum="102.98" maximum="114.10526315789" ntrain="3" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="f_b~c3_b~f_b">
-      <parameter type="angle" unit="degree" value="109.1" uncertainty="6.3" minimum="103.645" maximum="114.8421052632" ntrain="8" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="109.1" uncertainty="6.3" minimum="103.645" maximum="114.84210526316" ntrain="8" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="f_b~c3_b~h_b">
-      <parameter type="angle" unit="degree" value="107" uncertainty="7.5" minimum="101.65" maximum="112.6315789474" ntrain="12" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="107" uncertainty="7.5" minimum="101.65" maximum="112.63157894737" ntrain="12" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h_b~c2_b:n2_b">
-      <parameter type="angle" unit="degree" value="123.2" uncertainty="2.5" minimum="117.04" maximum="129.6842105263" ntrain="4" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="123.2" uncertainty="2.5" minimum="117.04" maximum="129.68421052632" ntrain="4" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h_b~c2_b:o2_b">
-      <parameter type="angle" unit="degree" value="114.8" uncertainty="0" minimum="109.06" maximum="120.8421052632" ntrain="2" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="114.8" uncertainty="0" minimum="109.06" maximum="120.84210526316" ntrain="2" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h_b~c2_b=o2_b">
-      <parameter type="angle" unit="degree" value="122.8" uncertainty="0" minimum="116.66" maximum="129.2631578947" ntrain="1" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="122.8" uncertainty="0" minimum="116.66" maximum="129.26315789474" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h_b~c2_b~n2_b">
-      <parameter type="angle" unit="degree" value="112.3" uncertainty="0" minimum="106.685" maximum="118.2105263158" ntrain="1" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="112.3" uncertainty="0" minimum="106.685" maximum="118.21052631579" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h_b~c3_b~h_b">
-      <parameter type="angle" unit="degree" value="107.8" uncertainty="4.6" minimum="102.41" maximum="113.4736842105" ntrain="207" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="107.8" uncertainty="4.6" minimum="102.41" maximum="113.47368421053" ntrain="207" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h_b~c3_b~i_b">
-      <parameter type="angle" unit="degree" value="107.8" uncertainty="0" minimum="102.41" maximum="113.4736842105" ntrain="3" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="107.8" uncertainty="0" minimum="102.41" maximum="113.47368421053" ntrain="3" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h_b~c3_b~n2_b">
-      <parameter type="angle" unit="degree" value="109.7" uncertainty="2.8" minimum="104.215" maximum="115.4736842105" ntrain="3" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="109.7" uncertainty="2.8" minimum="104.215" maximum="115.47368421053" ntrain="3" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h_b~c3_b~n3_b">
-      <parameter type="angle" unit="degree" value="110.7" uncertainty="4.2" minimum="105.165" maximum="116.5263157895" ntrain="5" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="110.7" uncertainty="4.2" minimum="105.165" maximum="116.52631578947" ntrain="5" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h_b~c3_b~n4_b">
-      <parameter type="angle" unit="degree" value="107.3" uncertainty="1.4" minimum="101.935" maximum="112.9473684211" ntrain="5" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="107.3" uncertainty="1.4" minimum="101.935" maximum="112.94736842105" ntrain="5" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h_b~c3_b~o3_b">
-      <parameter type="angle" unit="degree" value="109.8" uncertainty="8.4" minimum="104.31" maximum="115.5789473684" ntrain="32" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="109.8" uncertainty="8.4" minimum="104.31" maximum="115.57894736842" ntrain="32" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h_b~n2_b~h_b">
-      <parameter type="angle" unit="degree" value="119.6" uncertainty="0" minimum="113.62" maximum="125.8947368421" ntrain="1" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="119.6" uncertainty="0" minimum="113.62" maximum="125.89473684211" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h_b~n3_b~h_b">
-      <parameter type="angle" unit="degree" value="107.4" uncertainty="1.8" minimum="102.03" maximum="113.0526315789" ntrain="3" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="107.4" uncertainty="1.8" minimum="102.03" maximum="113.05263157895" ntrain="3" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h_b~n4_b~h_b">
-      <parameter type="angle" unit="degree" value="108.5" uncertainty="1.3" minimum="103.075" maximum="114.2105263158" ntrain="12" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="108.5" uncertainty="1.3" minimum="103.075" maximum="114.21052631579" ntrain="12" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="hw_b~ow_b~hw_b">
-      <parameter type="angle" unit="degree" value="104.2" uncertainty="0" minimum="98.99" maximum="109.6842105263" ntrain="1" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="104.2" uncertainty="0" minimum="98.99" maximum="109.68421052632" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="n2_b:c2_b:n2_b">
-      <parameter type="angle" unit="degree" value="111.3" uncertainty="0" minimum="105.735" maximum="117.1578947368" ntrain="1" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="111.3" uncertainty="0" minimum="105.735" maximum="117.15789473684" ntrain="1" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="n2_b~c2_b=o2_b">
-      <parameter type="angle" unit="degree" value="123.8" uncertainty="1.4" minimum="117.61" maximum="130.3157894737" ntrain="2" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="123.8" uncertainty="1.4" minimum="117.61" maximum="130.31578947368" ntrain="2" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="o2_b:c2_b:o2_b">
-      <parameter type="angle" unit="degree" value="129.5" uncertainty="1.1" minimum="123.025" maximum="136.3157894737" ntrain="2" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="angle" unit="degree" value="129.5" uncertainty="1.1" minimum="123.025" maximum="136.31578947368" ntrain="2" mutability="Bounded" nonnegative="yes"/>
       <parameter type="kt" unit="kJ/mol/rad2" value="300" uncertainty="0" minimum="150" maximum="600" ntrain="1" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
   </interaction>
@@ -3614,7 +3614,7 @@
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Br-_s_z">
-      <parameter type="zeta" unit="1/nm" value="8.234921413635" uncertainty="0" minimum="4" maximum="30" ntrain="10" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="zeta" unit="1/nm" value="8.6053865542388" uncertainty="0" minimum="4" maximum="30" ntrain="10" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Br-_z">
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -3626,7 +3626,7 @@
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Cl-_s_z">
-      <parameter type="zeta" unit="1/nm" value="7.983499505047" uncertainty="0" minimum="4" maximum="30" ntrain="11" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="zeta" unit="1/nm" value="8.129573811503" uncertainty="0" minimum="4" maximum="30" ntrain="11" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Cl-_z">
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -3638,7 +3638,7 @@
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="F-_s_z">
-      <parameter type="zeta" unit="1/nm" value="30" uncertainty="0" minimum="4" maximum="30" ntrain="6" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="zeta" unit="1/nm" value="27.818415847102" uncertainty="0" minimum="4" maximum="30" ntrain="6" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="F-_z">
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -3650,7 +3650,7 @@
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="K+_s_z">
-      <parameter type="zeta" unit="1/nm" value="11.28392840432" uncertainty="0" minimum="4" maximum="30" ntrain="8" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="zeta" unit="1/nm" value="10.827704980645" uncertainty="0" minimum="4" maximum="30" ntrain="8" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="K+_z">
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -3668,7 +3668,7 @@
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Na+_s_z">
-      <parameter type="zeta" unit="1/nm" value="19.58477145812" uncertainty="0" minimum="4" maximum="30" ntrain="7" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="zeta" unit="1/nm" value="15.985054798645" uncertainty="0" minimum="4" maximum="30" ntrain="7" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Na+_z">
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -3704,13 +3704,13 @@
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c2_s_z">
-      <parameter type="zeta" unit="1/nm" value="14.19830030692" uncertainty="0" minimum="4" maximum="30" ntrain="12" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="zeta" unit="1/nm" value="11.626118034536" uncertainty="0" minimum="4" maximum="30" ntrain="12" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c2_z">
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c3_s_z">
-      <parameter type="zeta" unit="1/nm" value="9.695021924547" uncertainty="0" minimum="4" maximum="30" ntrain="30" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="zeta" unit="1/nm" value="8.4588309408587" uncertainty="0" minimum="4" maximum="30" ntrain="30" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c3_z">
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -3728,13 +3728,13 @@
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h1_s_z">
-      <parameter type="zeta" unit="1/nm" value="27.63268095108" uncertainty="0" minimum="4" maximum="30" ntrain="41" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="zeta" unit="1/nm" value="29.196822894322" uncertainty="0" minimum="4" maximum="30" ntrain="41" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h1_z">
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h2_s_z">
-      <parameter type="zeta" unit="1/nm" value="13.002757059" uncertainty="0" minimum="4" maximum="30" ntrain="5" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="zeta" unit="1/nm" value="14.19178196112" uncertainty="0" minimum="4" maximum="30" ntrain="5" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h2_z">
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -3770,7 +3770,7 @@
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="hc_s_z">
-      <parameter type="zeta" unit="1/nm" value="18.73765205254" uncertainty="0" minimum="4" maximum="30" ntrain="42" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="zeta" unit="1/nm" value="19.292704879543" uncertainty="0" minimum="4" maximum="30" ntrain="42" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="hc_z">
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -3800,7 +3800,7 @@
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="hn_s_z">
-      <parameter type="zeta" unit="1/nm" value="28.05634111696" uncertainty="0" minimum="4" maximum="30" ntrain="76" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="zeta" unit="1/nm" value="25.50580515386" uncertainty="0" minimum="4" maximum="30" ntrain="76" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="hn_z">
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -3824,7 +3824,7 @@
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="hw_s_z">
-      <parameter type="zeta" unit="1/nm" value="30" uncertainty="0" minimum="4" maximum="30" ntrain="26" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="zeta" unit="1/nm" value="29.331825944752" uncertainty="0" minimum="4" maximum="30" ntrain="26" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="hw_z">
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -3860,7 +3860,7 @@
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="n4_s_z">
-      <parameter type="zeta" unit="1/nm" value="9.53717979776" uncertainty="0" minimum="4" maximum="30" ntrain="23" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="zeta" unit="1/nm" value="10.338611921429" uncertainty="0" minimum="4" maximum="30" ntrain="23" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="n4_z">
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -3878,7 +3878,7 @@
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="o2_s_z">
-      <parameter type="zeta" unit="1/nm" value="8.779683785697" uncertainty="0" minimum="4" maximum="30" ntrain="24" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="zeta" unit="1/nm" value="8.767668230602" uncertainty="0" minimum="4" maximum="30" ntrain="24" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="o2_z">
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -3890,7 +3890,7 @@
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="ow_s_z">
-      <parameter type="zeta" unit="1/nm" value="11.94587609623" uncertainty="0" minimum="4" maximum="30" ntrain="13" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="zeta" unit="1/nm" value="12.480524000496" uncertainty="0" minimum="4" maximum="30" ntrain="13" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="ow_z">
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -3932,28 +3932,28 @@
       <parameter type="zeta" unit="1/nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="v1Br-_z">
-      <parameter type="zeta" unit="1/nm" value="14.64060194247" uncertainty="0" minimum="5" maximum="20" ntrain="10" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="zeta" unit="1/nm" value="19.088007781879" uncertainty="0" minimum="5" maximum="20" ntrain="10" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="v1Cl-_z">
-      <parameter type="zeta" unit="1/nm" value="11.35694894547" uncertainty="0" minimum="5" maximum="20" ntrain="11" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="zeta" unit="1/nm" value="11.501635425716" uncertainty="0" minimum="5" maximum="20" ntrain="11" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="v1Cs+_z">
       <parameter type="zeta" unit="1/nm" value="12.5" uncertainty="0" minimum="5" maximum="20" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="v1F-_z">
-      <parameter type="zeta" unit="1/nm" value="9.609710266848" uncertainty="0" minimum="5" maximum="20" ntrain="6" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="zeta" unit="1/nm" value="9.3637266950516" uncertainty="0" minimum="5" maximum="20" ntrain="6" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="v1I-_z">
       <parameter type="zeta" unit="1/nm" value="12.5" uncertainty="0" minimum="5" maximum="20" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="v1K+_z">
-      <parameter type="zeta" unit="1/nm" value="10.04233676339" uncertainty="0" minimum="5" maximum="20" ntrain="8" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="zeta" unit="1/nm" value="19.636876070905" uncertainty="0" minimum="5" maximum="20" ntrain="8" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="v1Rb+_z">
       <parameter type="zeta" unit="1/nm" value="12.5" uncertainty="0" minimum="5" maximum="20" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="v1o2_z">
-      <parameter type="zeta" unit="1/nm" value="10.59153600344" uncertainty="0" minimum="5" maximum="20" ntrain="24" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="zeta" unit="1/nm" value="10.716232541182" uncertainty="0" minimum="5" maximum="20" ntrain="24" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="v2br1_z">
       <parameter type="zeta" unit="1/nm" value="12.5" uncertainty="0" minimum="5" maximum="20" ntrain="0" mutability="Bounded" nonnegative="yes"/>
@@ -4014,7 +4014,7 @@
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Br-_s">
-      <parameter type="alpha" unit="Angstrom3" value="3.85967814041" uncertainty="0" minimum="3" maximum="7" ntrain="10" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="alpha" unit="Angstrom3" value="3" uncertainty="0" minimum="3" maximum="7" ntrain="10" mutability="Bounded" nonnegative="yes"/>
       <parameter type="fchyper" unit="kJ/mol nm4" value="0" uncertainty="0" minimum="0" maximum="500000000" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
@@ -4024,7 +4024,7 @@
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Cl-_s">
-      <parameter type="alpha" unit="Angstrom3" value="2.71300372175" uncertainty="0" minimum="2" maximum="5" ntrain="11" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="alpha" unit="Angstrom3" value="2" uncertainty="0" minimum="2" maximum="5" ntrain="11" mutability="Bounded" nonnegative="yes"/>
       <parameter type="fchyper" unit="kJ/mol nm4" value="0" uncertainty="0" minimum="0" maximum="500000000" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
@@ -4034,7 +4034,7 @@
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="F-_s">
-      <parameter type="alpha" unit="Angstrom3" value="1.236354035676" uncertainty="0" minimum="1" maximum="2" ntrain="6" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="alpha" unit="Angstrom3" value="1" uncertainty="0" minimum="1" maximum="2" ntrain="6" mutability="Bounded" nonnegative="yes"/>
       <parameter type="fchyper" unit="kJ/mol nm4" value="0" uncertainty="0" minimum="0" maximum="500000000" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
@@ -4044,12 +4044,12 @@
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="K+_s">
-      <parameter type="alpha" unit="Angstrom3" value="0.9605439706114" uncertainty="0" minimum="0.4" maximum="1.2" ntrain="8" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="alpha" unit="Angstrom3" value="0.90537380058016" uncertainty="0" minimum="0.4" maximum="1.2" ntrain="8" mutability="Bounded" nonnegative="yes"/>
       <parameter type="fchyper" unit="kJ/mol nm4" value="0" uncertainty="0" minimum="0" maximum="500000000" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Li+_s">
-      <parameter type="alpha" unit="Angstrom3" value="0.2" uncertainty="0" minimum="0" maximum="0.2" ntrain="6" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="alpha" unit="Angstrom3" value="0.1220081851551" uncertainty="0" minimum="0" maximum="0.2" ntrain="6" mutability="Bounded" nonnegative="yes"/>
       <parameter type="fchyper" unit="kJ/mol nm4" value="0" uncertainty="0" minimum="0" maximum="500000000" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
@@ -4059,7 +4059,7 @@
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Na+_s">
-      <parameter type="alpha" unit="Angstrom3" value="0.1502950970023" uncertainty="0" minimum="0.1" maximum="0.6" ntrain="7" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="alpha" unit="Angstrom3" value="0.1" uncertainty="0" minimum="0.1" maximum="0.6" ntrain="7" mutability="Bounded" nonnegative="yes"/>
       <parameter type="fchyper" unit="kJ/mol nm4" value="0" uncertainty="0" minimum="0" maximum="500000000" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
@@ -4089,12 +4089,12 @@
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c2_s">
-      <parameter type="alpha" unit="Angstrom3" value="0.9454447881382" uncertainty="0" minimum="0.4" maximum="2.5" ntrain="12" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="alpha" unit="Angstrom3" value="0.4" uncertainty="0" minimum="0.4" maximum="2.5" ntrain="12" mutability="Bounded" nonnegative="yes"/>
       <parameter type="fchyper" unit="kJ/mol nm4" value="0" uncertainty="0" minimum="0" maximum="500000000" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c3_s">
-      <parameter type="alpha" unit="Angstrom3" value="1.41577806205" uncertainty="0" minimum="0.4" maximum="2.5" ntrain="30" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="alpha" unit="Angstrom3" value="1.2889578851035" uncertainty="0" minimum="0.4" maximum="2.5" ntrain="30" mutability="Bounded" nonnegative="yes"/>
       <parameter type="fchyper" unit="kJ/mol nm4" value="0" uncertainty="0" minimum="0" maximum="500000000" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
@@ -4109,12 +4109,12 @@
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h1_s">
-      <parameter type="alpha" unit="Angstrom3" value="0.01" uncertainty="0" minimum="0.01" maximum="1" ntrain="41" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="alpha" unit="Angstrom3" value="0.18948681889744" uncertainty="0" minimum="0.01" maximum="1" ntrain="41" mutability="Bounded" nonnegative="yes"/>
       <parameter type="fchyper" unit="kJ/mol nm4" value="0" uncertainty="0" minimum="0" maximum="500000000" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h2_s">
-      <parameter type="alpha" unit="Angstrom3" value="0.973365723712" uncertainty="0" minimum="0.01" maximum="1" ntrain="5" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="alpha" unit="Angstrom3" value="0.91546670181768" uncertainty="0" minimum="0.01" maximum="1" ntrain="5" mutability="Bounded" nonnegative="yes"/>
       <parameter type="fchyper" unit="kJ/mol nm4" value="0" uncertainty="0" minimum="0" maximum="500000000" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
@@ -4144,7 +4144,7 @@
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="hc_s">
-      <parameter type="alpha" unit="Angstrom3" value="0.2780645793439" uncertainty="0" minimum="0.01" maximum="1" ntrain="42" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="alpha" unit="Angstrom3" value="0.18531761671603" uncertainty="0" minimum="0.01" maximum="1" ntrain="42" mutability="Bounded" nonnegative="yes"/>
       <parameter type="fchyper" unit="kJ/mol nm4" value="0" uncertainty="0" minimum="0" maximum="500000000" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
@@ -4169,7 +4169,7 @@
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="hn_s">
-      <parameter type="alpha" unit="Angstrom3" value="0.01" uncertainty="0" minimum="0.01" maximum="1" ntrain="76" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="alpha" unit="Angstrom3" value="0.010035885733161" uncertainty="0" minimum="0.01" maximum="1" ntrain="76" mutability="Bounded" nonnegative="yes"/>
       <parameter type="fchyper" unit="kJ/mol nm4" value="0" uncertainty="0" minimum="0" maximum="500000000" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
@@ -4189,7 +4189,7 @@
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="hw_s">
-      <parameter type="alpha" unit="Angstrom3" value="0.3305772841464" uncertainty="0" minimum="0.01" maximum="1" ntrain="26" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="alpha" unit="Angstrom3" value="0.20979018222395" uncertainty="0" minimum="0.01" maximum="1" ntrain="26" mutability="Bounded" nonnegative="yes"/>
       <parameter type="fchyper" unit="kJ/mol nm4" value="0" uncertainty="0" minimum="0" maximum="500000000" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
@@ -4219,7 +4219,7 @@
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="n4_s">
-      <parameter type="alpha" unit="Angstrom3" value="2.112236999418" uncertainty="0" minimum="0.4" maximum="2.5" ntrain="23" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="alpha" unit="Angstrom3" value="0.75632341192576" uncertainty="0" minimum="0.4" maximum="2.5" ntrain="23" mutability="Bounded" nonnegative="yes"/>
       <parameter type="fchyper" unit="kJ/mol nm4" value="0" uncertainty="0" minimum="0" maximum="500000000" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
@@ -4234,7 +4234,7 @@
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="o2_s">
-      <parameter type="alpha" unit="Angstrom3" value="1.025436061608" uncertainty="0" minimum="0.4" maximum="2.5" ntrain="24" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="alpha" unit="Angstrom3" value="0.72043211708526" uncertainty="0" minimum="0.4" maximum="2.5" ntrain="24" mutability="Bounded" nonnegative="yes"/>
       <parameter type="fchyper" unit="kJ/mol nm4" value="0" uncertainty="0" minimum="0" maximum="500000000" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
@@ -4244,7 +4244,7 @@
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="ow_s">
-      <parameter type="alpha" unit="Angstrom3" value="0.7325828906988" uncertainty="0" minimum="0.4" maximum="2.5" ntrain="13" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="alpha" unit="Angstrom3" value="0.53224381246793" uncertainty="0" minimum="0.4" maximum="2.5" ntrain="13" mutability="Bounded" nonnegative="yes"/>
       <parameter type="fchyper" unit="kJ/mol nm4" value="0" uncertainty="0" minimum="0" maximum="500000000" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="rhyper" unit="nm" value="0.02" uncertainty="0" minimum="0" maximum="0.05" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
@@ -4291,12 +4291,12 @@
     <combinationrule parameter="bdexp" rule="Arithmetic"/>
     <parameterlist identifier="Ar">
       <parameter type="a1dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="40" uncertainty="0" minimum="10" maximum="70" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Be2+">
       <parameter type="a1dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="40" uncertainty="0" minimum="10" maximum="70" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Be2+_s">
@@ -4305,8 +4305,8 @@
       <parameter type="bdexp" unit="1/nm" value="10" uncertainty="0" minimum="10" maximum="10" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Br-">
-      <parameter type="a1dexp" unit="kJ/mol" value="25894.99372202" uncertainty="0" minimum="0" maximum="50000" ntrain="10" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="10" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a1dexp" unit="kJ/mol" value="996.94283477062" uncertainty="0" minimum="0" maximum="50000" ntrain="10" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="10" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="10" uncertainty="0" minimum="10" maximum="70" ntrain="10" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Br-_s">
@@ -4316,7 +4316,7 @@
     </parameterlist>
     <parameterlist identifier="Ca2+">
       <parameter type="a1dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="40" uncertainty="0" minimum="10" maximum="70" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Ca2+_s">
@@ -4325,9 +4325,9 @@
       <parameter type="bdexp" unit="1/nm" value="10" uncertainty="0" minimum="10" maximum="10" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Cl-">
-      <parameter type="a1dexp" unit="kJ/mol" value="25792.25857895" uncertainty="0" minimum="0" maximum="50000" ntrain="11" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="11" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bdexp" unit="1/nm" value="10.64903941987" uncertainty="0" minimum="10" maximum="70" ntrain="11" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a1dexp" unit="kJ/mol" value="642.71023279944" uncertainty="0" minimum="0" maximum="50000" ntrain="11" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="11" mutability="Fixed" nonnegative="yes"/>
+      <parameter type="bdexp" unit="1/nm" value="10" uncertainty="0" minimum="10" maximum="70" ntrain="11" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Cl-_s">
       <parameter type="a1dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -4336,7 +4336,7 @@
     </parameterlist>
     <parameterlist identifier="Cs+">
       <parameter type="a1dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="40" uncertainty="0" minimum="10" maximum="70" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Cs+_s">
@@ -4345,9 +4345,9 @@
       <parameter type="bdexp" unit="1/nm" value="10" uncertainty="0" minimum="10" maximum="10" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="F-">
-      <parameter type="a1dexp" unit="kJ/mol" value="26828.39692262" uncertainty="0" minimum="0" maximum="50000" ntrain="6" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="6" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bdexp" unit="1/nm" value="21.69863371614" uncertainty="0" minimum="10" maximum="70" ntrain="6" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a1dexp" unit="kJ/mol" value="1084.2448373968" uncertainty="0" minimum="0" maximum="50000" ntrain="6" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="6" mutability="Fixed" nonnegative="yes"/>
+      <parameter type="bdexp" unit="1/nm" value="13.994381720369" uncertainty="0" minimum="10" maximum="70" ntrain="6" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="F-_s">
       <parameter type="a1dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -4356,12 +4356,12 @@
     </parameterlist>
     <parameterlist identifier="He">
       <parameter type="a1dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="40" uncertainty="0" minimum="10" maximum="70" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="I-">
       <parameter type="a1dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="40" uncertainty="0" minimum="10" maximum="70" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="I-_s">
@@ -4371,8 +4371,8 @@
     </parameterlist>
     <parameterlist identifier="K+">
       <parameter type="a1dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="50000" ntrain="8" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="8" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bdexp" unit="1/nm" value="39.64864890098" uncertainty="0" minimum="10" maximum="70" ntrain="8" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="8" mutability="Fixed" nonnegative="yes"/>
+      <parameter type="bdexp" unit="1/nm" value="57.920326703625" uncertainty="0" minimum="10" maximum="70" ntrain="8" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="K+_s">
       <parameter type="a1dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -4381,13 +4381,13 @@
     </parameterlist>
     <parameterlist identifier="Kr">
       <parameter type="a1dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="40" uncertainty="0" minimum="10" maximum="70" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Li+">
-      <parameter type="a1dexp" unit="kJ/mol" value="16434.3069637" uncertainty="0" minimum="0" maximum="50000" ntrain="6" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="6" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bdexp" unit="1/nm" value="40.76300130344" uncertainty="0" minimum="10" maximum="70" ntrain="6" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a1dexp" unit="kJ/mol" value="21.975786273172" uncertainty="0" minimum="0" maximum="50000" ntrain="6" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="6" mutability="Fixed" nonnegative="yes"/>
+      <parameter type="bdexp" unit="1/nm" value="10.020722134384" uncertainty="0" minimum="10" maximum="70" ntrain="6" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Li+_s">
       <parameter type="a1dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -4396,7 +4396,7 @@
     </parameterlist>
     <parameterlist identifier="Mg2+">
       <parameter type="a1dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="40" uncertainty="0" minimum="10" maximum="70" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Mg2+_s">
@@ -4405,9 +4405,9 @@
       <parameter type="bdexp" unit="1/nm" value="10" uncertainty="0" minimum="10" maximum="10" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Na+">
-      <parameter type="a1dexp" unit="kJ/mol" value="841.7756400809" uncertainty="0" minimum="0" maximum="50000" ntrain="7" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="7" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bdexp" unit="1/nm" value="43.58934809892" uncertainty="0" minimum="10" maximum="70" ntrain="7" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a1dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="50000" ntrain="7" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="7" mutability="Fixed" nonnegative="yes"/>
+      <parameter type="bdexp" unit="1/nm" value="65.869633015165" uncertainty="0" minimum="10" maximum="70" ntrain="7" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Na+_s">
       <parameter type="a1dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -4416,12 +4416,12 @@
     </parameterlist>
     <parameterlist identifier="Ne">
       <parameter type="a1dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="40" uncertainty="0" minimum="10" maximum="70" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Rb+">
       <parameter type="a1dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="40" uncertainty="0" minimum="10" maximum="70" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="Rb+_s">
@@ -4431,7 +4431,7 @@
     </parameterlist>
     <parameterlist identifier="Xe">
       <parameter type="a1dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="25000" uncertainty="0" minimum="0" maximum="50000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="40" uncertainty="0" minimum="10" maximum="70" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="ar_s">
@@ -4441,7 +4441,7 @@
     </parameterlist>
     <parameterlist identifier="b">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="b_s">
@@ -4451,7 +4451,7 @@
     </parameterlist>
     <parameterlist identifier="br">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="br_s">
@@ -4461,7 +4461,7 @@
     </parameterlist>
     <parameterlist identifier="c1">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c1_s">
@@ -4470,9 +4470,9 @@
       <parameter type="bdexp" unit="1/nm" value="10" uncertainty="0" minimum="10" maximum="10" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c2">
-      <parameter type="a1dexp" unit="kJ/mol" value="48881.03169016" uncertainty="0" minimum="1" maximum="200000" ntrain="12" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="12" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bdexp" unit="1/nm" value="13.5680949399" uncertainty="0" minimum="10" maximum="30" ntrain="12" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a1dexp" unit="kJ/mol" value="1" uncertainty="0" minimum="1" maximum="200000" ntrain="12" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="12" mutability="Fixed" nonnegative="yes"/>
+      <parameter type="bdexp" unit="1/nm" value="22.068785715551" uncertainty="0" minimum="10" maximum="30" ntrain="12" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c2_s">
       <parameter type="a1dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -4480,9 +4480,9 @@
       <parameter type="bdexp" unit="1/nm" value="10" uncertainty="0" minimum="10" maximum="10" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c3">
-      <parameter type="a1dexp" unit="kJ/mol" value="35654.72753342" uncertainty="0" minimum="1" maximum="200000" ntrain="30" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="30" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bdexp" unit="1/nm" value="29.8253635215" uncertainty="0" minimum="10" maximum="30" ntrain="30" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a1dexp" unit="kJ/mol" value="1" uncertainty="0" minimum="1" maximum="200000" ntrain="30" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="30" mutability="Fixed" nonnegative="yes"/>
+      <parameter type="bdexp" unit="1/nm" value="25.520360250013" uncertainty="0" minimum="10" maximum="30" ntrain="30" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c3_s">
       <parameter type="a1dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -4491,7 +4491,7 @@
     </parameterlist>
     <parameterlist identifier="cl">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="cl_s">
@@ -4501,7 +4501,7 @@
     </parameterlist>
     <parameterlist identifier="f">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="f_s">
@@ -4510,9 +4510,9 @@
       <parameter type="bdexp" unit="1/nm" value="10" uncertainty="0" minimum="10" maximum="10" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h1">
-      <parameter type="a1dexp" unit="kJ/mol" value="52200.94570754" uncertainty="0" minimum="1" maximum="200000" ntrain="41" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="41" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bdexp" unit="1/nm" value="28.93571572872" uncertainty="0" minimum="10" maximum="30" ntrain="41" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a1dexp" unit="kJ/mol" value="1" uncertainty="0" minimum="1" maximum="200000" ntrain="41" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="41" mutability="Fixed" nonnegative="yes"/>
+      <parameter type="bdexp" unit="1/nm" value="10" uncertainty="0" minimum="10" maximum="30" ntrain="41" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h1_s">
       <parameter type="a1dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -4520,9 +4520,9 @@
       <parameter type="bdexp" unit="1/nm" value="10" uncertainty="0" minimum="10" maximum="10" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h2">
-      <parameter type="a1dexp" unit="kJ/mol" value="49873.80509917" uncertainty="0" minimum="1" maximum="200000" ntrain="5" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="5" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bdexp" unit="1/nm" value="28.7723756441" uncertainty="0" minimum="10" maximum="30" ntrain="5" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a1dexp" unit="kJ/mol" value="1" uncertainty="0" minimum="1" maximum="200000" ntrain="5" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="5" mutability="Fixed" nonnegative="yes"/>
+      <parameter type="bdexp" unit="1/nm" value="17.711911066435" uncertainty="0" minimum="10" maximum="30" ntrain="5" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h2_s">
       <parameter type="a1dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -4531,7 +4531,7 @@
     </parameterlist>
     <parameterlist identifier="h3">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h3_s">
@@ -4541,7 +4541,7 @@
     </parameterlist>
     <parameterlist identifier="h4">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h4_s">
@@ -4551,7 +4551,7 @@
     </parameterlist>
     <parameterlist identifier="h5">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h5_s">
@@ -4561,7 +4561,7 @@
     </parameterlist>
     <parameterlist identifier="ha">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="ha_s">
@@ -4571,7 +4571,7 @@
     </parameterlist>
     <parameterlist identifier="hbr">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="hbr_s">
@@ -4580,9 +4580,9 @@
       <parameter type="bdexp" unit="1/nm" value="10" uncertainty="0" minimum="10" maximum="10" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="hc">
-      <parameter type="a1dexp" unit="kJ/mol" value="52302.10466113" uncertainty="0" minimum="0" maximum="200000" ntrain="42" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="42" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bdexp" unit="1/nm" value="30" uncertainty="0" minimum="10" maximum="30" ntrain="42" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a1dexp" unit="kJ/mol" value="116.66027804551" uncertainty="0" minimum="0" maximum="200000" ntrain="42" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="42" mutability="Fixed" nonnegative="yes"/>
+      <parameter type="bdexp" unit="1/nm" value="21.215368101491" uncertainty="0" minimum="10" maximum="30" ntrain="42" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="hc_s">
       <parameter type="a1dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -4591,7 +4591,7 @@
     </parameterlist>
     <parameterlist identifier="hcl">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="hcl_s">
@@ -4606,7 +4606,7 @@
     </parameterlist>
     <parameterlist identifier="hf">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="hf_s">
@@ -4616,7 +4616,7 @@
     </parameterlist>
     <parameterlist identifier="hi">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="hi_s">
@@ -4625,9 +4625,9 @@
       <parameter type="bdexp" unit="1/nm" value="10" uncertainty="0" minimum="10" maximum="10" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="hn">
-      <parameter type="a1dexp" unit="kJ/mol" value="52802.86291936" uncertainty="0" minimum="1" maximum="200000" ntrain="76" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="76" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bdexp" unit="1/nm" value="23.54247745865" uncertainty="0" minimum="10" maximum="30" ntrain="76" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a1dexp" unit="kJ/mol" value="24.941081867153" uncertainty="0" minimum="1" maximum="200000" ntrain="76" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="76" mutability="Fixed" nonnegative="yes"/>
+      <parameter type="bdexp" unit="1/nm" value="10" uncertainty="0" minimum="10" maximum="30" ntrain="76" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="hn_s">
       <parameter type="a1dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -4636,7 +4636,7 @@
     </parameterlist>
     <parameterlist identifier="ho">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="ho_s">
@@ -4646,7 +4646,7 @@
     </parameterlist>
     <parameterlist identifier="hp">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="hp_s">
@@ -4656,7 +4656,7 @@
     </parameterlist>
     <parameterlist identifier="hs">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="hs_s">
@@ -4665,9 +4665,9 @@
       <parameter type="bdexp" unit="1/nm" value="10" uncertainty="0" minimum="10" maximum="10" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="hw">
-      <parameter type="a1dexp" unit="kJ/mol" value="49314.57676163" uncertainty="0" minimum="1" maximum="200000" ntrain="26" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="26" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bdexp" unit="1/nm" value="30" uncertainty="0" minimum="10" maximum="30" ntrain="26" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a1dexp" unit="kJ/mol" value="285.35396834459" uncertainty="0" minimum="1" maximum="200000" ntrain="26" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="26" mutability="Fixed" nonnegative="yes"/>
+      <parameter type="bdexp" unit="1/nm" value="29.989637547304" uncertainty="0" minimum="10" maximum="30" ntrain="26" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="hw_s">
       <parameter type="a1dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -4676,7 +4676,7 @@
     </parameterlist>
     <parameterlist identifier="i">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="i_s">
@@ -4691,7 +4691,7 @@
     </parameterlist>
     <parameterlist identifier="n1">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="n1_s">
@@ -4701,7 +4701,7 @@
     </parameterlist>
     <parameterlist identifier="n2">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="n2_s">
@@ -4711,7 +4711,7 @@
     </parameterlist>
     <parameterlist identifier="n3">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="n3_s">
@@ -4720,9 +4720,9 @@
       <parameter type="bdexp" unit="1/nm" value="10" uncertainty="0" minimum="10" maximum="10" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="n4">
-      <parameter type="a1dexp" unit="kJ/mol" value="15259.60976069" uncertainty="0" minimum="1" maximum="200000" ntrain="23" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="23" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bdexp" unit="1/nm" value="29.96363320568" uncertainty="0" minimum="10" maximum="30" ntrain="23" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a1dexp" unit="kJ/mol" value="1" uncertainty="0" minimum="1" maximum="200000" ntrain="23" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="23" mutability="Fixed" nonnegative="yes"/>
+      <parameter type="bdexp" unit="1/nm" value="28.572484710429" uncertainty="0" minimum="10" maximum="30" ntrain="23" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="n4_s">
       <parameter type="a1dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -4736,7 +4736,7 @@
     </parameterlist>
     <parameterlist identifier="o1">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="o1_s">
@@ -4745,9 +4745,9 @@
       <parameter type="bdexp" unit="1/nm" value="10" uncertainty="0" minimum="10" maximum="10" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="o2">
-      <parameter type="a1dexp" unit="kJ/mol" value="54495.01422631" uncertainty="0" minimum="1" maximum="200000" ntrain="24" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="24" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="bdexp" unit="1/nm" value="25.72043010597" uncertainty="0" minimum="10" maximum="30" ntrain="24" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a1dexp" unit="kJ/mol" value="2012.8789612272" uncertainty="0" minimum="1" maximum="200000" ntrain="24" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="24" mutability="Fixed" nonnegative="yes"/>
+      <parameter type="bdexp" unit="1/nm" value="18.353764535733" uncertainty="0" minimum="10" maximum="30" ntrain="24" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="o2_s">
       <parameter type="a1dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
@@ -4756,7 +4756,7 @@
     </parameterlist>
     <parameterlist identifier="o3">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="o3_s">
@@ -4765,8 +4765,8 @@
       <parameter type="bdexp" unit="1/nm" value="10" uncertainty="0" minimum="10" maximum="10" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="ow">
-      <parameter type="a1dexp" unit="kJ/mol" value="52081.12759175" uncertainty="0" minimum="1" maximum="200000" ntrain="13" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="13" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a1dexp" unit="kJ/mol" value="4543.8331058844" uncertainty="0" minimum="1" maximum="200000" ntrain="13" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="13" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="30" uncertainty="0" minimum="10" maximum="30" ntrain="13" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="ow_s">
@@ -4776,7 +4776,7 @@
     </parameterlist>
     <parameterlist identifier="p1">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="p1_s">
@@ -4786,7 +4786,7 @@
     </parameterlist>
     <parameterlist identifier="p2">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="p2_s">
@@ -4796,7 +4796,7 @@
     </parameterlist>
     <parameterlist identifier="p3">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="p3_s">
@@ -4806,7 +4806,7 @@
     </parameterlist>
     <parameterlist identifier="s1">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="s1_s">
@@ -4816,7 +4816,7 @@
     </parameterlist>
     <parameterlist identifier="s2">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="s2_s">
@@ -4826,7 +4826,7 @@
     </parameterlist>
     <parameterlist identifier="s3">
       <parameter type="a1dexp" unit="kJ/mol" value="100000.5" uncertainty="0" minimum="1" maximum="200000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="a2dexp" unit="kJ/mol" value="50000.5" uncertainty="0" minimum="1" maximum="100000" ntrain="0" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="a2dexp" unit="kJ/mol" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
       <parameter type="bdexp" unit="1/nm" value="20" uncertainty="0" minimum="10" maximum="30" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="s3_s">
@@ -4977,7 +4977,7 @@
   </interaction>
   <interaction type="VSITE3S" function="VSITE3S" canswap="vsite3">
     <parameterlist identifier="hw_b~ow_b~hw_b!v3bw">
-      <parameter type="vs3sa" unit="" value="0.232553986609" uncertainty="0" minimum="0.05" maximum="0.25" ntrain="13" mutability="Bounded" nonnegative="no"/>
+      <parameter type="vs3sa" unit="" value="0.21959756400719" uncertainty="0" minimum="0.05" maximum="0.25" ntrain="13" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
   </interaction>
   <interaction type="BONDCORRECTIONS" function="" canswap="false">
@@ -5062,24 +5062,24 @@
       <parameter type="delta_eta" unit="eV/e" value="0" uncertainty="0" minimum="-8" maximum="20" ntrain="0" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c2_z:o2_z">
-      <parameter type="delta_chi" unit="eV" value="-2.973954391743" uncertainty="0" minimum="-8" maximum="8" ntrain="24" mutability="Bounded" nonnegative="no"/>
-      <parameter type="delta_eta" unit="eV/e" value="1.515352562563" uncertainty="0" minimum="-8" maximum="20" ntrain="24" mutability="Bounded" nonnegative="no"/>
+      <parameter type="delta_chi" unit="eV" value="0.81656597217825" uncertainty="0" minimum="-8" maximum="8" ntrain="24" mutability="Bounded" nonnegative="no"/>
+      <parameter type="delta_eta" unit="eV/e" value="1.9717162994231" uncertainty="0" minimum="-8" maximum="20" ntrain="24" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c2_z=o2_z">
       <parameter type="delta_chi" unit="eV" value="0" uncertainty="0" minimum="-8" maximum="8" ntrain="0" mutability="Bounded" nonnegative="no"/>
       <parameter type="delta_eta" unit="eV/e" value="0" uncertainty="0" minimum="-8" maximum="20" ntrain="0" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c2_z~c3_z">
-      <parameter type="delta_chi" unit="eV" value="-7.691623161386" uncertainty="0" minimum="-8" maximum="8" ntrain="7" mutability="Bounded" nonnegative="no"/>
-      <parameter type="delta_eta" unit="eV/e" value="13.08742049296" uncertainty="0" minimum="-8" maximum="20" ntrain="7" mutability="Bounded" nonnegative="no"/>
+      <parameter type="delta_chi" unit="eV" value="-7.9402708742503" uncertainty="0" minimum="-8" maximum="8" ntrain="7" mutability="Bounded" nonnegative="no"/>
+      <parameter type="delta_eta" unit="eV/e" value="-2.7049436934812" uncertainty="0" minimum="-8" maximum="20" ntrain="7" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c2_z~h1_z">
       <parameter type="delta_chi" unit="eV" value="0" uncertainty="0" minimum="-8" maximum="8" ntrain="0" mutability="Bounded" nonnegative="no"/>
       <parameter type="delta_eta" unit="eV/e" value="0" uncertainty="0" minimum="-8" maximum="20" ntrain="0" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c2_z~h2_z">
-      <parameter type="delta_chi" unit="eV" value="-4.382222289665" uncertainty="0" minimum="-8" maximum="8" ntrain="5" mutability="Bounded" nonnegative="no"/>
-      <parameter type="delta_eta" unit="eV/e" value="15.53038343544" uncertainty="0" minimum="-8" maximum="20" ntrain="5" mutability="Bounded" nonnegative="no"/>
+      <parameter type="delta_chi" unit="eV" value="-5.7865563344153" uncertainty="0" minimum="-8" maximum="8" ntrain="5" mutability="Bounded" nonnegative="no"/>
+      <parameter type="delta_eta" unit="eV/e" value="15.255785530942" uncertainty="0" minimum="-8" maximum="20" ntrain="5" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c2_z~h3_z">
       <parameter type="delta_chi" unit="eV" value="0" uncertainty="0" minimum="-8" maximum="8" ntrain="0" mutability="Bounded" nonnegative="no"/>
@@ -5143,7 +5143,7 @@
     </parameterlist>
     <parameterlist identifier="c3_z~c3_z">
       <parameter type="delta_chi" unit="eV" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
-      <parameter type="delta_eta" unit="eV/e" value="-1.375637160157" uncertainty="0" minimum="-8" maximum="20" ntrain="7" mutability="Bounded" nonnegative="no"/>
+      <parameter type="delta_eta" unit="eV/e" value="16.775414117969" uncertainty="0" minimum="-8" maximum="20" ntrain="7" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c3_z~cl_z">
       <parameter type="delta_chi" unit="eV" value="0" uncertainty="0" minimum="-8" maximum="8" ntrain="0" mutability="Bounded" nonnegative="no"/>
@@ -5154,8 +5154,8 @@
       <parameter type="delta_eta" unit="eV/e" value="0" uncertainty="0" minimum="-8" maximum="20" ntrain="0" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c3_z~h1_z">
-      <parameter type="delta_chi" unit="eV" value="-2.813824311218" uncertainty="0" minimum="-8" maximum="8" ntrain="41" mutability="Bounded" nonnegative="no"/>
-      <parameter type="delta_eta" unit="eV/e" value="10.10120043147" uncertainty="0" minimum="-8" maximum="20" ntrain="41" mutability="Bounded" nonnegative="no"/>
+      <parameter type="delta_chi" unit="eV" value="-3.3340477456047" uncertainty="0" minimum="-8" maximum="8" ntrain="41" mutability="Bounded" nonnegative="no"/>
+      <parameter type="delta_eta" unit="eV/e" value="3.6363393823543" uncertainty="0" minimum="-8" maximum="20" ntrain="41" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c3_z~h2_z">
       <parameter type="delta_chi" unit="eV" value="0" uncertainty="0" minimum="-8" maximum="8" ntrain="0" mutability="Bounded" nonnegative="no"/>
@@ -5182,8 +5182,8 @@
       <parameter type="delta_eta" unit="eV/e" value="0" uncertainty="0" minimum="-8" maximum="20" ntrain="0" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c3_z~hc_z">
-      <parameter type="delta_chi" unit="eV" value="-1.876423139774" uncertainty="0" minimum="-8" maximum="8" ntrain="42" mutability="Bounded" nonnegative="no"/>
-      <parameter type="delta_eta" unit="eV/e" value="-3.47113585491" uncertainty="0" minimum="-8" maximum="20" ntrain="42" mutability="Bounded" nonnegative="no"/>
+      <parameter type="delta_chi" unit="eV" value="-0.3788105519109" uncertainty="0" minimum="-8" maximum="8" ntrain="42" mutability="Bounded" nonnegative="no"/>
+      <parameter type="delta_eta" unit="eV/e" value="10.042791663448" uncertainty="0" minimum="-8" maximum="20" ntrain="42" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c3_z~hcl_z">
       <parameter type="delta_chi" unit="eV" value="0" uncertainty="0" minimum="-8" maximum="8" ntrain="0" mutability="Bounded" nonnegative="no"/>
@@ -5226,8 +5226,8 @@
       <parameter type="delta_eta" unit="eV/e" value="0" uncertainty="0" minimum="-8" maximum="20" ntrain="0" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c3_z~n4_z">
-      <parameter type="delta_chi" unit="eV" value="0.9740374816867" uncertainty="0" minimum="-8" maximum="8" ntrain="16" mutability="Bounded" nonnegative="no"/>
-      <parameter type="delta_eta" unit="eV/e" value="9.909561060001" uncertainty="0" minimum="-8" maximum="20" ntrain="16" mutability="Bounded" nonnegative="no"/>
+      <parameter type="delta_chi" unit="eV" value="2.6227569070667" uncertainty="0" minimum="-8" maximum="8" ntrain="16" mutability="Bounded" nonnegative="no"/>
+      <parameter type="delta_eta" unit="eV/e" value="16.786391377665" uncertainty="0" minimum="-8" maximum="20" ntrain="16" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="c3_z~o3_z">
       <parameter type="delta_chi" unit="eV" value="0" uncertainty="0" minimum="-8" maximum="8" ntrain="0" mutability="Bounded" nonnegative="no"/>
@@ -5594,8 +5594,8 @@
       <parameter type="delta_eta" unit="eV/e" value="0" uncertainty="0" minimum="-8" maximum="20" ntrain="0" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="hn_z~n4_z">
-      <parameter type="delta_chi" unit="eV" value="-0.2742568634306" uncertainty="0" minimum="-8" maximum="8" ntrain="76" mutability="Bounded" nonnegative="no"/>
-      <parameter type="delta_eta" unit="eV/e" value="8.103152872323" uncertainty="0" minimum="-8" maximum="20" ntrain="76" mutability="Bounded" nonnegative="no"/>
+      <parameter type="delta_chi" unit="eV" value="-0.72914096906525" uncertainty="0" minimum="-8" maximum="8" ntrain="76" mutability="Bounded" nonnegative="no"/>
+      <parameter type="delta_eta" unit="eV/e" value="3.0437598372514" uncertainty="0" minimum="-8" maximum="20" ntrain="76" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="hn_z~o3_z">
       <parameter type="delta_chi" unit="eV" value="0" uncertainty="0" minimum="-8" maximum="8" ntrain="0" mutability="Bounded" nonnegative="no"/>
@@ -5662,8 +5662,8 @@
       <parameter type="delta_eta" unit="eV/e" value="0" uncertainty="0" minimum="-8" maximum="20" ntrain="0" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
     <parameterlist identifier="hw_z~ow_z">
-      <parameter type="delta_chi" unit="eV" value="3.587870036276" uncertainty="0" minimum="-8" maximum="8" ntrain="26" mutability="Bounded" nonnegative="no"/>
-      <parameter type="delta_eta" unit="eV/e" value="18.11378707706" uncertainty="0" minimum="-8" maximum="20" ntrain="26" mutability="Bounded" nonnegative="no"/>
+      <parameter type="delta_chi" unit="eV" value="4.7530270182722" uncertainty="0" minimum="-8" maximum="8" ntrain="26" mutability="Bounded" nonnegative="no"/>
+      <parameter type="delta_eta" unit="eV/e" value="18.235401832577" uncertainty="0" minimum="-8" maximum="20" ntrain="26" mutability="Bounded" nonnegative="no"/>
     </parameterlist>
   </interaction>
   <interaction type="ELECTRONEGATIVITYEQUALIZATION" function="" canswap="true">
@@ -5732,12 +5732,12 @@
       <parameter type="eta" unit="eV" value="14" uncertainty="0" minimum="4" maximum="24" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c2_z">
-      <parameter type="chi" unit="eV" value="3.726012376314" uncertainty="0" minimum="2" maximum="9" ntrain="12" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="eta" unit="eV" value="15.99223239252" uncertainty="0" minimum="4" maximum="24" ntrain="12" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="chi" unit="eV" value="2.4927298435646" uncertainty="0" minimum="2" maximum="9" ntrain="12" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="eta" unit="eV" value="11.801060363991" uncertainty="0" minimum="4" maximum="24" ntrain="12" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="c3_z">
-      <parameter type="chi" unit="eV" value="3.546038167502" uncertainty="0" minimum="2" maximum="9" ntrain="30" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="eta" unit="eV" value="19.38325843649" uncertainty="0" minimum="4" maximum="24" ntrain="30" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="chi" unit="eV" value="6.3904755301424" uncertainty="0" minimum="2" maximum="9" ntrain="30" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="eta" unit="eV" value="21.379726635194" uncertainty="0" minimum="4" maximum="24" ntrain="30" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="cl_z">
       <parameter type="chi" unit="eV" value="9" uncertainty="0" minimum="4" maximum="14" ntrain="0" mutability="Bounded" nonnegative="yes"/>
@@ -5749,11 +5749,11 @@
     </parameterlist>
     <parameterlist identifier="h1_z">
       <parameter type="chi" unit="eV" value="2" uncertainty="0" minimum="2" maximum="2" ntrain="1" mutability="Fixed" nonnegative="yes"/>
-      <parameter type="eta" unit="eV" value="22.53054127262" uncertainty="0" minimum="4" maximum="24" ntrain="41" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="eta" unit="eV" value="18.942653407013" uncertainty="0" minimum="4" maximum="24" ntrain="41" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h2_z">
       <parameter type="chi" unit="eV" value="2" uncertainty="0" minimum="2" maximum="2" ntrain="1" mutability="Fixed" nonnegative="yes"/>
-      <parameter type="eta" unit="eV" value="6.502073479805" uncertainty="0" minimum="4" maximum="24" ntrain="5" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="eta" unit="eV" value="12.437001445162" uncertainty="0" minimum="4" maximum="24" ntrain="5" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="h3_z">
       <parameter type="chi" unit="eV" value="2" uncertainty="0" minimum="2" maximum="2" ntrain="1" mutability="Fixed" nonnegative="yes"/>
@@ -5777,7 +5777,7 @@
     </parameterlist>
     <parameterlist identifier="hc_z">
       <parameter type="chi" unit="eV" value="2" uncertainty="0" minimum="2" maximum="2" ntrain="1" mutability="Fixed" nonnegative="yes"/>
-      <parameter type="eta" unit="eV" value="18.66552170229" uncertainty="0" minimum="4" maximum="24" ntrain="42" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="eta" unit="eV" value="15.107617596235" uncertainty="0" minimum="4" maximum="24" ntrain="42" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="hcl_z">
       <parameter type="chi" unit="eV" value="2" uncertainty="0" minimum="2" maximum="2" ntrain="1" mutability="Fixed" nonnegative="yes"/>
@@ -5797,7 +5797,7 @@
     </parameterlist>
     <parameterlist identifier="hn_z">
       <parameter type="chi" unit="eV" value="2" uncertainty="0" minimum="2" maximum="2" ntrain="1" mutability="Fixed" nonnegative="yes"/>
-      <parameter type="eta" unit="eV" value="9.817088801624" uncertainty="0" minimum="4" maximum="24" ntrain="76" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="eta" unit="eV" value="21.341648566445" uncertainty="0" minimum="4" maximum="24" ntrain="76" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="ho_z">
       <parameter type="chi" unit="eV" value="2" uncertainty="0" minimum="2" maximum="2" ntrain="1" mutability="Fixed" nonnegative="yes"/>
@@ -5813,7 +5813,7 @@
     </parameterlist>
     <parameterlist identifier="hw_z">
       <parameter type="chi" unit="eV" value="2" uncertainty="0" minimum="2" maximum="2" ntrain="1" mutability="Fixed" nonnegative="yes"/>
-      <parameter type="eta" unit="eV" value="13.77117602285" uncertainty="0" minimum="4" maximum="24" ntrain="26" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="eta" unit="eV" value="14.436147699597" uncertainty="0" minimum="4" maximum="24" ntrain="26" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="i_z">
       <parameter type="chi" unit="eV" value="9" uncertainty="0" minimum="4" maximum="14" ntrain="0" mutability="Bounded" nonnegative="yes"/>
@@ -5836,8 +5836,8 @@
       <parameter type="eta" unit="eV" value="14" uncertainty="0" minimum="4" maximum="24" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="n4_z">
-      <parameter type="chi" unit="eV" value="5.507677424445" uncertainty="0" minimum="3" maximum="12" ntrain="23" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="eta" unit="eV" value="12.06892004767" uncertainty="0" minimum="4" maximum="24" ntrain="23" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="chi" unit="eV" value="4.9396374918432" uncertainty="0" minimum="3" maximum="12" ntrain="23" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="eta" unit="eV" value="13.410576628498" uncertainty="0" minimum="4" maximum="24" ntrain="23" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="ne_z">
       <parameter type="chi" unit="eV" value="4" uncertainty="0" minimum="4" maximum="4" ntrain="1" mutability="Fixed" nonnegative="yes"/>
@@ -5848,16 +5848,16 @@
       <parameter type="eta" unit="eV" value="14" uncertainty="0" minimum="4" maximum="24" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="o2_z">
-      <parameter type="chi" unit="eV" value="4.254940170714" uncertainty="0" minimum="3" maximum="12" ntrain="24" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="eta" unit="eV" value="23.57700686793" uncertainty="0" minimum="4" maximum="24" ntrain="24" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="chi" unit="eV" value="5.3560101876518" uncertainty="0" minimum="3" maximum="12" ntrain="24" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="eta" unit="eV" value="14.69114317115" uncertainty="0" minimum="4" maximum="24" ntrain="24" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="o3_z">
       <parameter type="chi" unit="eV" value="7.5" uncertainty="0" minimum="3" maximum="12" ntrain="0" mutability="Bounded" nonnegative="yes"/>
       <parameter type="eta" unit="eV" value="14" uncertainty="0" minimum="4" maximum="24" ntrain="0" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="ow_z">
-      <parameter type="chi" unit="eV" value="9.004788109032" uncertainty="0" minimum="3" maximum="12" ntrain="13" mutability="Bounded" nonnegative="yes"/>
-      <parameter type="eta" unit="eV" value="23.55522136056" uncertainty="0" minimum="4" maximum="24" ntrain="13" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="chi" unit="eV" value="12" uncertainty="0" minimum="3" maximum="12" ntrain="13" mutability="Bounded" nonnegative="yes"/>
+      <parameter type="eta" unit="eV" value="9.676864706441" uncertainty="0" minimum="4" maximum="24" ntrain="13" mutability="Bounded" nonnegative="yes"/>
     </parameterlist>
     <parameterlist identifier="p1_z">
       <parameter type="chi" unit="eV" value="8.5" uncertainty="0" minimum="3" maximum="14" ntrain="0" mutability="Bounded" nonnegative="yes"/>
