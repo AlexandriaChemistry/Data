@@ -10,18 +10,14 @@ Here's the [preprint] (https://chemrxiv.org/engage/chemrxiv/article-details/67f8
 - `AnalyticalFitting/SAPT_Alkali_Halides/` - SAPT0/aug-cc-pVTZ calculations.
 - `AntechamberGaussian/` - BCC and RESP calculations from Gaussian and Antechamber for ions, water, and side-chains.
 - `Charge_Models/` - Reproduction of Table 1, Comparison of electrostatic energies from Alexandria and other popular charge models, e.g. ESP. Note that according to the definition of SAPT, we 
-   need the sum of electrostatic and induction energies from SAPT to obtain the correct electrostatic energy. 
-- `Partial-Charges/` - Reproduction of partial charges from log files- Tables S8-S13.  
+   need the sum of electrostatic and induction energies from SAPT to obtain the correct electrostatic energy.  Reproduction of partial charges- Tables S9-S14.  
 - `SAPTDatabase/` - SAPT2+(CCD)-δMP2 database for training and tet.
 - `Scripts4Figs/` - Reproduction of the figure 2B,S2 presented in the article.
 - `AlexandriaFF/` - Trained force field files on SAPT2+(CCD)-δMP2 using Alexandria.esp-paper-gaussian.xml FF contains charges for Mulliken, Hirshfeld, CM5, and ESP.
 - `ForceFields/` - Available force field files such as TIP3P, TIP4P, TIP4P-2005.xml, TIP4PEW-JC.xml, Walz2018a.xml, GAFF, and SWM4-NDP.xml. 
 - `Selection/` - Train and Test sets and a script to generate random test and train compounds. 
 - `Scripts4Tabs/` - Reproduction of tables presented in the article.
-- `Training_RMSD_Compound/` - RMSD values with respect to SAPT for all studied compounds, including our ACT model and several widely used models. 
-- `Training_RMSD_Compound/Elec/` - Training files on electorsrtatic energy from SAPT2+(CCD)-δMP for PC, GC, PC+GV, and PC+GVS models.  
-- `Training_RMSD_Compound/AllElec/` - Training files on electorsrtatic and induction energies from SAPT2+(CCD)-δMP2 for PC, GC and, PC+G model.
-- `Training_RMSD_Compound/PARAMETERS/` -  Parameters for the PC, GC, GC+PGV, and PC+GVS  models trained on the electrostatic energy. For details please see the ACT manual.
+- `Parameters` -  Parameters for the PC, GC, GC+PGV, and PC+GVS  models trained on the electrostatic energy or the sum of electrostatic and induction energies from SAPT2+(CCD)-δMP2. For details please see the ACT manual.
 - `ESP-RMSD-Histogram/` - ESP at the HF/6-31G** level of theory for 5100 compounds, Fig S1.
 
 ## Requirements
