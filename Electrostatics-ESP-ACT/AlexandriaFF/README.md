@@ -9,9 +9,11 @@ The following XML files represent different force field models:
 These force fields were trained on the sum of electrostatic and induction energy components from SAPT.
 
 In addition:
-- `all-pg.xml`: A polarizable Gaussian-distributed shell (Drude particle) was added to generate the PC + GVS model were trained on the electrostatic energy from SAPT.
+- `all-pg-submit.xml`: A polarizable Gaussian-distributed shell (Drude particle) was added to generate the PC + GVS model were trained on the electrostatic energy from SAPT.
 
 - `coul-g.xml`, `coul-gv.xml`, and  `coul-p.xml` were trained only on the electrostatic energy from SAPT.
+
+- `esp-g.xml` and `esp-gv.xml` were trained only on the electrostatic potentials (ESP), where the quantum chemical ESP of monomeric compounds is employed.
 
 - `esp-paper-gaussian.xml` includes available charge models, and `sapt-esp.xml` serve as reference XML files.
 
