@@ -1,1 +1,1 @@
-This script generates a table containing the RMSD values for the Mulliken, Hirshfeld, ESP, CM5, BCC, RESP, and ACT models, compared to SAPT2+(CCD)$\delta$MP2 using the aug-cc-pVTZ basis set (Table 1 in the main) for water ions and side chain analogs.
+Charge-Models-Table1.py script generates a table containing the RMSD values for the Mulliken, Hirshfeld, ESP, CM5, BCC, RESP, and ACT models, compared to SAPT2+(CCD)$\delta$MP2 using the aug-cc-pVTZ basis set (Table 1 in the main) for water ions and side chain analogs.
