@@ -2,7 +2,7 @@
 
 import os, subprocess
 
-debug = False
+debug = True
 
 xml_files = []
 tmpdir = "xml.tmp"
@@ -10,8 +10,10 @@ os.makedirs(tmpdir, exist_ok=True)
 with open("distance.csv", "r") as inf:
     for line in inf:
         if not line.startswith("#"):
-            try:
-                dimer,mindist = line.strip().split(",")
+            words = line.strip().split(",")
+            if len(words) == 2:
+                dimer = words[0]
+                mindist = words[1]
                 if debug:
                     print("dimer %s mindist %s" % ( dimer, mindist ))
                 xml_file = tmpdir + "/" + dimer + ".xml"
@@ -22,9 +24,6 @@ with open("distance.csv", "r") as inf:
                 if os.path.exists(xml_file):
                     xml_files.append(xml_file)
 
-            except:
-                print("Cannot read line '%s'" % line.strip())
-                continue
 
 if len(xml_files) > 0:
     subprocess.run(["alexandria", "edit_mp", "-mp", *xml_files, "-o", "sapt2+3-tz.xml"], check=True)
