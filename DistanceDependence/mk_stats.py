@@ -121,7 +121,7 @@ def mydistance(dimer:str, ww:str)->float:
             md2 = min(md2, mmm2)
     return math.sqrt(md2)
     
-def read_log(filenm:str, mylist:dict)->dict:
+def read_log_ener(filenm:str, mylist:dict)->dict:
     print("Will read %s" % filenm)
     moldata = {}
     with open(filenm, "r") as inf:
@@ -163,7 +163,7 @@ def do_mols(logdir:str, logfn:str, fntype:str, resonly:bool):
     for sel in allsel:
         for repl in [ "A" ]:
             logfn = logdir + f"/{logfn}-{sel}-{repl}.log"
-            _, moldata = read_log(logfn, mylist)
+            _, moldata = read_log_ener(logfn, mylist)
             for md in moldata.keys():
                 xvgfn = xvgdir + "/" + md.replace("#", "-") + ".xvg"
                 with open(xvgfn, "w") as outf:
@@ -182,14 +182,14 @@ def do_mols(logdir:str, logfn:str, fntype:str, resonly:bool):
                         else:
                             outf.write("%10g  %10g  %10g  %10g\n" % ( dd[0], dd[1], dd[2], dd[2]-dd[1] ) )
 
-def do_fig1(fntype:str):
+def do_fig1(logdir:str, fntype:str):
     allsel = [1, 2, 3]
     mylist = { "Train": [], "Test": [] }
     for sel in allsel:
         for repl in [ "A" ]:
             tdir  = f"{prefix}TT2b-pg-{fntype}-{sel}-{repl}"
             logfn = tdir + "/train-Elec.log"
-            mylist, _ = read_log(logfn, mylist)
+            mylist, _ = read_log_ener(logfn, mylist)
             NN     = { "Train": 0, "Test": 0 }
             for ml in mylist.keys():
                 xvgfn = f"induction{ml}.xvg"
@@ -204,7 +204,7 @@ def do_fig1(fntype:str):
                 ltest  = f"Test (N = {NN['Test']})"
             if sel == 2:
                 elpdf = "electrostatics2.pdf"
-                os.system(f"viewxvg -f logs/Elec-COULOMB-2-A.xvg -ls None None -mk o x -res {viewflags} -pdf {elpdf}  -noshow -legend_y 0.3 -legend_x 0.65 ")
+                os.system(f"viewxvg -f {logdir}/Elec-COULOMB-2-A.xvg -ls None None -mk o x -res {viewflags} -pdf {elpdf}  -noshow -legend_y 0.3 -legend_x 0.65 ")
                 print("Please check %s" % elpdf)
             indpdf = "induction2.pdf"
             os.system(f"viewxvg -f inductionTrain.xvg inductionTest.xvg -ls None None -mk o x  -label \"{ltrain}\" \"{ltest}\" -res -ymin -500 -ymax 500 -pdf {indpdf} -noshow -xmin -150 -legend_y 0.3 {viewflags}")
@@ -213,7 +213,7 @@ if __name__ == "__main__":
     mk     = "MORSEic-Kronecker3"
     logdir = "logs-" + mk
     run_stats(mk, logdir)
-    do_fig1(mk)
+    do_fig1(logdir, mk)
     do_mols(logdir, "Elec", mk, True)
-    do_mols(logdir, "Induc", mk, False)
-    do_mols(logdir, "Induc", "MSic", False)
+    do_mols(logdir, "Induc", mk, True)
+    do_mols(logdir, "Induc", "MSic", True)
