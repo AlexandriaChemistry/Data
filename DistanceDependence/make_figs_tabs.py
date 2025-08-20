@@ -1,11 +1,62 @@
 #!/usr/bin/env python3
 
 import json, math, os, sys
+from scipy.optimize import curve_fit
+import numpy as np
 
 prefix    = "../../ACTdata/Training/ions-nobles-gases/TT2b/allhh/pol/vsite/"
 viewflags = "-lfs 32 -alfs 32 -tickfs 28"
 sapt      = "../../Psi4_ACT/sapt2+3(ccd)dmp2-aug-cc-pvtz/dimer-scans/"
 debug     = False
+
+def morse(x, De, beta, bondlength):
+    bx = beta*(x-bondlength)
+    return De*( ( 1 - np.exp(-bx))**2 - 1)
+
+def yukawa(x, A, B, C, D):
+    return A*np.exp(-B*x)/x + C*np.exp(-D*x)
+
+def fit_residual(dimer:str, distances, residual)->dict:
+    cfit = { "Morse": { "func": morse,
+                        "p0": [ 10, 1, 3 ],
+                        "bounds": ( [ 0, 0.1, 0 ], [ 1000, 8, 10 ] ),
+                        "params": None,
+                        "value": None,
+                        "msd": 0,
+                        "rmsd": 0 },
+             "Yukawa": { "func": yukawa,
+                         "p0": [ 10, 1, -10, 1 ],
+                         "bounds": ( [ -1000, 0.1, -100, 0.1 ], [ 1000, 5, 100, 5 ] ),
+                         "params": None,
+                         "value": None,
+                         "msd": 0,
+                         "rmsd": 0 }
+            }
+    print("There are %d data points for %s" % ( len(distances), dimer ) )
+    pots = list(cfit.keys())
+    for pot in pots:
+        if debug:
+            xx = 0.2
+            print(f"morse_fit({xx}, {p0Morse}) = %g" % ( morse(xx, *p0Morse)))
+        try:
+            cfit[pot]["params"], _ = curve_fit(cfit[pot]["func"], distances, residual,
+                                               p0=cfit[pot]["p0"], 
+                                               bounds=cfit[pot]["bounds"],
+                                               maxfev=10000)
+            cfit[pot]["values"] = []
+            index = 0
+            for d in distances:
+                val = cfit[pot]["func"](d, *(cfit[pot]["params"]))
+                cfit[pot]["values"].append(val)
+                cfit[pot]["msd"] += (residual[index]-val)**2
+                index += 1
+      
+        except Exception as e:
+            print(f"Error fitting {pot} data for {dimer}: {e}")
+
+        cfit[pot]["rmsd"] = math.sqrt(cfit[pot]["msd"]/len(distances))
+
+    return cfit
 
 def read_log_rmsd(filenm:str, ff:str)->dict:
     mylist = { "Test": {}, "Train": {} }
@@ -155,17 +206,48 @@ def read_log_ener(filenm:str, mylist:dict)->dict:
                                 print("Dimer '%s' has incorrect values" % dimer)
     return mylist, moldata
 
-def do_mols(logdir:str, logfn:str, fntype:str, resonly:bool):
+def print_morse_parameters(pot:str, mfit:dict, texfn:str):
+    with open(texfn, "w") as outf:
+        outf.write("\\begin{longtable}{lcccc}\n")
+        outf.write("\\caption{Parameters for fit of induction residual to a %s potential}\\\\\n" % pot)
+        outf.write("\\hline\n")
+        outf.write("Dimer & De & $\\beta$ & r$_{min}$ & RMSD (kJ/mole)\\\\\n")
+        param = "param"
+        for md in sorted(mfit.keys()):
+            outf.write("%s " % md.replace("#", "-") )
+            for p in mfit[md][param]:
+                outf.write(" & %.2f " % p)
+            outf.write(" %.1f \\\\\n" % ( mfit[md]["rmsd"] ) )
+        outf.write("\\hline\n")
+        outf.write("\\end{longtable}\n")
+        
+def do_mols(logdir:str, logfn:str, fntype:str, resonly:bool, dofit:bool):
     allsel = [ 2 ]
     xvgdir = "xvgs-" + logfn + "-" + fntype
     os.makedirs(xvgdir, exist_ok=True)
     mylist = { "Train": [], "Test": [] }
+    if dofit:
+        mfit = {}
     for sel in allsel:
         for repl in [ "A" ]:
             logfn = logdir + f"/{logfn}-{sel}-{repl}.log"
             _, moldata = read_log_ener(logfn, mylist)
             for md in moldata.keys():
                 xvgfn = xvgdir + "/" + md.replace("#", "-") + ".xvg"
+                # Prepare data for fitting
+                if dofit:
+                    distances = []
+                    residual  = []
+                    for dd in sorted(moldata[md]):
+                        distances.append(dd[0])
+                        # The residual is SAPT - Polarization, that is the missing part of the energy function
+                        residual.append( dd[1]-dd[2] )
+                    cfit = fit_residual(md, distances, residual)
+                    for pot in cfit:
+                        if not pot in mfit:
+                            mfit[pot] = {}
+                        if "params" in cfit[pot] and not cfit[pot]["params"] is None:
+                            mfit[pot][md] = { "param": cfit[pot]["params"].copy(), "rmsd": cfit[pot]["rmsd"] }
                 with open(xvgfn, "w") as outf:
                     outf.write("@ xaxis label \"Distance\"\n")
                     outf.write("@ yaxis label \"Induction (kJ/mole)\"\n")
@@ -176,11 +258,30 @@ def do_mols(logdir:str, logfn:str, fntype:str, resonly:bool):
                         outf.write("@ s%d legend \"ACT\"\n" % setind)
                         setind += 1
                     outf.write("@ s%d legend \"Residual\"\n" % setind)
-                    for dd in sorted(moldata[md]):
-                        if resonly:
-                            outf.write("%10g  %10g\n" % ( dd[0], dd[2]-dd[1] ) )
-                        else:
-                            outf.write("%10g  %10g  %10g  %10g\n" % ( dd[0], dd[1], dd[2], dd[2]-dd[1] ) )
+                    if dofit:
+                        for pot in mfit:
+                            if not "values" in cfit[pot]:
+                                continue
+                            setind += 1
+                            outf.write("@ s%d legend \"%s fit to residual, RMSD = %.1f\"\n" %
+                                       ( setind, pot, mfit[pot][md]["rmsd"] ) )
+
+                    if dofit:
+                        for index in range(len(distances)):
+                            outf.write("%10g  %10g" % ( distances[index], residual[index] ) )
+                            for pot in mfit:
+                                if "values" in cfit[pot]:
+                                    outf.write("  %10g" % cfit[pot]["values"][index] )
+                            outf.write("\n")
+                    else:
+                        for dd in sorted(moldata[md]):
+                            if resonly:
+                                outf.write("%10g  %10g  %10g\n" % ( dd[0], dd[1], dd[2] ) )
+                            else:
+                                outf.write("%10g  %10g  %10g  %10g\n" % ( dd[0], dd[1], dd[2], dd[2]-dd[1] ) )
+    if dofit:
+        for pot in mfit:
+            print_morse_parameters(pot, mfit[pot], f"{pot}_param.tex")
 
 def do_fig1(logdir:str, fntype:str):
     allsel = [1, 2, 3]
@@ -212,8 +313,8 @@ def do_fig1(logdir:str, fntype:str):
 if __name__ == "__main__":
     mk     = "MORSEic-Kronecker3"
     logdir = "logs-" + mk
-    run_stats(mk, logdir)
-    do_fig1(logdir, mk)
-    do_mols(logdir, "Elec", mk, True)
-    do_mols(logdir, "Induc", mk, True)
-    do_mols(logdir, "Induc", "MSic", True)
+#    run_stats(mk, logdir)
+#    do_fig1(logdir, mk)
+    do_mols(logdir, "Elec", mk, True, True)
+    do_mols(logdir, "Induc", mk, True, False)
+    do_mols(logdir, "Induc", "MSic", True, False)
