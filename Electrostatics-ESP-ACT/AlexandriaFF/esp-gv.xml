@@ -29,6 +29,7 @@
     <particletype identifier="Br-" type="Atom" description="bromide ion">
       <option key="acmtype" value="Br-_z"/>
       <option key="atomnumber" value="35"/>
+      <option key="bondtype" value="Br-"/>
       <option key="element" value="Br"/>
       <option key="induccorrtype" value="Br-"/>
       <option key="row" value="4"/>
@@ -52,6 +53,7 @@
     <particletype identifier="Cl-" type="Atom" description="chloride ion">
       <option key="acmtype" value="Cl-_z"/>
       <option key="atomnumber" value="17"/>
+      <option key="bondtype" value="Cl-"/>
       <option key="element" value="Cl"/>
       <option key="induccorrtype" value="Cl-"/>
       <option key="row" value="3"/>
@@ -64,6 +66,7 @@
     <particletype identifier="Cs+" type="Atom" description="cesium ion">
       <option key="acmtype" value="Cs+_z"/>
       <option key="atomnumber" value="55"/>
+      <option key="bondtype" value="Cs+"/>
       <option key="element" value="Cs"/>
       <option key="induccorrtype" value="Cs+"/>
       <option key="row" value="6"/>
@@ -76,6 +79,7 @@
     <particletype identifier="F-" type="Atom" description="fluoride ion">
       <option key="acmtype" value="F-_z"/>
       <option key="atomnumber" value="9"/>
+      <option key="bondtype" value="F-"/>
       <option key="element" value="F"/>
       <option key="induccorrtype" value="F-"/>
       <option key="row" value="2"/>
@@ -99,6 +103,7 @@
     </particletype>
     <particletype identifier="I-" type="Atom" description="iodide ion">
       <option key="atomnumber" value="53"/>
+      <option key="bondtype" value="I-"/>
       <option key="element" value="I"/>
       <option key="induccorrtype" value="I-"/>
       <option key="row" value="5"/>
@@ -111,6 +116,7 @@
     <particletype identifier="K+" type="Atom" description="potassium ion">
       <option key="acmtype" value="K+_z"/>
       <option key="atomnumber" value="19"/>
+      <option key="bondtype" value="K+"/>
       <option key="element" value="K"/>
       <option key="induccorrtype" value="K+"/>
       <option key="row" value="4"/>
@@ -180,6 +186,7 @@
     <particletype identifier="Rb+" type="Atom" description="rubidium ion">
       <option key="acmtype" value="Rb+_z"/>
       <option key="atomnumber" value="37"/>
+      <option key="bondtype" value="Rb-"/>
       <option key="element" value="Rb"/>
       <option key="induccorrtype" value="Rb+"/>
       <option key="row" value="5"/>
