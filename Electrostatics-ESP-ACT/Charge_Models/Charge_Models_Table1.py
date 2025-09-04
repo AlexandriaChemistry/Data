@@ -199,3 +199,5 @@ with open("legacy.tex", "w") as outf:
     outf.write("\\hline\n")
     outf.write("\\end{tabular}\n")
     outf.write("\\end{table}\n")
+
+print("ntrain %d ntest %d" % ( ntrain, ntest ))
