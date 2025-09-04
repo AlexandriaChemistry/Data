@@ -1948,7 +1948,7 @@
       <parameter type="sigma" unit="nm" value="0" uncertainty="0" minimum="0" maximum="0" ntrain="0" mutability="Fixed" nonnegative="yes"/>
     </parameterlist>
   </interaction>
-  <interaction type="VDWCORRECTION" function="EXPONENTIAL" canswap="true">
+  <interaction type="VDWCORRECTION" function="BORN_MAYER" canswap="true">
     <option key="nexcl" value="2"/>
     <combinationrule parameter="aexp" rule="Kronecker"/>
     <combinationrule parameter="bexp" rule="Arithmetic"/>
@@ -2165,7 +2165,7 @@
     </parameterlist>
   </interaction>
   <interaction type="POLARIZATION" function="POLARIZATION" canswap="true"/>
-  <interaction type="INDUCTIONCORRECTION" function="DOUBLEEXPONENTIAL" canswap="true">
+  <interaction type="INDUCTIONCORRECTION" function="MACDANIEL_SCHMIDT" canswap="true">
     <option key="nexcl" value="2"/>
     <combinationrule parameter="a1dexp" rule="Geometric"/>
     <combinationrule parameter="a2dexp" rule="Geometric"/>

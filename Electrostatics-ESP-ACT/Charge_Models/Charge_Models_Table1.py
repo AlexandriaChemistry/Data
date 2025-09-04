@@ -96,9 +96,9 @@ charge_models = [
     ("CM5", ""),
     ("BCC", ""),
     ("RESP",""),
-    ("header", "Non-polarizable ESP-based ACT models" ),
+    ("header", "Non-polarizable ACT models based on monomer ESP" ),
     ("ACM", "-esp-G"), ("ACM", "-esp-GV"),
-    ("header", "Non-polarizable SAPT-based ACT models" ),
+    ("header", "Non-polarizable ACT models based on SAPT dimer energies" ),
     ("ACM", "-elec-P"), ("ACM", "-allelec-P"),
     ("ACM", "-elec-G"), ("ACM", "-allelec-G"),
     ("ACM", "-elec-GV"), ("ACM", "-allelec-GV"),
@@ -130,7 +130,7 @@ ntrain, ntest = get_train_test("ESP.log")
 with open("legacy.tex", "w") as outf:
     outf.write("\\begin{table}[htb]\n")
     outf.write("\\centering\n")
-    outf.write("\\caption{Root mean square deviation (RMSE) and mean signed error (MSE) of electrostatic energies (Elec, kJ/mol) and the sum of electrostatics and induction (Elec+Induc, kJ/mol) for popular charge models compared to SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set. The dataset consisted of 77 dimers (Table S6), with %d data points for training and %d for testing (for ESP training see Methods). \\#P indicates the number of parameters in the model. The training targets are indicated and RMSD and MSE values that correspond to the training set are indicated in {\\bf bold font}. A non-polarizable model with virtual sites with a Gaussian distributed charge (on anions and potassium ion only) is labeled as GC+PGV. The polarizable point charge + Gaussian virtual site and shell (PC+GVS) model was trained on electrostatic and induction energies in one step.}\n" % ( ntrain, ntest ) )
+    outf.write("\\caption{Root mean square deviation (RMSE) and mean signed error (MSE) of electrostatic energies (Elec, kJ/mol) and the sum of electrostatics and induction (Elec+Induc, kJ/mol) for popular charge models compared to SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set. The dataset consisted of 77 dimers (Table S6). \\#P indicates the number of parameters in the model. The training targets are indicated and RMSD and MSE values that correspond to the training set are indicated in {\\bf bold font}. A non-polarizable model with virtual sites with a Gaussian distributed charge (on anions and potassium ion only) is labeled as GC+PGV. The polarizable point charge + Gaussian virtual site and shell (PC+GVS) model was trained on electrostatic and induction energies in one step.}\n")
     
     
     outf.write("\\label{legacy}\n")

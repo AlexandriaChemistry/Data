@@ -11,6 +11,9 @@ debug     = False
 Induction = "Induction"
 Electrostatics = "Electrostatics"
 
+def ms(x, A, b):
+    return -A*np.exp(-b*x)
+
 def morse(x, De, beta, bondlength):
     bx = beta*(x-bondlength)
     return De*( ( 1 - np.exp(-bx))**2 - 1)
@@ -19,21 +22,29 @@ def yukawa(x, A, B, C, D):
     return A*np.exp(-B*x)/x + C*np.exp(-D*x)
 
 def fit_residual(dimer:str, distances, residual, init_p0)->dict:
-    cfit = { "Morse": { "func": morse,
-                        "p0": [ 10, 1, 3 ],
-                        "bounds": ( [ 0, 0.1, 0 ], [ 1000, 8, 20 ] ),
-                        "params": None,
-                        "value": None,
-                        "msd": 0,
-                        "rmsd": 0 },
-             "Yukawa": { "func": yukawa,
-                         "p0": [ 10, 1, -10, 1 ],
-                         "bounds": ( [ -100, 0.1, -100, 0.1 ], [ 100, 5, 100, 5 ] ),
-                         "params": None,
-                         "value": None,
-                         "msd": 0,
-                         "rmsd": 0 }
-            }
+    cfit = { 
+        "MS": { "func": ms,
+                "p0": [ 10, 1 ],
+                "bounds": ( [ 0, 0.1 ], [ 5000, 12 ] ),
+                "params": None,
+                "value": None,
+                "msd": 0,
+                "rmsd": 0 },
+        "Morse": { "func": morse,
+                   "p0": [ 10, 1, 3 ],
+                   "bounds": ( [ 0, 0.1, 0 ], [ 5000, 12, 20 ] ),
+                   "params": None,
+                   "value": None,
+                   "msd": 0,
+                   "rmsd": 0 },
+        "Yukawa": { "func": yukawa,
+                    "p0": [ 10, 1, -10, 1 ],
+                    "bounds": ( [ -500000, 0.1, 0, 0.1 ], [ 0, 5, 500000, 5 ] ),
+                    "params": None,
+                    "value": None,
+                    "msd": 0,
+                    "rmsd": 0 }
+    }
     if debug:
         print("There are %d data points for %s" % ( len(distances), dimer ) )
     pots = list(cfit.keys())
@@ -72,7 +83,8 @@ def fit_residual(dimer:str, distances, residual, init_p0)->dict:
 def read_log_rmsd(filenm:str, ff:str)->dict:
     mylist = { "Test": {}, "Train": {} }
     toread = { "Elec": [ "COULOMB", "INDUCTION" ],
-               "Induc": [ "INDUCTION", "DISPERSION", "EXCHANGE", "EPOT" ] }
+               "Elec+Induc": [  "COULOMB", "INDUCTION" ],
+               "Inter": [ "DISPERSION", "EXCHANGE", "EPOT" ] }
 
     if os.path.exists(filenm):
         with open(filenm, "r") as inf:
@@ -86,33 +98,121 @@ def read_log_rmsd(filenm:str, ff:str)->dict:
 
     return mylist
 
-def run_stats(mk:str, logdir:str):
+def read_log_rmsd_aver(filenm:str)->dict:
+    mylist = { "Train": {}, "Test": {} }
+
+    with open(filenm, "r") as inf:
+        dataset = None
+        dimer = None
+        for line in inf:
+            if line.startswith("Molecule "):
+                words = line.strip().split()
+                dataset = words[13]
+                dimer = words[3][:-1]
+                if debug:
+                    print("Found dimer '%s' dataset %s" % ( dimer, dataset ))
+            elif line.find(" RMSD") >= 0 and dimer and dataset:
+                words = line.strip().split()
+                if len(words) >= 14:
+                    try:
+                        ener = words[0]
+                        if not ener in mylist[dataset]:
+                            mylist[dataset][ener] = { "RMSD": 0, "N": 0 }
+                        mylist[dataset][ener]["RMSD"] += float(words[2])
+                        mylist[dataset][ener]["N"]    += 1
+                    except ValueError:
+                        print("Cannot interpret line '%s'"  % (line.strip()))
+            elif dimer and len(line)==0:
+                dimer = None
+                dataset = None
+
+    allset = { "Train": {}, "Test": {} }
+    for dset in mylist:
+        for ener in mylist[dset]:
+            if ener == "N":
+                continue
+            allset[dset][ener] = { "RMSD": mylist[dset][ener]["RMSD"]/mylist[dset][ener]["N"],
+                                   "N": mylist[dset][ener]["N"] }
+    return allset
+
+def read_log_ener(filenm:str, induc:bool)->dict:
+    mylist = { "Train": [], "Test": [] }
+    print("Will read %s" % filenm)
+    moldata = {}
+    # Which energies to fetch for induction
+    iqm = 4
+    iact = 5
+    if not induc:
+        # Get the electrostatics
+        iqm = 2
+        iact = 3
+    with open(filenm, "r") as inf:
+        found = False
+        dataset = None
+        dimer = None
+        for line in inf:
+            if line.startswith("Molecule "):
+                words = line.strip().split()
+                dataset = words[13]
+                dimer = words[3][:-1]
+                moldata[dimer] = []
+                if debug:
+                    print("Found dimer '%s' dataset %s" % ( dimer, dataset ))
+            elif line.find("QM       ACT        QM       ACT") >= 0:
+                found = True
+            elif line.find("EPOT RMSD") >= 0:
+                found = False
+                dataset = None
+            elif found:
+                words = line.strip().split()
+                if len(words) >= 16:
+                    if dataset:
+                        if not words[iqm] == "x":
+                            myind = mydistance(dimer, words[16])
+                            if myind > 0:
+                                mylist[dataset].append( ( float(words[iqm]), float(words[iact]) ) )
+                                moldata[dimer].append( ( myind, float(words[iqm]), float(words[iact]) ) )
+                        else:
+                            if debug:
+                                print("Dimer '%s' has incorrect values" % dimer)
+    return mylist, moldata
+
+
+def run_stats(mk:str, logdir:str, allsel:list, repls: list)->int:
     def run_train_ff(fn:str, logfn:str, ff:str, sel:int):
         actdata = "../../ACTdata/"
         sel = actdata + f"Training/ions-nobles-gases{sel}.dat"
-        os.system(f"alexandria train_ff -ff {fn}/Train-ff_{ff}.xml -mp {actdata}MolProps/sapt2+3-final2 -sel {sel} -nooptimize -g {logfn}")
+        xml = f"{fn}/Train-ff_{ff}.xml"
+        if os.path.exists(xml):
+            return os.system(f"alexandria train_ff -ff {xml} -mp {actdata}MolProps/sapt2+3-final2 -sel {sel} -nooptimize -g {logfn}")
+        return 1
 
     os.makedirs(logdir, exist_ok=True)
-    indpol = "Induction (polarization only)"
-    indall = "Induction (complete)"
+    indpol = "Induction\\footnote{Polarization only}"
+    indall = "Induction\\footnote{Including correction}"
     rename = { "COULOMB": Electrostatics, "EPOT": "Total" }
     mylist = {}
-    allsel = [1, 2, 3]
+    aver_rmsd = True
     for sel in allsel:
-        for repl in [ "A" ]:
+        for repl in repls:
             tdir = f"{prefix}TT2b-pg-{mk}-{sel}-{repl}"
             mylist[tdir] = {}
-            for ff in [ "Elec", "Induc" ]:
+            for ff in [ "Elec", "Elec+Induc", "Inter" ]:
                 logfn = f"{logdir}/{ff}-{sel}-{repl}.log"
-                run_train_ff(tdir, logfn, ff, sel)
+                if run_train_ff(tdir, logfn, ff, sel) != 0:
+                    continue
                 for xvg in [ "COULOMB", "INDUCTION", "DISPERSION", "EXCHANGE", "EPOT" ]:
                     fff = xvg + ".xvg"
                     if os.path.exists(fff):
                         os.system(f"mv {fff} {logdir}/{ff}-{xvg}-{sel}-{repl}.xvg")
                 for xvg in [ "EXCHIND.xvg", "ALLELEC.xvg" ]:
-                    os.unlink(xvg)
+                    if os.path.exists(xvg):
+                        os.unlink(xvg)
                 if os.path.exists(logfn):
-                    allset = read_log_rmsd(logfn, ff)
+                    if aver_rmsd:
+                        allset = read_log_rmsd_aver(logfn)
+                    else:
+                        allset = read_log_rmsd(logfn, ff)
                     for dset in allset:
                         if not dset in mylist[tdir]:
                             mylist[tdir][dset] = {}
@@ -133,11 +233,17 @@ def run_stats(mk:str, logdir:str):
     with open(texfn, "w") as outf:
         outf.write("\\begin{table}[ht]\n")
         outf.write("\\centering\n")
-        outf.write("\\caption{Root mean square deviation from SAPT energies (kJ/mol) for three different selections (Table S1) separated in Train and Test sets.}\n")
+        outf.write("\\caption{Root mean square deviation from SAPT energies (kJ/mol) for five different selections (Table S1) separated in Train and Test sets.}\n")
         outf.write("\\label{tab:stats}\n")
-        outf.write("\\begin{tabular}{lcccc}\n")
+        outf.write("\\begin{tabular}{lc")
+        for r in allsel:
+            outf.write("c")
+        outf.write("}\n")
         outf.write("\\hline\n")
-        outf.write("Term & & Set 1 & Set 2 & Set 3\\\\\n")
+        outf.write("Term &")
+        for r in range(len(allsel)):
+            outf.write("& Set %d" % (r+1))
+        outf.write("\\\\\n")
         outf.write("\\hline\n")
         order = [ Electrostatics, indpol, indall,
                   "Dispersion", "Exchange", "Total" ]
@@ -183,52 +289,13 @@ def mydistance(dimer:str, ww:str)->float:
             md2 = min(md2, mmm2)
     return math.sqrt(md2)
     
-def read_log_ener(filenm:str, mylist:dict, induc:bool)->dict:
-    print("Will read %s" % filenm)
-    moldata = {}
-    # Which energies to fetch for induction
-    iqm = 4
-    iact = 5
-    if not induc:
-        # Get the electrostatics
-        iqm = 2
-        iact = 3
-    with open(filenm, "r") as inf:
-        found = False
-        dataset = None
-        dimer = None
-        for line in inf:
-            if line.startswith("Molecule "):
-                words = line.strip().split()
-                dataset = words[13]
-                dimer = words[3][:-1]
-                moldata[dimer] = []
-                if debug:
-                    print("Found dimer '%s' dataset %s" % ( dimer, dataset ))
-            elif line.find("QM       ACT        QM       ACT") >= 0:
-                found = True
-            elif line.find("EPOT RMSD") >= 0:
-                found = False
-                dataset = None
-            elif found:
-                words = line.strip().split()
-                if len(words) >= 16:
-                    if dataset:
-                        if not words[iqm] == "x":
-                            myind = mydistance(dimer, words[16])
-                            if myind > 0:
-                                mylist[dataset].append( ( float(words[iqm]), float(words[iact]) ) )
-                                moldata[dimer].append( ( myind, float(words[iqm]), float(words[iact]) ) )
-                        else:
-                            if debug:
-                                print("Dimer '%s' has incorrect values" % dimer)
-    return mylist, moldata
-
 def print_parameters(mfit:dict):
     invaa = "(1/{\\AA})"
     kjm   = "(kJ/mole)"
     rmin  = "r$_{min}$ ({\\AA})"
-    texprops = {  "Morse": { "columns": "lcccc", "heading": 
+    texprops = {  "MS": { "columns": "lccc", "heading": 
+                             f"Dimer & A {kjm} & $\\beta$ {invaa} & RMSD {kjm}" },
+                  "Morse": { "columns": "lcccc", "heading": 
                              f"Dimer & De {kjm} & $\\beta$ {invaa} & {rmin} & RMSD {kjm}" },
                   "Yukawa": { "columns": "lccccc", "heading":
                               f"Dimer & A {kjm}& B {invaa} & C {kjm} & D {invaa} & RMSD {kjm}" }
@@ -282,7 +349,8 @@ def make_pdf(xvgdir:str, plotfn:str, xvgfns:list):
                 outf.write("\\cleardoublepage\n")
                 count = 0
 
-def write_xvg(xvgfn:str, eterm:str, resonly:bool, args, ener_data:dict, mfit:dict, cfit:dict,
+def write_xvg(xvgfn:str, eterm:str, resonly:bool, args,
+              ener_data:dict, mfit:dict, cfit:dict,
               distances, residual)->int:
     setind = 0
     with open(xvgfn, "w") as outf:
@@ -320,8 +388,8 @@ def write_xvg(xvgfn:str, eterm:str, resonly:bool, args, ener_data:dict, mfit:dic
                     outf.write("%10g  %10g  %10g  %10g\n" % ( dd[0], dd[1], dd[2], dd[2]-dd[1] ) )
     return setind
 
-def do_mols(logdir:str, logfn:str, fntype:str, resonly:bool, args):
-    allsel = [ 2 ]
+def do_mols(logdir:str, logfn:str, fntype:str, resonly:bool, args, allsel:list,
+            repls: list):
     xvgdir = "xvgs-" + logfn + "-" + fntype
     os.makedirs(xvgdir, exist_ok=True)
     mylist = { "Train": [], "Test": [] }
@@ -337,11 +405,11 @@ def do_mols(logdir:str, logfn:str, fntype:str, resonly:bool, args):
         with open(args.load, "r") as inf:
             initial_fit = json.load(inf)
     for sel in allsel:
-        for repl in [ "A" ]:
-            logfn = logdir + f"/{logfn}-{sel}-{repl}.log"
-            _, induc_data = read_log_ener(logfn, mylist, True)
+        for repl in repls:
+            mylogfn = logdir + f"/{logfn}-{sel}-{repl}.log"
+            _, induc_data = read_log_ener(mylogfn, True)
             if args.plot:
-                _, elec_data = read_log_ener(logfn, mylist, False)
+                _, elec_data = read_log_ener(mylogfn, False)
             xvgfns = {}
             for md in induc_data.keys():
                 # Prepare data for fitting
@@ -353,8 +421,11 @@ def do_mols(logdir:str, logfn:str, fntype:str, resonly:bool, args):
                         distances.append(dd[0])
                         # The residual is SAPT - Polarization, that is the missing part of the energy function
                         residual.append( dd[1]-dd[2] )
+                    # Check distance range for table S1
+                    # Has to be based on elec_data
                     if args.dist and not md in dist_range:
-                        dist_range[md] = ( distances[0], distances[-1] )
+                        mydd = sorted(elec_data[md])
+                        dist_range[md] = ( mydd[0][0], mydd[-1][0] )
                     init_p0 = None
                     if initial_fit and md in initial_fit:
                         init_p0 = initial_fit[md]
@@ -371,7 +442,8 @@ def do_mols(logdir:str, logfn:str, fntype:str, resonly:bool, args):
                     xvgfn2 = xvgdir + f"/{Electrostatics}-{dimer}.xvg"
                     write_xvg(xvgfn2, Electrostatics, True, args, elec_data[md],
                               None, None, None, None)
-                    xvgfns[md] = { Induction: xvgfn1, Electrostatics: xvgfn2 }
+                    if os.path.exists(xvgfn1) and os.path.exists(xvgfn2):
+                        xvgfns[md] = { Induction: xvgfn1, Electrostatics: xvgfn2 }
             if args.plot:
                 make_pdf(xvgdir, args.plot, xvgfns)
     if args.fit:
@@ -388,32 +460,12 @@ def do_mols(logdir:str, logfn:str, fntype:str, resonly:bool, args):
                 outf.write("%s,%g,%g\n" % ( md, dist_range[md][0], dist_range[md][1] ) )
             print("Stored distance range to %s" % args.dist)
 
-
-def do_fig1(logdir:str, fntype:str):
-    allsel = [1, 2, 3]
-    mylist = { "Train": [], "Test": [] }
+def do_fig1(logdir:str, allsel:list, repls:list):
     for sel in allsel:
-        for repl in [ "A" ]:
-            logfn = logdir + f"/Elec-{sel}-{repl}.log"
-            mylist, _ = read_log_ener(logfn, mylist, True)
-            NN     = { "Train": 0, "Test": 0 }
-            for ml in mylist.keys():
-                xvgfn = f"induction{ml}.xvg"
-                with open(xvgfn, "w") as outf:
-                    outf.write("@ xaxis label \"Induction (kJ/mol)\"\n")
-                    outf.write("@ yaxis label \"Alexandria\"\n")
-                    for pair in mylist[ml]:
-                        outf.write("%10g  %10g\n" % ( pair[0], pair[1] ) )
-                        NN[ml] += 1
-                print("Please check %s" % xvgfn)
-                ltrain = f"Train (N = {NN['Train']})"
-                ltest  = f"Test (N = {NN['Test']})"
-            if sel == 2:
-                elpdf = "electrostatics2.pdf"
-                os.system(f"viewxvg -f {logdir}/Elec-COULOMB-2-A.xvg -ls None None -mk o x -res {viewflags} -pdf {elpdf}  -noshow -legend_y 0.3 -legend_x 0.65 ")
-                print("Please check %s" % elpdf)
-            indpdf = "induction2.pdf"
-            os.system(f"viewxvg -f inductionTrain.xvg inductionTest.xvg -ls None None -mk o x  -label \"{ltrain}\" \"{ltest}\" -res -ymin -500 -ymax 500 -pdf {indpdf} -noshow -xmin -150 -legend_y 0.3 {viewflags}")
+        for repl in repls:
+            pdf = f"{logdir}/fig1-{sel}-{repl}.pdf"            
+            os.system(f"viewxvg -f {logdir}/Elec-COULOMB-{sel}-{repl}.xvg {logdir}/Elec-INDUCTION-{sel}-{repl}.xvg  -pdf {pdf} -xframe 9 -yframe 12 -legend_x 0.6 -legend_y 0.3 -panels -noshow -res -ls None None -mk o + -xframe 10 -yframe 14  -lfs 26 -tickfs 20 -alfs 26 ")
+            print("Please check %s" % pdf)
 
 def parser():
     parser  = argparse.ArgumentParser(description="""
@@ -437,14 +489,16 @@ You have to run the -stats option (or -all) at least once before using the other
 if __name__ == "__main__":
     args = parser()
     
-    mk     = "MORSEic-Kronecker3"
+    mk     = "MORSEic-Kronecker-EXTRA"
     logdir = "logs-" + mk
+    allsel = [ 1, 2, 3, 4, 5 ]
+    repls  = [ "C" ]
     if args.stats or args.all:
-        run_stats(mk, logdir)
+        run_stats(mk, logdir, allsel, repls)
     if os.path.isdir(logdir):
-        do_fig1(logdir, mk)
+        do_fig1(logdir, allsel, repls)
         if args.pol or args.all or args.fit:
-            do_mols(logdir, "Elec", mk, True, args)
+            do_mols(logdir, "Elec", mk, True, args, allsel, repls)
         if args.induc or args.all:
-            do_mols(logdir, "Induc", mk, True, args)
-            do_mols(logdir, "Induc", "MSic", True, args)
+            do_mols(logdir, "Elec+Induc", mk, True, args, allsel, repls)
+            do_mols(logdir, "Elec+Induc", "MSic", True, args, allsel, repls)
