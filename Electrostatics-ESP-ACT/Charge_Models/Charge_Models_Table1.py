@@ -30,7 +30,7 @@ def run_one(qtype:str) -> dict:
     if not qtype in acmparm:
         sys.exit("Unknown qtype %s" % qtype)
     molprops = "../AlexandriaFF/sapt-esp.xml"
-    #"../AlexandriaFF/sapt2-aug-cc-pvtz-0.015Hartree-noIC.xml"
+
     log_filename = f"{qtype}.log"
     base_command = f"alexandria train_ff -nooptimize -g {log_filename} -sel ../Selection/ac-total.dat -mp {molprops} -ff ../AlexandriaFF/{acmparm[qtype]['ff']}"
 
@@ -118,7 +118,7 @@ for qt, suffix in charge_models:
     run_command(f"mv ALLELEC.xvg {newallelec}")
     allelecs += f" {newallelec}"
     labels += f" {qtsuf}"
-    for fn in [ "EXCHANGE.xvg", "EXCHIND.xvg", "DISPERSION.xvg", "INDUCTIONCORRECTION.xvg", "EPOT.xvg", "INDUCTION.xvg" ] + glob.glob("#*#"):
+    for fn in [ "EXCHANGE.xvg", "EXCHIND.xvg", "DISPERSION.xvg", "INDUCTIONCORRECTION.xvg", "EPOT.xvg", "INDUCTION.xvg" ]:
         if os.path.exists(fn):
             os.unlink(fn)
 
