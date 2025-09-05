@@ -48,8 +48,13 @@ if __name__ == "__main__":
     rsum /= (len(mydict.keys()) - histo[100])
     print("Please check %d outliers in outlier.txt" % (histo[100]))
     print("Average RMSD %g kJ/mol e" % (hartree*rsum))
-    with open("histo-%s.xvg" % filter, "w") as outf:
+    histofn = f"histo-{filter}.xvg"
+    with open(histofn, "w") as outf:
         outf.write("@ xaxis label \"RMSD (kJ/mol e)\"\n")
         outf.write("@ yaxis label \"(arbitrary units)\"\n")
         for i in range(len(histo)-1):
             outf.write("%10g  %10g\n" % ( hartree*i*mymax/100, histo[i]*1.0/nmol))
+
+    pdf = "rmsd_histo.pdf"
+    os.system("viewxvg -f %s -lfs 40 -alfs 40 -tickfs 32 -noshow -pdf %s" % ( histofn, pdf ) )
+    print("Please check %s" % pdf )

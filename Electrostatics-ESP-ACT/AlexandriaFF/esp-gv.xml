@@ -140,6 +140,7 @@
     </particletype>
     <particletype identifier="Li+" type="Atom" description="lithium ion">
       <option key="atomnumber" value="3"/>
+      <option key="bondtype" value="Li+"/>
       <option key="element" value="Li"/>
       <option key="induccorrtype" value="Li+"/>
       <option key="row" value="2"/>
@@ -162,6 +163,7 @@
     </particletype>
     <particletype identifier="Na+" type="Atom" description="sodium ion">
       <option key="atomnumber" value="11"/>
+      <option key="bondtype" value="Na+"/>
       <option key="element" value="Na"/>
       <option key="induccorrtype" value="Na+"/>
       <option key="row" value="3"/>

@@ -17,6 +17,8 @@ acmparm = {
     "RESP":      { "ref": "Bayly1993a", "ff": "coul-p.xml" },
     "ACM-esp-G":      { "ff": "esp-g.xml", "nparm": 48, "label": "GC", "target": "ESP" },
     "ACM-esp-GV":     { "ff": "esp-gv.xml", "nparm": 54, "label": "GC+PGV", "target": "ESP" },
+    "ACM-esp-GV2":     { "ff": "esp-gv2.xml", "nparm": 62, "label": "GC+PGV2", "target": "ESP" },
+    
     "ACM-elec-P":     { "ff": "coul-p.xml", "nparm": 32, "label": "PC", "target": "Elec" },
     "ACM-allelec-P":  { "ff": "all-p.xml", "nparm": 32, "label": "PC", "target": "Elec+Induc" },
     "ACM-elec-G":     { "ff": "coul-g.xml", "nparm": 48, "label": "GC", "target": "Elec" },
@@ -97,7 +99,7 @@ charge_models = [
     ("BCC", ""),
     ("RESP",""),
     ("header", "Non-polarizable ACT models based on monomer ESP" ),
-    ("ACM", "-esp-G"), ("ACM", "-esp-GV"),
+    ("ACM", "-esp-G"), ("ACM", "-esp-GV"), ("ACM", "-esp-GV2"),
     ("header", "Non-polarizable ACT models based on SAPT dimer energies" ),
     ("ACM", "-elec-P"), ("ACM", "-allelec-P"),
     ("ACM", "-elec-G"), ("ACM", "-allelec-G"),
