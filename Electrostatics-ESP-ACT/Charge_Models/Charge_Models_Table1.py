@@ -2,23 +2,21 @@
 
 import os, glob, sys
 
-def run_command(command):
-    os.system(command)
-
+debug   = False
 train   = "Train"
 test    = "Test"
 
 acmparm = {
-    "Mulliken":  { "ref": "Mulliken1955a", "ff": "coul-p.xml" },
-    "Hirshfeld": { "ref": "Hirshfeld1977a",  "ff": "coul-p.xml" },
-    "ESP":       { "ref": "Besler1990a", "ff": "coul-p.xml" },
-    "CM5":       { "ref": "Marenich2012a",  "ff": "coul-p.xml" },
-    "BCC":       { "ref": "Jakalian2000a", "ff": "coul-p.xml" },
-    "RESP":      { "ref": "Bayly1993a", "ff": "coul-p.xml" },
-    "ACM-esp-G":      { "ff": "esp-g.xml", "nparm": 48, "label": "GC", "target": "ESP" },
-    "ACM-esp-GV":     { "ff": "esp-gv.xml", "nparm": 54, "label": "GC+PGV", "target": "ESP" },
-    "ACM-esp-GV2":     { "ff": "esp-gv2.xml", "nparm": 62, "label": "GC+PGV2", "target": "ESP" },
-    
+    "Mulliken":  { "ref": "Mulliken1955a", "nparm": 27, "ff": "coul-p.xml" },
+    "Hirshfeld": { "ref": "Hirshfeld1977a", "nparm": 27, "ff": "coul-p.xml" },
+    "ESP":       { "ref": "Besler1990a", "nparm": 27, "ff": "coul-p.xml" },
+    "CM5":       { "ref": "Marenich2012a",  "nparm": 27, "ff": "coul-p.xml" },
+    "BCC":       { "ref": "Jakalian2000a", "nparm": 27, "ff": "coul-p.xml" },
+    "RESP":      { "ref": "Bayly1993a", "nparm": 27, "ff": "coul-p.xml" },
+#    "ACM-esp-G":      { "ff": "esp-g.xml", "nparm": 48, "label": "GC", "target": "ESP" },
+#    "ACM-esp-GV":     { "ff": "esp-gv.xml", "nparm": 54, "label": "GC+PGV", "target": "ESP" },
+#    "ACM-esp-GV2":     { "ff": "esp-gv2.xml", "nparm": 62, "label": "GC+PGV2", "target": "ESP" },
+#    "ACM-esp-PG":     { "ff": "esp-pg.xml", "nparm": 93, "label": "GC+PGV", "target": "ESP" },
     "ACM-elec-P":     { "ff": "coul-p.xml", "nparm": 32, "label": "PC", "target": "Elec" },
     "ACM-allelec-P":  { "ff": "all-p.xml", "nparm": 32, "label": "PC", "target": "Elec+Induc" },
     "ACM-elec-G":     { "ff": "coul-g.xml", "nparm": 48, "label": "GC", "target": "Elec" },
@@ -31,7 +29,7 @@ acmparm = {
 def run_one(qtype:str) -> dict:
     if not qtype in acmparm:
         sys.exit("Unknown qtype %s" % qtype)
-    molprops = "../AlexandriaFF/sapt-esp.xml"
+    molprops = "../AlexandriaFF/sapt-esp3.xml"
 
     log_filename = f"{qtype}.log"
     base_command = f"alexandria train_ff -nooptimize -g {log_filename} -sel ../Selection/ac-total.dat -mp {molprops} -ff ../AlexandriaFF/{acmparm[qtype]['ff']}"
@@ -41,7 +39,7 @@ def run_one(qtype:str) -> dict:
         mycmd = base_command + " -charges ../AlexandriaFF/hf-aug-cc-pvtz.xml "
     else:
         mycmd = base_command + f" -qtype q{qtype} -charges ../AlexandriaFF/esp-paper-gaussian.xml "
-    run_command(mycmd)
+    os.system(mycmd)
 
     print(f"Reading log file {log_filename}")
     mydict = {}
@@ -98,9 +96,11 @@ charge_models = [
     ("CM5", ""),
     ("BCC", ""),
     ("RESP",""),
-    ("header", "Non-polarizable ACT models based on monomer ESP" ),
-    ("ACM", "-esp-G"), ("ACM", "-esp-GV"), ("ACM", "-esp-GV2"),
-    ("header", "Non-polarizable ACT models based on SAPT dimer energies" ),
+#    ("header", "Non-polarizable ACT models based on monomer ESP" ),
+#    ("ACM", "-esp-G"), ("ACM", "-esp-GV"), ("ACM", "-esp-GV2"), 
+#    ("header", "Polarizable ACT model based on monomer ESP" ),
+#    ("ACM", "-esp-PG" ),
+    ("header", "Non-polarizable SAPT-based ACT models" ),
     ("ACM", "-elec-P"), ("ACM", "-allelec-P"),
     ("ACM", "-elec-G"), ("ACM", "-allelec-G"),
     ("ACM", "-elec-GV"), ("ACM", "-allelec-GV"),
@@ -114,25 +114,26 @@ for qt, suffix in charge_models:
     qtsuf = qt+suffix
     mytable[qtsuf] = run_one(qtsuf)
     newcoul = f"COULOMB-{qtsuf}.xvg"
-    run_command(f"mv COULOMB.xvg {newcoul}")
+    os.system(f"mv COULOMB.xvg {newcoul}")
     couls += f" {newcoul}"
     newallelec = f"ALLELEC-{qtsuf}.xvg"
-    run_command(f"mv ALLELEC.xvg {newallelec}")
+    os.system(f"mv ALLELEC.xvg {newallelec}")
     allelecs += f" {newallelec}"
     labels += f" {qtsuf}"
     for fn in [ "EXCHANGE.xvg", "EXCHIND.xvg", "DISPERSION.xvg", "INDUCTIONCORRECTION.xvg", "EPOT.xvg", "INDUCTION.xvg" ]:
         if os.path.exists(fn):
             os.unlink(fn)
 
-run_command(f"viewxvg -f {couls} -label {labels} -ls None -mk o + x -res -noshow -pdf legacy_coul.pdf")
-run_command(f"viewxvg -f {allelecs} -label {labels} -ls None -mk o + x -res -noshow -pdf legacy_allelec.pdf")
+os.system(f"viewxvg -f {couls} -label {labels} -ls None -mk o + x -res -noshow -pdf legacy_coul.pdf")
+os.system(f"viewxvg -f {allelecs} -label {labels} -ls None -mk o + x -res -noshow -pdf legacy_allelec.pdf")
 
 ntrain, ntest = get_train_test("ESP.log")
 
 with open("legacy.tex", "w") as outf:
-    outf.write("\\begin{table}[htb]\n")
+    outf.write("\\begin{table}[ht]\n")
     outf.write("\\centering\n")
-    outf.write("\\caption{Root mean square deviation (RMSE) and mean signed error (MSE) of electrostatic energies (Elec, kJ/mol) and the sum of electrostatics and induction (Elec+Induc, kJ/mol) for popular charge models compared to SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set. The dataset consisted of 77 dimers (Table S6). \\#P indicates the number of parameters in the model. The training targets are indicated and RMSD and MSE values that correspond to the training set are indicated in {\\bf bold font}. A non-polarizable model with virtual sites with a Gaussian distributed charge (on anions and potassium ion only) is labeled as GC+PGV. The polarizable point charge + Gaussian virtual site and shell (PC+GVS) model was trained on electrostatic and induction energies in one step.}\n")
+    outf.write("\\caption{Root mean square deviation (RMSD) and mean signed error (MSE), both in kJ/mol of electrostatic energies (Elec) and the sum of electrostatics and induction (Elec+Induc) for popular charge models compared to SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set. The dataset consisted of 77 dimers (Table S6). \\#P indicates the number of parameters in the model (the number of individual charges in legacy models). Values corresponding to the training targets are indicated in {\\bf bold font}. Description of models is given in Table~\\ref{tab:models}.}\n")
+#     A non-polarizable model with virtual sites with a Gaussian distributed charge (on anions and potassium ion only) is labeled as GC+PGV. The polarizable point charge + Gaussian virtual site and shell (PC+GVS) model was trained on electrostatic and induction energies in one step.}\n")
     
     
     outf.write("\\label{legacy}\n")
@@ -157,6 +158,9 @@ with open("legacy.tex", "w") as outf:
         rmsd     = 'RMSD'
         mse      = 'MSE'
         na       = 'N/A'
+        np       = ""
+        if "nparm" in acmparm[qtsuf]:
+            np = acmparm[qtsuf]["nparm"]
         rmsd_str = {}
         mse_str  = {}
         for mydata in [ "COUL", "ALLELEC" ]:
@@ -183,12 +187,10 @@ with open("legacy.tex", "w") as outf:
                 else:
                     print("Something wrong with table for %s" % qtsuf)
                     sys.exit(ttable)
-                np = ""
-                if "nparm" in acmparm[qtsuf] and dataset == train:
-                    np = acmparm[qtsuf]["nparm"]
         N = mytable[qtsuf][train][mydata]["N"]
-        print(rmsd_str)
-        print(mse_str)
+        if debug:
+            print(rmsd_str)
+            print(mse_str)
         for dataset in [ train, test ]:
             target = ""
             if star:
@@ -196,7 +198,10 @@ with open("legacy.tex", "w") as outf:
             cite = ""
             if "ref" in acmparm[qtsuf] and dataset == train:
                 cite = f"~\\cite{{{acmparm[qtsuf]['ref']}}}"
-            outf.write(f"{label}{cite} & {dataset} &{target} & {np} & {rmsd_str['COUL'][dataset]} & {mse_str['COUL'][dataset]} & {rmsd_str['ALLELEC'][dataset]} & {mse_str['ALLELEC'][dataset]} \\\\\n")
+            thisnp = ""
+            if dataset == train:
+                thisnp = np
+            outf.write(f"{label}{cite} & {dataset} &{target} & {thisnp} & {rmsd_str['COUL'][dataset]} & {mse_str['COUL'][dataset]} & {rmsd_str['ALLELEC'][dataset]} & {mse_str['ALLELEC'][dataset]} \\\\\n")
 
     outf.write("\\hline\n")
     outf.write("\\end{tabular}\n")
