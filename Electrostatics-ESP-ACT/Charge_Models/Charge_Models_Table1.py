@@ -29,7 +29,7 @@ acmparm = {
 def run_one(qtype:str) -> dict:
     if not qtype in acmparm:
         sys.exit("Unknown qtype %s" % qtype)
-    molprops = "../AlexandriaFF/sapt-esp3.xml"
+    molprops = "../AlexandriaFF/sapt-esp.xml"
 
     log_filename = f"{qtype}.log"
     base_command = f"alexandria train_ff -nooptimize -g {log_filename} -sel ../Selection/ac-total.dat -mp {molprops} -ff ../AlexandriaFF/{acmparm[qtype]['ff']}"
@@ -132,9 +132,7 @@ ntrain, ntest = get_train_test("ESP.log")
 with open("legacy.tex", "w") as outf:
     outf.write("\\begin{table}[ht]\n")
     outf.write("\\centering\n")
-    outf.write("\\caption{Root mean square deviation (RMSD) and mean signed error (MSE), both in kJ/mol of electrostatic energies (Elec) and the sum of electrostatics and induction (Elec+Induc) for popular charge models compared to SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set. The dataset consisted of 77 dimers (Table S6). \\#P indicates the number of parameters in the model (the number of individual charges in legacy models). Values corresponding to the training targets are indicated in {\\bf bold font}. Description of models is given in Table~\\ref{tab:models}.}\n")
-#     A non-polarizable model with virtual sites with a Gaussian distributed charge (on anions and potassium ion only) is labeled as GC+PGV. The polarizable point charge + Gaussian virtual site and shell (PC+GVS) model was trained on electrostatic and induction energies in one step.}\n")
-    
+    outf.write("\\caption{Root mean square deviation (RMSD) and mean signed error (MSE), both in kJ/mol of electrostatic energies (Elec) and the sum of electrostatics and induction (Elec+Induc) for popular charge models compared to SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set. The dataset consisted of 77 dimers (Table S5). \\#P indicates the number of parameters in the model (the number of individual charges in legacy models). Values corresponding to the training targets are indicated in {\\bf bold font}. Description of models is given in Table~\\ref{tab:models}.}\n")    
     
     outf.write("\\label{legacy}\n")
     outf.write("\\begin{tabular}{lcccccccc}\n")
