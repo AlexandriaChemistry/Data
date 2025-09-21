@@ -13,6 +13,8 @@ acmparm = {
     "CM5":       { "ref": "Marenich2012a",  "nparm": 27, "ff": "coul-p.xml" },
     "BCC":       { "ref": "Jakalian2000a", "nparm": 27, "ff": "coul-p.xml" },
     "RESP":      { "ref": "Bayly1993a", "nparm": 27, "ff": "coul-p.xml" },
+    "MBIS":      { "ref": "Verstraelen2016a", "nparm": 27, "ff": "coul-p.xml" },
+    "MBIS-S":      { "ref": "Verstraelen2016a", "nparm": 27, "ff": "P+S.xml" },
 #    "ACM-esp-G":      { "ff": "esp-g.xml", "nparm": 48, "label": "GC", "target": "ESP" },
 #    "ACM-esp-GV":     { "ff": "esp-gv.xml", "nparm": 54, "label": "GC+PGV", "target": "ESP" },
 #    "ACM-esp-GV2":     { "ff": "esp-gv2.xml", "nparm": 62, "label": "GC+PGV2", "target": "ESP" },
@@ -29,7 +31,7 @@ acmparm = {
 def run_one(qtype:str) -> dict:
     if not qtype in acmparm:
         sys.exit("Unknown qtype %s" % qtype)
-    molprops = "../AlexandriaFF/sapt-esp.xml"
+    molprops = "../AlexandriaFF/sapt-esp3.xml"
 
     log_filename = f"{qtype}.log"
     base_command = f"alexandria train_ff -nooptimize -g {log_filename} -sel ../Selection/ac-total.dat -mp {molprops} -ff ../AlexandriaFF/{acmparm[qtype]['ff']}"
@@ -37,9 +39,17 @@ def run_one(qtype:str) -> dict:
     print(f"Running command for {qtype}")
     if "ACM" in qtype:
         mycmd = base_command + " -charges ../AlexandriaFF/hf-aug-cc-pvtz.xml "
+    elif qtype == "MBIS":
+        mycmd = base_command + f" -qtype qRESP -charges ../AlexandriaFF/mbis_ccsd.xml "
+    elif qtype == "MBIS-S":
+        mycmd = base_command + f" -charges ../AlexandriaFF/hf-aug-cc-pvtz.xml "        
     else:
-        mycmd = base_command + f" -qtype q{qtype} -charges ../AlexandriaFF/esp-paper-gaussian.xml "
+        mycmd = base_command + f" -qtype q{qtype} -charges ../AlexandriaFF/esp-paper-gaussian.xml "    
     os.system(mycmd)
+
+
+
+
 
     print(f"Reading log file {log_filename}")
     mydict = {}
@@ -96,6 +106,8 @@ charge_models = [
     ("CM5", ""),
     ("BCC", ""),
     ("RESP",""),
+    ("MBIS",""),
+    ("MBIS-S",""),
 #    ("header", "Non-polarizable ACT models based on monomer ESP" ),
 #    ("ACM", "-esp-G"), ("ACM", "-esp-GV"), ("ACM", "-esp-GV2"), 
 #    ("header", "Polarizable ACT model based on monomer ESP" ),
@@ -132,7 +144,9 @@ ntrain, ntest = get_train_test("ESP.log")
 with open("legacy.tex", "w") as outf:
     outf.write("\\begin{table}[ht]\n")
     outf.write("\\centering\n")
-    outf.write("\\caption{Root mean square deviation (RMSD) and mean signed error (MSE), both in kJ/mol of electrostatic energies (Elec) and the sum of electrostatics and induction (Elec+Induc) for popular charge models compared to SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set. The dataset consisted of 77 dimers (Table S5). \\#P indicates the number of parameters in the model (the number of individual charges in legacy models). Values corresponding to the training targets are indicated in {\\bf bold font}. Description of models is given in Table~\\ref{tab:models}.}\n")    
+    outf.write("\\caption{Root mean square deviation (RMSD) and mean signed error (MSE), both in kJ/mol of electrostatic energies (Elec) and the sum of electrostatics and induction (Elec+Induc) for popular charge models compared to SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set. The dataset consisted of 77 dimers (Table S6). \\#P indicates the number of parameters in the model (the number of individual charges in legacy models). Values corresponding to the training targets are indicated in {\\bf bold font}. Description of models is given in Table~\\ref{tab:models}.}\n")
+#     A non-polarizable model with virtual sites with a Gaussian distributed charge (on anions and potassium ion only) is labeled as GC+PGV. The polarizable point charge + Gaussian virtual site and shell (PC+GVS) model was trained on electrostatic and induction energies in one step.}\n")
+    
     
     outf.write("\\label{legacy}\n")
     outf.write("\\begin{tabular}{lcccccccc}\n")
