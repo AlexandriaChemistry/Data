@@ -15,39 +15,41 @@ acmparm = {
     "RESP":      { "ref": "Bayly1993a", "nparm": 27, "ff": "coul-p.xml" },
     "MBIS":      { "ref": "Verstraelen2016a", "nparm": 27, "ff": "coul-p.xml" },
     "MBIS-S":      { "ref": "Verstraelen2016a", "nparm": 27, "ff": "P+S.xml" },
-#    "ACM-esp-G":      { "ff": "esp-g.xml", "nparm": 48, "label": "GC", "target": "ESP" },
-#    "ACM-esp-GV":     { "ff": "esp-gv.xml", "nparm": 54, "label": "GC+PGV", "target": "ESP" },
-#    "ACM-esp-GV2":     { "ff": "esp-gv2.xml", "nparm": 62, "label": "GC+PGV2", "target": "ESP" },
-#    "ACM-esp-PG":     { "ff": "esp-pg.xml", "nparm": 93, "label": "GC+PGV", "target": "ESP" },
-    "ACM-elec-P":     { "ff": "coul-p.xml", "nparm": 32, "label": "PC", "target": "Elec" },
-    "ACM-allelec-P":  { "ff": "all-p.xml", "nparm": 32, "label": "PC", "target": "Elec+Induc" },
-    "ACM-elec-G":     { "ff": "coul-g.xml", "nparm": 48, "label": "GC", "target": "Elec" },
-    "ACM-allelec-G":  { "ff": "all-g.xml", "nparm": 48, "label": "GC", "target": "Elec+Induc" },
-    "ACM-elec-GV":    { "ff": "coul-gv.xml", "nparm": 62, "label": "GC+PGV", "target": "Elec" },
-    "ACM-allelec-GV": { "ff": "all-gv.xml", "nparm": 62, "label": "GC+PGV", "target": "Elec+Induc" },
-    "ACM-all-PG":     { "ff": "all-pg.xml", "nparm": 125, "label": "PC+GVS", "target": "Elec,Induc" }
+    "ACM-elec-P":     { "ff": "PC-elec.xml", "nparm": 66, "label": "PC", "target": "Elec" },
+    "ACM-allelec-P":  { "ff": "PC-allelec.xml", "nparm": 66, "label": "PC", "target": "Elec+Induc" },
+    "ACM-elec-G":     { "ff": "GC-elec.xml", "nparm": 85, "label": "GC", "target": "Elec" },
+    "ACM-allelec-G":  { "ff": "GC-allelec.xml", "nparm": 85, "label": "GC", "target": "Elec+Induc" },
+    "ACM-elec-S":     { "ff": "SC-elec.xml", "nparm": 85, "label": "SC", "target": "Elec" },
+    "ACM-allelec-S":  { "ff": "SC-allelec.xml", "nparm": 85, "label": "SC", "target": "Elec+Induc" },
+    "ACM-elec-GV":    { "ff": "PC+GV-elec.xml", "nparm": 106, "label": "PC+GV", "target": "Elec" },
+    "ACM-allelec-GV": { "ff": "PC+GV-allelec.xml", "nparm": 106, "label": "PC+GV", "target": "Elec+Induc" },
+    "ACM-elec-SV":    { "ff": "PC+SV-elec.xml", "nparm": 106, "label": "PC+SV", "target": "Elec" },
+    "ACM-allelec-SV": { "ff": "PC+SV-allelec.xml", "nparm": 106, "label": "PC+SV", "target": "Elec+Induc" },
+    "ACM-elec-PG":    { "ff": "PC+GS-elec.xml", "nparm": 125, "label": "PC+GS", "target": "Elec,Induc" }
+    "ACM-allelec-PG": { "ff": "PC+GS-allelec.xml", "nparm": 125, "label": "PC+GS", "target": "Elec+Induc" }
 }
 
 def run_one(qtype:str) -> dict:
     if not qtype in acmparm:
         sys.exit("Unknown qtype %s" % qtype)
-    molprops = "../AlexandriaFF/sapt-esp3.xml"
+    molprops = "../AlexandriaFF/sapt-esp5.xml"
 
     log_filename = f"{qtype}.log"
     base_command = f"alexandria train_ff -nooptimize -g {log_filename} -sel ../Selection/ac-total.dat -mp {molprops} -ff ../AlexandriaFF/{acmparm[qtype]['ff']}"
 
     print(f"Running command for {qtype}")
     if "ACM" in qtype:
-        mycmd = base_command + " -charges ../AlexandriaFF/hf-aug-cc-pvtz.xml "
+        mycmd = base_command + " -charges ../AlexandriaFF/mp2-aug-cc-pvtz.xml "
     elif qtype == "MBIS":
         mycmd = base_command + f" -qtype qRESP -charges ../AlexandriaFF/mbis_ccsd.xml "
     elif qtype == "MBIS-S":
-        mycmd = base_command + f" -charges ../AlexandriaFF/hf-aug-cc-pvtz.xml "        
+        mycmd = base_command + f" -charges ../AlexandriaFF/mp2-aug-cc-pvtz.xml "        
     else:
         mycmd = base_command + f" -qtype q{qtype} -charges ../AlexandriaFF/esp-paper-gaussian.xml "    
     os.system(mycmd)
 
-
+    if not os.path.exists(log_filename):
+        return {}
 
 
 
@@ -115,9 +117,11 @@ charge_models = [
     ("header", "Non-polarizable SAPT-based ACT models" ),
     ("ACM", "-elec-P"), ("ACM", "-allelec-P"),
     ("ACM", "-elec-G"), ("ACM", "-allelec-G"),
+    ("ACM", "-elec-S"), ("ACM", "-allelec-S"),
     ("ACM", "-elec-GV"), ("ACM", "-allelec-GV"),
-    ("header", "Polarizable SAPT-based ACT model" ),
-    ("ACM", "-all-PG")
+    ("ACM", "-elec-SV"), ("ACM", "-allelec-SV"),
+    ("header", "Polarizable SAPT-based ACT models" ),
+    ("ACM", "-elec-PG"), ("ACM", "-allelec-PG")
 ]
 
 for qt, suffix in charge_models:
@@ -125,6 +129,9 @@ for qt, suffix in charge_models:
         continue
     qtsuf = qt+suffix
     mytable[qtsuf] = run_one(qtsuf)
+    # Check whether we got any data
+    if not mytable[qtsuf]:
+        continue
     newcoul = f"COULOMB-{qtsuf}.xvg"
     os.system(f"mv COULOMB.xvg {newcoul}")
     couls += f" {newcoul}"
@@ -144,20 +151,19 @@ ntrain, ntest = get_train_test("ESP.log")
 with open("legacy.tex", "w") as outf:
     outf.write("\\begin{table}[ht]\n")
     outf.write("\\centering\n")
-    outf.write("\\caption{Root mean square deviation (RMSD) and mean signed error (MSE), both in kJ/mol of electrostatic energies (Elec) and the sum of electrostatics and induction (Elec+Induc) for popular charge models compared to SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set. The dataset consisted of 77 dimers (Table S6). \\#P indicates the number of parameters in the model (the number of individual charges in legacy models). Values corresponding to the training targets are indicated in {\\bf bold font}. Description of models is given in Table~\\ref{tab:models}.}\n")
-#     A non-polarizable model with virtual sites with a Gaussian distributed charge (on anions and potassium ion only) is labeled as GC+PGV. The polarizable point charge + Gaussian virtual site and shell (PC+GVS) model was trained on electrostatic and induction energies in one step.}\n")
-    
+    outf.write("\\caption{Root mean square deviation (RMSD) and mean signed error (MSE), both in kJ/mol of electrostatic energies (Elec) and the sum of electrostatics and induction (Elec+Induc) for popular charge models compared to SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set. The dataset consisted of 94 dimers (Table S6). \\#P indicates the number of parameters in the model (the number of individual charges in legacy models). Values corresponding to the training targets are indicated in {\\bf bold font}. Description of models is given in Table~\\ref{tab:models}.}\n")
     
     outf.write("\\label{legacy}\n")
-    outf.write("\\begin{tabular}{lcccccccc}\n")
+    outf.write("\\begin{tabular}{lccccccccccc}\n")
     outf.write("\\hline\n")
-    outf.write(" & Dataset & Training & \\#P & \\multicolumn{2}{c}{Elec}  & \\multicolumn{2}{c}{Elec+Induc}\\\\\n")
-    outf.write("Model & & target & & RMSD & MSE & RMSD & MSE \\\\\n")
+    outf.write(" & Training & \\#P & \\multicolumn{2}{c}{Elec}  & \\multicolumn{2}{c}{Elec+Induc}& \\multicolumn{2}{c}{Elec}  & \\multicolumn{2}{c}{Elec+Induc}\\\\\n")
+    outf.write("Model & target & & RMSD & MSE & RMSD & MSE & RMSD & MSE & RMSD & MSE \\\\\n")
+    outf.write("& & & \\multicolumn{4}{c}{Train}& \\multicolumn{4}{c}{Test}\\\\\n")
 
     for qt, suffix in charge_models:
         if qt == "header":
             outf.write("\\hline\n")
-            outf.write("\\multicolumn{8}{c}{\\bf %s}\\\\\n" % suffix)
+            outf.write("&&&\\multicolumn{9}{c}{\\bf %s}\\\\\n" % suffix)
             continue
         qtsuf = qt + suffix
         label = qt
@@ -179,6 +185,12 @@ with open("legacy.tex", "w") as outf:
             rmsd_str[mydata] = {}
             mse_str[mydata]  = {}
             for dataset in [ train, test ]:
+                if not qtsuf in mytable:
+                    print(f"No {qtsuf} in data")
+                    continue
+                if not dataset in mytable[qtsuf]:
+                    print(f"No {dataset} data in {qtsuf}")
+                    continue
                 ttable = mytable[qtsuf][dataset][mydata]
                 if rmsd in ttable and mse in ttable:
                     bold    = False
@@ -199,21 +211,19 @@ with open("legacy.tex", "w") as outf:
                 else:
                     print("Something wrong with table for %s" % qtsuf)
                     sys.exit(ttable)
-        N = mytable[qtsuf][train][mydata]["N"]
-        if debug:
-            print(rmsd_str)
-            print(mse_str)
-        for dataset in [ train, test ]:
+        if train in mytable[qtsuf]:
+            N = mytable[qtsuf][train][mydata]["N"]
+            if debug:
+                print(rmsd_str)
+                print(mse_str)
             target = ""
             if star:
                 target = star
             cite = ""
             if "ref" in acmparm[qtsuf] and dataset == train:
                 cite = f"~\\cite{{{acmparm[qtsuf]['ref']}}}"
-            thisnp = ""
-            if dataset == train:
-                thisnp = np
-            outf.write(f"{label}{cite} & {dataset} &{target} & {thisnp} & {rmsd_str['COUL'][dataset]} & {mse_str['COUL'][dataset]} & {rmsd_str['ALLELEC'][dataset]} & {mse_str['ALLELEC'][dataset]} \\\\\n")
+            thisnp = np
+            outf.write(f"{label}{cite} & {target} & {thisnp} & {rmsd_str['COUL'][train]} & {mse_str['COUL'][train]} & {rmsd_str['ALLELEC'][train]} & {mse_str['ALLELEC'][train]} & {rmsd_str['COUL'][test]} & {mse_str['COUL'][test]} & {rmsd_str['ALLELEC'][test]} & {mse_str['ALLELEC'][test]} \\\\\n")
 
     outf.write("\\hline\n")
     outf.write("\\end{tabular}\n")

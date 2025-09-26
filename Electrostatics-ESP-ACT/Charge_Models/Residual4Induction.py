@@ -6,17 +6,17 @@ import sys
 
 
 log_file_map = {
-    "ACM-PG.log": "PC+GVS",
+    "ACM-PG.log": "PC+GS",
     "SWM4.log": "CHARMM Drude"
 }
 
-molprops = "../AlexandriaFF/sapt-esp.xml"
+molprops = "../AlexandriaFF/sapt-esp5.xml"
 charges = "../AlexandriaFF/hf-aug-cc-pvtz.xml"
 selection_file = "../Selection/water+ions.dat"
 
 
 forcefield_map = {
-    "ACM-PG.log": "../AlexandriaFF/all-pg.xml",
+    "ACM-PG.log": "../AlexandriaFF/PC+GS-elec.xml",
     "SWM4.log": "../ForceFields/CharmmDrude.xml"
 }
 

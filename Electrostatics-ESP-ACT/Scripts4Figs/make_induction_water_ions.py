@@ -3,7 +3,7 @@
 import os, sys
 
 def run_one(ff:str, inducxvg:str, idlog:str):
-    os.system("alexandria train_ff -nooptimize -ff %s -sel ../Selection/water+ions.dat -mp ../AlexandriaFF/sapt-esp.xml -g %s -charges ../AlexandriaFF/hf-aug-cc-pvtz" % ( ff, idlog ) )
+    os.system("alexandria train_ff -nooptimize -ff %s -sel ../Selection/water+ions.dat -mp ../AlexandriaFF/sapt-esp5.xml -g %s -charges ../AlexandriaFF/hf-aug-cc-pvtz" % ( ff, idlog ) )
     os.system("grep -v Alexandria INDUCTION.xvg | grep -v Train > %s" % inducxvg)
     
 def rmsd(logfn:str)->float:
@@ -20,8 +20,8 @@ def rmsd(logfn:str)->float:
 if __name__ == "__main__":
     ffs = [ { "ff": "../ForceFields/CharmmDrude.xml",
               "abbrev": "CharmmDrude", "label": "CHARMM Drude" },
-              { "ff": "../AlexandriaFF/all-pg.xml",
-              "abbrev": "PC+GVS", "label": "PC+GVS" }
+            { "ff": "../AlexandriaFF/PC+GS-elec.xml",
+              "abbrev": "PC+GS", "label": "PC+GS" }
            ]
     for ff in range(len(ffs)):
         logfn = ffs[ff]["abbrev"] + ".log"
