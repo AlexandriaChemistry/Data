@@ -182,7 +182,7 @@ def ah_ions():
     add_calcs(mydata, models)
 
     file_path = "Ions-sapt2-JC-Walz2018a-ACT.tex"
-    caption= "\\textbf{Ion-pair electrostatic energies at distances close to their energy minimum.} Distance r (\\AA) between ions and electrostatic energies from the SAPT2+(CCD)$\\delta$MP2/aug-cc-pVTZ level of theory, for point charges (PC), for the Walz {\\em et al.} model with a Gaussian charge distribution~\\cite{Walz2018a}, and the ACT models PC+GV and PC+GS (see Methods). The RMSD and MSE were calculated with respect to the SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set electrostatic energy. Note that this level of theory is different from Tables~S1 and~S2 and the results cannot be compared directly. In addition, the results in Tables~S1 and~S2 are from fitting models to the ESP, whereas in this table training was done on SAPT data as indicated above."
+    caption= "Ion-pair electrostatic energies at distances close to their energy minimum. Distance r (\\AA) between ions and electrostatic energies from the SAPT2+(CCD)$\\delta$MP2/aug-cc-pVTZ level of theory, for point charges (PC), for the Walz {\\em et al.} model with a Gaussian charge distribution~\\cite{Walz2018a}, and the ACT models PC+GV and PC+GS (see Methods). The RMSD and MSE were calculated with respect to the SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set electrostatic energy. Note that this level of theory is different from Tables~S1 and~S2 and the results cannot be compared directly. In addition, the results in Tables~S1 and~S2 are from fitting models to the ESP, whereas in this table training was done on SAPT data as indicated above."
 
     label = "tab:ion_ah"
     wtable(file_path, models, mydata, caption, label)
@@ -191,9 +191,9 @@ def ah_ions():
 
 def ac_mt_gaff():
     mymp  = "../AlexandriaFF/hf-aug-cc-pvtz.xml"
-    epg   = "../AlexandriaFF/esp-paper-gaussian.xml"
-    models = { "RESP": { "ff": "../AlexandriaFF/coul-p.xml", "mp": epg, "qtype": "qRESP" },
-               "BCC": { "ff": "../AlexandriaFF/coul-p.xml", "mp": epg, "qtype": "qBCC" },
+    #epg   = "../AlexandriaFF/esp-paper-gaussian.xml"
+    models = { "RESP": { "ff": "../AlexandriaFF/coul-p.xml", "mp": mymp, "qtype": "qRESP" },
+               "BCC": { "ff": "../AlexandriaFF/coul-p.xml", "mp": mymp, "qtype": "qBCC" },
                "PC+GV": { "ff": "../AlexandriaFF/PC+GV-elec.xml", "mp": mymp },
                "PC+GS": { "ff": "../AlexandriaFF/PC+GS-elec.xml", "mp": mymp } }
     newfn = "data-sc-ions.json"
