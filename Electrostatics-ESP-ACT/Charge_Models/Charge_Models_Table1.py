@@ -45,7 +45,8 @@ def run_one(qtype:str) -> dict:
     elif qtype == "MBIS-S":
         mycmd = base_command + f" -charges ../AlexandriaFF/mp2-aug-cc-pvtz.xml "        
     else:
-        mycmd = base_command + f" -qtype q{qtype} -charges ../AlexandriaFF/esp-paper-gaussian.xml "    
+        mycmd = base_command + f" -qtype q{qtype} -charges ../AlexandriaFF/hf-aug-cc-pvtz.xml "    
+#        mycmd = base_command + f" -qtype q{qtype} -charges ../AlexandriaFF/esp-paper-gaussian.xml "    
     os.system(mycmd)
 
     if not os.path.exists(log_filename):
