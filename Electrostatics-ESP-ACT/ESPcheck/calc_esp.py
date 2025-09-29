@@ -7,7 +7,7 @@ def run_one(ff:str, qtype:str)->float:
     mylog = myff.replace(".xml", ".log")
     cmd = ("alexandria train_ff -ff ../AlexandriaFF/%s -mp ../../../ACTdata/MolProps/hf-aug-cc-pvtz.xml -nooptimize -sel ../Selection/monomer.dat -g %s -v 4" % ( myff, mylog ) )
     if qtype:
-        cmd += (" -qtype q%s -charges ../AlexandriaFF/esp-paper-gaussian.xml " % qtype)
+        cmd += (" -qtype q%s -charges ../AlexandriaFF/hf-aug-cc-pvtz.xml " % qtype)
     os.system(cmd)
     rmsd = None
     with open(mylog, "r") as inf:

@@ -39,14 +39,13 @@ def run_one(qtype:str) -> dict:
 
     print(f"Running command for {qtype}")
     if "ACM" in qtype:
-        mycmd = base_command + " -charges ../AlexandriaFF/mp2-aug-cc-pvtz.xml "
+        mycmd = base_command + " -charges ../AlexandriaFF/hf-aug-cc-pvtz.xml "
     elif qtype == "MBIS":
         mycmd = base_command + f" -qtype qRESP -charges ../AlexandriaFF/mbis_ccsd.xml "
     elif qtype == "MBIS-S":
-        mycmd = base_command + f" -charges ../AlexandriaFF/mp2-aug-cc-pvtz.xml "        
+        mycmd = base_command + f" -charges ../AlexandriaFF/hf-aug-cc-pvtz.xml "        
     else:
         mycmd = base_command + f" -qtype q{qtype} -charges ../AlexandriaFF/hf-aug-cc-pvtz.xml "    
-#        mycmd = base_command + f" -qtype q{qtype} -charges ../AlexandriaFF/esp-paper-gaussian.xml "    
     os.system(mycmd)
 
     if not os.path.exists(log_filename):

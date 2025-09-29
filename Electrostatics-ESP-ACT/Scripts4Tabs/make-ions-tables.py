@@ -191,7 +191,6 @@ def ah_ions():
 
 def ac_mt_gaff():
     mymp  = "../AlexandriaFF/hf-aug-cc-pvtz.xml"
-    #epg   = "../AlexandriaFF/esp-paper-gaussian.xml"
     models = { "RESP": { "ff": "../AlexandriaFF/coul-p.xml", "mp": mymp, "qtype": "qRESP" },
                "BCC": { "ff": "../AlexandriaFF/coul-p.xml", "mp": mymp, "qtype": "qBCC" },
                "PC+GV": { "ff": "../AlexandriaFF/PC+GV-elec.xml", "mp": mymp },
