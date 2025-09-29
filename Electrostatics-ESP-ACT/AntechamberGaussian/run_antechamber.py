@@ -1,21 +1,18 @@
 #!/usr/bin/env python3
 
 import os, glob
+from run_gaussian import get_mols
 
 if __name__ == "__main__":
-    mc   = "HF_SC/mols.csv"
-    mols = {}
-    with open(mc, "r") as inf:
-        for line in inf:
-            words = line.strip().split(",")
-            if len(words) == 2:
-                mols[words[0]] = int(words[1])
-
-    pp = "prepi"
+    mols = get_mols()
+    pp   = "prepi"
     os.makedirs(pp, exist_ok=True)
     os.chdir(pp)
     for mol in mols.keys():
+        xyz  = f"HF_SC/xyz/{mol}.xyz"
+        pdb  = f"HF_SC/{mol}/{mol}.pdb"
+        os.system(f"obabel -ixyz {xyz} -opdb -O {pdb}")
         for method in [ "resp", "bcc" ]:
-            os.system(f"antechamber -i ../HF_SC/{mol}/{mol}.log -fi gout -o {mol}_{method}.prepi -fo prepi -c {method} -nc {mols[mol]}")
+            os.system(f"antechamber -i ../HF_SC/{mol}/{mol}.log -fi gout -rn UNL -o {mol}_{method}.prepi -fo prepi -c {method} -nc {mols[mol]}")
     os.chdir("..")
 

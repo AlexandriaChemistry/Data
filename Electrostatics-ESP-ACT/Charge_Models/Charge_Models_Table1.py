@@ -25,8 +25,8 @@ acmparm = {
     "ACM-allelec-GV": { "ff": "PC+GV-allelec.xml", "nparm": 106, "label": "PC+GV", "target": "Elec+Induc" },
     "ACM-elec-SV":    { "ff": "PC+SV-elec.xml", "nparm": 106, "label": "PC+SV", "target": "Elec" },
     "ACM-allelec-SV": { "ff": "PC+SV-allelec.xml", "nparm": 106, "label": "PC+SV", "target": "Elec+Induc" },
-    "ACM-elec-PG":    { "ff": "PC+GS-elec.xml", "nparm": 125, "label": "PC+GS", "target": "Elec,Induc" }
-    "ACM-allelec-PG": { "ff": "PC+GS-allelec.xml", "nparm": 125, "label": "PC+GS", "target": "Elec+Induc" }
+    "ACM-elec-PG":    { "ff": "PC+GS-elec.xml", "nparm": 156, "label": "PC+GS", "target": "Elec,Induc" },
+    "ACM-allelec-PG": { "ff": "PC+GS-allelec.xml", "nparm": 156, "label": "PC+GS", "target": "Elec+Induc" }
 }
 
 def run_one(qtype:str) -> dict:
@@ -114,13 +114,13 @@ charge_models = [
 #    ("ACM", "-esp-G"), ("ACM", "-esp-GV"), ("ACM", "-esp-GV2"), 
 #    ("header", "Polarizable ACT model based on monomer ESP" ),
 #    ("ACM", "-esp-PG" ),
-    ("header", "Non-polarizable SAPT-based ACT models" ),
+    ("header", "Non-polarizable ACT models" ),
     ("ACM", "-elec-P"), ("ACM", "-allelec-P"),
     ("ACM", "-elec-G"), ("ACM", "-allelec-G"),
     ("ACM", "-elec-S"), ("ACM", "-allelec-S"),
     ("ACM", "-elec-GV"), ("ACM", "-allelec-GV"),
     ("ACM", "-elec-SV"), ("ACM", "-allelec-SV"),
-    ("header", "Polarizable SAPT-based ACT models" ),
+    ("header", "Polarizable ACT models" ),
     ("ACM", "-elec-PG"), ("ACM", "-allelec-PG")
 ]
 
@@ -163,7 +163,7 @@ with open("legacy.tex", "w") as outf:
     for qt, suffix in charge_models:
         if qt == "header":
             outf.write("\\hline\n")
-            outf.write("&&&\\multicolumn{9}{c}{\\bf %s}\\\\\n" % suffix)
+            outf.write("&&&\\multicolumn{8}{c}{\\bf %s}\\\\\n" % suffix)
             continue
         qtsuf = qt + suffix
         label = qt

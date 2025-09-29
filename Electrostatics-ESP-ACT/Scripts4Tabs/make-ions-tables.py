@@ -137,7 +137,7 @@ def water_ions():
     add_calcs(mydata, models)
 
     file_path = "ion-water-SAPT2-TIP4Pew-ACT4S.tex"
-    caption = "\\textbf{Water-ion electrostatic energies at distances close to their energy minimum.} Distance r (\\AA) between ions and water oxygen/hydrogen from Experiment (ref.~\\citenum{Heyrovska2006a}), and minimized water dimer (ref.~\\citenum{temelso2011benchmark}). Electrostatic energies are reported in kJ/mol from the SAPT2+(CCD)-$\\delta$MP2 method with an aug-cc-pVTZ basis set, TIP4P-Ew~\\cite{Horn2004a} with point charges representing ions, for the CHARMM drude model of water (SWM4-NDP~\\cite{Lamoureux2006a}) with ions due to Yu {\\em et al.}~\\cite{Yu2010a}, as well as point core+Gaussian vsite (PC+GV), and point charge + Gaussian vsite and shell (PC+GS) derived here using ACT."
+    caption = "\\textbf{Water-ion electrostatic energies at distances close to their energy minimum.} Distance r (\\AA) between ions and water oxygen/hydrogen from Experiment (ref.~\\citenum{Heyrovska2006a}), and minimized water dimer (ref.~\\citenum{temelso2011benchmark}). Electrostatic energies are reported in kJ/mol from the SAPT2+(CCD)-$\\delta$MP2 method with an aug-cc-pVTZ basis set, TIP4P-Ew~\\cite{Horn2004a} with point charges representing ions, for the CHARMM drude model of water (SWM4-NDP~\\cite{Lamoureux2006a}) with ions due to Yu {\\em et al.}~\\cite{Yu2010a}, as well as point core+Gaussian vsite (PC+GV), and point charge + Gaussian shell (PC+GS) derived here using ACT."
     label = "tab:ion_water2"
     wtable(file_path, models, mydata, caption, label)
     return file_path
@@ -145,7 +145,7 @@ def water_ions():
 def water_ions_induction():
     mymp  = "../AlexandriaFF/hf-aug-cc-pvtz.xml"
     models = { "CHARMM": { "ff": "../ForceFields/CharmmDrude.xml", "mp": mymp },
-               "PC+GS": { "ff": "../AlexandriaFF/PS+GS-elec.xml", "mp": mymp } }
+               "PC+GS": { "ff": "../AlexandriaFF/PC+GS-elec.xml", "mp": mymp } }
     newfn = "data-water-ions-induction.json"
     if not os.path.exists(newfn):
         sys.exit("Cannot find %s" % newfn)
@@ -162,7 +162,7 @@ def water_ions_induction():
                 mydata[i][m] = None
 
     file_path = "ion-water-induction.tex"
-    caption = "\\textbf{Water-ion induction energies at distances close to their energy minimum.} Distance r (\\AA) between ions and water oxygen/hydrogen from Experiment (ref.~\\citenum{Heyrovska2006a}), and minimized water dimer (ref.~\\citenum{temelso2011benchmark}). Induction energies are reported in kJ/mol from the SAPT2+(CCD)-$\\delta$MP2 method with an aug-cc-pVTZ basis set, for the CHARMM drude model of water (SWM4-NDP~\\cite{Lamoureux2006a}) with ions due to Yu {\\em et al.}~\\cite{Yu2010a}, as well the point charge + Gaussian vsite and shell (PC+GS) derived here using ACT."
+    caption = "\\textbf{Water-ion induction energies at distances close to their energy minimum.} Distance r (\\AA) between ions and water oxygen/hydrogen from Experiment (ref.~\\citenum{Heyrovska2006a}), and minimized water dimer (ref.~\\citenum{temelso2011benchmark}). Induction energies are reported in kJ/mol from the SAPT2+(CCD)-$\\delta$MP2 method with an aug-cc-pVTZ basis set, for the CHARMM drude model of water (SWM4-NDP~\\cite{Lamoureux2006a}) with ions due to Yu {\\em et al.}~\\cite{Yu2010a}, as well the point charge + Gaussian shell (PC+GS) derived here using ACT."
     label = "tab:ion_inducs"
     wtable(file_path, models, mydata, caption, label)
     return file_path
@@ -182,7 +182,7 @@ def ah_ions():
     add_calcs(mydata, models)
 
     file_path = "Ions-sapt2-JC-Walz2018a-ACT.tex"
-    caption= "\\textbf{Ion-pair electrostatic energies at distances close to their energy minimum.} Distance r (\\AA) between ions and electrostatic energies from SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set, for point charges (PC), for the Walz {\\em et al.} model with a Gaussian charge distribution~\\cite{Walz2018a}, and the ACT models GC+PVG and PC+GS consisting of a point charge and virtual site with a Gaussian charge (Na$^+$, K$^+$ and halide ions only) and a Drude particle with a Gaussian charge (PC+GS only). The RMSD and MSE were calculated with respect to the SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set electrostatic energy. Note that the level of theory is different from Tables~\\ref{tab:sapt100} and~\\ref{tab:sapt10} and the results cannot be compared directly. In addition, the results in Tables~\\ref{tab:sapt100} and~\\ref{tab:sapt10} are from fitting models to the ESP, whereas in this table training was done on SAPT data as indicated above."
+    caption= "\\textbf{Ion-pair electrostatic energies at distances close to their energy minimum.} Distance r (\\AA) between ions and electrostatic energies from the SAPT2+(CCD)$\\delta$MP2/aug-cc-pVTZ level of theory, for point charges (PC), for the Walz {\\em et al.} model with a Gaussian charge distribution~\\cite{Walz2018a}, and the ACT models PC+GV and PC+GS (see Methods). The RMSD and MSE were calculated with respect to the SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set electrostatic energy. Note that this level of theory is different from Tables~S1 and~S2 and the results cannot be compared directly. In addition, the results in Tables~S1 and~S2 are from fitting models to the ESP, whereas in this table training was done on SAPT data as indicated above."
 
     label = "tab:ion_ah"
     wtable(file_path, models, mydata, caption, label)
@@ -195,7 +195,7 @@ def ac_mt_gaff():
     models = { "RESP": { "ff": "../AlexandriaFF/coul-p.xml", "mp": epg, "qtype": "qRESP" },
                "BCC": { "ff": "../AlexandriaFF/coul-p.xml", "mp": epg, "qtype": "qBCC" },
                "PC+GV": { "ff": "../AlexandriaFF/PC+GV-elec.xml", "mp": mymp },
-               "PC+GS": { "ff": "../AlexandriaFF/PS+GS-elec.xml", "mp": mymp } }
+               "PC+GS": { "ff": "../AlexandriaFF/PC+GS-elec.xml", "mp": mymp } }
     newfn = "data-sc-ions.json"
     if not os.path.exists(newfn):
         sys.exit("Cannot find %s" % newfn)
