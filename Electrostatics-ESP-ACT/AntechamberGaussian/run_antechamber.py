@@ -13,6 +13,6 @@ if __name__ == "__main__":
         pdb  = f"HF_SC/{mol}/{mol}.pdb"
         os.system(f"obabel -ixyz {xyz} -opdb -O {pdb}")
         for method in [ "resp", "bcc" ]:
-            os.system(f"antechamber -i ../HF_SC/{mol}/{mol}.log -fi gout -rn UNL -o {mol}_{method}.prepi -fo prepi -c {method} -nc {mols[mol]}")
+            os.system(f"antechamber -i ../HF_SC/{mol}/{mol}.log -fi gout -rn UNL.0 -o {mol}_{method}.prepi -fo prepi -c {method} -nc {mols[mol]} -j 0 -pf yes")
     os.chdir("..")
 
