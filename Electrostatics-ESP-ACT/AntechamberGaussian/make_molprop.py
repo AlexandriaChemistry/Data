@@ -3,6 +3,8 @@
 import os
 from run_gaussian import get_mols
 
+debug = False
+
 def extract_columns(mol:str, input_file, skip_lines=7)->list:
     renum = { 
         "ammonium": { "4": 2, "5": 1, "6": 3, "7": 4, "8": 5 },
@@ -17,14 +19,16 @@ def extract_columns(mol:str, input_file, skip_lines=7)->list:
         "guanidine": { "4": 2, "5": 7, "6": 8, "7": 1, "8": 4, "9": 9, "10": 3,
                        "11": 5, "12": 6 },
         "guanidinium": { "4": 2, "5": 7, "6": 8, "7": 1, "8": 3, "9": 5, "10": 6,
-                         "11": 5, "12": 9, "13": 10 },
+                         "11": 4, "12": 9, "13": 10 },
         "imidazole": { "4": 1, "5": 2, "6": 3, "7": 4, "8": 5, "9": 6, "10": 7,
                          "11": 8, "12": 9 },
         "imidazolium": { "4": 1, "5": 6, "6": 2, "7": 7, "8": 3, "9": 8, "10": 4,
                          "11": 9, "12": 5, "13": 10 },
+        "1-methylimidazolium": { "4": 3, "5": 8, "6": 2, "7": 7, "8": 1, "9": 13, "10": 5,
+                                 "11": 9, "12": 4, "13": 6, "14": 10, "15": 11, "16": 12 },
         "methylammonium": { "4": 1, "5": 3, "6": 4, "7": 5, "8": 2, "9": 6, "10": 7,
                             "11": 8 },
-        "propanoate": { "4": 1, "5": 5, "6": 6, "7": 3, "8": 6, "9": 7, "10": 4,
+        "propanoate": { "4": 1, "5": 5, "6": 2, "7": 3, "8": 6, "9": 7, "10": 4,
                         "11": 8, "12": 9, "13": 10 },
         "water": { "4": 1, "5": 2, "6": 3 }
     }
@@ -71,8 +75,11 @@ if __name__ == "__main__":
                         if line.find("qMulliken") >= 0:
                             for method in [ "bcc", "resp" ]:
                                 if method in atomq and atomq[method]:
-                                    m = method.upper()
-                                    outf.write(f"      <q{m}>{atomq[method][iatom]['q']}</q{m}>\n")
+                                    m   = method.upper()
+                                    if debug:
+                                        print(f"mol {mol} iatom {iatom} atomq[method] {atomq[method]}")
+                                    myq = atomq[method][iatom]["q"]
+                                    outf.write(f"      <q{m}>{myq}</q{m}>\n")
                             iatom += 1
                 os.unlink(txml)
             
