@@ -17,7 +17,7 @@ def write_job(mol:str, q:int)->str:
 #P HF/aug-cc-pvtz Opt=(Redundant, calcall, verytight) symm=(loose,follow) Pop=(MK,Hirshfeld,ReadRadii) iop(6/33=2) iop(6/42=6) Polar Freq
 maxdisk=128GB
             """)
-            outf.write("%s\n\n" %mol)
+            outf.write("\n%s\n\n" %mol)
             outf.write("%d 1\n" % q)
             for n in range(2, len(lines)):
                 outf.write(lines[n])
@@ -26,22 +26,25 @@ maxdisk=128GB
         with open(job, "w") as outf:
             outf.write("""#!/bin/sh
 
-#SBATCH -A naiss2023-5-531
+#SBATCH -A naiss2024-3-13
 #SBATCH -n 1
 #SBATCH -c 8
 #SBATCH -t 72:00:00
             """)
-            outf.write("g16 %s\n" %s com)
+            outf.write("g16 %s\n" % com)
         return job
 
 def run_it():
-    mols = [ "acetate", "bromide", "ethylammonium", "formate", "methylammonium", "sodium-ion", "ammonium", "chloride", "fluoride", "lithium-ion",  "potassium-ion",   "water" ]
-
-    mols = [ "propanoate", "butanoate", "guanidinium", "imidazolium", "1-methylimidazolium" ]
-    for mol in mols:
+    mols = {}
+    with open("mols.csv", "r") as inf:
+        for line in inf:
+            words = line.strip().split(",")
+            if len(words) == 2:
+                mols[words[0]] = int(words[1])
+    for mol in mols.keys():
         os.makedirs(mol, exist_ok=True)
         os.chdir(mol)
-        job = write_job(mol)
+        job = write_job(mol, mols[mol])
         if job:
             os.system("sbatch "+job)
         os.chdir("..")
