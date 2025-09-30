@@ -33,7 +33,16 @@ def extract_columns(mol:str, input_file, skip_lines=7)->list:
         "water": { "4": 1, "5": 2, "6": 3 }
     }
     if not mol in renum:
-        return None
+        monatom = { "bromide": { "name": "Br", "q": "-1", "index": 1 },
+                    "chloride": { "name": "Cl", "q": "-1", "index": 1 },
+                    "fluoride": { "name": "F", "q": "-1", "index": 1 },
+                    "lithium-ion": { "name": "Li", "q": "1", "index": 1 },
+                    "sodium-ion": { "name": "Na", "q": "1", "index": 1 },
+                    "potassium-ion": { "name": "K", "q": "1", "index": 1 } }
+        if mol in monatom:
+            return monatom[mol]
+        else:
+            return None
     if not os.path.exists(input_file):
         return None
     # Create table with right length
@@ -57,30 +66,31 @@ def extract_columns(mol:str, input_file, skip_lines=7)->list:
 
 if __name__ == "__main__":
     mols = get_mols()
-    for mol in mols.keys():
-        mdir = f"HF_SC/{mol}"
-        if os.path.isdir(mdir):
-            txml   = f"{mdir}/temp.xml"
-            molxml = f"{mdir}/{mol}.xml"
-            os.system(f"gauss2molprop -n {mol} -i {mdir}/{mol}.log -o {txml} -basis aug-cc-pvtz")
+    for qm in [ "HF" ]:
+        for mol in mols.keys():
+            mdir = f"{qm}_SC/{mol}"
+            if os.path.isdir(mdir):
+                txml   = f"{mdir}/temp.xml"
+                molxml = f"{mdir}/{mol}.xml"
+                os.system(f"gauss2molprop -n {mol} -i {mdir}/{mol}.log -o {txml} -basis aug-cc-pvtz")
             
-            atomq = {}
-            for method in [ "bcc", "resp" ]:
-                atomq[method] = extract_columns(mol, f"prepi/{mol}_{method}.prepi")
-            with open(molxml, "w") as outf:
-                with open(txml) as fd:
-                    iatom = 0
-                    for line in fd:
-                        outf.write(line)
-                        if line.find("qMulliken") >= 0:
-                            for method in [ "bcc", "resp" ]:
-                                if method in atomq and atomq[method]:
-                                    m   = method.upper()
-                                    if debug:
-                                        print(f"mol {mol} iatom {iatom} atomq[method] {atomq[method]}")
-                                    myq = atomq[method][iatom]["q"]
-                                    outf.write(f"      <q{m}>{myq}</q{m}>\n")
-                            iatom += 1
-                os.unlink(txml)
+                atomq = {}
+                for method in [ "bcc", "resp" ]:
+                    atomq[method] = extract_columns(mol, f"prepi/{mol}_{qm}_{method}.prepi")
+                with open(molxml, "w") as outf:
+                    with open(txml) as fd:
+                        iatom = 0
+                        for line in fd:
+                            outf.write(line)
+                            if line.find("qMulliken") >= 0:
+                                for method in [ "bcc", "resp" ]:
+                                    if method in atomq and atomq[method]:
+                                        m   = method.upper()
+                                        if debug:
+                                            print(f"mol {mol} iatom {iatom} atomq[method] {atomq[method]}")
+                                        myq = atomq[method][iatom]["q"]
+                                        outf.write(f"      <q{m}>{myq}</q{m}>\n")
+                                iatom += 1
+                    os.unlink(txml)
             
-    os.system("alexandria edit_mp -mp HF_SC/*/*.xml -o hf-aug-cc-pvtz.xml")
+        os.system(f"alexandria edit_mp -mp {qm}_SC/*/*.xml -o {method}-aug-cc-pvtz.xml")
