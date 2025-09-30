@@ -7,11 +7,11 @@ def get_mols()->dict:
     with open("mols.csv", "r") as inf:
         for line in inf:
             words = line.strip().split(",")
-            if len(words) == 2:
-                mols[words[0]] = int(words[1])
+            if len(words) == 3:
+                mols[words[0]] = { "q": int(words[1]), "basis": words[2] }
     return mols
 
-def write_job(mol:str, q:int, method:str, ncore:int)->str:
+def write_job(mol:str, q:int, method:str, basis:str, ncore:int)->str:
     xyz  = f"../../xyz/{mol}.xyz"
     if not os.path.exists(xyz):
         print("No coordinate file %s" % xyz)
@@ -58,7 +58,7 @@ def run_it():
             os.chdir(mol)
             # Do not redo a calc if it is already there
             if not os.path.exists(f"{mol}.log"):
-                job = write_job(mol, mols[mol], method, 16)
+                job = write_job(mol, mols[mol]["q"], method, mols[mol]["basis"], 16)
                 if job:
                     os.system("sbatch "+job)
             os.chdir("..")
