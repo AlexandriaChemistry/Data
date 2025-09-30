@@ -3,7 +3,7 @@
 import os
 from run_gaussian import get_mols
 
-debug = True
+debug = False
 
 def extract_columns(mol:str, input_file, skip_lines=7)->list:
     renum = { 
@@ -63,6 +63,11 @@ def extract_columns(mol:str, input_file, skip_lines=7)->list:
     return atomq
 
 if __name__ == "__main__":
+    repl = { "InChI=1S/H4N/h1H4": "InChI=1S/H3N/h1H3/p+1",
+             "InChI=1S/C2H8N/c1-2-3/h2H2,1,3H3": "InChI=1S/C2H7N/c1-2-3/h2-3H2,1H3/p+1",
+             "InChI=1S/CH6N/c1-2/h1-2H3": "InChI=1S/CH5N/c1-2/h2H2,1H3/p+1",
+             "InChI=1S/CH6N3/c2-1(3)4/h2-4H2": "InChI=1S/CH6N3/c2-1(3)4/h2-4H2/q+1",
+             "InChI=1S/C4H8O2/c1-2-3-4(5)6/h2-3H2,1H3,(H,5,6)/p-1": "InChI=1S/C4H9O2/c1-2-3-4(5)6/h2H2,1,3H3,(H,5,6)/q-1" }
     mols = get_mols()
     for qm in [ "HF", "MP2" ]:
         for mol in mols.keys():
@@ -81,7 +86,10 @@ if __name__ == "__main__":
                     with open(txml) as fd:
                         iatom = 0
                         for line in fd:
-                            outf.write(line)
+                            myline = line
+                            for r in repl:
+                                myline = myline.replace(r, repl[r])
+                            outf.write(myline)
                             if line.find("qMulliken") >= 0:
                                 for method in [ "bcc", "resp" ]:
                                     if method in atomq and atomq[method]:
