@@ -3,6 +3,7 @@
 import json, math, os, sys
 
 debug = True
+mymp  = "../AlexandriaFF/MP2-aug-cc-pvtz.xml"
 
 def logToCoulomb(logfn:str)->float:
     with open(logfn, "r") as inf:
@@ -123,7 +124,6 @@ def wtable(file_path:str, models:dict, mydata:list, caption:str, label:str):
 
 
 def water_ions():
-    mymp  = "../AlexandriaFF/hf-aug-cc-pvtz.xml"
     models = { "TIP4P-Ew": { "ff": "../ForceFields/TIP4PEW-JC.xml", "mp": mymp },
                "CHARMM": { "ff": "../ForceFields/CharmmDrude.xml", "mp": mymp },
                "PC+GV": { "ff": "../AlexandriaFF/PC+GV-elec.xml", "mp": mymp },
@@ -143,7 +143,7 @@ def water_ions():
     return file_path
     
 def water_ions_induction():
-    mymp  = "../AlexandriaFF/hf-aug-cc-pvtz.xml"
+    mymp  = "../AlexandriaFF/MP2-aug-cc-pvtz.xml"
     models = { "CHARMM": { "ff": "../ForceFields/CharmmDrude.xml", "mp": mymp },
                "PC+GS": { "ff": "../AlexandriaFF/PC+GS-elec.xml", "mp": mymp } }
     newfn = "data-water-ions-induction.json"
@@ -168,7 +168,6 @@ def water_ions_induction():
     return file_path
     
 def ah_ions():
-    mymp  = "../AlexandriaFF/hf-aug-cc-pvtz.xml"
     models = { "PC": { "ff": "../ForceFields/TIP4PEW-JC.xml", "mp": mymp },
                "Walz":   { "ff": "../ForceFields/Walz2018a.xml", "mp": mymp },
                "PC+GV": { "ff": "../AlexandriaFF/PC+GV-elec.xml", "mp": mymp },
@@ -190,7 +189,6 @@ def ah_ions():
     
 
 def ac_mt_gaff():
-    mymp  = "../AlexandriaFF/hf-aug-cc-pvtz.xml"
     models = { "RESP": { "ff": "../AlexandriaFF/coul-p.xml", "mp": mymp, "qtype": "qRESP" },
                "BCC": { "ff": "../AlexandriaFF/coul-p.xml", "mp": mymp, "qtype": "qBCC" },
                "PC+GV": { "ff": "../AlexandriaFF/PC+GV-elec.xml", "mp": mymp },

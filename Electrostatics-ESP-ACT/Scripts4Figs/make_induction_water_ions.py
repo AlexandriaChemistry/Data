@@ -3,7 +3,7 @@
 import os, sys
 
 def run_one(ff:str, inducxvg:str, idlog:str):
-    os.system("alexandria train_ff -nooptimize -ff %s -sel ../Selection/water+ions.dat -mp ../AlexandriaFF/sapt-esp5.xml -g %s -charges ../AlexandriaFF/hf-aug-cc-pvtz" % ( ff, idlog ) )
+    os.system("alexandria train_ff -nooptimize -ff %s -sel ../Selection/water+ions.dat -mp ../AlexandriaFF/sapt-esp5.xml -g %s -charges ../AlexandriaFF/MP2-aug-cc-pvtz" % ( ff, idlog ) )
     os.system("grep -v Alexandria INDUCTION.xvg | grep -v Train > %s" % inducxvg)
     
 def rmsd(logfn:str)->float:

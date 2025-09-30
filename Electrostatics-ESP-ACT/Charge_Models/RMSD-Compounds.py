@@ -38,14 +38,14 @@ def run_legacy(filenm: str) -> dict:
 
 if __name__ == "__main__":
     alldata = {}
-    mydirs = { "PC": "ACM-elec-P.log",
-               "GC": "ACM-elec-G.log",
-               "PC+GV": "ACM-elec-GV.log",
-               "PC+GS": "ACM-all-PG.log",
-               "Mulliken": "Mulliken.log",
-               "Hirshfeld": "Hirshfeld.log",
-               "ESP": "ESP.log",
-               "CM5": "CM5.log" }
+    mydirs = { "PC": "ACM-elec-P_MP2.log",
+               "GC": "ACM-elec-G_MP2.log",
+               "PC+GV": "ACM-elec-GV_MP2.log",
+               "PC+GS": "ACM-elec-PG_MP2.log",
+               "Mulliken": "Mulliken_MP2.log",
+               "Hirshfeld": "Hirshfeld_MP2.log",
+               "ESP": "ESP_MP2.log",
+               "CM5": "CM5_MP2.log" }
     for mydir in mydirs.keys():
         alldata[mydir] = run_one(mydirs[mydir])
     
