@@ -40,8 +40,8 @@ if __name__ == "__main__":
     alldata = {}
     mydirs = { "PC": "ACM-elec-P.log",
                "GC": "ACM-elec-G.log",
-               "GC+PGV": "ACM-elec-GV.log",
-               "PC+GVS": "ACM-all-PG.log",
+               "PC+GV": "ACM-elec-GV.log",
+               "PC+GS": "ACM-all-PG.log",
                "Mulliken": "Mulliken.log",
                "Hirshfeld": "Hirshfeld.log",
                "ESP": "ESP.log",
@@ -66,7 +66,10 @@ if __name__ == "__main__":
                 ddd = ("{\\bf %s}" % ddd)
             outf.write("%s & %s " % (ddd, alldata["PC"][dimer]["N"]))
             for md in alldata.keys():
-                outf.write(" & %s" % alldata[md][dimer]["RMSD"])
+                if dimer in alldata[md]:
+                    outf.write(" & %s" % alldata[md][dimer]["RMSD"])
+                else:
+                    outf.write(" & ")
             outf.write("\\\\\n")
         outf.write("\\hline\n")
         outf.write("\\end{longtable}\n")

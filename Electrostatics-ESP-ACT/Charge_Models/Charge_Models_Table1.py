@@ -6,15 +6,17 @@ debug   = False
 train   = "Train"
 test    = "Test"
 
+# Number of independent charges disregarding symmetry
+nq = 45
 acmparm = {
-    "Mulliken":  { "ref": "Mulliken1955a", "nparm": 27, "ff": "coul-p.xml" },
-    "Hirshfeld": { "ref": "Hirshfeld1977a", "nparm": 27, "ff": "coul-p.xml" },
-    "ESP":       { "ref": "Besler1990a", "nparm": 27, "ff": "coul-p.xml" },
-    "CM5":       { "ref": "Marenich2012a",  "nparm": 27, "ff": "coul-p.xml" },
-    "BCC":       { "ref": "Jakalian2000a", "nparm": 27, "ff": "coul-p.xml" },
-    "RESP":      { "ref": "Bayly1993a", "nparm": 27, "ff": "coul-p.xml" },
-    "MBIS":      { "ref": "Verstraelen2016a", "nparm": 27, "ff": "coul-p.xml" },
-    "MBIS-S":      { "ref": "Verstraelen2016a", "nparm": 27, "ff": "P+S.xml" },
+    "Mulliken":  { "ref": "Mulliken1955a", "nparm": nq, "ff": "coul-p.xml" },
+    "Hirshfeld": { "ref": "Hirshfeld1977a", "nparm": nq, "ff": "coul-p.xml" },
+    "ESP":       { "ref": "Besler1990a", "nparm": nq, "ff": "coul-p.xml" },
+    "CM5":       { "ref": "Marenich2012a",  "nparm": nq, "ff": "coul-p.xml" },
+    "BCC":       { "ref": "Jakalian2000a", "nparm": nq, "ff": "coul-p.xml" },
+    "RESP":      { "ref": "Bayly1993a", "nparm": nq, "ff": "coul-p.xml" },
+    "MBIS":      { "ref": "Verstraelen2016a", "nparm": nq, "ff": "coul-p.xml" },
+    "MBIS-S":      { "ref": "Verstraelen2016a", "nparm": nq*2, "ff": "P+S.xml" },
     "ACM-elec-P":     { "ff": "PC-elec.xml", "nparm": 66, "label": "PC", "target": "Elec" },
     "ACM-allelec-P":  { "ff": "PC-allelec.xml", "nparm": 66, "label": "PC", "target": "Elec+Induc" },
     "ACM-elec-G":     { "ff": "GC-elec.xml", "nparm": 85, "label": "GC", "target": "Elec" },
