@@ -2,7 +2,7 @@
 %nprocshared=16
 %mem=32Gb
 %chk=potassium-ion.chk
-#P HF/gen Opt=tight  Pop=(MK,Hirshfeld,ReadRadii) iop(6/33=2) iop(6/42=6)
+#P MP2/gen Opt=tight  density=MP2 Pop=(MK,Hirshfeld,ReadRadii) iop(6/33=2) iop(6/42=6)
 maxdisk=128GB
             
 potassium-ion

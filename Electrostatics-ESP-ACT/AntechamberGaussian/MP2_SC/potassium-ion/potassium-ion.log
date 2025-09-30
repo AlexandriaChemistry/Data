@@ -2,8 +2,8 @@
  Input=potassium-ion.wrap
  Output=potassium-ion.log
  Initial command:
- /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l1.exe "/scratch/local/Gau-1656593.inp" -scrdir="/scratch/local/"
- Entering Link 1 = /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l1.exe PID=   1656594.
+ /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l1.exe "/scratch/local/Gau-2823825.inp" -scrdir="/scratch/local/"
+ Entering Link 1 = /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l1.exe PID=   2823826.
   
  Copyright (c) 1988-2019, Gaussian, Inc.  All Rights Reserved.
   
@@ -84,16 +84,19 @@
  %mem=32Gb
  %chk=potassium-ion.chk
  ----------------------------------------------------------------------
- #P HF/gen Opt=tight Pop=(MK,Hirshfeld,ReadRadii) iop(6/33=2) iop(6/42=
- 6) maxdisk=128GB
+ #P MP2/gen Opt=tight density=MP2 Pop=(MK,Hirshfeld,ReadRadii) iop(6/33
+ =2) iop(6/42=6) maxdisk=128GB
  ----------------------------------------------------------------------
  1/7=10,18=20,19=15,38=1/1,3;
  2/9=110,12=2,17=6,18=5,40=1/2;
  3/5=7,11=9,25=1,30=1,71=1/1,2,3;
  4//1;
  5/5=2,38=5/2;
- 6/7=2,8=2,9=2,10=2,15=8,20=101,28=1,33=2,42=6,79=1/1,2;
- 7//1,2,3,16;
+ 8/6=4,10=1/1;
+ 9/15=2,16=-3/6;
+ 10/5=1/2;
+ 6/7=2,8=2,9=2,10=2,15=8,20=101,22=2,33=2,42=6,79=1/1,2;
+ 7/12=2/1,2,3,16;
  1/7=10,18=20,19=15/3(2);
  2/9=110/2;
  99//99;
@@ -101,12 +104,15 @@
  3/5=7,6=1,11=9,25=1,30=1,71=1,82=7/1,2,3;
  4/5=5,16=3,69=1/1;
  5/5=2,38=5/2;
- 7//1,2,3,16;
- 1/7=10,18=20,19=15/3(-5);
+ 8/6=4,10=1/1;
+ 9/15=2,16=-3/6;
+ 10/5=1/2;
+ 7/12=2/1,2,3,16;
+ 1/7=10,18=20,19=15/3(-8);
  2/9=110/2;
- 6/7=2,8=2,9=2,10=2,15=8,19=2,20=101,28=1,33=2,42=6,79=1/1,2;
- 99/9=1/99;
- Leave Link    1 at Tue Sep 30 19:49:52 2025, MaxMem=  4294967296 cpu:               0.6 elap:               0.0
+ 6/7=2,8=2,9=2,10=2,15=8,20=101,22=2,33=2,42=6,79=1/1,2;
+ 99/9=10/99;
+ Leave Link    1 at Tue Sep 30 19:49:52 2025, MaxMem=  4294967296 cpu:               0.7 elap:               0.1
  (Enter /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l101.exe)
  -------------
  potassium-ion
@@ -131,7 +137,7 @@
  NQMom=    5.8500000
  NMagM=    0.3914660
  AtZNuc=  19.0000000
- Leave Link  101 at Tue Sep 30 19:49:52 2025, MaxMem=  4294967296 cpu:               5.2 elap:               0.4
+ Leave Link  101 at Tue Sep 30 19:49:52 2025, MaxMem=  4294967296 cpu:               5.2 elap:               0.3
  (Enter /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l103.exe)
 
  GradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGrad
@@ -142,7 +148,7 @@
  Number of steps in this run=     20 maximum allowed number of steps=    100.
  GradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGrad
 
- Leave Link  103 at Tue Sep 30 19:49:53 2025, MaxMem=  4294967296 cpu:               0.4 elap:               0.1
+ Leave Link  103 at Tue Sep 30 19:49:53 2025, MaxMem=  4294967296 cpu:               0.3 elap:               0.0
  (Enter /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l202.exe)
                           Input orientation:                          
  ---------------------------------------------------------------------
@@ -164,7 +170,7 @@
  ---------------------------------------------------------------------
       1         19           0        0.000000    0.000000    0.000000
  ---------------------------------------------------------------------
- Leave Link  202 at Tue Sep 30 19:49:53 2025, MaxMem=  4294967296 cpu:               1.2 elap:               0.1
+ Leave Link  202 at Tue Sep 30 19:49:53 2025, MaxMem=  4294967296 cpu:               0.4 elap:               0.0
  (Enter /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l301.exe)
  General basis read from cards:  (5D, 7F)
  Centers:       1
@@ -240,7 +246,7 @@
  Integral buffers will be    131072 words long.
  Raffenetti 1 integral format.
  Two-electron integral symmetry is turned on.
- Leave Link  301 at Tue Sep 30 19:49:53 2025, MaxMem=  4294967296 cpu:               1.3 elap:               0.2
+ Leave Link  301 at Tue Sep 30 19:49:53 2025, MaxMem=  4294967296 cpu:               1.2 elap:               0.2
  (Enter /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l302.exe)
  NPDir=0 NMtPBC=     1 NCelOv=     1 NCel=       1 NClECP=     1 NCelD=      1
          NCelK=      1 NCelE2=     1 NClLst=     1 CellRange=     0.0.
@@ -248,10 +254,10 @@
  One-electron integral symmetry used in STVInt
  NBasis=    33 RedAO= T EigKep=  5.62D-02  NBF=    12     3     3     3     0     4     4     4
  NBsUse=    33 1.00D-06 EigRej= -1.00D+00 NBFU=    12     3     3     3     0     4     4     4
- Leave Link  302 at Tue Sep 30 19:49:54 2025, MaxMem=  4294967296 cpu:               1.8 elap:               0.1
+ Leave Link  302 at Tue Sep 30 19:49:54 2025, MaxMem=  4294967296 cpu:               1.7 elap:               0.1
  (Enter /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l303.exe)
  DipDrv:  MaxL=1.
- Leave Link  303 at Tue Sep 30 19:49:54 2025, MaxMem=  4294967296 cpu:               0.8 elap:               0.1
+ Leave Link  303 at Tue Sep 30 19:49:54 2025, MaxMem=  4294967296 cpu:               0.6 elap:               0.1
  (Enter /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l401.exe)
  ExpMin= 1.58D-02 ExpMax= 1.54D+05 ExpMxC= 5.25D+03 IAcc=3 IRadAn=         5 AccDes= 0.00D+00
  Harris functional with IExCor=  205 and IRadAn=       5 diagonalized for initial guess.
@@ -262,7 +268,7 @@
          wScrn=  0.000000 ICntrl=       500 IOpCl=  0 I1Cent=   200000004 NGrid=           0
          NMat0=    1 NMatS0=      1 NMatT0=    0 NMatD0=    1 NMtDS0=    0 NMtDT0=    0
  Petite list used in FoFCou.
- Harris En= -598.376020831402    
+ Harris En= -598.376020831401    
  JPrj=0 DoOrth=F DoCkMO=F.
  Initial guess orbital symmetries:
        Occupied  (A1G) (A1G) (T1U) (T1U) (T1U) (A1G) (T1U) (T1U)
@@ -271,7 +277,7 @@
                  (EG) (EG) (T2G) (T2G) (T2G) (EG) (EG) (T1U) (T1U)
                  (T1U) (A1G) (T2G) (T2G) (T2G) (EG) (EG)
  The electronic state of the initial guess is 1-A1G.
- Leave Link  401 at Tue Sep 30 19:49:55 2025, MaxMem=  4294967296 cpu:               2.3 elap:               0.2
+ Leave Link  401 at Tue Sep 30 19:49:55 2025, MaxMem=  4294967296 cpu:               2.2 elap:               0.2
  (Enter /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l502.exe)
  Keep R1 ints in memory in symmetry-blocked form, NReq=3465362.
  FoFCou: FMM=F IPFlag=           0 FMFlag=           0 FMFlg1=           0
@@ -313,9 +319,9 @@
  RMSDP=8.98D-04 MaxDP=1.03D-02 DE=-1.57D-02 OVMax= 5.12D-04
 
  Cycle   3  Pass 1  IDiag  1:
- E= -599.006025039735     Delta-E=       -0.000340127999 Rises=F Damp=F
+ E= -599.006025039734     Delta-E=       -0.000340127999 Rises=F Damp=F
  DIIS: error= 3.78D-04 at cycle   3 NSaved=   3.
- NSaved= 3 IEnMin= 3 EnMin= -599.006025039735     IErMin= 3 ErrMin= 3.78D-04
+ NSaved= 3 IEnMin= 3 EnMin= -599.006025039734     IErMin= 3 ErrMin= 3.78D-04
  ErrMax= 3.78D-04  0.00D+00 EMaxC= 1.00D-01 BMatC= 6.07D-06 BMatP= 4.27D-04
  IDIUse=3 WtCom= 9.96D-01 WtEn= 3.78D-03
  Coeff-Com: -0.632D-02 0.356D-01 0.971D+00
@@ -325,9 +331,9 @@
  RMSDP=7.33D-05 MaxDP=8.96D-04 DE=-3.40D-04 OVMax= 2.71D-04
 
  Cycle   4  Pass 1  IDiag  1:
- E= -599.006030706824     Delta-E=       -0.000005667089 Rises=F Damp=F
+ E= -599.006030706822     Delta-E=       -0.000005667088 Rises=F Damp=F
  DIIS: error= 3.71D-05 at cycle   4 NSaved=   4.
- NSaved= 4 IEnMin= 4 EnMin= -599.006030706824     IErMin= 4 ErrMin= 3.71D-05
+ NSaved= 4 IEnMin= 4 EnMin= -599.006030706822     IErMin= 4 ErrMin= 3.71D-05
  ErrMax= 3.71D-05  0.00D+00 EMaxC= 1.00D-01 BMatC= 5.43D-08 BMatP= 6.07D-06
  IDIUse=1 WtCom= 1.00D+00 WtEn= 0.00D+00
  Coeff-Com:  0.676D-03-0.144D-01-0.125D+00 0.114D+01
@@ -336,9 +342,9 @@
  RMSDP=1.20D-05 MaxDP=1.42D-04 DE=-5.67D-06 OVMax= 2.33D-05
 
  Cycle   5  Pass 1  IDiag  1:
- E= -599.006030784329     Delta-E=       -0.000000077505 Rises=F Damp=F
+ E= -599.006030784328     Delta-E=       -0.000000077506 Rises=F Damp=F
  DIIS: error= 1.64D-06 at cycle   5 NSaved=   5.
- NSaved= 5 IEnMin= 5 EnMin= -599.006030784329     IErMin= 5 ErrMin= 1.64D-06
+ NSaved= 5 IEnMin= 5 EnMin= -599.006030784328     IErMin= 5 ErrMin= 1.64D-06
  ErrMax= 1.64D-06  0.00D+00 EMaxC= 1.00D-01 BMatC= 4.28D-11 BMatP= 5.43D-08
  IDIUse=1 WtCom= 1.00D+00 WtEn= 0.00D+00
  Coeff-Com: -0.167D-04 0.447D-03 0.369D-02-0.542D-01 0.105D+01
@@ -347,7 +353,7 @@
  RMSDP=2.97D-07 MaxDP=5.59D-06 DE=-7.75D-08 OVMax= 1.03D-06
 
  Cycle   6  Pass 1  IDiag  1:
- E= -599.006030784373     Delta-E=       -0.000000000044 Rises=F Damp=F
+ E= -599.006030784373     Delta-E=       -0.000000000045 Rises=F Damp=F
  DIIS: error= 1.48D-07 at cycle   6 NSaved=   6.
  NSaved= 6 IEnMin= 6 EnMin= -599.006030784373     IErMin= 6 ErrMin= 1.48D-07
  ErrMax= 1.48D-07  0.00D+00 EMaxC= 1.00D-01 BMatC= 3.42D-13 BMatP= 4.28D-11
@@ -355,12 +361,12 @@
  Coeff-Com:  0.143D-05-0.485D-04-0.359D-03 0.719D-02-0.189D+00 0.118D+01
  Coeff:      0.143D-05-0.485D-04-0.359D-03 0.719D-02-0.189D+00 0.118D+01
  Gap=     1.024 Goal=   None    Shift=    0.000
- RMSDP=2.67D-08 MaxDP=5.15D-07 DE=-4.41D-11 OVMax= 2.28D-07
+ RMSDP=2.67D-08 MaxDP=5.15D-07 DE=-4.46D-11 OVMax= 2.28D-07
 
  Cycle   7  Pass 1  IDiag  1:
- E= -599.006030784375     Delta-E=       -0.000000000002 Rises=F Damp=F
+ E= -599.006030784374     Delta-E=       -0.000000000001 Rises=F Damp=F
  DIIS: error= 3.33D-09 at cycle   7 NSaved=   7.
- NSaved= 7 IEnMin= 7 EnMin= -599.006030784375     IErMin= 7 ErrMin= 3.33D-09
+ NSaved= 7 IEnMin= 7 EnMin= -599.006030784374     IErMin= 7 ErrMin= 3.33D-09
  ErrMax= 3.33D-09  0.00D+00 EMaxC= 1.00D-01 BMatC= 2.16D-16 BMatP= 3.42D-13
  IDIUse=1 WtCom= 1.00D+00 WtEn= 0.00D+00
  Coeff-Com: -0.515D-07 0.153D-05 0.146D-04-0.278D-03 0.748D-02-0.624D-01
@@ -368,19 +374,72 @@
  Coeff:     -0.515D-07 0.153D-05 0.146D-04-0.278D-03 0.748D-02-0.624D-01
  Coeff:      0.106D+01
  Gap=     1.024 Goal=   None    Shift=    0.000
- RMSDP=6.30D-10 MaxDP=1.39D-08 DE=-1.82D-12 OVMax= 2.92D-09
+ RMSDP=6.30D-10 MaxDP=1.39D-08 DE=-1.36D-12 OVMax= 2.92D-09
 
  SCF Done:  E(RHF) =  -599.006030784     A.U. after    7 cycles
             NFock=  7  Conv=0.63D-09     -V/T= 2.0000
  KE= 5.990180044783D+02 PE=-1.418742290356D+03 EE= 2.207182550932D+02
- Leave Link  502 at Tue Sep 30 19:49:56 2025, MaxMem=  4294967296 cpu:               2.5 elap:               0.2
+ Leave Link  502 at Tue Sep 30 19:49:56 2025, MaxMem=  4294967296 cpu:               2.4 elap:               0.2
+ (Enter /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l801.exe)
+ Range of M.O.s used for correlation:    10    33
+ NBasis=    33 NAE=     9 NBE=     9 NFC=     9 NFV=     0
+ NROrb=     24 NOA=     0 NOB=     0 NVA=    24 NVB=    24
+ *** There is no correlation energy for this system ***
+ Leave Link  801 at Tue Sep 30 19:49:56 2025, MaxMem=  4294967296 cpu:               0.7 elap:               0.1
+ (Enter /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l906.exe)
+ Frozen-core derivative calculation, NFC=   9 NFV=   0.
+ FulOut=F Deriv=T AODrv=T NAtomX=     1
+   MMem=       10312  MDisk=           0 MDiskD=           1
+  W3Min=       10692 MinDsk=       73022 NBas6D=          36
+ NBas2D=         723    NTT=         666    LW2=     2040000
+    MDV=  4294941572 MDiskM=     1656227 NBas2p=         723
+ Fully direct method using O(ONN) memory.
+ No occupied orbitals for this spin space.
+ Spin components of T(2) and E(2):
+     alpha-alpha T2 =       0.0000000000D+00 E2=      0.0000000000D+00
+     alpha-beta  T2 =       0.0000000000D+00 E2=      0.0000000000D+00
+     beta-beta   T2 =       0.0000000000D+00 E2=      0.0000000000D+00
+ The integrals were generated   0 times.
+ ANorm=    0.1000000000D+01
+ E2 =     0.0000000000D+00 EUMP2 =    -0.59900603078437D+03
+ Leave Link  906 at Tue Sep 30 19:49:56 2025, MaxMem=  4294967296 cpu:               0.6 elap:               0.1
+ (Enter /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l1002.exe)
+ Minotr:  Closed shell wavefunction.
+          Computing MP2/KS-MP2 derivatives.
+          Using Z-Vector for PSCF gradient.
+          Skipping F1 and S1 gradient terms here.
+          IDoAtm=1
+          Frozen-core window.
+          Direct CPHF calculation.
+          Differentiating once with respect to electric field.
+                with respect to dipole field.
+          Differentiating once with respect to nuclear coordinates.
+          Using symmetry in CPHF.
+          Requested convergence is 1.0D-10 RMS, and 1.0D-09 maximum.
+          NewPWx=F KeepS1=T KeepF1=T KeepIn=T MapXYZ=F SortEE=F KeepMc=T.
+ Keep R1 ints in memory in symmetry-blocked form, NReq=3465787.
+ FoFCou: FMM=F IPFlag=           0 FMFlag=           0 FMFlg1=           0
+         NFxFlg=           0 DoJE=F BraDBF=F KetDBF=F FulRan=T
+         wScrn=  0.000000 ICntrl=       600 IOpCl=  0 I1Cent=           0 NGrid=           0
+         NMat0=    1 NMatS0=    561 NMatT0=    0 NMatD0=    1 NMtDS0=    0 NMtDT0=    0
+ Petite list used in FoFCou.
+          MDV=    4294967296 using IRadAn=       5.
+          Solving linear equations separately, MaxMat=       0.
+          There are     1 degrees of freedom in the 1st order CPHF.  IDoFFX=0 NUNeed=     1.
+ FoF2E skips out because all densities are zero.
+ LinEq1:  Iter=  0 NonCon=     0 RMS=0.00D+00 Max=0.00D+00 NDo=     0
+ FoF2E skips out because all densities are zero.
+ End of Minotr F.D. properties file   721 does not exist.
+ End of Minotr F.D. properties file   722 does not exist.
+ End of Minotr F.D. properties file   788 does not exist.
+ Leave Link 1002 at Tue Sep 30 19:49:57 2025, MaxMem=  4294967296 cpu:               4.6 elap:               0.3
  (Enter /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l601.exe)
  Copying SCF densities to generalized density rwf, IOpCl= 0 IROHF=0.
  SCF density gives NOpUse= 48 NOpAll= 48.
 
  **********************************************************************
 
-            Population analysis using the SCF Density.
+            Population analysis using the MP2 Density.
 
  **********************************************************************
 
@@ -388,9 +447,9 @@
  BldTbl:  Degeneracy threshold= 1.00D-02
        Occupied  (A1G) (A1G) (T1U) (T1U) (T1U) (A1G) (T1U) (T1U)
                  (T1U)
-       Virtual   (A1G) (T1U) (T1U) (T1U) (A1G) (EG) (T2G) (T2G)
-                 (T2G) (EG) (T2G) (T2G) (T2G) (EG) (EG) (T1U) (T1U)
-                 (T1U) (A1G) (EG) (EG) (T2G) (T2G) (T2G)
+       Virtual   (A1G) (T1U) (T1U) (T1U) (A1G) (EG) (EG) (T2G)
+                 (T2G) (T2G) (T2G) (T2G) (EG) (T2G) (EG) (T1U)
+                 (T1U) (T1U) (A1G) (EG) (EG) (T2G) (T2G) (T2G)
  The electronic state is 1-A1G.
  Alpha  occ. eigenvalues -- -133.75007 -14.70691 -11.73681 -11.73681 -11.73681
  Alpha  occ. eigenvalues --   -1.96401  -1.17083  -1.17083  -1.17083
@@ -426,14 +485,14 @@
  PrSmSu:  NxtVal=              2.
  Electronic moments (au):
         -18.00000000         -0.00000000         -0.00000000         -0.00000000
-         -6.52549309         -6.52549309         -6.52549309         -0.00000000
+         -6.52549309         -6.52549309         -6.52549309          0.00000000
          -0.00000000          0.00000000         -0.00000000         -0.00000000
          -0.00000000         -0.00000000         -0.00000000         -0.00000000
          -0.00000000         -0.00000000         -0.00000000         -0.00000000
         -15.00427861        -15.00427861        -15.00427861          0.00000000
-          0.00000000          0.00000000          0.00000000          0.00000000
+         -0.00000000          0.00000000          0.00000000         -0.00000000
           0.00000000         -5.00142620         -5.00142620         -5.00142620
-          0.00000000          0.00000000          0.00000000
+          0.00000000         -0.00000000          0.00000000
  Electronic spatial extent (au):  <R**2>=             19.5765
  DipInt: DoE/N= F T RetVal/Mat= T F Init=T NMatP=  1 IDeriv=0 Min/MaxMlt=  0  4
  Nuclear    moments (au):
@@ -448,40 +507,40 @@
           0.00000000          0.00000000          0.00000000
  Total      moments (au):
           1.00000000          0.00000000          0.00000000          0.00000000
-         -6.52549309         -6.52549309         -6.52549309         -0.00000000
+         -6.52549309         -6.52549309         -6.52549309          0.00000000
          -0.00000000          0.00000000          0.00000000          0.00000000
           0.00000000          0.00000000          0.00000000          0.00000000
           0.00000000          0.00000000          0.00000000          0.00000000
         -15.00427861        -15.00427861        -15.00427861          0.00000000
-          0.00000000          0.00000000          0.00000000          0.00000000
+         -0.00000000          0.00000000          0.00000000         -0.00000000
           0.00000000         -5.00142620         -5.00142620         -5.00142620
-          0.00000000          0.00000000          0.00000000
+          0.00000000         -0.00000000          0.00000000
  Traceless Quadrup. (au):
-         -0.00000000         -0.00000000          0.00000000         -0.00000000
+          0.00000000         -0.00000000         -0.00000000          0.00000000
          -0.00000000          0.00000000
  Charge=              1.0000 electrons
  Dipole moment (field-independent basis, Debye):
     X=              0.0000    Y=              0.0000    Z=              0.0000  Tot=              0.0000
  Quadrupole moment (field-independent basis, Debye-Ang):
    XX=             -8.7770   YY=             -8.7770   ZZ=             -8.7770
-   XY=             -0.0000   XZ=             -0.0000   YZ=              0.0000
+   XY=              0.0000   XZ=             -0.0000   YZ=              0.0000
  Traceless Quadrupole moment (field-independent basis, Debye-Ang):
    XX=              0.0000   YY=              0.0000   ZZ=              0.0000
-   XY=             -0.0000   XZ=             -0.0000   YZ=              0.0000
+   XY=              0.0000   XZ=             -0.0000   YZ=              0.0000
  Octapole moment (field-independent basis, Debye-Ang**2):
   XXX=              0.0000  YYY=              0.0000  ZZZ=              0.0000  XYY=              0.0000
   XXY=              0.0000  XXZ=              0.0000  XZZ=              0.0000  YZZ=              0.0000
   YYZ=              0.0000  XYZ=              0.0000
  Hexadecapole moment (field-independent basis, Debye-Ang**3):
  XXXX=             -5.6513 YYYY=             -5.6513 ZZZZ=             -5.6513 XXXY=              0.0000
- XXXZ=              0.0000 YYYX=              0.0000 YYYZ=              0.0000 ZZZX=              0.0000
+ XXXZ=             -0.0000 YYYX=              0.0000 YYYZ=              0.0000 ZZZX=             -0.0000
  ZZZY=              0.0000 XXYY=             -1.8838 XXZZ=             -1.8838 YYZZ=             -1.8838
- XXYZ=              0.0000 YYXZ=              0.0000 ZZXY=              0.0000
+ XXYZ=              0.0000 YYXZ=             -0.0000 ZZXY=              0.0000
  N-N= 0.000000000000D+00 E-N=-1.418742290262D+03  KE= 5.990180044783D+02
  Symmetry AG   KE= 4.110068268876D+02
- Symmetry B1G  KE= 4.034690165945D-61
- Symmetry B2G  KE= 3.497501092891D-61
- Symmetry B3G  KE= 4.250334657503D-61
+ Symmetry B1G  KE= 4.443286050114D-61
+ Symmetry B2G  KE= 4.606613893561D-61
+ Symmetry B3G  KE= 3.596460969268D-61
  Symmetry AU   KE= 0.000000000000D+00
  Symmetry B1U  KE= 6.267039253021D+01
  Symmetry B2U  KE= 6.267039253021D+01
@@ -499,126 +558,128 @@
  IPart=  0 Atom   1 batch    1 overlaps    1 atoms,    13 shells and     1 DB shells.   NGrid=      1032
  Pruned (  99, 590) grid will be used in numerical quadrature.
  Symmetry reduced    86 angular points to    86 for atom    1.
- IPart=  9 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
+ IPart=  1 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
  Pruned (  99, 590) grid will be used in numerical quadrature.
  CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ IPart= 10 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
+ CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ IPart= 15 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ IPart=  1 Atom number   1 atomic number 19 has       29144 grid points.
+ IPart= 10 Atom number   1 atomic number 19 has       29144 grid points.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ IPart= 10 Atom   1 batch    3 overlaps    1 atoms,    13 shells and     1 DB shells.   NGrid=      1812
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ Symmetry reduced   302 angular points to   302 for atom    1.
+ IPart=  9 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
+ CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ IPart= 11 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
  Pruned (  99, 590) grid will be used in numerical quadrature.
  Pruned (  99, 590) grid will be used in numerical quadrature.
  IPart=  6 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
  Pruned (  99, 590) grid will be used in numerical quadrature.
- CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
- IPart=  9 Atom number   1 atomic number 19 has       29144 grid points.
- IPart= 12 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
  Pruned (  99, 590) grid will be used in numerical quadrature.
- Pruned (  99, 590) grid will be used in numerical quadrature.
- Pruned (  99, 590) grid will be used in numerical quadrature.
- IPart=  8 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
- IPart= 14 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
- CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
- Pruned (  99, 590) grid will be used in numerical quadrature.
- CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
- IPart=  2 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
- IPart= 15 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
- Pruned (  99, 590) grid will be used in numerical quadrature.
- Pruned (  99, 590) grid will be used in numerical quadrature.
- Pruned (  99, 590) grid will be used in numerical quadrature.
- Pruned (  99, 590) grid will be used in numerical quadrature.
- Pruned (  99, 590) grid will be used in numerical quadrature.
- CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
- IPart= 12 Atom number   1 atomic number 19 has       29144 grid points.
- IPart=  5 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
  IPart= 13 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
  Pruned (  99, 590) grid will be used in numerical quadrature.
- Pruned (  99, 590) grid will be used in numerical quadrature.
- Pruned (  99, 590) grid will be used in numerical quadrature.
- CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
- CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
- IPart= 12 Atom   1 batch    5 overlaps    1 atoms,    13 shells and     1 DB shells.   NGrid=      1180
- IPart=  4 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
- Pruned (  99, 590) grid will be used in numerical quadrature.
- Pruned (  99, 590) grid will be used in numerical quadrature.
- IPart= 10 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
- CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
- CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
- Symmetry reduced   590 angular points to   590 for atom    1.
- CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
- Pruned (  99, 590) grid will be used in numerical quadrature.
- Pruned (  99, 590) grid will be used in numerical quadrature.
- Pruned (  99, 590) grid will be used in numerical quadrature.
- Pruned (  99, 590) grid will be used in numerical quadrature.
- IPart= 14 Atom number   1 atomic number 19 has       29144 grid points.
- CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
- IPart= 15 Atom number   1 atomic number 19 has       29144 grid points.
- IPart= 11 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
- Pruned (  99, 590) grid will be used in numerical quadrature.
- IPart=  9 Atom   1 batch    2 overlaps    1 atoms,    13 shells and     1 DB shells.   NGrid=      2328
- IPart=  8 Atom number   1 atomic number 19 has       29144 grid points.
- IPart=  6 Atom number   1 atomic number 19 has       29144 grid points.
- Symmetry reduced   194 angular points to   194 for atom    1.
- IPart= 13 Atom number   1 atomic number 19 has       29144 grid points.
- IPart=  5 Atom number   1 atomic number 19 has       29144 grid points.
- IPart= 13 Atom   1 batch    7 overlaps    1 atoms,    12 shells and     1 DB shells.   NGrid=      1180
- IPart=  5 Atom   1 batch   12 overlaps    1 atoms,    11 shells and     1 DB shells.   NGrid=      1180
- IPart= 15 Atom   1 batch   11 overlaps    1 atoms,    12 shells and     1 DB shells.   NGrid=      1180
- Symmetry reduced   590 angular points to   590 for atom    1.
- Symmetry reduced   590 angular points to   590 for atom    1.
- Pruned (  99, 590) grid will be used in numerical quadrature.
- Pruned (  99, 590) grid will be used in numerical quadrature.
- Symmetry reduced   590 angular points to   590 for atom    1.
- IPart=  6 Atom   1 batch    3 overlaps    1 atoms,    13 shells and     1 DB shells.   NGrid=      1812
- IPart=  3 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
- Symmetry reduced   302 angular points to   302 for atom    1.
  CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
  CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
  IPart=  7 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
  Pruned (  99, 590) grid will be used in numerical quadrature.
+ IPart=  4 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
+ CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
+ IPart= 15 Atom number   1 atomic number 19 has       29144 grid points.
+ IPart=  9 Atom number   1 atomic number 19 has       29144 grid points.
+ IPart= 15 Atom   1 batch    5 overlaps    1 atoms,    13 shells and     1 DB shells.   NGrid=      1180
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
  CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
  Pruned (  99, 590) grid will be used in numerical quadrature.
- IPart=  8 Atom   1 batch    8 overlaps    1 atoms,    12 shells and     1 DB shells.   NGrid=      1180
- IPart= 14 Atom   1 batch    4 overlaps    1 atoms,    13 shells and     1 DB shells.   NGrid=      1180
- IPart=  3 Atom number   1 atomic number 19 has       29144 grid points.
- Symmetry reduced   590 angular points to   590 for atom    1.
  Pruned (  99, 590) grid will be used in numerical quadrature.
- IPart=  2 Atom number   1 atomic number 19 has       29144 grid points.
  Symmetry reduced   590 angular points to   590 for atom    1.
- IPart=  2 Atom   1 batch    6 overlaps    1 atoms,    12 shells and     1 DB shells.   NGrid=      1180
- IPart=  7 Atom number   1 atomic number 19 has       29144 grid points.
- Symmetry reduced   590 angular points to   590 for atom    1.
- IPart=  7 Atom   1 batch   15 overlaps    1 atoms,    10 shells and     1 DB shells.   NGrid=      1180
+ IPart=  1 Atom   1 batch    2 overlaps    1 atoms,    13 shells and     1 DB shells.   NGrid=      2328
+ IPart=  3 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
+ IPart=  6 Atom number   1 atomic number 19 has       29144 grid points.
  IPart=  4 Atom number   1 atomic number 19 has       29144 grid points.
- IPart=  1 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
- IPart=  4 Atom   1 batch   10 overlaps    1 atoms,    12 shells and     1 DB shells.   NGrid=      1180
+ IPart=  6 Atom   1 batch    9 overlaps    1 atoms,    12 shells and     1 DB shells.   NGrid=      1180
+ IPart=  4 Atom   1 batch    7 overlaps    1 atoms,    12 shells and     1 DB shells.   NGrid=      1180
+ Symmetry reduced   194 angular points to   194 for atom    1.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ IPart= 12 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
  CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
- IPart= 11 Atom number   1 atomic number 19 has       29144 grid points.
- Symmetry reduced   590 angular points to   590 for atom    1.
- IPart= 11 Atom   1 batch   13 overlaps    1 atoms,    10 shells and     1 DB shells.   NGrid=      1180
+ IPart=  8 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
+ CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
+ CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
+ IPart=  9 Atom   1 batch    4 overlaps    1 atoms,    13 shells and     1 DB shells.   NGrid=      1180
+ IPart= 14 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
  Pruned (  99, 590) grid will be used in numerical quadrature.
  Symmetry reduced   590 angular points to   590 for atom    1.
- IPart=  1 Atom number   1 atomic number 19 has       29144 grid points.
- IPart=  1 Atom   1 batch   16 overlaps    1 atoms,    10 shells and     1 DB shells.   NGrid=      1180
- IPart= 10 Atom number   1 atomic number 19 has       29144 grid points.
+ CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ IPart=  7 Atom number   1 atomic number 19 has       29144 grid points.
+ IPart= 11 Atom number   1 atomic number 19 has       29144 grid points.
+ IPart=  7 Atom   1 batch   10 overlaps    1 atoms,    12 shells and     1 DB shells.   NGrid=      1180
+ IPart= 13 Atom number   1 atomic number 19 has       29144 grid points.
+ IPart=  2 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
+ IPart= 13 Atom   1 batch    6 overlaps    1 atoms,    12 shells and     1 DB shells.   NGrid=      1180
  Symmetry reduced   590 angular points to   590 for atom    1.
- IPart= 10 Atom   1 batch    9 overlaps    1 atoms,    12 shells and     1 DB shells.   NGrid=      1180
- IPart=  3 Atom   1 batch   14 overlaps    1 atoms,    10 shells and     1 DB shells.   NGrid=      1180
+ IPart=  5 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
+ CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
+ CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
  Symmetry reduced   590 angular points to   590 for atom    1.
+ Symmetry reduced   590 angular points to   590 for atom    1.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
+ IPart=  2 Atom number   1 atomic number 19 has       29144 grid points.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ IPart= 12 Atom number   1 atomic number 19 has       29144 grid points.
+ IPart=  3 Atom number   1 atomic number 19 has       29144 grid points.
+ IPart= 12 Atom   1 batch   12 overlaps    1 atoms,    11 shells and     1 DB shells.   NGrid=      1180
+ IPart=  3 Atom   1 batch   16 overlaps    1 atoms,    10 shells and     1 DB shells.   NGrid=      1180
+ IPart=  2 Atom   1 batch   14 overlaps    1 atoms,    10 shells and     1 DB shells.   NGrid=      1180
+ Symmetry reduced   590 angular points to   590 for atom    1.
+ Symmetry reduced   590 angular points to   590 for atom    1.
+ IPart= 11 Atom   1 batch    8 overlaps    1 atoms,    12 shells and     1 DB shells.   NGrid=      1180
+ Symmetry reduced   590 angular points to   590 for atom    1.
+ Symmetry reduced   590 angular points to   590 for atom    1.
+ IPart= 14 Atom number   1 atomic number 19 has       29144 grid points.
+ IPart= 14 Atom   1 batch   13 overlaps    1 atoms,    10 shells and     1 DB shells.   NGrid=      1180
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ Symmetry reduced   590 angular points to   590 for atom    1.
+ IPart=  8 Atom number   1 atomic number 19 has       29144 grid points.
+ Symmetry reduced   590 angular points to   590 for atom    1.
+ IPart=  5 Atom number   1 atomic number 19 has       29144 grid points.
+ IPart=  8 Atom   1 batch   11 overlaps    1 atoms,    12 shells and     1 DB shells.   NGrid=      1180
+ IPart=  5 Atom   1 batch   15 overlaps    1 atoms,    10 shells and     1 DB shells.   NGrid=      1180
  Symmetry reduced   590 angular points to   590 for atom    1.
  Symmetry reduced   590 angular points to   590 for atom    1.
  IPart=  0 Atom   1 batch   17 overlaps    1 atoms,     8 shells and     1 DB shells.   NGrid=      1180
- IPart= 12 Atom   1 batch   18 overlaps    1 atoms,     7 shells and     1 DB shells.   NGrid=      1180
  Symmetry reduced   590 angular points to   590 for atom    1.
- IPart= 14 Atom   1 batch   19 overlaps    1 atoms,     7 shells and     1 DB shells.   NGrid=      1180
- IPart=  5 Atom   1 batch   20 overlaps    1 atoms,     6 shells and     1 DB shells.   NGrid=      1180
- IPart= 13 Atom   1 batch   22 overlaps    1 atoms,     4 shells and     1 DB shells.   NGrid=       604
- IPart=  2 Atom   1 batch   21 overlaps    1 atoms,     4 shells and     1 DB shells.   NGrid=       590
+ IPart= 15 Atom   1 batch   18 overlaps    1 atoms,     7 shells and     1 DB shells.   NGrid=      1180
+ IPart= 10 Atom   1 batch   19 overlaps    1 atoms,     7 shells and     1 DB shells.   NGrid=      1180
+ Symmetry reduced   590 angular points to   590 for atom    1.
+ IPart=  9 Atom   1 batch   20 overlaps    1 atoms,     6 shells and     1 DB shells.   NGrid=      1180
+ IPart=  6 Atom   1 batch   21 overlaps    1 atoms,     4 shells and     1 DB shells.   NGrid=       590
+ IPart= 13 Atom   1 batch   23 overlaps    1 atoms,     4 shells and     1 DB shells.   NGrid=       604
+ IPart=  4 Atom   1 batch   22 overlaps    1 atoms,     4 shells and     1 DB shells.   NGrid=       604
  Symmetry reduced   302 angular points to   302 for atom    1.
- IPart= 15 Atom   1 batch   24 overlaps    1 atoms,     4 shells and     1 DB shells.   NGrid=       604
- IPart= 10 Atom   1 batch   23 overlaps    1 atoms,     4 shells and     1 DB shells.   NGrid=       604
  Symmetry reduced   302 angular points to   302 for atom    1.
- IPart=  6 Atom   1 batch   25 overlaps    1 atoms,     1 shells and     0 DB shells.   NGrid=       604
+ IPart=  7 Atom   1 batch   24 overlaps    1 atoms,     4 shells and     1 DB shells.   NGrid=       604
+ IPart= 12 Atom   1 batch   25 overlaps    1 atoms,     1 shells and     0 DB shells.   NGrid=       604
  Symmetry reduced   302 angular points to   302 for atom    1.
- IPart=  8 Atom   1 batch   26 overlaps    1 atoms,     1 shells and     0 DB shells.   NGrid=       604
  Symmetry reduced   302 angular points to   302 for atom    1.
- IPart=  4 Atom   1 batch   27 overlaps    1 atoms,     0 shells and     0 DB shells.   NGrid=       302
+ IPart= 11 Atom   1 batch   26 overlaps    1 atoms,     1 shells and     0 DB shells.   NGrid=       604
+ IPart= 14 Atom   1 batch   27 overlaps    1 atoms,     0 shells and     0 DB shells.   NGrid=       302
+ Symmetry reduced   302 angular points to   302 for atom    1.
  There are a total of       28842 grid points.
  ElSum from          density=       17.9999996864
  ElSum from atomic densities=       19.0000662039
@@ -670,44 +731,44 @@
  PRISM was handed   268430087 working-precision words and    67 shell-pairs
  PRISM was handed   268430087 working-precision words and    67 shell-pairs
  PRISM was handed   268430087 working-precision words and    67 shell-pairs
- IPart=  6 NShTot=           0 NBatch=           0 AvBLen=         0.0
- PrsmSu-ThDecC:  IPartSL=    6    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   16.
- IPart= 14 NShTot=           0 NBatch=           0 AvBLen=         0.0
- PrsmSu-ThDecC:  IPartSL=   14    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   15.
- IPart= 10 NShTot=           0 NBatch=           0 AvBLen=         0.0
- PrsmSu-ThDecC:  IPartSL=   10    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   14.
- IPart= 12 NShTot=           0 NBatch=           0 AvBLen=         0.0
- PrsmSu-ThDecC:  IPartSL=   12    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   13.
- IPart=  2 NShTot=          11 NBatch=          11 AvBLen=         1.0
- PrsmSu-ThDecC:  IPartSL=    2    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   12.
- IPart=  7 NShTot=           0 NBatch=           0 AvBLen=         0.0
- PrsmSu-ThDecC:  IPartSL=    7    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   11.
- IPart= 13 NShTot=           0 NBatch=           0 AvBLen=         0.0
- IPart=  5 NShTot=           3 NBatch=           3 AvBLen=         1.0
- PrsmSu-ThDecC:  IPartSL=   13    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   10.
- PrsmSu-ThDecC:  IPartSL=    5    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    9.
- IPart=  4 NShTot=           3 NBatch=           3 AvBLen=         1.0
- PrsmSu-ThDecC:  IPartSL=    4    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    8.
- IPart=  8 NShTot=           0 NBatch=           0 AvBLen=         0.0
- PrsmSu-ThDecC:  IPartSL=    8    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    7.
  IPart= 11 NShTot=           0 NBatch=           0 AvBLen=         0.0
- IPart=  3 NShTot=           6 NBatch=           6 AvBLen=         1.0
- PrsmSu-ThDecC:  IPartSL=   11    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    6.
- PrsmSu-ThDecC:  IPartSL=    3    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    5.
- IPart=  9 NShTot=           0 NBatch=           0 AvBLen=         0.0
- PrsmSu-ThDecC:  IPartSL=    9    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    4.
- IPart=  0 NShTot=          25 NBatch=          25 AvBLen=         1.0
- PrsmSu-ThDecC:  IPartSL=    0    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    3.
+ PrsmSu-ThDecC:  IPartSL=   11    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   16.
+ IPart=  7 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ IPart= 14 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=    7    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   15.
+ PrsmSu-ThDecC:  IPartSL=   14    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   14.
  IPart= 15 NShTot=           0 NBatch=           0 AvBLen=         0.0
- PrsmSu-ThDecC:  IPartSL=   15    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    2.
+ IPart=  9 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ IPart= 10 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=   15    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   13.
+ PrsmSu-ThDecC:  IPartSL=    9    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   12.
+ IPart=  6 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ IPart=  5 NShTot=           3 NBatch=           3 AvBLen=         1.0
+ IPart= 12 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=   10    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   11.
+ PrsmSu-ThDecC:  IPartSL=   12    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   10.
  IPart=  1 NShTot=          19 NBatch=          19 AvBLen=         1.0
- PrsmSu-ThDecC:  IPartSL=    1    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    1.
+ IPart=  0 NShTot=          25 NBatch=          25 AvBLen=         1.0
+ IPart=  8 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ IPart= 13 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ IPart=  2 NShTot=          11 NBatch=          11 AvBLen=         1.0
+ IPart=  3 NShTot=           6 NBatch=           6 AvBLen=         1.0
+ IPart=  4 NShTot=           3 NBatch=           3 AvBLen=         1.0
+ PrsmSu-ThDecC:  IPartSL=    5    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    9.
+ PrsmSu-ThDecC:  IPartSL=    1    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    8.
+ PrsmSu-ThDecC:  IPartSL=   13    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    7.
+ PrsmSu-ThDecC:  IPartSL=    0    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    6.
+ PrsmSu-ThDecC:  IPartSL=    4    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    5.
+ PrsmSu-ThDecC:  IPartSL=    2    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    4.
+ PrsmSu-ThDecC:  IPartSL=    6    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    3.
+ PrsmSu-ThDecC:  IPartSL=    3    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    2.
+ PrsmSu-ThDecC:  IPartSL=    8    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    1.
  PrSmSu:  NxtVal=             17.
  --------------------------------------------------------
        Center         ----      EFG at Nuclei      ----
                       3XX-RR        3YY-RR        3ZZ-RR
  --------------------------------------------------------
-     1   Atom        0.000000      0.000000      0.000000
+     1   Atom       -0.000000      0.000000      0.000000
  --------------------------------------------------------
                         XY            XZ            YZ
  --------------------------------------------------------
@@ -721,7 +782,7 @@
 
        Atom             a.u.   MegaHertz   Gauss  10(-4) cm-1        Axes
 
-              Baa     0.0000    -0.000    -0.000    -0.000  1.0000  0.0000  0.0000
+              Baa    -0.0000     0.000     0.000     0.000  1.0000  0.0000  0.0000
      1 K(39)  Bbb     0.0000    -0.000    -0.000    -0.000 -0.0000  1.0000  0.0000
               Bcc     0.0000    -0.000    -0.000    -0.000  0.0000  0.0000  1.0000
  
@@ -729,7 +790,7 @@
  ---------------------------------------------------------------------------------
 
  No NMR shielding tensors so no spin-rotation constants.
- Leave Link  601 at Tue Sep 30 19:49:56 2025, MaxMem=  4294967296 cpu:               3.5 elap:               0.4
+ Leave Link  601 at Tue Sep 30 19:49:57 2025, MaxMem=  4294967296 cpu:               1.7 elap:               0.2
  (Enter /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l602.exe)
  FitSet:  NAtFit=     1 NAtPot=     1 NAtFrz=     0 MDM=     5 TotChg=   1.00000
  Merz-Kollman atomic radii used.
@@ -742,7 +803,7 @@
 
  **********************************************************************
 
-            Electrostatic Properties Using The SCF Density.
+            Electrostatic Properties Using The MP2 Density.
 
  **********************************************************************
 
@@ -3836,8 +3897,6 @@
  PrsmSu:  NPrtUS=  16 ThrOK=T IAlg=2 LenDen=           0 ISkipM=0 DoSpLW=F IThBeg=    0 IThEnd=   15.
  Prism:   IPart=     0 DynPar=F LinDyn=F Incr=         128.
  PRISM was handed   268384126 working-precision words and    67 shell-pairs
- IPart=  0 NShTot=       80002 NBatch=         143 AvBLen=       559.5
- PrsmSu-ThDecC:  IPartSL=    0    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   16.
  PRISM was handed   268384126 working-precision words and    67 shell-pairs
  PRISM was handed   268384126 working-precision words and    67 shell-pairs
  PRISM was handed   268384126 working-precision words and    67 shell-pairs
@@ -3853,24 +3912,26 @@
  PRISM was handed   268384126 working-precision words and    67 shell-pairs
  PRISM was handed   268384126 working-precision words and    67 shell-pairs
  PRISM was handed   268384126 working-precision words and    67 shell-pairs
- IPart= 11 NShTot=           0 NBatch=           0 AvBLen=         0.0
- PrsmSu-ThDecC:  IPartSL=   11    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   15.
- IPart= 10 NShTot=           0 NBatch=           0 AvBLen=         0.0
- IPart= 14 NShTot=           0 NBatch=           0 AvBLen=         0.0
- IPart=  8 NShTot=           0 NBatch=           0 AvBLen=         0.0
- PrsmSu-ThDecC:  IPartSL=   10    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   14.
- PrsmSu-ThDecC:  IPartSL=    8    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   13.
- IPart=  9 NShTot=           0 NBatch=           0 AvBLen=         0.0
- PrsmSu-ThDecC:  IPartSL=   14    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   12.
- PrsmSu-ThDecC:  IPartSL=    9    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   11.
  IPart= 13 NShTot=           0 NBatch=           0 AvBLen=         0.0
- PrsmSu-ThDecC:  IPartSL=   13    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   10.
+ IPart= 14 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ IPart= 10 NShTot=           0 NBatch=           0 AvBLen=         0.0
  IPart= 12 NShTot=           0 NBatch=           0 AvBLen=         0.0
- PrsmSu-ThDecC:  IPartSL=   12    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    9.
- IPart=  6 NShTot=           0 NBatch=           0 AvBLen=         0.0
- PrsmSu-ThDecC:  IPartSL=    6    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    8.
+ IPart=  9 NShTot=           0 NBatch=           0 AvBLen=         0.0
  IPart=  7 NShTot=           0 NBatch=           0 AvBLen=         0.0
- PrsmSu-ThDecC:  IPartSL=    7    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    7.
+ IPart=  8 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ IPart= 15 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ IPart=  6 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=   13    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   16.
+ PrsmSu-ThDecC:  IPartSL=    8    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   15.
+ PrsmSu-ThDecC:  IPartSL=   14    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   14.
+ IPart= 11 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=    6    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   13.
+ PrsmSu-ThDecC:  IPartSL=   15    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   12.
+ PrsmSu-ThDecC:  IPartSL=    7    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   11.
+ PrsmSu-ThDecC:  IPartSL=   12    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=   10.
+ PrsmSu-ThDecC:  IPartSL=   11    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    9.
+ PrsmSu-ThDecC:  IPartSL=   10    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    8.
+ PrsmSu-ThDecC:  IPartSL=    9    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    7.
  IPart=  5 NShTot=        9231 NBatch=           7 AvBLen=      1318.7
  PrsmSu-ThDecC:  IPartSL=    5    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    6.
  IPart=  4 NShTot=        9231 NBatch=           7 AvBLen=      1318.7
@@ -3881,8 +3942,8 @@
  PrsmSu-ThDecC:  IPartSL=    2    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    3.
  IPart=  1 NShTot=       58463 NBatch=          69 AvBLen=       847.3
  PrsmSu-ThDecC:  IPartSL=    1    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    2.
- IPart= 15 NShTot=           0 NBatch=           0 AvBLen=         0.0
- PrsmSu-ThDecC:  IPartSL=   15    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    1.
+ IPart=  0 NShTot=       80002 NBatch=         143 AvBLen=       559.5
+ PrsmSu-ThDecC:  IPartSL=    0    0 NPrtUSL=   16    1 IThBeg=    0 IThEnd=   15 CPU=   -1 GPU=   -1 NThAct=    1.
  PrSmSu:  NxtVal=           2049.
     3076 points will be used for fitting atomic charges
  Fitting point charges to electrostatic potential
@@ -6981,26 +7042,26 @@
  3076 Fit       0.139257
  3077 Fit       0.139257
  -----------------------------------------------------------------
- Leave Link  602 at Tue Sep 30 19:49:57 2025, MaxMem=  4294967296 cpu:               1.7 elap:               0.1
+ Leave Link  602 at Tue Sep 30 19:49:57 2025, MaxMem=  4294967296 cpu:               1.1 elap:               0.1
  (Enter /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l701.exe)
- ... and contract with generalized density number  0.
+ ... and contract with generalized density number  2.
  Compute integral first derivatives.
- Leave Link  701 at Tue Sep 30 19:49:57 2025, MaxMem=  4294967296 cpu:               1.7 elap:               0.1
+ Leave Link  701 at Tue Sep 30 19:49:58 2025, MaxMem=  4294967296 cpu:               1.6 elap:               0.1
  (Enter /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l702.exe)
  L702 exits ... SP integral derivatives will be done elsewhere.
- Leave Link  702 at Tue Sep 30 19:49:57 2025, MaxMem=  4294967296 cpu:               0.8 elap:               0.1
+ Leave Link  702 at Tue Sep 30 19:49:58 2025, MaxMem=  4294967296 cpu:               0.5 elap:               0.1
  (Enter /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l703.exe)
  Integral derivatives from FoFJK, PRISM(SPDF).
  Compute integral first derivatives, UseDBF=F ICtDFT=           0.
- Calling FoFJK, ICntrl=      2127 FMM=F ISym2X=1 I1Cent= 0 IOpClX= 0 NMat=1 NMatS=1 NMatT=0.
- FoFJK:  IHMeth= 1 ICntrl=    2127 DoSepK=F KAlg= 0 I1Cent=           0 FoldK=F
+ Calling FoFJK, ICntrl=  10002127 FMM=F ISym2X=1 I1Cent= 0 IOpClX= 0 NMat=1 NMatS=1 NMatT=0.
+ FoFJK:  IHMeth= 1 ICntrl=10002127 DoSepK=F KAlg= 0 I1Cent=           0 FoldK=F
  IRaf=         0 NMat=       1 IRICut=       1 DoRegI=T DoRafI=F ISym2E= 1 IDoP0=0 IntGTp=1.
  FoFCou: FMM=F IPFlag=           0 FMFlag=      100000 FMFlg1=         800
          NFxFlg=           0 DoJE=F BraDBF=F KetDBF=F FulRan=T
-         wScrn=  0.000000 ICntrl=      2127 IOpCl=  0 I1Cent=           0 NGrid=           0
+         wScrn=  0.000000 ICntrl=  10002127 IOpCl=  0 I1Cent=           0 NGrid=           0
          NMat0=    1 NMatS0=      1 NMatT0=    0 NMatD0=    1 NMtDS0=    0 NMtDT0=    0
  Petite list used in FoFCou.
- Leave Link  703 at Tue Sep 30 19:49:58 2025, MaxMem=  4294967296 cpu:               3.1 elap:               0.2
+ Leave Link  703 at Tue Sep 30 19:49:58 2025, MaxMem=  4294967296 cpu:               2.4 elap:               0.2
  (Enter /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l716.exe)
  Dipole        = 0.00000000D+00 0.00000000D+00 0.00000000D+00
  ***** Axes restored to original set *****
@@ -7012,7 +7073,7 @@
  -------------------------------------------------------------------
  Cartesian Forces:  Max     0.000000000 RMS     0.000000000
  Z-matrix is all fixed cartesians, so copy forces.
- Leave Link  716 at Tue Sep 30 19:49:58 2025, MaxMem=  4294967296 cpu:               0.8 elap:               0.1
+ Leave Link  716 at Tue Sep 30 19:49:59 2025, MaxMem=  4294967296 cpu:               0.8 elap:               0.1
  (Enter /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l103.exe)
 
  GradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGrad
@@ -7053,7 +7114,7 @@
  Largest change from initial coordinates is atom    0       0.000 Angstoms.
  GradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGrad
 
- Leave Link  103 at Tue Sep 30 19:49:58 2025, MaxMem=  4294967296 cpu:               0.6 elap:               0.1
+ Leave Link  103 at Tue Sep 30 19:49:59 2025, MaxMem=  4294967296 cpu:               0.8 elap:               0.1
  (Enter /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l202.exe)
                           Input orientation:                          
  ---------------------------------------------------------------------
@@ -7076,20 +7137,21 @@
  ---------------------------------------------------------------------
       1         19           0        0.000000    0.000000    0.000000
  ---------------------------------------------------------------------
- Leave Link  202 at Tue Sep 30 19:49:58 2025, MaxMem=  4294967296 cpu:               1.7 elap:               0.1
+ Leave Link  202 at Tue Sep 30 19:49:59 2025, MaxMem=  4294967296 cpu:               0.3 elap:               0.0
  (Enter /software/sse/easybuild/prefix/software/Gaussian/16.C.01-avx2-nsc1/g16/l9999.exe)
 
  Test job not archived.
- 1\1\NSC-N202\FOpt\RHF\Gen\K1(1+)\X_DAVVA\30-Sep-2025\0\\#P HF/gen Opt=
- tight Pop=(MK,Hirshfeld,ReadRadii) iop(6/33=2) iop(6/42=6) maxdisk=128
- GB\\potassium-ion\\1,1\K,0.,0.,0.\\Version=ES64L-G16RevC.01\State=1-A1
- G\HF=-599.0060308\RMSD=6.297e-10\RMSF=0.000e+00\Dipole=0.,0.,0.\Quadru
- pole=0.,0.,0.,0.,0.,0.\PG=OH [O(K1)]\\@
+ 1\1\NSC-N291\FOpt\RMP2-FC\Gen\K1(1+)\X_DAVVA\30-Sep-2025\0\\#P MP2/gen
+  Opt=tight density=MP2 Pop=(MK,Hirshfeld,ReadRadii) iop(6/33=2) iop(6/
+ 42=6) maxdisk=128GB\\potassium-ion\\1,1\K,0.,0.,0.\\Version=ES64L-G16R
+ evC.01\State=1-A1G\HF=-599.0060308\MP2=-599.0060308\RMSD=6.297e-10\RMS
+ F=0.000e+00\Dipole=0.,0.,0.\Quadrupole=0.,0.,0.,0.,0.,0.\PG=OH [O(K1)]
+ \\@
 
 
  MOM AND DAD WENT TO ALPHA CENTAURI AND ALL
  I GOT WAS THIS DUMB T-SHIRT.
- Job cpu time:       0 days  0 hours  0 minutes 31.3 seconds.
- Elapsed time:       0 days  0 hours  0 minutes  2.8 seconds.
+ Job cpu time:       0 days  0 hours  0 minutes 30.6 seconds.
+ Elapsed time:       0 days  0 hours  0 minutes  2.4 seconds.
  File lengths (MBytes):  RWF=      6 Int=      0 D2E=      0 Chk=      8 Scr=      1
  Normal termination of Gaussian 16 at Tue Sep 30 19:49:59 2025.

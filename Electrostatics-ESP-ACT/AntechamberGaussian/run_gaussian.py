@@ -23,7 +23,7 @@ def write_job(mol:str, q:int, method:str, basis:str, ncore:int)->str:
     readrad = ""
     if len(basis) > 0:
         mybasis = "gen"
-        readrad = "ReadRadii"
+        readrad = ",ReadRadii"
     with open(xyz, "r") as inf:
         lines = inf.readlines()
         com = mol + ".com"
