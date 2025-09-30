@@ -3,14 +3,12 @@
 import os
 from run_gaussian import get_mols
 
-debug = False
+debug = True
 
 def extract_columns(mol:str, input_file, skip_lines=7)->list:
     renum = { 
         "ammonium": { "4": 2, "5": 1, "6": 3, "7": 4, "8": 5 },
         "acetate":  { "4": 1, "5": 5, "6": 6, "7": 7, "8": 2, "9": 3, "10": 4 },
-        "bromide": { "4": 1 }, "chloride": { "4": 1 }, "fluoride": { "4": 1 },
-        "lithium-ion": { "4": 1 }, "sodium-ion": { "4": 1 }, "potassium-ion": { "4": 1 },
         "butanoate": { "4": 3, "5": 2, "6": 4, "7": 1, "8": 6, "9": 7, "10": 5,
                        "11": 8, "12": 9, "13": 10, "14": 11, "15": 12, "16": 13 },
         "ethylammonium": {  "4": 1, "5": 3, "6": 4, "7": 5, "8": 2, "9": 6, "10": 7,
@@ -40,7 +38,7 @@ def extract_columns(mol:str, input_file, skip_lines=7)->list:
                     "sodium-ion": { "name": "Na", "q": "1", "index": 1 },
                     "potassium-ion": { "name": "K", "q": "1", "index": 1 } }
         if mol in monatom:
-            return monatom[mol]
+            return [ monatom[mol] ]
         else:
             return None
     if not os.path.exists(input_file):
@@ -66,7 +64,7 @@ def extract_columns(mol:str, input_file, skip_lines=7)->list:
 
 if __name__ == "__main__":
     mols = get_mols()
-    for qm in [ "HF" ]:
+    for qm in [ "HF", "MP2" ]:
         for mol in mols.keys():
             mdir = f"{qm}_SC/{mol}"
             if os.path.isdir(mdir):
@@ -77,6 +75,8 @@ if __name__ == "__main__":
                 atomq = {}
                 for method in [ "bcc", "resp" ]:
                     atomq[method] = extract_columns(mol, f"prepi/{mol}_{qm}_{method}.prepi")
+                    if debug:
+                        print(f"mol {mol} method {method} atomq {atomq[method]}")
                 with open(molxml, "w") as outf:
                     with open(txml) as fd:
                         iatom = 0
@@ -93,4 +93,4 @@ if __name__ == "__main__":
                                 iatom += 1
                     os.unlink(txml)
             
-        os.system(f"alexandria edit_mp -mp {qm}_SC/*/*.xml -o {method}-aug-cc-pvtz.xml")
+        os.system(f"alexandria edit_mp -mp {qm}_SC/*/*.xml -o {qm}-aug-cc-pvtz.xml")

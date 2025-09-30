@@ -19,6 +19,11 @@ def write_job(mol:str, q:int, method:str, basis:str, ncore:int)->str:
     density = ""
     if method == "MP2":
         density = " density=MP2"
+    mybasis = "aug-cc-pvtz"
+    readrad = ""
+    if len(basis) > 0:
+        mybasis = "gen"
+        readrad = "ReadRadii"
     with open(xyz, "r") as inf:
         lines = inf.readlines()
         com = mol + ".com"
@@ -27,14 +32,23 @@ def write_job(mol:str, q:int, method:str, basis:str, ncore:int)->str:
 %%nprocshared=%d
 %%mem=%dGb
 %%chk=%s.chk
-#P %s/aug-cc-pvtz Opt=tight %s Pop=(MK,Hirshfeld) iop(6/33=2) iop(6/42=6)
+#P %s/%s Opt=tight %s Pop=(MK,Hirshfeld%s) iop(6/33=2) iop(6/42=6)
 maxdisk=128GB
-            """ % ( ncore, ncore*2, mol, method, density ) )
+            """ % ( ncore, ncore*2, mol, method, mybasis, density, readrad ) )
             outf.write("\n%s\n\n" %mol)
             outf.write("%d 1\n" % q)
             for n in range(2, len(lines)):
                 outf.write(lines[n])
-            outf.write("\n\n")
+            outf.write("\n")
+            if len(basis) > 0:
+                bfn = f"../../{basis}"
+                with open(bfn, "r") as inf:
+                    for line in inf:
+                        outf.write(line)
+            outf.write("\n")
+            for m in range(2):
+                outf.write(" K 1.9\n")
+            outf.write("\n")
         job = mol + ".sh"
         with open(job, "w") as outf:
             outf.write("""#!/bin/sh
