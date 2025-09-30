@@ -31,23 +31,24 @@ acmparm = {
     "ACM-allelec-PG": { "ff": "PC+GS-allelec.xml", "nparm": 156, "label": "PC+GS", "target": "Elec+Induc" }
 }
 
-def run_one(qtype:str) -> dict:
+def run_one(qtype:str, qm:str) -> dict:
     if not qtype in acmparm:
         sys.exit("Unknown qtype %s" % qtype)
     molprops = "../AlexandriaFF/sapt-esp5.xml"
 
-    log_filename = f"{qtype}.log"
+    log_filename = f"{qtype}_{qm}.log"
     base_command = f"alexandria train_ff -nooptimize -g {log_filename} -sel ../Selection/ac-total.dat -mp {molprops} -ff ../AlexandriaFF/{acmparm[qtype]['ff']}"
 
+    qfn = f"../AlexandriaFF/{qm}-aug-cc-pvtz.xml"
     print(f"Running command for {qtype}")
     if "ACM" in qtype:
-        mycmd = base_command + " -charges ../AlexandriaFF/hf-aug-cc-pvtz.xml "
+        mycmd = base_command + f" -charges {qfn} "
     elif qtype == "MBIS":
         mycmd = base_command + f" -qtype qRESP -charges ../AlexandriaFF/mbis_ccsd.xml "
     elif qtype == "MBIS-S":
-        mycmd = base_command + f" -charges ../AlexandriaFF/hf-aug-cc-pvtz.xml "        
+        mycmd = base_command + f" -charges {qfn} "        
     else:
-        mycmd = base_command + f" -qtype q{qtype} -charges ../AlexandriaFF/hf-aug-cc-pvtz.xml "    
+        mycmd = base_command + f" -qtype q{qtype} -charges {qfn} "    
     os.system(mycmd)
 
     if not os.path.exists(log_filename):
@@ -97,138 +98,135 @@ def get_train_test(logfn:str):
                     ntest = int(words[2])
     return ntrain, ntest
 
-mytable = {}
-couls = ""
-allelecs = ""
-labels = ""
+def do_all(qm:str):
+    mytable = {}
+    couls = ""
+    allelecs = ""
+    labels = ""
 
-charge_models = [
-    ("header", "Existing charge models" ),
-    ("Mulliken", ""),
-    ("Hirshfeld", ""),
-    ("ESP", ""),
-    ("CM5", ""),
-    ("BCC", ""),
-    ("RESP",""),
-    ("MBIS",""),
-    ("MBIS-S",""),
-#    ("header", "Non-polarizable ACT models based on monomer ESP" ),
-#    ("ACM", "-esp-G"), ("ACM", "-esp-GV"), ("ACM", "-esp-GV2"), 
-#    ("header", "Polarizable ACT model based on monomer ESP" ),
-#    ("ACM", "-esp-PG" ),
-    ("header", "Non-polarizable ACT models" ),
-    ("ACM", "-elec-P"), ("ACM", "-allelec-P"),
-    ("ACM", "-elec-G"), ("ACM", "-allelec-G"),
-    ("ACM", "-elec-S"), ("ACM", "-allelec-S"),
-    ("ACM", "-elec-GV"), ("ACM", "-allelec-GV"),
-    ("ACM", "-elec-SV"), ("ACM", "-allelec-SV"),
-    ("header", "Polarizable ACT models" ),
-    ("ACM", "-elec-PG"), ("ACM", "-allelec-PG")
-]
-
-for qt, suffix in charge_models:
-    if qt == "header":
-        continue
-    qtsuf = qt+suffix
-    mytable[qtsuf] = run_one(qtsuf)
-    # Check whether we got any data
-    if not mytable[qtsuf]:
-        continue
-    newcoul = f"COULOMB-{qtsuf}.xvg"
-    os.system(f"mv COULOMB.xvg {newcoul}")
-    couls += f" {newcoul}"
-    newallelec = f"ALLELEC-{qtsuf}.xvg"
-    os.system(f"mv ALLELEC.xvg {newallelec}")
-    allelecs += f" {newallelec}"
-    labels += f" {qtsuf}"
-    for fn in [ "EXCHANGE.xvg", "EXCHIND.xvg", "DISPERSION.xvg", "INDUCTIONCORRECTION.xvg", "EPOT.xvg", "INDUCTION.xvg" ]:
-        if os.path.exists(fn):
-            os.unlink(fn)
-
-os.system(f"viewxvg -f {couls} -label {labels} -ls None -mk o + x -res -noshow -pdf legacy_coul.pdf")
-os.system(f"viewxvg -f {allelecs} -label {labels} -ls None -mk o + x -res -noshow -pdf legacy_allelec.pdf")
-
-ntrain, ntest = get_train_test("ESP.log")
-
-with open("legacy.tex", "w") as outf:
-    outf.write("\\begin{table}[ht]\n")
-    outf.write("\\centering\n")
-    outf.write("\\caption{Root mean square deviation (RMSD) and mean signed error (MSE), both in kJ/mol of electrostatic energies (Elec) and the sum of electrostatics and induction (Elec+Induc) for popular charge models compared to SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set. The dataset consisted of 94 dimers (Table S6). \\#P indicates the number of parameters in the model (the number of individual charges in legacy models). Values corresponding to the training targets are indicated in {\\bf bold font}. Description of models is given in Table~\\ref{tab:models}.}\n")
-    
-    outf.write("\\label{legacy}\n")
-    outf.write("\\begin{tabular}{lccccccccccc}\n")
-    outf.write("\\hline\n")
-    outf.write(" & Training & \\#P & \\multicolumn{2}{c}{Elec}  & \\multicolumn{2}{c}{Elec+Induc}& \\multicolumn{2}{c}{Elec}  & \\multicolumn{2}{c}{Elec+Induc}\\\\\n")
-    outf.write("Model & target & & RMSD & MSE & RMSD & MSE & RMSD & MSE & RMSD & MSE \\\\\n")
-    outf.write("& & & \\multicolumn{4}{c}{Train}& \\multicolumn{4}{c}{Test}\\\\\n")
+    charge_models = [
+        ("header", "Existing charge models" ),
+        ("Mulliken", ""), ("Hirshfeld", ""),
+        ("ESP", ""), ("CM5", ""),
+        ("BCC", ""), ("RESP",""),
+        ("MBIS",""), ("MBIS-S",""),
+        ("header", "Non-polarizable ACT models" ),
+        ("ACM", "-elec-P"), ("ACM", "-allelec-P"),
+        ("ACM", "-elec-G"), ("ACM", "-allelec-G"),
+        ("ACM", "-elec-S"), ("ACM", "-allelec-S"),
+        ("ACM", "-elec-GV"), ("ACM", "-allelec-GV"),
+        ("ACM", "-elec-SV"), ("ACM", "-allelec-SV"),
+        ("header", "Polarizable ACT models" ),
+        ("ACM", "-elec-PG"), ("ACM", "-allelec-PG")
+    ]
 
     for qt, suffix in charge_models:
         if qt == "header":
-            outf.write("\\hline\n")
-            outf.write("&&&\\multicolumn{8}{c}{\\bf %s}\\\\\n" % suffix)
             continue
-        qtsuf = qt + suffix
-        label = qt
-        if "label" in acmparm[qtsuf]:
-            label = acmparm[qtsuf]["label"]
-        star  = None
-        if "target" in acmparm[qtsuf]:
-            star  = acmparm[qtsuf]["target"]
+        qtsuf = qt+suffix
+        mytable[qtsuf] = run_one(qtsuf, qm)
+        # Check whether we got any data
+        if not mytable[qtsuf]:
+            continue
+        newcoul = f"COULOMB-{qtsuf}.xvg"
+        os.system(f"mv COULOMB.xvg {newcoul}")
+        couls += f" {newcoul}"
+        newallelec = f"ALLELEC-{qtsuf}.xvg"
+        os.system(f"mv ALLELEC.xvg {newallelec}")
+        allelecs += f" {newallelec}"
+        labels += f" {qtsuf}"
+        for fn in [ "EXCHANGE.xvg", "EXCHIND.xvg", "DISPERSION.xvg", "INDUCTIONCORRECTION.xvg", "EPOT.xvg", "INDUCTION.xvg" ]:
+            if os.path.exists(fn):
+                os.unlink(fn)
 
-        rmsd     = 'RMSD'
-        mse      = 'MSE'
-        na       = 'N/A'
-        np       = ""
-        if "nparm" in acmparm[qtsuf]:
-            np = acmparm[qtsuf]["nparm"]
-        rmsd_str = {}
-        mse_str  = {}
-        for mydata in [ "COUL", "ALLELEC" ]:
-            rmsd_str[mydata] = {}
-            mse_str[mydata]  = {}
-            for dataset in [ train, test ]:
-                if not qtsuf in mytable:
-                    print(f"No {qtsuf} in data")
-                    continue
-                if not dataset in mytable[qtsuf]:
-                    print(f"No {dataset} data in {qtsuf}")
-                    continue
-                ttable = mytable[qtsuf][dataset][mydata]
-                if rmsd in ttable and mse in ttable:
-                    bold    = False
-                    if star and "nparm" in acmparm[qtsuf] and dataset == train:
-                        if "Elec,Induc" in star:
-                            bold = True
-                        elif "Elec+Induc" in star:
-                            bold = mydata == "ALLELEC"
-                        else:
-                            bold = mydata == "COUL"
+    os.system(f"viewxvg -f {couls} -label {labels} -ls None -mk o + x -res -noshow -pdf legacy_coul_{qm}.pdf")
+    os.system(f"viewxvg -f {allelecs} -label {labels} -ls None -mk o + x -res -noshow -pdf legacy_allelec_{qm}.pdf")
+
+    ntrain, ntest = get_train_test("ESP.log")
+
+    with open(f"legacy_{qm}.tex", "w") as outf:
+        outf.write("\\begin{table}[ht]\n")
+        outf.write("\\centering\n")
+        outf.write("\\caption{Root mean square deviation (RMSD) and mean signed error (MSE), both in kJ/mol of electrostatic energies (Elec) and the sum of electrostatics and induction (Elec+Induc) for popular charge models compared to SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set. The dataset consisted of 94 dimers (Table S6). \\#P indicates the number of parameters in the model (the number of individual charges in legacy models). Values corresponding to the training targets are indicated in {\\bf bold font}. Description of models is given in Table~\\ref{tab:models}.}\n")
+    
+        outf.write("\\label{legacy}\n")
+        outf.write("\\begin{tabular}{lccccccccccc}\n")
+        outf.write("\\hline\n")
+        outf.write(" & Training & \\#P & \\multicolumn{2}{c}{Elec}  & \\multicolumn{2}{c}{Elec+Induc}& \\multicolumn{2}{c}{Elec}  & \\multicolumn{2}{c}{Elec+Induc}\\\\\n")
+        outf.write("Model & target & & RMSD & MSE & RMSD & MSE & RMSD & MSE & RMSD & MSE \\\\\n")
+        outf.write("& & & \\multicolumn{4}{c}{Train}& \\multicolumn{4}{c}{Test}\\\\\n")
+
+        for qt, suffix in charge_models:
+            if qt == "header":
+                outf.write("\\hline\n")
+                outf.write("&&&\\multicolumn{8}{c}{\\bf %s}\\\\\n" % suffix)
+                continue
+            qtsuf = qt + suffix
+            label = qt
+            if "label" in acmparm[qtsuf]:
+                label = acmparm[qtsuf]["label"]
+            star  = None
+            if "target" in acmparm[qtsuf]:
+                star  = acmparm[qtsuf]["target"]
+
+            rmsd     = 'RMSD'
+            mse      = 'MSE'
+            na       = 'N/A'
+            np       = ""
+            if "nparm" in acmparm[qtsuf]:
+                np = acmparm[qtsuf]["nparm"]
+            rmsd_str = {}
+            mse_str  = {}
+            for mydata in [ "COUL", "ALLELEC" ]:
+                rmsd_str[mydata] = {}
+                mse_str[mydata]  = {}
+                for dataset in [ train, test ]:
+                    if not qtsuf in mytable:
+                        print(f"No {qtsuf} in data")
+                        continue
+                    if not dataset in mytable[qtsuf]:
+                        print(f"No {dataset} data in {qtsuf}")
+                        continue
+                    ttable = mytable[qtsuf][dataset][mydata]
+                    if rmsd in ttable and mse in ttable:
+                        bold    = False
+                        if star and "nparm" in acmparm[qtsuf] and dataset == train:
+                            if "Elec,Induc" in star:
+                                bold = True
+                            elif "Elec+Induc" in star:
+                                bold = mydata == "ALLELEC"
+                            else:
+                                bold = mydata == "COUL"
                         
-                    if  bold:
-                        rmsd_str[mydata][dataset] = f"\\textbf{{{ttable[rmsd]}}}"
-                        mse_str[mydata][dataset]  = f"\\textbf{{{ttable[mse]}}}"
+                        if  bold:
+                            rmsd_str[mydata][dataset] = f"\\textbf{{{ttable[rmsd]}}}"
+                            mse_str[mydata][dataset]  = f"\\textbf{{{ttable[mse]}}}"
+                        else:
+                            rmsd_str[mydata][dataset] = f"{ttable[rmsd]}"
+                            mse_str[mydata][dataset]  = f"{ttable[mse]}"
                     else:
-                        rmsd_str[mydata][dataset] = f"{ttable[rmsd]}"
-                        mse_str[mydata][dataset]  = f"{ttable[mse]}"
-                else:
-                    print("Something wrong with table for %s" % qtsuf)
-                    sys.exit(ttable)
-        if train in mytable[qtsuf]:
-            N = mytable[qtsuf][train][mydata]["N"]
-            if debug:
-                print(rmsd_str)
-                print(mse_str)
-            target = ""
-            if star:
-                target = star
-            cite = ""
-            if "ref" in acmparm[qtsuf] and dataset == train:
-                cite = f"~\\cite{{{acmparm[qtsuf]['ref']}}}"
-            thisnp = np
-            outf.write(f"{label}{cite} & {target} & {thisnp} & {rmsd_str['COUL'][train]} & {mse_str['COUL'][train]} & {rmsd_str['ALLELEC'][train]} & {mse_str['ALLELEC'][train]} & {rmsd_str['COUL'][test]} & {mse_str['COUL'][test]} & {rmsd_str['ALLELEC'][test]} & {mse_str['ALLELEC'][test]} \\\\\n")
+                        print("Something wrong with table for %s" % qtsuf)
+                        sys.exit(ttable)
+            if train in mytable[qtsuf]:
+                N = mytable[qtsuf][train][mydata]["N"]
+                if debug:
+                    print(rmsd_str)
+                    print(mse_str)
+                target = ""
+                if star:
+                    target = star
+                cite = ""
+                if "ref" in acmparm[qtsuf] and dataset == train:
+                    cite = f"~\\cite{{{acmparm[qtsuf]['ref']}}}"
+                thisnp = np
+                outf.write(f"{label}{cite} & {target} & {thisnp} & {rmsd_str['COUL'][train]} & {mse_str['COUL'][train]} & {rmsd_str['ALLELEC'][train]} & {mse_str['ALLELEC'][train]} & {rmsd_str['COUL'][test]} & {mse_str['COUL'][test]} & {rmsd_str['ALLELEC'][test]} & {mse_str['ALLELEC'][test]} \\\\\n")
 
-    outf.write("\\hline\n")
-    outf.write("\\end{tabular}\n")
-    outf.write("\\end{table}\n")
+        outf.write("\\hline\n")
+        outf.write("\\end{tabular}\n")
+        outf.write("\\end{table}\n")
 
-print("ntrain %d ntest %d" % ( ntrain, ntest ))
+    print("ntrain %d ntest %d" % ( ntrain, ntest ))
+
+if __name__ == "__main__":
+    do_all("HF")
+    do_all("MP2")
