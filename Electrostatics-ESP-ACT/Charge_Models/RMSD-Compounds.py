@@ -42,10 +42,15 @@ if __name__ == "__main__":
                "GC": "ACM-elec-G_MP2.log",
                "PC+GV": "ACM-elec-GV_MP2.log",
                "PC+GS": "ACM-elec-PG_MP2.log",
-               "Mulliken": "Mulliken_MP2.log",
-               "Hirshfeld": "Hirshfeld_MP2.log",
-               "ESP": "ESP_MP2.log",
-               "CM5": "CM5_MP2.log" }
+               #"Mulliken": "Mulliken_MP2.log",
+               #"Hirshfeld": "Hirshfeld_MP2.log",
+               #"ESP": "ESP_MP2.log",
+               #"CM5": "CM5_MP2.log",
+               "BCC": "BCC_MP2.log",
+               "RESP": "RESP_MP2.log",
+               "MBIS": "MBIS_MP2.log",
+               "MBIS-S": "MBIS-S_MP2.log"
+              }
     for mydir in mydirs.keys():
         alldata[mydir] = run_one(mydirs[mydir])
     

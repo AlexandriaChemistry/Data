@@ -5,30 +5,31 @@ import os, glob, sys
 debug   = False
 train   = "Train"
 test    = "Test"
+header  = "header"
 
 # Number of independent charges disregarding symmetry
 nq = 45
 acmparm = {
-    "Mulliken":  { "ref": "Mulliken1955a", "nparm": nq, "ff": "coul-p.xml" },
-    "Hirshfeld": { "ref": "Hirshfeld1977a", "nparm": nq, "ff": "coul-p.xml" },
-    "ESP":       { "ref": "Besler1990a", "nparm": nq, "ff": "coul-p.xml" },
-    "CM5":       { "ref": "Marenich2012a",  "nparm": nq, "ff": "coul-p.xml" },
-    "BCC":       { "ref": "Jakalian2000a", "nparm": nq, "ff": "coul-p.xml" },
-    "RESP":      { "ref": "Bayly1993a", "nparm": nq, "ff": "coul-p.xml" },
-    "MBIS":      { "ref": "Verstraelen2016a", "nparm": nq, "ff": "coul-p.xml" },
-    "MBIS-S":      { "ref": "Verstraelen2016a", "nparm": nq*2, "ff": "P+S.xml" },
-    "ACM-elec-P":     { "ff": "PC-elec.xml", "nparm": 66, "label": "PC", "target": "Elec" },
-    "ACM-allelec-P":  { "ff": "PC-allelec.xml", "nparm": 66, "label": "PC", "target": "Elec+Induc" },
-    "ACM-elec-G":     { "ff": "GC-elec.xml", "nparm": 85, "label": "GC", "target": "Elec" },
-    "ACM-allelec-G":  { "ff": "GC-allelec.xml", "nparm": 85, "label": "GC", "target": "Elec+Induc" },
-    "ACM-elec-S":     { "ff": "SC-elec.xml", "nparm": 85, "label": "SC", "target": "Elec" },
-    "ACM-allelec-S":  { "ff": "SC-allelec.xml", "nparm": 85, "label": "SC", "target": "Elec+Induc" },
-    "ACM-elec-GV":    { "ff": "PC+GV-elec.xml", "nparm": 106, "label": "PC+GV", "target": "Elec" },
-    "ACM-allelec-GV": { "ff": "PC+GV-allelec.xml", "nparm": 106, "label": "PC+GV", "target": "Elec+Induc" },
-    "ACM-elec-SV":    { "ff": "PC+SV-elec.xml", "nparm": 106, "label": "PC+SV", "target": "Elec" },
-    "ACM-allelec-SV": { "ff": "PC+SV-allelec.xml", "nparm": 106, "label": "PC+SV", "target": "Elec+Induc" },
-    "ACM-elec-PG":    { "ff": "PC+GS-elec.xml", "nparm": 156, "label": "PC+GS", "target": "Elec,Induc" },
-    "ACM-allelec-PG": { "ff": "PC+GS-allelec.xml", "nparm": 156, "label": "PC+GS", "target": "Elec+Induc" }
+    "Mulliken":      { "ref": "Mulliken1955a", "nparm": nq, "ff": "coul-p.xml", header: "Existing charge models" },
+    "Hirshfeld":     { "ref": "Hirshfeld1977a", "nparm": nq, "ff": "coul-p.xml" },
+    "ESP":           { "ref": "Besler1990a", "nparm": nq, "ff": "coul-p.xml" },
+    "CM5":           { "ref": "Marenich2012a",  "nparm": nq, "ff": "coul-p.xml" },
+    "BCC":           { "ref": "Jakalian2000a", "nparm": nq, "ff": "coul-p.xml" },
+    "RESP":          { "ref": "Bayly1993a", "nparm": nq, "ff": "coul-p.xml" },
+    "MBIS":          { "ref": "Verstraelen2016a", "nparm": nq, "ff": "coul-p.xml" },
+    "MBIS-S":        { "ref": "Verstraelen2016a", "nparm": nq*2, "ff": "P+S.xml" },
+    "PC-elec":       { "ff": "PC-elec.xml", "nparm": 66, "label": "PC", "target": "Elec", header: "Non-polarizable ACT models" },
+    "PC-allelec":    { "ff": "PC-allelec.xml", "nparm": 66, "label": "PC", "target": "Elec+Induc" },
+    "GC-elec":       { "ff": "GC-elec.xml", "nparm": 85, "label": "GC", "target": "Elec" },
+    "GC-allelec":    { "ff": "GC-allelec.xml", "nparm": 85, "label": "GC", "target": "Elec+Induc" },
+    "SC-elec":       { "ff": "SC-elec.xml", "nparm": 85, "label": "SC", "target": "Elec" },
+    "SC-allelec":    { "ff": "SC-allelec.xml", "nparm": 85, "label": "SC", "target": "Elec+Induc" },
+    "PC+GV-elec":    { "ff": "PC+GV-elec.xml", "nparm": 106, "label": "PC+GV", "target": "Elec" },
+    "PC+GV-allelec": { "ff": "PC+GV-allelec.xml", "nparm": 106, "label": "PC+GV", "target": "Elec+Induc" },
+    "PC+SV-elec":    { "ff": "PC+SV-elec.xml", "nparm": 106, "label": "PC+SV", "target": "Elec" },
+    "PC+SV-allelec": { "ff": "PC+SV-allelec.xml", "nparm": 106, "label": "PC+SV", "target": "Elec+Induc" },
+    "PC+GS-elec":    { "ff": "PC+GS-elec.xml", "nparm": 156, "label": "PC+GS", "target": "Elec,Induc", header: "Polarizable ACT models" },
+    "PC+GS-allelec": { "ff": "PC+GS-allelec.xml", "nparm": 156, "label": "PC+GS", "target": "Elec+Induc" }
 }
 
 def run_one(qtype:str, qm:str) -> dict:
@@ -41,7 +42,7 @@ def run_one(qtype:str, qm:str) -> dict:
 
     qfn = f"../AlexandriaFF/{qm}-aug-cc-pvtz.xml"
     print(f"Running command for {qtype}")
-    if "ACM" in qtype:
+    if "elec" in qtype:
         mycmd = base_command + f" -charges {qfn} "
     elif qtype == "MBIS":
         mycmd = base_command + f" -qtype qRESP -charges ../AlexandriaFF/mbis_ccsd.xml "
@@ -88,14 +89,15 @@ def run_one(qtype:str, qm:str) -> dict:
 def get_train_test(logfn:str):
     ntrain = 0
     ntest  = 0
-    with open(logfn, "r") as inf:
-        for line in inf:
-            if "COULOMB (kJ/mol)" in line:
-                words = line.split()
-                if "Train" in line:
-                    ntrain = int(words[2])
-                else:
-                    ntest = int(words[2])
+    if os.path.exists(logfn):
+        with open(logfn, "r") as inf:
+            for line in inf:
+                if "COULOMB (kJ/mol)" in line:
+                    words = line.split()
+                    if "Train" in line:
+                        ntrain = int(words[2])
+                    else:
+                        ntest = int(words[2])
     return ntrain, ntest
 
 def do_all(qm:str):
@@ -104,26 +106,7 @@ def do_all(qm:str):
     allelecs = ""
     labels = ""
 
-    charge_models = [
-        ("header", "Existing charge models" ),
-        ("Mulliken", ""), ("Hirshfeld", ""),
-        ("ESP", ""), ("CM5", ""),
-        ("BCC", ""), ("RESP",""),
-        ("MBIS",""), ("MBIS-S",""),
-        ("header", "Non-polarizable ACT models" ),
-        ("ACM", "-elec-P"), ("ACM", "-allelec-P"),
-        ("ACM", "-elec-G"), ("ACM", "-allelec-G"),
-        ("ACM", "-elec-S"), ("ACM", "-allelec-S"),
-        ("ACM", "-elec-GV"), ("ACM", "-allelec-GV"),
-        ("ACM", "-elec-SV"), ("ACM", "-allelec-SV"),
-        ("header", "Polarizable ACT models" ),
-        ("ACM", "-elec-PG"), ("ACM", "-allelec-PG")
-    ]
-
-    for qt, suffix in charge_models:
-        if qt == "header":
-            continue
-        qtsuf = qt+suffix
+    for qtsuf in acmparm:
         mytable[qtsuf] = run_one(qtsuf, qm)
         # Check whether we got any data
         if not mytable[qtsuf]:
@@ -139,10 +122,10 @@ def do_all(qm:str):
             if os.path.exists(fn):
                 os.unlink(fn)
 
-    os.system(f"viewxvg -f {couls} -label {labels} -ls None -mk o + x -res -noshow -pdf legacy_coul_{qm}.pdf")
-    os.system(f"viewxvg -f {allelecs} -label {labels} -ls None -mk o + x -res -noshow -pdf legacy_allelec_{qm}.pdf")
+    os.system(f"viewxvg -f {couls} -label {labels} -ls None -mk o + x -res -noshow -pdf legacy_coul_{qm}.pdf -panel")
+    os.system(f"viewxvg -f {allelecs} -label {labels} -ls None -mk o + x -res -noshow -pdf legacy_allelec_{qm}.pdf -panel")
 
-    ntrain, ntest = get_train_test("ESP.log")
+    ntrain, ntest = get_train_test("ESP_{qm}.log")
 
     with open(f"legacy_{qm}.tex", "w") as outf:
         outf.write("\\begin{table}[ht]\n")
@@ -156,13 +139,11 @@ def do_all(qm:str):
         outf.write("Model & target & & RMSD & MSE & RMSD & MSE & RMSD & MSE & RMSD & MSE \\\\\n")
         outf.write("& & & \\multicolumn{4}{c}{Train}& \\multicolumn{4}{c}{Test}\\\\\n")
 
-        for qt, suffix in charge_models:
-            if qt == "header":
+        for qtsuf in acmparm:
+            if header in acmparm[qtsuf]:
                 outf.write("\\hline\n")
-                outf.write("&&&\\multicolumn{8}{c}{\\bf %s}\\\\\n" % suffix)
-                continue
-            qtsuf = qt + suffix
-            label = qt
+                outf.write("&&&\\multicolumn{8}{c}{\\bf %s}\\\\\n" % acmparm[qtsuf][header])
+            label = qtsuf
             if "label" in acmparm[qtsuf]:
                 label = acmparm[qtsuf]["label"]
             star  = None
