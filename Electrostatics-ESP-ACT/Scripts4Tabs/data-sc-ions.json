@@ -110,5 +110,82 @@
         "latex": "$\\text{C}_2\\text{H}_7\\text{NH}_3^+ \\text{-H}_2\\text{O}$",
         "rmin": 2.651,
         "sapt2": -99.48
+    },
+    {
+        "name": "guanidinium#formate",
+        "index": "0348",
+        "latex": "Guanidinium-Formate",
+        "rmin": 2.594,
+        "sapt2": -389.144
+    },
+    {
+        "name": "guanidinium#acetate",
+        "index": "0280",
+        "latex": "Guanidinium-Acetate",
+        "rmin": 2.403,
+        "sapt2": -385.986
+    },
+    {
+        "name": "guanidinium#fluoride",
+        "index": "0218",
+        "latex": "Guanidinium-Fluoride",
+        "rmin": 2.632,
+        "sapt2": -395.176
+    },
+    {
+        "name": "guanidinium#chloride",
+        "index": "0227",
+        "latex": "Guanidinium-Chloride",
+        "rmin": 2.906,
+        "sapt2": -367.426
+    },
+    {
+        "name": "guanidinium#bromide",
+        "index": "0245",
+        "latex": "Guanidinium-Bromide",
+        "rmin": 3.042,
+        "sapt2": -368.115
+    },
+    {
+        "name": "guanidinium#water",
+        "index": "0250",
+        "latex": "Guanidinium-Water",
+        "rmin": 2.728,
+        "sapt2": -36.8077
+    },
+    {
+        "name": "imidazolium#formate",
+        "index": "0305",
+        "latex": "Imidazolium-Formate",
+        "rmin": 2.588,
+        "sapt2":  -366.234
+    },
+    {
+        "name": "imidazolium#acetate",
+        "index": "0019",
+        "latex": "Imidazolium-Acetate",
+        "rmin": 3.043,
+        "sapt2": -377.681
+    },
+    {
+        "name": "imidazolium#chloride",
+        "index": "0016",
+        "latex": "Imidazolium-Chloride",
+        "rmin": 2.885,
+        "sapt2": -385.444
+    },
+    {
+        "name": "imidazolium#bromide",
+        "index": "0535",
+        "latex": "Imidazolium-Bromide",
+        "rmin": 2.989,
+        "sapt2": -372.723
+    },
+    {
+        "name": "imidazolium#water",
+        "index": "0225",
+        "latex": "Imidazolium-Water",
+        "rmin": 2.462,
+        "sapt2": -37.1544
     }
 ]

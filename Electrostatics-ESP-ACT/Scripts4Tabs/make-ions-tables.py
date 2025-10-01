@@ -95,8 +95,9 @@ def wtable(file_path:str, models:dict, mydata:list, caption:str, label:str):
             rmsd[m] = 0
             mse[m]  = 0
         for i in range(len(mydata)):
+            myname = mydata[i]["name"].replace("#", "-")
             file.write("%s & %g & %.1f " %
-                       ( mydata[i]["latex"], mydata[i]["rmin"], mydata[i]["sapt2"] ) )
+                       ( myname, mydata[i]["rmin"], mydata[i]["sapt2"] ) )
             for m in models.keys():
                 if not m in mydata[i] or not mydata[i][m]:
                     file.write("& - ")
