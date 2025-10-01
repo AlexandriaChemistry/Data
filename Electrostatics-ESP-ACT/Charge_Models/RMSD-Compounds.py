@@ -38,10 +38,12 @@ def run_legacy(filenm: str) -> dict:
 
 if __name__ == "__main__":
     alldata = {}
-    mydirs = { "PC": "ACM-elec-P_MP2.log",
-               "GC": "ACM-elec-G_MP2.log",
-               "PC+GV": "ACM-elec-GV_MP2.log",
-               "PC+GS": "ACM-elec-PG_MP2.log",
+    mydirs = { "PC": "PC-elec_MP2.log",
+               "GC": "GC-elec_MP2.log",
+               "SC": "SC-elec_MP2.log",
+               "PC+GV": "PC+GV-elec_MP2.log",
+               "PC+SV": "PC+SV-elec_MP2.log",
+               "PC+GS": "PC+GS-elec_MP2.log",
                #"Mulliken": "Mulliken_MP2.log",
                #"Hirshfeld": "Hirshfeld_MP2.log",
                #"ESP": "ESP_MP2.log",
@@ -57,7 +59,7 @@ if __name__ == "__main__":
     train = get_train()
     texfn = "rmsdtable.tex"
     with open(texfn, "w") as outf:
-        outf.write("\\begin{longtable}{lcccccccccc}\n")
+        outf.write("\\begin{longtable}{lcccccccccccc}\n")
         outf.write("\\caption{Root mean square deviation (kJ/mol) from SAPT2+(CCD)$\\delta$MP2 electrostatics per compound dimer for the different ACT models and widely-used models, Mulliken, Hirshfeld, ESP, and CM5. N is the number of conformations of each dimer used. Compound dimers used in training are printed in {\\bf bold font}.}\\\\\n")
         outf.write("\\hline\n")
         outf.write("Dimer & N ")
@@ -72,7 +74,7 @@ if __name__ == "__main__":
             outf.write("%s & %s " % (ddd, alldata["PC"][dimer]["N"]))
             for md in alldata.keys():
                 if dimer in alldata[md]:
-                    outf.write(" & %s" % alldata[md][dimer]["RMSD"])
+                    outf.write(" & %.1f" % float(alldata[md][dimer]["RMSD"]))
                 else:
                     outf.write(" & ")
             outf.write("\\\\\n")
