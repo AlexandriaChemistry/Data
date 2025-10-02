@@ -1,10 +1,27 @@
 #!/usr/bin/env python3
 
-import os
+import json, os
 from run_gaussian import get_mols
 
-debug = False
+debug   = False
+atoms   = "atoms"
+charges = "charges"
+widths  = "valence_widths"
 
+def read_mbis(mol:str, method:str)->list:
+    js = f"MBIS/{mol}/{method}.json"
+    if not os.path.exists(js):
+        return None
+    mb = []
+    with open(js, "r") as inf:
+        data = json.load(inf)
+        if atoms in data and charges in data and widths in data:
+            for i in range(len(data[atoms])):
+                mb.append( { "atom": data[atoms][i],
+                             "q": data[charges][i][0],
+                             "width": data[widths][i][0] } )
+    return mb
+            
 def extract_columns(mol:str, input_file, skip_lines=7)->list:
     renum = { 
         "ammonium": { "4": 2, "5": 1, "6": 3, "7": 4, "8": 5 },
@@ -70,11 +87,13 @@ if __name__ == "__main__":
              "InChI=1S/C4H8O2/c1-2-3-4(5)6/h2-3H2,1H3,(H,5,6)/p-1": "InChI=1S/C4H9O2/c1-2-3-4(5)6/h2H2,1,3H3,(H,5,6)/q-1" }
     mols = get_mols()
     for qm in [ "HF", "MP2" ]:
+        myxmls = ""
         for mol in mols.keys():
             mdir = f"{qm}_SC/{mol}"
             if os.path.isdir(mdir):
                 txml   = f"{mdir}/temp.xml"
                 molxml = f"{mdir}/{mol}.xml"
+                myxmls += " " + molxml
                 os.system(f"gauss2molprop -n {mol} -i {mdir}/{mol}.log -o {txml} -basis aug-cc-pvtz")
             
                 atomq = {}
@@ -82,6 +101,12 @@ if __name__ == "__main__":
                     atomq[method] = extract_columns(mol, f"prepi/{mol}_{qm}_{method}.prepi")
                     if debug:
                         print(f"mol {mol} method {method} atomq {atomq[method]}")
+                mbisf  = None
+                mbdata = None
+                if qm == "MP2":
+                    mbdata = read_mbis(mol)
+                    mbxml  = f"{mdir}/mbis.xml"
+                    mbisf  = open(mbxml, "w")
                 with open(molxml, "w") as outf:
                     with open(txml) as fd:
                         iatom = 0
@@ -89,6 +114,12 @@ if __name__ == "__main__":
                             myline = line
                             for r in repl:
                                 myline = myline.replace(r, repl[r])
+                            if mbisf:
+                                if line.find("qRESP") >= 0:
+                                    myq = mbdata[iatom]["q"]
+                                    mbisf.write(f"      <q{m}>{myq}</q{m}>\n")
+                                else:
+                                    mbisf.write(myline)
                             outf.write(myline)
                             if line.find("qMulliken") >= 0:
                                 for method in [ "bcc", "resp" ]:
@@ -100,5 +131,8 @@ if __name__ == "__main__":
                                         outf.write(f"      <q{m}>{myq}</q{m}>\n")
                                 iatom += 1
                     os.unlink(txml)
-            
-        os.system(f"alexandria edit_mp -mp {qm}_SC/*/*.xml -o {qm}-aug-cc-pvtz.xml")
+                if mbisf:
+                    mbisf.close()
+        if qm == "MP2":
+            os.system(f"alexandria edit_mp -mp {qm}_SC/*/mbis.xml -o MBIS_{qm}.xml")
+        os.system(f"alexandria edit_mp -mp {myxmls} -o {qm}-aug-cc-pvtz.xml")
