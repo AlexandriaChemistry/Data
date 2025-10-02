@@ -8,8 +8,10 @@ compounds_of_interest = [
     "methylammonium",
     "acetate",
     "formate",
-    "water"
-]
+    "water",
+    "guanidinium",
+    "imidazolium"
+    ]
 
 def extract_data_from_log(log_files):
     data = {
