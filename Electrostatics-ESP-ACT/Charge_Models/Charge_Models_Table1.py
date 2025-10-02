@@ -36,6 +36,8 @@ def run_one(qtype:str, qm:str) -> dict:
     if not qtype in acmparm:
         sys.exit("Unknown qtype %s" % qtype)
     molprops = "../AlexandriaFF/sapt-esp5.xml"
+    if qtype == "MBIS-S":
+        molprops = "../AlexandriaFF/sapt-esp5-mbiss.xml"
 
     log_filename = f"{qtype}_{qm}.log"
     base_command = f"alexandria train_ff -nooptimize -g {log_filename} -sel ../Selection/ac-total.dat -mp {molprops} -ff ../AlexandriaFF/{acmparm[qtype]['ff']}"
@@ -47,7 +49,7 @@ def run_one(qtype:str, qm:str) -> dict:
     elif qtype == "MBIS":
         mycmd = base_command + f" -qtype qRESP -charges ../AlexandriaFF/MBIS_MP2.xml "
     elif qtype == "MBIS-S":
-        mycmd = base_command + f" -charges {qfn} "        
+        mycmd = base_command + f" -charges ../AlexandriaFF/mbisS_ccsd.xml "        
     else:
         mycmd = base_command + f" -qtype q{qtype} -charges {qfn} "    
     os.system(mycmd)
