@@ -3,14 +3,15 @@
 import json, os
 from run_gaussian import get_mols
 
-debug   = False
-atoms   = "atoms"
+debug   = True
+atoms   = "atom_names"
 charges = "charges"
 widths  = "valence_widths"
 
 def read_mbis(mol:str, method:str)->list:
-    js = f"MBIS/{mol}/{method}.json"
+    js = f"../MBIS/{mol}_mbis_ps.json"
     if not os.path.exists(js):
+        print(f"Cannot find {js}")
         return None
     mb = []
     with open(js, "r") as inf:
@@ -104,9 +105,12 @@ if __name__ == "__main__":
                 mbisf  = None
                 mbdata = None
                 if qm == "MP2":
-                    mbdata = read_mbis(mol)
-                    mbxml  = f"{mdir}/mbis.xml"
-                    mbisf  = open(mbxml, "w")
+                    mbdata = read_mbis(mol, qm)
+                    if debug:
+                        print(f"mol {mol} mbdata {mbdata}")
+                    if mbdata:
+                        mbxml  = f"{mdir}/mbis.xml"
+                        mbisf  = open(mbxml, "w")
                 with open(molxml, "w") as outf:
                     with open(txml) as fd:
                         iatom = 0
@@ -115,11 +119,13 @@ if __name__ == "__main__":
                             for r in repl:
                                 myline = myline.replace(r, repl[r])
                             if mbisf:
-                                if line.find("qRESP") >= 0:
+                                mbisf.write(myline)
+                                if line.find("qESP") >= 0:
+                                    # Fake it until you make it: use the RESP charge field
+                                    # to store the MBIS charge.
                                     myq = mbdata[iatom]["q"]
-                                    mbisf.write(f"      <q{m}>{myq}</q{m}>\n")
-                                else:
-                                    mbisf.write(myline)
+                                    mbisf.write(f"      <qRESP>{myq}</qRESP>\n")
+
                             outf.write(myline)
                             if line.find("qMulliken") >= 0:
                                 for method in [ "bcc", "resp" ]:

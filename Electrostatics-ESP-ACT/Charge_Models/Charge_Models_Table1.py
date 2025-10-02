@@ -45,7 +45,7 @@ def run_one(qtype:str, qm:str) -> dict:
     if "elec" in qtype:
         mycmd = base_command + f" -charges {qfn} "
     elif qtype == "MBIS":
-        mycmd = base_command + f" -qtype qRESP -charges ../AlexandriaFF/mbis_ccsd.xml "
+        mycmd = base_command + f" -qtype qRESP -charges ../AlexandriaFF/MBIS_MP2.xml "
     elif qtype == "MBIS-S":
         mycmd = base_command + f" -charges {qfn} "        
     else:
