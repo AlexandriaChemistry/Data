@@ -124,8 +124,8 @@ def do_all(qm:str):
             if os.path.exists(fn):
                 os.unlink(fn)
 
-    os.system(f"viewxvg -f {couls} -label {labels} -ls None -mk o + x -res -noshow -pdf legacy_coul_{qm}.pdf -panel")
-    os.system(f"viewxvg -f {allelecs} -label {labels} -ls None -mk o + x -res -noshow -pdf legacy_allelec_{qm}.pdf -panel")
+    os.system(f"viewxvg -f {couls} -label {labels} -ls None -mk o + x -res -noshow -save legacy_coul_{qm}.pdf -panel")
+    os.system(f"viewxvg -f {allelecs} -label {labels} -ls None -mk o + x -res -noshow -save legacy_allelec_{qm}.pdf -panel")
 
     ntrain, ntest = get_train_test("ESP_{qm}.log")
 
