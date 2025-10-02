@@ -3,7 +3,7 @@
 import json, os
 from run_gaussian import get_mols
 
-debug   = True
+debug   = False
 atoms   = "atom_names"
 charges = "charges"
 widths  = "valence_widths"
@@ -140,5 +140,5 @@ if __name__ == "__main__":
                 if mbisf:
                     mbisf.close()
         if qm == "MP2":
-            os.system(f"alexandria edit_mp -mp {qm}_SC/*/mbis.xml -o MBIS_{qm}.xml")
+            os.system(f"alexandria edit_mp -mp {qm}_SC/*/mbis.xml -o mbis_ccsd.xml")
         os.system(f"alexandria edit_mp -mp {myxmls} -o {qm}-aug-cc-pvtz.xml")
