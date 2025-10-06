@@ -39,8 +39,6 @@ if __name__ == "__main__":
     	"all-pg.xml",
     ]
     label = {
-        "esp-g.xml": { "model": "GC", "train": "ESP" },
-        "esp-gv.xml": { "model": "GC+PGV", "train": "ESP" },
         "coul-p.xml": { "model": "PC", "train": "SAPT (Elec)" },
         "all-p.xml": { "model": "PC", "train": "SAPT (Elec+Induc)" },
         "coul-g.xml": { "model": "GC", "train": "SAPT (Elec)" },
