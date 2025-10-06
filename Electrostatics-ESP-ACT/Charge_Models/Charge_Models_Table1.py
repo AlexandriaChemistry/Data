@@ -17,7 +17,7 @@ acmparm = {
     "BCC":           { "ref": "Jakalian2000a", "nparm": nq, "ff": "coul-p.xml" },
     "RESP":          { "ref": "Bayly1993a", "nparm": nq, "ff": "coul-p.xml" },
     "MBIS":          { "ref": "Verstraelen2016a", "nparm": nq, "ff": "coul-p.xml" },
-    "MBIS-S":        { "ref": "Verstraelen2016a", "nparm": nq*3, "ff": "P+S.xml" },
+    "MBIS-S":        { "ref": "Verstraelen2016a", "nparm": nq*3, "ff": "P+S-hacked.xml" },
     "PC-elec":       { "ff": "PC-elec.xml", "nparm": 66, "label": "PC", "target": "Elec", header: "Non-polarizable ACT models" },
     "PC-allelec":    { "ff": "PC-allelec.xml", "nparm": 66, "label": "PC", "target": "Elec+Induc" },
     "GC-elec":       { "ff": "GC-elec.xml", "nparm": 85, "label": "GC", "target": "Elec" },
@@ -124,8 +124,14 @@ def do_all(qm:str):
             if os.path.exists(fn):
                 os.unlink(fn)
 
-    os.system(f"viewxvg -f {couls} -label {labels} -ls None -mk o + x -res -noshow -save legacy_coul_{qm}.pdf -panel")
-    os.system(f"viewxvg -f {allelecs} -label {labels} -ls None -mk o + x -res -noshow -save legacy_allelec_{qm}.pdf -panel")
+    cmd1 = f"viewxvg -f {couls} -label {labels} -ls None -mk o + x -res -noshow -save legacy_coul_{qm}.pdf -panel"
+    if debug:
+        print(f"cmd1 = {cmd1}")
+    os.system(cmd1)
+    cmd2 = f"viewxvg -f {allelecs} -label {labels} -ls None -mk o + x -res -noshow -save legacy_allelec_{qm}.pdf -panel"
+    if debug:
+        print(f"cmd2 = {cmd2}")
+    os.system(cmd2)
 
     ntrain, ntest = get_train_test("ESP_{qm}.log")
 
@@ -211,5 +217,5 @@ def do_all(qm:str):
     print("ntrain %d ntest %d" % ( ntrain, ntest ))
 
 if __name__ == "__main__":
-    do_all("HF")
+    #do_all("HF")
     do_all("MP2")
