@@ -17,7 +17,7 @@ acmparm = {
     "BCC":           { "ref": "Jakalian2000a", "nparm": nq, "ff": "coul-p.xml" },
     "RESP":          { "ref": "Bayly1993a", "nparm": nq, "ff": "coul-p.xml" },
     "MBIS":          { "ref": "Verstraelen2016a", "nparm": nq, "ff": "coul-p.xml" },
-    "MBIS-S":        { "ref": "Verstraelen2016a", "nparm": nq*2, "ff": "P+S.xml" },
+    "MBIS-S":        { "ref": "Verstraelen2016a", "nparm": nq*3, "ff": "P+S.xml" },
     "PC-elec":       { "ff": "PC-elec.xml", "nparm": 66, "label": "PC", "target": "Elec", header: "Non-polarizable ACT models" },
     "PC-allelec":    { "ff": "PC-allelec.xml", "nparm": 66, "label": "PC", "target": "Elec+Induc" },
     "GC-elec":       { "ff": "GC-elec.xml", "nparm": 85, "label": "GC", "target": "Elec" },
@@ -49,7 +49,7 @@ def run_one(qtype:str, qm:str) -> dict:
     elif qtype == "MBIS":
         mycmd = base_command + f" -qtype qRESP -charges ../AlexandriaFF/MBIS_MP2.xml "
     elif qtype == "MBIS-S":
-        mycmd = base_command + f" -charges ../AlexandriaFF/mbisS_ccsd.xml "        
+        mycmd = base_command + f" -charges ../AlexandriaFF/mbisS_ccsd.xml -qtype qRESP "        
     else:
         mycmd = base_command + f" -qtype q{qtype} -charges {qfn} "    
     os.system(mycmd)
