@@ -2,12 +2,14 @@
 
 import os
 
-def run_one(ff:str, qtype:str)->float:
-    myff = os.path.basename(ff)
-    mylog = myff.replace(".xml", ".log")
-    cmd = ("alexandria train_ff -ff ../AlexandriaFF/%s -mp ../../../ACTdata/MolProps/hf-aug-cc-pvtz.xml -nooptimize -sel ../Selection/monomer.dat -g %s -v 4" % ( myff, mylog ) )
+def run_one(ff:str, myid:str, qtype:str, charges:str)->float:
+    myff  = os.path.basename(ff)
+    mylog = f"{myid}.log"
+    cmd = ("alexandria train_ff -ff %s -mp ../AlexandriaFF/hf-aug-cc-pvtz.xml -nooptimize -sel ../Selection/monomer.dat -g %s -v 4" % ( ff, mylog ) )
     if qtype:
-        cmd += (" -qtype q%s -charges ../AlexandriaFF/hf-aug-cc-pvtz.xml " % qtype)
+        if not charges:
+            charges = "../AlexandriaFF/hf-aug-cc-pvtz.xml"
+        cmd += (" -qtype q%s -charges %s" % ( qtype, charges ) )
     os.system(cmd)
     rmsd = None
     with open(mylog, "r") as inf:
@@ -22,45 +24,32 @@ def run_one(ff:str, qtype:str)->float:
     
 if __name__ == "__main__":
     allffs = [
-        "Mulliken",
-        "Hirshfeld",
-        "ESP",
-        "CM5",
-        "BCC",
-        "RESP",
-        "esp-g.xml",
-        "esp-gv.xml",
-        "coul-p.xml", 
-        "all-p.xml", 
-        "coul-g.xml",
-        "all-g.xml",
-        "coul-gv.xml",
-        "all-gv.xml",
-    	"all-pg.xml",
+        { "label": "Mulliken", "ff": "coul-p", "qtype": "Mulliken" },
+        { "label": "Hirshfeld", "ff": "coul-p", "qtype": "Hirshfeld" },
+        { "label": "ESP", "ff": "coul-p", "qtype": "ESP" },
+        { "label": "CM5", "ff": "coul-p", "qtype": "CM5" },
+        { "label": "BCC", "ff": "coul-p", "qtype": "BCC" },
+        { "label": "RESP", "ff": "coul-p", "qtype": "RESP" },
+        { "label": "MBIS", "ff": "coul-p", "qtype": "RESP", "charges": "../AlexandriaFF/mbis_ccsd.xml" },
+        { "label": "MBIS-S", "ff": "P+S-hacked", "qtype": "RESP", "charges": "../AlexandriaFF/mbisS_ccsd.xml" },
+        { "label": "PC", "ff": "PC-elec", "qtype": None },
+        { "label": "GC", "ff": "GC-elec", "qtype": None },
+        { "label": "SC", "ff": "SC-elec", "qtype": None },
+        { "label": "PC+GV", "ff": "PC+GV-elec", "qtype": None },
+        { "label": "PC+SV", "ff": "PC+SV-elec", "qtype": None },
+        { "label": "PC+GS", "ff": "PC+GS-elec", "qtype": None }
     ]
-    label = {
-        "coul-p.xml": { "model": "PC", "train": "SAPT (Elec)" },
-        "all-p.xml": { "model": "PC", "train": "SAPT (Elec+Induc)" },
-        "coul-g.xml": { "model": "GC", "train": "SAPT (Elec)" },
-        "all-g.xml": { "model": "GC", "train": "SAPT (Elec+Induc)" },
-        "coul-gv.xml": { "model": "GC+PGV", "train": "SAPT (Elec)" },
-        "all-gv.xml": { "model": "GC+PGV", "train": "SAPT (Elec+Induc)" },
-    	"all-pg.xml": { "model": "PC+GVS", "train": "SAPT (Elec,Induc)" }
-    }
     myrmsd = []
-    for ff in allffs:
-        myff  = "coul-p.xml"
-        qtype = ff
-        myid  = qtype
-        if ff.endswith(".xml"):
-            myff  = ff
-            qtype = None
-            myid  = myff
-        print("Will run %s" % myff)
-        rmsd = run_one(myff, qtype)
-        print("==================")
+    for qtype in allffs:
+        print("Will run %s" % qtype['label'])
+        ff = f"../AlexandriaFF/{qtype['ff']}.xml"
+        charges = None
+        if "charges" in qtype:
+            charges = qtype["charges"]
+        rmsd = run_one(ff, qtype['label'], qtype['qtype'], charges)
+
         if rmsd:
-            myrmsd.append( ( myid,  rmsd ) )
+            myrmsd.append( ( qtype['label'],  rmsd ) )
     for kv in myrmsd:
         print("%s  %g" % ( kv[0], kv[1] ))
     tab = "esprmsd.tex"
@@ -74,12 +63,8 @@ if __name__ == "__main__":
         outf.write("Model & Training target & RMSD \\\\\n")
         outf.write("\\hline\n")
         for kv in myrmsd:
-            model = kv[0]
-            train = ""
-            if kv[0] in label:
-                model = label[kv[0]]["model"]
-                train = label[kv[0]]["train"]
-            outf.write("%s & %s & %.1f\\\\\n" % ( model, train, kv[1] ))
+            train = "elec"
+            outf.write("%s & %s & %.1f\\\\\n" % ( kv[0], train, kv[1] ))
         outf.write("\\hline\n")
         outf.write("\\end{tabular}\n")
         outf.write("\\end{table}\n")
