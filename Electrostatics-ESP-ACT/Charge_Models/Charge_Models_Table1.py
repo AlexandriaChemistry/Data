@@ -17,7 +17,7 @@ acmparm = {
     "BCC":           { "ref": "Jakalian2000a", "nparm": nq, "ff": "coul-p.xml" },
     "RESP":          { "ref": "Bayly1993a", "nparm": nq, "ff": "coul-p.xml" },
     "MBIS":          { "ref": "Verstraelen2016a", "nparm": nq, "ff": "coul-p.xml" },
-    "MBIS-S":        { "ref": "Verstraelen2016a", "nparm": nq*3, "ff": "P+S-hacked.xml" },
+    "MBIS-S":        { "ref": "Verstraelen2016a", "nparm": nq*3, "ff": "P+S_updated.xml" },
     "PC-elec":       { "ff": "PC-elec.xml", "nparm": 66, "label": "PC", "target": "Elec", header: "Non-polarizable ACT models" },
     "PC-allelec":    { "ff": "PC-allelec.xml", "nparm": 66, "label": "PC", "target": "Elec+Induc" },
     "GC-elec":       { "ff": "GC-elec.xml", "nparm": 85, "label": "GC", "target": "Elec" },

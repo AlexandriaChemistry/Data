@@ -56,7 +56,7 @@ if __name__ == "__main__":
     with open(tab, "w") as outf:
         outf.write("\\begin{table}[ht]\n")
         outf.write("\\centering\n")
-        outf.write("\\caption{RMSD (kJ/mol e) of different charge models with respect to the electrostatic potential computed at the HF/aug-cc-pvtz level of theory (see Methods). For description of the different models and training, see Methods.}\n")
+        outf.write("\\caption{RMSD (kJ/mol e) of different charge models with respect to the electrostatic potential computed at the HF/aug-cc-pvtz level of theory (see Methods) for all side chain analogs in Table 1 and water. For description of the different models and training, see Methods.}\n")
         outf.write("\\label{tab:esprms}\n")
         outf.write("\\begin{tabular}{lcc}\n")
         outf.write("\\hline\n")

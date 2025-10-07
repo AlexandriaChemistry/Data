@@ -98,6 +98,10 @@ coulomb_block = root.find(".//interaction[@type='COULOMB']")
 if coulomb_block is None:
     raise RuntimeError("No COULOMB interaction block found in XML!")
 
+particle_block = root.find(".//particletypes")
+if particle_block is None:
+    raise RuntimeError("No particletypes found in XML!")
+
 for molname in obtype_updates.keys():
     json_path = os.path.join(json_dir, f"{molname}/CCSD.json")
     if not os.path.exists(json_path):
@@ -116,12 +120,6 @@ for molname in obtype_updates.keys():
     for v in val_widths:
         zeta_values.append(1/(2*BOHR*float(v[0])))
 
-    charges = jdata.get("charges", [])
-    val_charges = jdata.get("valence_charges", [])
-    core_charges = []
-    for c in range(len(charges)):
-        core_charges.append(val_charges[c][0] - charges[c][0])
-    
     atomtypes = [new for _, new in obtype_updates[molname]]
 
     if len(atomtypes) != len(zeta_values):
@@ -146,5 +144,18 @@ for molname in obtype_updates.keys():
         param_elem.set("minimum", str(zval_rounded))
         param_elem.set("maximum", str(zval_rounded))
 
+    # Now fix charges
+    charges = jdata.get("charges", [])
+    val_charges = jdata.get("valence_charges", [])
+    core_charges = []
+    for c in range(len(charges)):
+        core_charges.append(charges[c][0] - val_charges[c][0])
+    for atype, qcore in zip(atomtypes, core_charges):
+        paramlist = particle_block.find(f".//particletype[@identifier='{atype}']")
+        charge = paramlist.find(f".//parameter[@type='charge']")
+        charge.set("value", str(qcore))
+        charge.set("minimum", str(qcore))
+        charge.set("maximum", str(qcore))
+        
 tree.write(output_xml, xml_declaration=True, short_empty_elements=True)
 print(f"updated XML written to {output_xml}")
