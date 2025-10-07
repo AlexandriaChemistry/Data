@@ -3,7 +3,8 @@ import os
 import json
 import xml.etree.ElementTree as ET
 
-json_dir = "."
+BOHR = 0.0529177
+json_dir = "../AntechamberGaussian/MBIS/"
 xml_file = "P+S.xml"
 output_xml = "P+S_updated.xml"
 
@@ -98,7 +99,7 @@ if coulomb_block is None:
     raise RuntimeError("No COULOMB interaction block found in XML!")
 
 for molname in obtype_updates.keys():
-    json_path = os.path.join(json_dir, f"{molname}_mbis_ps.json")
+    json_path = os.path.join(json_dir, f"{molname}/CCSD.json")
     if not os.path.exists(json_path):
         print(f"no JSON for {molname}, skipping...")
         continue
@@ -106,20 +107,28 @@ for molname in obtype_updates.keys():
     with open(json_path) as f:
         jdata = json.load(f)
 
-    sigma_inv_nm = jdata.get("sigma_inv_nm", [])
-    if not sigma_inv_nm:
-        print(f"no sigma_inv_nm for {molname}, skipping...")
+    val_widths = jdata.get("valence_widths", [])
+    if not val_widths:
+        print(f"no val_widths for {molname}, skipping...")
         continue
 
-    zeta_values = [v/2 for v in sigma_inv_nm]
+    zeta_values = []
+    for v in val_widths:
+        zeta_values.append(1/(2*BOHR*float(v[0])))
 
+    charges = jdata.get("charges", [])
+    val_charges = jdata.get("valence_charges", [])
+    core_charges = []
+    for c in range(len(charges)):
+        core_charges.append(val_charges[c][0] - charges[c][0])
+    
     atomtypes = [new for _, new in obtype_updates[molname]]
 
     if len(atomtypes) != len(zeta_values):
         print(f"mismatch in number of atomtypes ({len(atomtypes)}) and zeta values ({len(zeta_values)}) for {molname}")
         continue
 
-    print(f"{molname}: using {len(zeta_values)} zeta values (divided by 2)")
+    print(f"{molname}: using {len(zeta_values)} zeta values")
 
     for atype, zval in zip(atomtypes, zeta_values):
         paramlist = coulomb_block.find(f".//parameterlist[@identifier='{atype}_z']")
