@@ -63,12 +63,12 @@ def simplify(atype:str)->str:
 
 def get_zeta_mbiss(compound:str):
     zeta = []
-    fn = f"../MBIS/{compound}_mbis_ps.json"
+    fn = f"../AntechamberGaussian/MBIS/{compound}/CCSD.json"
     if os.path.exists(fn):
         with open(fn, "r") as inf:
             data = json.load(inf)
         atoms = "atom_names"
-        zzz   = "sigma_inv_nm"
+        zzz   = "valence_widths"
         if atoms in data and zzz in data:
             for a in range(len(data[atoms])):
                 zeta.append( { "atom": data[atoms][a], "zeta": 2*data[zzz][a] })

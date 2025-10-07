@@ -8,6 +8,12 @@ json_dir = "../AntechamberGaussian/MBIS/"
 xml_file = "P+S.xml"
 output_xml = "P+S_updated.xml"
 
+def set_val(var, val:float):
+    var.set("value", str(val))
+    var.set("minimum", str(val))
+    var.set("maximum", str(val))
+    var.set("mutability", "Fixed")
+
 obtype_updates = {
     "guanidinium": [
         ("c2", "c2g"),
@@ -118,7 +124,7 @@ for molname in obtype_updates.keys():
 
     zeta_values = []
     for v in val_widths:
-        zeta_values.append(1/(2*BOHR*float(v[0])))
+        zeta_values.append(2/(BOHR*float(v[0])))
 
     atomtypes = [new for _, new in obtype_updates[molname]]
 
@@ -140,22 +146,23 @@ for molname in obtype_updates.keys():
             continue
 
         zval_rounded = round(zval, 6)
-        param_elem.set("value", str(zval_rounded))
-        param_elem.set("minimum", str(zval_rounded))
-        param_elem.set("maximum", str(zval_rounded))
+        set_val(param_elem, zval_rounded)
 
     # Now fix charges
     charges = jdata.get("charges", [])
     val_charges = jdata.get("valence_charges", [])
-    core_charges = []
     for c in range(len(charges)):
-        core_charges.append(charges[c][0] - val_charges[c][0])
-    for atype, qcore in zip(atomtypes, core_charges):
+        qcore = charges[c][0] - val_charges[c][0]
+        atype = atomtypes[c]
+        # Change vtype
+        vatype = "v1" + atype
+        paramlist = particle_block.find(f".//particletype[@identifier='{vatype}']")
+        vcharge = paramlist.find(f".//parameter[@type='charge']")
+        set_val(vcharge, qcore)
+        # Change atom
         paramlist = particle_block.find(f".//particletype[@identifier='{atype}']")
-        charge = paramlist.find(f".//parameter[@type='charge']")
-        charge.set("value", str(qcore))
-        charge.set("minimum", str(qcore))
-        charge.set("maximum", str(qcore))
-        
+        acharge = paramlist.find(f".//parameter[@type='charge']")
+        set_val(acharge, val_charges[c][0])
+
 tree.write(output_xml, xml_declaration=True, short_empty_elements=True)
 print(f"updated XML written to {output_xml}")
