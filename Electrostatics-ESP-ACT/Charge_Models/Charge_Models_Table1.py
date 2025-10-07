@@ -57,8 +57,6 @@ def run_one(qtype:str, qm:str) -> dict:
     if not os.path.exists(log_filename):
         return {}
 
-
-
     print(f"Reading log file {log_filename}")
     mydict = {}
     for dataset in [ train, test ]:
