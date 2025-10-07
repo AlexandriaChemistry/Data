@@ -3,7 +3,8 @@ import os
 import json
 import xml.etree.ElementTree as ET
 
-json_dir = "."
+BOHR = 0.0529177
+json_dir = "../AntechamberGaussian/MBIS/"
 xml_file = "P+S.xml"
 output_xml = "P+S_updated.xml"
 
@@ -55,7 +56,7 @@ if coulomb_block is None:
     raise RuntimeError("No COULOMB interaction block found in XML!")
 
 for molname in obtype_updates.keys():
-    json_path = os.path.join(json_dir, f"{molname}_mbis_ps.json")
+    json_path = os.path.join(json_dir, f"{molname}/CCSD.json")
     if not os.path.exists(json_path):
         print(f"no JSON for {molname}, skipping...")
         continue
@@ -78,7 +79,9 @@ for molname in obtype_updates.keys():
         print(f"mismatch in atomtypes ({len(atomtypes)}) and zeta values ({len(zeta_values)}) for {molname}")
         continue
 
+
     print(f"{molname}: using {len(zeta_values)} zeta values (multiplied by 2)")
+
 
 
     for atype, zval in zip(atomtypes, zeta_values):

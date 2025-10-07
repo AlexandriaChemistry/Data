@@ -2,6 +2,8 @@
 
 import glob, os, sys, json, xmltodict
 
+debug = False
+
 compounds_of_interest = [
     "ammonium",
     "methylammonium",
@@ -21,7 +23,6 @@ log_files = { "ESP":        { "label": "ESP", "ncol": 1 },
               "PC+GV-elec": { "label": "PC+GV$_{e}$", "ncol": 2 },
               "PC+GS-elec": { "label": "PC+GS$_{e,i}$", "ncol": 2 },
               }
-
 
 def simplify(atype:str)->str:
     newrep = { "hn": [ "hna1", "hna2", "hne1", "hne2", "hne3",
@@ -60,20 +61,24 @@ def simplify(atype:str)->str:
             return key
     return atype
 
+def get_zeta_mbiss(compound:str):
+    zeta = []
+    fn = f"../MBIS/{compound}_mbis_ps.json"
+    if os.path.exists(fn):
+        with open(fn, "r") as inf:
+            data = json.load(inf)
+        atoms = "atom_names"
+        zzz   = "sigma_inv_nm"
+        if atoms in data and zzz in data:
+            for a in range(len(data[atoms])):
+                zeta.append( { "atom": data[atoms][a], "zeta": 2*data[zzz][a] })
+                zeta.append( { "atom": data[atoms][a]+"_s", "zeta": 0 })
+
 def get_zeta(model:str, compound:str):
     zeta = []
-    if model.startswith("MBIS-S"):
-        fn = f"../MBIS/{compound}_mbis_ps.json"
-        if os.path.exists(fn):
-            with open(fn, "r") as inf:
-                data = json.load(inf)
-            atoms = "atom_names"
-            zzz   = "sigma_inv_nm"
-            if atoms in data and zzz in data:
-                for a in range(len(data[atoms])):
-                    zeta.append( { "atom": data[atoms][a], "zeta": data[zzz][a] })
-                    zeta.append( { "atom": data[atoms][a]+"_s", "zeta": 0 })
-    elif log_files[model]["ncol"] == 2:
+    bcc  = []
+    eem  = []
+    if log_files[model]["ncol"] == 2:
         fn = f"../AlexandriaFF/{model}.xml"
         if os.path.exists(fn):
             with open(fn, "r") as inf:
@@ -87,17 +92,29 @@ def get_zeta(model:str, compound:str):
                 val   = '@value'
                                         
                 for ii in doc[ac][inter]:
-                    if ii["@type"] == "COULOMB":
+                    mytype = ii["@type"]
+                    if mytype in [ "COULOMB", "BONDCORRECTIONS", "ELECTRONEGATIVITYEQUALIZATION" ]:
                         for pp in ii:
                             if pp == plist:
                                 for entry in ii[pp]:
                                     if ident in entry:
-                                        if param in entry and val in entry[param]:
-                                            value = entry[param][val]
-                                            idl   = entry[ident].lower()[:-2]
-                                            zeta.append({ "atom": idl, "zeta": float(value) })
-
-    return zeta
+                                        for param in entry:
+                                            if val in entry[param]:
+                                                ptype = entry[param]["@type"]
+                                                value = entry[param][val]
+                                                if mytype == "COULOMB":
+                                                    idl   = entry[ident].lower()[:-2]
+                                                    zeta.append({ "atom": idl, "zeta": float(value) })
+                                                elif mytype == "BONDCORRECTIONS":
+                                                    if not entry[ident] in bcc:
+                                                        bcc[entry[ident]] = {}
+                                                    bcc[entry[ident]][ptype] = value
+                                                else:
+                                                    if not entry[ident] in eem:
+                                                        eem[entry[ident]] = {}
+                                                    eem[entry[ident]][ptype] = value
+                        
+    return zeta, eem, bcc
         
 def extract_data_from_log():
     data = {}
@@ -149,7 +166,8 @@ def extract_data_from_log():
                                         aindex   += 1
                                         atom_type = simplify(columns[2]) + ( "-%d" % aindex )
                                 data[file_type][current_compound].append( { "type": atom_type, "value": acm_value } )
-            print(f"file {file_type} data {data[file_type]['guanidinium']}")
+            if debug:
+                print(f"file {file_type} data {data[file_type]['guanidinium']}")
         except Exception as e:
             print(f"Error processing file {log_file}: {e}")
 
@@ -164,7 +182,10 @@ def save_data_as_latex(data):
         if log_files[method]["ncol"] == 2:
             zeta[method] = {}
             for compound in compounds_of_interest:
-                zeta[method][compound] = get_zeta(method, compound)
+                if method == "MBIS-S":
+                    zeta[method][compound] = get_zeta_mbiss(compound)
+                else:
+                    zeta[method][compound] = get_zeta(method, compound)
 
     with open(combined_output_file, 'w') as file:
         for compound in compounds_of_interest:
@@ -255,7 +276,7 @@ def save_data_as_latex(data):
             file.write("\\hline\n")
             file.write("Total")
             for method in data.keys():
-                file.write(" & %g" % round(total[method],2) )
+                file.write(" & \\multicolumn{%d}{c}{%g}" % ( log_files[method]["ncol"], round(total[method],2) ) )
             file.write("\\\\\n")
             file.write("\\hline\n")
             file.write("\\end{tabular}\n")
