@@ -2,7 +2,9 @@
 
 import glob, os, sys, json, xmltodict
 
-debug = False
+debug    = False
+BOHR     = 0.0529177
+json_dir = "../AntechamberGaussian/MBIS"
 
 compounds_of_interest = [
     "ammonium",
@@ -10,6 +12,7 @@ compounds_of_interest = [
     "ethylammonium",
     "formate",
     "acetate",
+    "propanoate",
     "guanidinium",
     "imidazolium",
     "water"
@@ -63,15 +66,15 @@ def simplify(atype:str)->str:
 
 def get_zeta_mbiss(compound:str):
     zeta = []
-    fn = f"../AntechamberGaussian/MBIS/{compound}/CCSD.json"
+    fn = f"{json_dir}/{compound}/CCSD.json"
     if os.path.exists(fn):
         with open(fn, "r") as inf:
             data = json.load(inf)
-        atoms = "atom_names"
+        atoms = "atoms"
         zzz   = "valence_widths"
         if atoms in data and zzz in data:
             for a in range(len(data[atoms])):
-                zeta.append( { "atom": data[atoms][a], "zeta": 2*data[zzz][a] })
+                zeta.append( { "atom": data[atoms][a], "zeta": 2/(BOHR*float(data[zzz][a][0])) })
                 zeta.append( { "atom": data[atoms][a]+"_s", "zeta": 0 })
 
 def get_zeta(model:str, compound:str):
@@ -243,17 +246,16 @@ def save_data_as_latex(data):
                             zval = None
                             # Hardcoding stuff, sigh.
                             if method == "MBIS-S":
-                                if ipart < len(zeta[method][compound]):
+                                if method in zeta and compound in zeta[method] and zeta[method][compound] and ipart < len(zeta[method][compound]):
                                     zval = zeta[method][compound][ipart]["zeta"]
                             else:
-                                zval = None
                                 if method == "PC+GS-elec":
                                     ppp = particle['type'].split('-')[0]
                                 else:
                                     ppp = "v1"+particle['type'].split('_')[0]
                                 for j in range(len(zeta[method][compound])):
-                                    if zeta[method][compound][j]['atom'] == ppp:
-                                        zval = zeta[method][compound][j]['zeta']
+                                    if zeta[method][compound][0][j]['atom'] == ppp:
+                                        zval = zeta[method][compound][0][j]['zeta']
                                         break
 
 #                            elif particle in zeta[method][compound]:
