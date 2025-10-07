@@ -5,8 +5,8 @@ from run_gaussian import get_mols
 
 def run_it(compound:str, charge:int, basis:str):
     os.chdir(compound)
-    method = "MP2"
-    if not (os.path.exists("scf.json") and os.path.exists("CCSD.json")):
+    method = "CCSD"
+    if not (os.path.exists("scf.json") and os.path.exists(f"{method}.json")):
         os.system(f"sbatch ../run_mbis.py {compound} {charge} {method} {basis}")
     os.chdir("..")
 

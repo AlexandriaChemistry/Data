@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-#SBATCH -t 48:00:00
-#SBATCH -c 64
-#SBATCH -p CLUSTER-AMD
+#SBATCH -t 24:00:00
+#SBATCH -c 128
+#SBATCH -p main
+#SBATCH -A naiss2024-3-13
+
 import os, sys, json
 import numpy as np
 import psi4 as psi4
@@ -31,11 +33,16 @@ def xyz2geometry(xyzfn:str, q:int, extra:list):
 def set_psi4_opts(compound:str, ncores:int):
     psi4.core.set_num_threads(ncores)
     psi4.set_options({'guess': 'read', 'reference': 'rhf', 'cachelevel': 1, 'print': 1, 'damping_percentage': 20, 
-                      'mbis_radial_points': 199, 'mbis_spherical_points': 770, 'max_radial_moment': 4 })
+                      'mbis_radial_points': 99, 'mbis_spherical_points': 350, 'max_radial_moment': 4 })
 
-    psi4.set_memory(ncores*3500000*1000)
+    psi4.set_memory(ncores*1900*1000000)
     psi4_io = psi4.core.IOManager.shared_object()
-    tmpdir = "/scratch"
+    PDC = "PDC_TMP"
+    if PDC in os.environ:
+        tmpdir = f"{os.environ[PDC]}/{compound}"
+    else:
+        tmpdir = f"/cfs/klemming/scratch/s/spoel/{compound}"
+    os.makedirs(tmpdir, exist_ok=True)
     psi4_io.set_default_path(tmpdir)
     psi4.core.set_output_file(compound + ".log", False)
 
@@ -44,7 +51,7 @@ def store_mbis(energy:float, wfn, atoms:list, jsonfn:str):
                    "dipoles":         'MBIS_DIPOLES',
                    "quadrupoles":     'MBIS_QUADRUPOLES',
                    "octupoles":       'MBIS_OCTUPOLES',
-#                   "valence_charges": 'MBIS_VALENCE CHARGES',
+                   "valence_charges": 'MBIS_VALENCE CHARGES',
                    "valence_widths":  'MBIS_VALENCE WIDTHS',
                    #"volume_ratios":  'MBIS_VOLUME_RATIOS',
                    "radial_moments": 'MBIS_RADIAL_MOMENTS_<R^3>'
