@@ -9,79 +9,36 @@ output_xml = "P+S_updated.xml"
 
 obtype_updates = {
     "guanidinium": [
-        ("c2", "c2g"),
-        ("n2", "n2g"),
-        ("n2", "n2g"),
-        ("n2", "n2g"),
-        ("hn", "hng"),
-        ("hn", "hng"),
-        ("hn", "hng"),
-        ("hn", "hng"),
-        ("hn", "hng"),
-        ("hn", "hng"),
+        ("c2", "c2g"), ("n2", "n2g"), ("n2", "n2g"), ("n2", "n2g"),
+        ("hn", "hng"), ("hn", "hng"), ("hn", "hng"), ("hn", "hng"),
+        ("hn", "hng"), ("hn", "hng"),
     ],
     "imidazolium": [
-        ("c2", "c2i1"),
-        ("c2", "c2i1"),
-        ("n2", "n2i"),
-        ("c2", "c2i2"),
-        ("n2", "n2i"),
-        ("h4", "h4i"),
-        ("h4", "h4i"),
-        ("hn", "hni"),
-        ("h5", "h5i"),
-        ("hn", "hni"),        
+        ("c2", "c2i1"), ("c2", "c2i1"), ("n2", "n2i"), ("c2", "c2i2"),
+        ("n2", "n2i"), ("h4", "h4i"), ("h4", "h4i"), ("hn", "hni"),
+        ("h5", "h5i"), ("hn", "hni"),
     ],
     "acetate": [
-        ("c3", "c3a"),
-        ("c2", "c2a"),
-        ("o2", "o2a1"),
-        ("o2", "o2a2"),
-        ("hc", "hca1"),
-        ("hc", "hca2"),
-        ("hc", "hca3"),
+        ("c3", "c3a"), ("c2", "c2a"), ("o2", "o2a1"), ("o2", "o2a2"),
+        ("hc", "hca1"), ("hc", "hca2"), ("hc", "hca3"),
     ],
     "ammonium": [
-        ("hn", "hna1"),
-        ("n4", "n4a"),
-        ("hn", "hna1"),
-        ("hn", "hna2"),
-        ("hn", "hna2"),
+        ("hn", "hna1"), ("n4", "n4a"), ("hn", "hna1"),
+        ("hn", "hna2"), ("hn", "hna2"),
     ],
     "ethylammonium": [
-        ("n4", "n4e"),
-        ("c3", "c3e1"),
-        ("hn", "hne1"),
-        ("hn", "hne2"),
-        ("hn", "hne3"),
-        ("h1", "h1e1"),
-        ("h1", "h1e2"),
-        ("c3", "c3e2"),
-        ("hc", "hce1"),
-        ("hc", "hce2"),
-        ("hc", "hce3"),
+        ("n4", "n4e"), ("c3", "c3e1"), ("hn", "hne1"), ("hn", "hne2"), ("hn", "hne3"),
+        ("h1", "h1e1"), ("h1", "h1e2"), ("c3", "c3e2"), ("hc", "hce1"),
+        ("hc", "hce2"), ("hc", "hce3"),
     ],
     "formate": [
-        ("o2", "o2f"),
-        ("o2", "o2f"),
-        ("c2", "c2f"),
-        ("h2", "h2f"),
+        ("o2", "o2f"), ("o2", "o2f"), ("c2", "c2f"), ("h2", "h2f"),
     ],
     "methylammonium": [
-        ("n4", "n4m"),
-        ("c3", "c3m"),
-        ("hn", "hnm1"),
-        ("hn", "hnm2"),
-        ("hn", "hnm3"),   
-        ("h1", "h1m1"),
-        ("h1", "h1m2"),
-        ("h1", "h1m3"),                     
+        ("n4", "n4m"), ("c3", "c3m"), ("hn", "hnm1"), ("hn", "hnm2"),
+        ("hn", "hnm3"), ("h1", "h1m1"), ("h1", "h1m2"), ("h1", "h1m3"),
     ],
-    "water": [
-        ("O", "ow"),
-        ("H", "hw"),
-        ("H", "hw"),
-    ],
+    "water": [("O", "ow"), ("H", "hw"), ("H", "hw")],
     "bromide": [("Br", "Br-")],
     "chloride": [("Cl", "Cl-")],
     "fluoride": [("F", "F-")],
@@ -107,29 +64,31 @@ for molname in obtype_updates.keys():
         jdata = json.load(f)
 
     sigma_inv_nm = jdata.get("sigma_inv_nm", [])
+    shell_charges = jdata.get("shell_charges", [])
+    core_charges = jdata.get("core_charges", [])
+
     if not sigma_inv_nm:
-        print(f"no sigma_inv_nm for {molname}, skipping...")
+        print(f"no sigma_inv_nm for {molname}, skipping.")
         continue
 
-    zeta_values = [v/2 for v in sigma_inv_nm]
-
+    zeta_values = [v * 2 for v in sigma_inv_nm]
     atomtypes = [new for _, new in obtype_updates[molname]]
 
     if len(atomtypes) != len(zeta_values):
-        print(f"mismatch in number of atomtypes ({len(atomtypes)}) and zeta values ({len(zeta_values)}) for {molname}")
+        print(f"mismatch in atomtypes ({len(atomtypes)}) and zeta values ({len(zeta_values)}) for {molname}")
         continue
 
-    print(f"{molname}: using {len(zeta_values)} zeta values (divided by 2)")
+    print(f"{molname}: using {len(zeta_values)} zeta values (multiplied by 2)")
+
 
     for atype, zval in zip(atomtypes, zeta_values):
         paramlist = coulomb_block.find(f".//parameterlist[@identifier='{atype}_z']")
         if paramlist is None:
             print(f"no <parameterlist> found for {atype}_z")
             continue
-
         param_elem = paramlist.find("parameter[@type='zeta']")
         if param_elem is None:
-            print(f"no <parameter> element of type='zeta' for {atype}_z")
+            print(f"no <parameter type='zeta'> found for {atype}_z")
             continue
 
         zval_rounded = round(zval, 6)
@@ -137,5 +96,31 @@ for molname in obtype_updates.keys():
         param_elem.set("minimum", str(zval_rounded))
         param_elem.set("maximum", str(zval_rounded))
 
+
+    particletype_elems = root.findall(".//particletype")
+    for ptype in particletype_elems:
+        identifier = ptype.get("identifier")
+        if identifier is None:
+            continue
+
+        for idx, atype in enumerate(atomtypes):
+
+            if identifier == f"v1{atype}" and idx < len(core_charges):
+                qval = round(core_charges[idx], 6)
+
+            elif identifier == atype and idx < len(shell_charges):
+                qval = round(shell_charges[idx], 6)
+            else:
+                continue
+
+            qparam = ptype.find("parameter[@type='charge']")
+            if qparam is None:
+                continue
+
+            qparam.set("value", str(qval))
+            qparam.set("minimum", str(qval))
+            qparam.set("maximum", str(qval))
+
 tree.write(output_xml, xml_declaration=True, short_empty_elements=True)
-print(f"updated XML written to {output_xml}")
+print(f"\nupdated XML written to {output_xml}")
+
