@@ -24,12 +24,8 @@ def main(T: int):
         "KF": "royalblue", "KCl": "dodgerblue", "KBr": "cornflowerblue"
     }
 
-    func_index_to_name = {
-        0: "P+G"
-    }
-    func_index_to_function = {
-        0: Point_core_gaussian_shell
-    }
+    func_index_to_name = {0: "P+G"}
+    func_index_to_function = {0: Point_core_gaussian_shell}
 
     fig, all_axes = plt.subplots(3, 3, figsize=(12, 10), sharex=False, sharey=False)
     axes = all_axes.flatten()
@@ -48,8 +44,8 @@ def main(T: int):
             y_sorted = y[sorted_idx]
 
             ener_pc = -one_4pi_eps0 / x_sorted
-
             ax = axes[idx]
+
             ax.text(
                 0.5, 0.5, compound,
                 transform=ax.transAxes,
@@ -101,11 +97,20 @@ def main(T: int):
 
             idx += 1
 
+    first_row_axes = axes[0:3]
+    y_min, y_max = np.inf, -np.inf
+    for ax in first_row_axes:
+        ylim = ax.get_ylim()
+        y_min = min(y_min, ylim[0])
+        y_max = max(y_max, ylim[1])
+    for ax in first_row_axes:
+        ax.set_ylim(y_min, y_max)
+
     fig.text(0.5, 0.04, 'Distance (Å)', ha='center', fontsize=24)
-    fig.text(0.04, 0.5, 'SAPT0 - Model electrostatics (kJ/mol)', va='center', rotation='vertical', fontsize=24)
+    fig.text(0.04, 0.5, 'Residual (kJ/mol)', va='center', rotation='vertical', fontsize=24)
 
     plt.tight_layout()
-    plt.subplots_adjust(hspace=0., wspace=0., left=0.15, bottom=0.12, right=0.95, top=0.95)
+    plt.subplots_adjust(hspace=0., wspace=0., left=0.2, bottom=0.12, right=0.95, top=0.95)
 
     output_file = os.path.join(FIG_DIR, "Residual-ESP.pdf")
     plt.savefig(output_file, dpi=300)
