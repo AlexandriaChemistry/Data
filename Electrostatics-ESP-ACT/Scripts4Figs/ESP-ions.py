@@ -3,7 +3,12 @@
 import os
 import json
 import numpy as np
-from walz2018a import one_4pi_eps0
+import sys
+
+sys.path.append('../Scripts4Tabs')
+
+from walz2018a_SAPT0_P1S2S import one_4pi_eps0
+
 
 input_json = 'output_4_100.json'
 with open(input_json, 'r') as json_f:
