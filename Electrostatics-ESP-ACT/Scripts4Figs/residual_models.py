@@ -31,7 +31,7 @@ def main(T: int):
         0: Point_core_gaussian_shell
     }
 
-    fig, all_axes = plt.subplots(3, 3, figsize=(10, 8), sharex=False, sharey=False)
+    fig, all_axes = plt.subplots(3, 3, figsize=(12, 10), sharex=False, sharey=False)
     axes = all_axes.flatten()
     idx = 0
 
@@ -53,7 +53,7 @@ def main(T: int):
             ax.text(
                 0.5, 0.5, compound,
                 transform=ax.transAxes,
-                fontsize=12, fontweight='bold', ha='center'
+                fontsize=20, fontweight='bold', ha='center'
             )
 
             ax.scatter(
@@ -62,7 +62,7 @@ def main(T: int):
                 label="PC",
                 alpha=0.8,
                 edgecolor='k',
-                s=50
+                s=120
             )
 
             for func_index in func_index_to_function:
@@ -87,7 +87,7 @@ def main(T: int):
                     marker='^',
                     linestyle='None',
                     alpha=0.8,
-                    markersize=5
+                    markersize=12
                 )
 
             if row < 2:
@@ -95,14 +95,14 @@ def main(T: int):
             if col != 0:
                 ax.set_yticklabels([])
 
-            ax.tick_params(axis='x', labelsize=16)
-            ax.tick_params(axis='y', labelsize=16, pad=8)
+            ax.tick_params(axis='x', labelsize=24)
+            ax.tick_params(axis='y', labelsize=24, pad=8)
             ax.legend(fontsize=14, loc='best', frameon=False)
 
             idx += 1
 
-    fig.text(0.5, 0.04, 'Distance (Å)', ha='center', fontsize=18)
-    fig.text(0.04, 0.5, 'SAPT0 - Model electrostatics (kJ/mol)', va='center', rotation='vertical', fontsize=18)
+    fig.text(0.5, 0.04, 'Distance (Å)', ha='center', fontsize=24)
+    fig.text(0.04, 0.5, 'SAPT0 - Model electrostatics (kJ/mol)', va='center', rotation='vertical', fontsize=24)
 
     plt.tight_layout()
     plt.subplots_adjust(hspace=0., wspace=0., left=0.15, bottom=0.12, right=0.95, top=0.95)
