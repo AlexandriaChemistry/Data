@@ -62,8 +62,10 @@ def add_calcs(mydata:list, models:dict):
             if not os.path.exists(myconf):
                 print("File %s is missing" % myconf)
                 continue
-            mycmd = ("alexandria simulate -ff %s -charges %s  -f %s  -sp -g %s -o %s -e %s" %
-                     ( models[m]["ff"], models[m]["mp"], myconf, mylog, mytrj, myxvg ) )
+            mycmd = ("alexandria simulate -ff %s  -f %s  -sp -g %s -o %s -e %s" %
+                     ( models[m]["ff"], myconf, mylog, mytrj, myxvg ) )
+            if "mp" in models[m] and not models[m]["mp"] is None:
+                mycmd += ( " -charges %s " % models[m]["mp"])
             if "qtype" in models[m]:
                 mycmd += ( " -qqm %s" % models[m]["qtype"] )
             print(mycmd)
@@ -81,7 +83,10 @@ def wtable(file_path:str, models:dict, mydata:list, caption:str, label:str):
         file.write("\\centering\n")
         file.write("\\caption{%s}\n" % caption)
         file.write("\\label{%s}\n" % label)
-        file.write("\\begin{tabular}{lcccccc} \n")
+        file.write("\\begin{tabular}{lc")
+        for c in range(len(mydata)):
+            file.write("c")
+        file.write("} \n")
         file.write("\\hline \n")
         file.write("Ion & r & SAPT ")
         for m in models.keys():
@@ -126,6 +131,7 @@ def wtable(file_path:str, models:dict, mydata:list, caption:str, label:str):
 
 def water_ions():
     models = { "TIP4P-Ew": { "ff": "../ForceFields/TIP4PEW-JC.xml", "mp": mymp },
+               "MBIS-S": { "ff": "../AlexandriaFF/P+S_updated.xml", "mp": None },
                "CHARMM": { "ff": "../ForceFields/CharmmDrude.xml", "mp": mymp },
                "PC+GV": { "ff": "../AlexandriaFF/PC+GV-elec.xml", "mp": mymp },
                "PC+GS": { "ff": "../AlexandriaFF/PC+GS-elec.xml", "mp": mymp } }
@@ -138,7 +144,7 @@ def water_ions():
     add_calcs(mydata, models)
 
     file_path = "ion-water-SAPT2-TIP4Pew-ACT4S.tex"
-    caption = "Water-ion electrostatic energies at distances close to their energy minimum. Distance r (\\AA) between ions and water oxygen/hydrogen from Experiment (ref.~\\citenum{Heyrovska2006a}), and minimized water dimer (ref.~\\citenum{temelso2011benchmark}). Electrostatic energies are reported in kJ/mol from the SAPT2+(CCD)-$\\delta$MP2 method with an aug-cc-pVTZ basis set, TIP4P-Ew~\\cite{Horn2004a} with point charges representing ions, for the CHARMM drude model of water (SWM4-NDP~\\cite{Lamoureux2006a}) with ions due to Yu {\\em et al.}~\\cite{Yu2010a}, as well as point core+Gaussian vsite (PC+GV), and point charge + Gaussian shell (PC+GS) derived here using ACT."
+    caption = "Water-ion electrostatic energies at distances close to their energy minimum. Distance r (\\AA) between ions and water oxygen/hydrogen from Experiment (ref.~\\citenum{Heyrovska2006a}), and minimized water dimer (ref.~\\citenum{temelso2011benchmark}). Electrostatic energies are reported in kJ/mol from the SAPT2+(CCD)-$\\delta$MP2 method with an aug-cc-pVTZ basis set, TIP4P-Ew~\\cite{Horn2004a} with point charges representing ions, for MBIS-S~\\cite{Verstraelen2016a}, for the CHARMM drude model of water (SWM4-NDP~\\cite{Lamoureux2006a}) with ions due to Yu {\\em et al.}~\\cite{Yu2010a}, as well as point core+Gaussian vsite (PC+GV), and point charge + Gaussian shell (PC+GS) derived here using ACT."
     label = "tab:ion_water2"
     wtable(file_path, models, mydata, caption, label)
     return file_path
@@ -170,6 +176,7 @@ def water_ions_induction():
     
 def ah_ions():
     models = { "PC": { "ff": "../ForceFields/TIP4PEW-JC.xml", "mp": mymp },
+               "MBIS-S": { "ff": "../AlexandriaFF/P+S_updated.xml", "mp": None },
                "Walz":   { "ff": "../ForceFields/Walz2018a.xml", "mp": mymp },
                "PC+GV": { "ff": "../AlexandriaFF/PC+GV-elec.xml", "mp": mymp },
                "PC+GS": { "ff": "../AlexandriaFF/PC+GS-elec.xml", "mp": mymp } }
@@ -182,7 +189,7 @@ def ah_ions():
     add_calcs(mydata, models)
 
     file_path = "Ions-sapt2-JC-Walz2018a-ACT.tex"
-    caption= "Ion-pair electrostatic energies at distances close to their energy minimum. Distance r (\\AA) between ions and electrostatic energies from the SAPT2+(CCD)$\\delta$MP2/aug-cc-pVTZ level of theory, for point charges (PC), for the Walz {\\em et al.} model with a Gaussian charge distribution~\\cite{Walz2018a}, and the ACT models PC+GV and PC+GS (see Methods). The RMSD and MSE were calculated with respect to the SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set electrostatic energy. Note that this level of theory is different from Tables~S1 and~S2 and the results cannot be compared directly. In addition, the results in Tables~S1 and~S2 are from fitting models to the ESP, whereas in this table training was done on SAPT data as indicated above."
+    caption= "Ion-pair electrostatic energies at distances close to their energy minimum. Distance r (\\AA) between ions and electrostatic energies from the SAPT2+(CCD)$\\delta$MP2/aug-cc-pVTZ level of theory, for point charges (PC), for MBIS-S~\\cite{Verstraelen2016a}, for the Walz {\\em et al.} model with a Gaussian charge distribution~\\cite{Walz2018a}, and the ACT models PC+GV and PC+GS (see Methods). The RMSD and MSE were calculated with respect to the SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set electrostatic energy. Note that this level of theory is different from Tables~S1 and~S2 and the results cannot be compared directly. In addition, the results in Tables~S1 and~S2 are from fitting models to the ESP, whereas in this table training was done on SAPT data as indicated above."
 
     label = "tab:ion_ah"
     wtable(file_path, models, mydata, caption, label)
@@ -202,7 +209,7 @@ def ac_mt_gaff():
     add_calcs(mydata, models)
 
     file_path = "AC-MA-IONS-GAFF.tex"
-    caption = "Electrostatic energy (kJ/mol) between alkali ions, halides or water (oxygen) and amino acid side chain analogs, formate (oxygen), acetate (oxygen), methylammonium (nitrogen), ethylammonium (nitrogen) from SAPT2+(CCD)$\\delta$MP2/aug-cc-pVTZ, and charges determined using either RESP~\\cite{Bayly1993a} or BCC~\\cite{Jakalian2000a}, as well as two models generated using the ACT."
+    caption = "Electrostatic energy (kJ/mol) between alkali ions, halides or water (oxygen) and amino acid side chain analogs, formate (oxygen), acetate (oxygen), methylammonium (nitrogen), ethylammonium (nitrogen) from SAPT2+(CCD)$\\delta$MP2/aug-cc-pVTZ, and charges determined using either RESP~\\cite{Bayly1993a} or BCC~\\cite{Jakalian2000a}, MBIS-S~\\cite{Verstraelen2016a} as well as two models generated using the ACT."
     label = "tab:ac_ma_ions"
     wtable(file_path, models, mydata, caption, label)
     return file_path
@@ -216,4 +223,3 @@ if __name__ == "__main__":
     print("Please check files:")
     for fn in files:
         print("  %s" % fn)
-

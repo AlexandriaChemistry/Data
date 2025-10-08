@@ -2,7 +2,7 @@
 
 import os, glob, sys
 
-debug   = False
+debug   = True
 train   = "Train"
 test    = "Test"
 header  = "header"
@@ -138,7 +138,7 @@ def do_all(qm:str):
         outf.write("\\centering\n")
         outf.write("\\caption{Root mean square deviation (RMSD) and mean signed error (MSE), both in kJ/mol of electrostatic energies (Elec) and the sum of electrostatics and induction (Elec+Induc) for popular charge models compared to SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set. The dataset consisted of 94 dimers (Table S6). \\#P indicates the number of parameters in the model (the number of individual charges in legacy models). Values corresponding to the training targets are indicated in {\\bf bold font}. Description of models is given in Table~\\ref{tab:models}.}\n")
     
-        outf.write("\\label{legacy}\n")
+        outf.write("\\label{tab:legacy}\n")
         outf.write("\\begin{tabular}{lccccccccccc}\n")
         outf.write("\\hline\n")
         outf.write(" & Training & \\#P & \\multicolumn{2}{c}{Elec}  & \\multicolumn{2}{c}{Elec+Induc}& \\multicolumn{2}{c}{Elec}  & \\multicolumn{2}{c}{Elec+Induc}\\\\\n")

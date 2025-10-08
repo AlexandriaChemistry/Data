@@ -31,5 +31,7 @@ if __name__ == "__main__":
         ffs[ff]["label"] += ( " RMSD %.1f kJ/mol" % ( rmsd(logfn) ) )
 
     pdf = "induction-water-ions.pdf"
-    os.system("viewxvg -ls None -mk o x -alfs 32 -lfs 32 -tickfs 28 -f %s %s -label '%s' '%s' -pdf %s -noshow -res -legend_x 0.26 -legend_y 0.26" % ( ffs[0]["xvg"], ffs[1]["xvg"], ffs[0]["label"], ffs[1]["label"], pdf ) )
+    cmd = ("viewxvg -ls None None -mk o +  -alfs 32 -lfs 32 -tickfs 28 -f %s %s -label '%s' '%s' -ymin -50 -ymax 50 -save %s -noshow -res -legend_x 0.26 -legend_y 0.26" % ( ffs[0]["xvg"], ffs[1]["xvg"], ffs[0]["label"], ffs[1]["label"], pdf ) )
+    print(cmd)
+    os.system(cmd)
     print("Please check %s" % pdf)
