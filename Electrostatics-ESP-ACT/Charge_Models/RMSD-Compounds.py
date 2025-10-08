@@ -50,7 +50,7 @@ if __name__ == "__main__":
                #"CM5": "CM5_MP2.log",
                "BCC": "BCC_MP2.log",
                "RESP": "RESP_MP2.log",
-               "MBIS": "MBIS_MP2.log",
+               #"MBIS": "MBIS_MP2.log",
                "MBIS-S": "MBIS-S_MP2.log"
               }
     for mydir in mydirs.keys():

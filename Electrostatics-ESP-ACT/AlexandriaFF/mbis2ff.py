@@ -175,7 +175,7 @@ for molname in obtype_updates.keys():
 
     zeta_values = []
     for v in val_widths:
-        zeta_values.append(2/(BOHR*float(v[0])))
+        zeta_values.append(1/(2*BOHR*float(v[0])))
 
     if len(atomtypes) != len(zeta_values):
         print(f"mismatch in number of atomtypes ({len(atomtypes)}) and zeta values ({len(zeta_values)}) for {molname}")
@@ -203,13 +203,13 @@ for molname in obtype_updates.keys():
         # Change vtype
         vatype = "v1" + atype
         paramlist = particle_block.find(f".//particletype[@identifier='{vatype}']")
-        if not paramlist:
+        if paramlist is None:
             sys.exit("Cannot find particletype for %s" % vatype)
         vcharge = paramlist.find(f".//parameter[@type='charge']")
         set_val(vcharge, qcore)
         # Change atom
         paramlist = particle_block.find(f".//particletype[@identifier='{atype}']")
-        if not paramlist:
+        if paramlist is None:
             sys.exit("Cannot find particletype for %s" % atype)
         acharge = paramlist.find(f".//parameter[@type='charge']")
         set_val(acharge, val_charges[c][0])
