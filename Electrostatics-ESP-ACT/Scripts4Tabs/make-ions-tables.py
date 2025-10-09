@@ -209,7 +209,7 @@ def ac_mt_gaff():
     add_calcs(mydata, models)
 
     file_path = "AC-MA-IONS-GAFF.tex"
-    caption = "Electrostatic energy (kJ/mol) between alkali ions, halides or water (oxygen) and amino acid side chain analogs, formate (oxygen), acetate (oxygen), methylammonium (nitrogen), ethylammonium (nitrogen) from SAPT2+(CCD)$\\delta$MP2/aug-cc-pVTZ, and charges determined using either RESP~\\cite{Bayly1993a} or BCC~\\cite{Jakalian2000a}, MBIS-S~\\cite{Verstraelen2016a} as well as two models generated using the ACT."
+    caption = "Electrostatic energy (kJ/mol) between alkali ions, halides or water (oxygen) and amino acid side chain analogs, formate (oxygen), acetate (oxygen), methylammonium (nitrogen), ethylammonium (nitrogen) from SAPT2+(CCD)$\\delta$MP2/aug-cc-pVTZ, and charges determined using either RESP~\\cite{Bayly1993a} or BCC~\\cite{Jakalian2000a} as well as two models generated using the ACT."
     label = "tab:ac_ma_ions"
     wtable(file_path, models, mydata, caption, label)
     return file_path
