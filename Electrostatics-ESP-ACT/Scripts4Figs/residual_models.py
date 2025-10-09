@@ -57,7 +57,7 @@ def main(T: int):
                 color=colors[compound],
                 label="PC",
                 alpha=0.8,
-                edgecolor='k',
+                #edgecolor='k',
                 s=120
             )
 
@@ -106,14 +106,14 @@ def main(T: int):
     for ax in first_row_axes:
         ax.set_ylim(y_min, y_max)
 
-    fig.text(0.5, 0.04, 'Distance (Å)', ha='center', fontsize=24)
+    fig.text(0.5, 0.04, 'Distance ($\\mathrm{\\AA}$)', ha='center', fontsize=24)
     fig.text(0.04, 0.5, 'Residual (kJ/mol)', va='center', rotation='vertical', fontsize=24)
 
     plt.tight_layout()
     plt.subplots_adjust(hspace=0., wspace=0., left=0.2, bottom=0.12, right=0.95, top=0.95)
 
-    output_file = os.path.join(FIG_DIR, "Residual-ESP.pdf")
-    plt.savefig(output_file, dpi=300)
+    output_file = "Residual-ESP.pdf"
+    plt.savefig(output_file, dpi=300, bbox_inches='tight')
     plt.show()
 
 
