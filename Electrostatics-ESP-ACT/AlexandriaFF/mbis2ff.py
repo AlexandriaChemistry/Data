@@ -124,6 +124,21 @@ obtype_updates = {
         ("hc", "hcp2"),
         ("hc", "hcp2") 
     ],
+    "butanoate": [
+        ("c3", "c3b1"),
+        ("o2", "o2b"),
+        ("o2", "o2b"),
+        ("c2", "c2b"),
+        ("c3", "c3b2"),
+        ("hc", "hcb1"),
+        ("hc", "hcb1"),
+        ("hc", "hcb2"),
+        ("hc", "hcb2"),
+        ("c3", "c3b3"),
+        ("hc", "hcb3"),
+        ("hc", "hcb3"),
+        ("hc", "hcb3") 
+    ],
     "water": [
         ("O", "ow"),
         ("H", "hw"),

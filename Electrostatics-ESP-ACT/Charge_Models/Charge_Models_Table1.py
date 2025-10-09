@@ -27,6 +27,7 @@ acmparm = {
     "PC+GV-elec":    { "ff": "PC+GV-elec.xml", "nparm": 106, "label": "PC+GV", "target": "Elec" },
     "PC+GV-allelec": { "ff": "PC+GV-allelec.xml", "nparm": 106, "label": "PC+GV", "target": "Elec+Induc" },
     "PC+SV-elec":    { "ff": "PC+SV-elec.xml", "nparm": 106, "label": "PC+SV", "target": "Elec" },
+    "PC+SV-esp":     { "ff": "PC+SV-esp2.xml", "nparm": 106, "label": "PC+SV*", "target": "Elec" },
     "PC+SV-allelec": { "ff": "PC+SV-allelec.xml", "nparm": 106, "label": "PC+SV", "target": "Elec+Induc" },
     "PC+GS-elec":    { "ff": "PC+GS-elec.xml", "nparm": 156, "label": "PC+GS", "target": "Elec,Induc", header: "Polarizable ACT models" },
     "PC+GS-allelec": { "ff": "PC+GS-allelec.xml", "nparm": 156, "label": "PC+GS", "target": "Elec+Induc" }
