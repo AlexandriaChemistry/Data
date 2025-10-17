@@ -40,6 +40,7 @@ if __name__ == "__main__":
         { "label": "SC", "ff": "SC-elec", "qtype": None, train: dimer },
         { "label": "PC+GV", "ff": "PC+GV-elec", "qtype": None, train: dimer },
         { "label": "PC+SV", "ff": "PC+SV-elec", "qtype": None, train: dimer },
+        { "label": "PC+SV*4", "ff": "PC+SV-esp4", "qtype": None, train: dimer },
         { "label": "PC+GS", "ff": "PC+GS-elec", "qtype": None, train: dimer }
     ]
     myrmsd = { monomer: [], dimer: [] }

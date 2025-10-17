@@ -27,7 +27,8 @@ acmparm = {
     "PC+GV-elec":    { "ff": "PC+GV-elec.xml", "nparm": 106, "label": "PC+GV", "target": "Elec" },
     "PC+GV-allelec": { "ff": "PC+GV-allelec.xml", "nparm": 106, "label": "PC+GV", "target": "Elec+Induc" },
     "PC+SV-elec":    { "ff": "PC+SV-elec.xml", "nparm": 106, "label": "PC+SV", "target": "Elec" },
-    "PC+SV-esp":     { "ff": "PC+SV-esp2.xml", "nparm": 106, "label": "PC+SV*", "target": "Elec" },
+    "PC+SV-esp1":    { "ff": "PC+SV-esp1.xml", "nparm": 152, "label": "PC+SV*3", "target": "Elec" },
+    "PC+SV-esp4":    { "ff": "PC+SV-esp4.xml", "nparm": 94, "label": "PC+SV*4", "target": "Elec" },
     "PC+SV-allelec": { "ff": "PC+SV-allelec.xml", "nparm": 106, "label": "PC+SV", "target": "Elec+Induc" },
     "PC+GS-elec":    { "ff": "PC+GS-elec.xml", "nparm": 156, "label": "PC+GS", "target": "Elec,Induc", header: "Polarizable ACT models" },
     "PC+GS-allelec": { "ff": "PC+GS-allelec.xml", "nparm": 156, "label": "PC+GS", "target": "Elec+Induc" }
@@ -45,7 +46,7 @@ def run_one(qtype:str, qm:str) -> dict:
 
     qfn = f"../AlexandriaFF/{qm}-aug-cc-pvtz.xml"
     print(f"Running command for {qtype}")
-    if "elec" in qtype:
+    if "elec" in qtype or "esp" in qtype:
         mycmd = base_command + f" -charges {qfn} "
     elif qtype == "MBIS":
         mycmd = base_command + f" -qtype qRESP -charges ../AlexandriaFF/MBIS_MP2.xml "

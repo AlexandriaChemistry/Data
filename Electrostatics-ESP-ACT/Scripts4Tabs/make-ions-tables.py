@@ -199,6 +199,7 @@ def ah_ions():
 def ac_mt_gaff():
     models = { "RESP": { "ff": "../AlexandriaFF/coul-p.xml", "mp": mymp, "qtype": "qRESP" },
                "BCC": { "ff": "../AlexandriaFF/coul-p.xml", "mp": mymp, "qtype": "qBCC" },
+               "MBIS-S": { "ff": "../AlexandriaFF/P+S_updated.xml", "mp": "../AlexandriaFF/sapt-esp5-mbiss.xml"  },
                "PC+GV": { "ff": "../AlexandriaFF/PC+GV-elec.xml", "mp": mymp },
                "PC+GS": { "ff": "../AlexandriaFF/PC+GS-elec.xml", "mp": mymp } }
     newfn = "data-sc-ions.json"
@@ -216,10 +217,10 @@ def ac_mt_gaff():
     
 if __name__ == "__main__":
     files = []
-    files.append(water_ions())
-    files.append(water_ions_induction())
+    #files.append(water_ions())
+    #files.append(water_ions_induction())
     files.append(ac_mt_gaff())
-    files.append(ah_ions())
+    #files.append(ah_ions())
     print("Please check files:")
     for fn in files:
         print("  %s" % fn)
