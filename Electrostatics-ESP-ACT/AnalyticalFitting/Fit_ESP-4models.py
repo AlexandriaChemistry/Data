@@ -136,6 +136,11 @@ def doit(T:int, texf):
                     label += "+"
 
             original_charge = 0
+            if False and distance_data[0] > 0:
+                    original_charge = charge
+                    for d in range(len(distance_data)):
+                            potential_data[d] -= one_4pi_eps0*charge/distance_data[d]
+                    charge = 0
             
             for func_index, func in enumerate(functions):
                 if func_index == 4:
