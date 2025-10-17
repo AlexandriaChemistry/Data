@@ -55,7 +55,6 @@ def doit(T:int, texf):
                 else:
                     erf1 = math.erf(distance[i] * z1)
                     erf2 = math.erf(distance[i] * z2)
-                    #erf = math.erf(distance[i] * z1 * z2 / (z1**2 + z2**2)**0.5)
                     S = (q_c / distance[i] + q_s1 * erf1 / distance[i]+ q_s2 * erf2 / distance[i])
                 fit_potential.append(one_4pi_eps0 * S)
             return fit_potential
@@ -96,9 +95,7 @@ def doit(T:int, texf):
             ChargeModel.POINT_CORE: ["q_c"],
         }
 
-        # charge models
         functions = [
-
             point_core_gaussian_shell_charge,
             Point_core_1slater_shell_charge,
             point_core_gaussian_gaussian_shell_charge,
@@ -106,25 +103,19 @@ def doit(T:int, texf):
             point_core
         ]
 
-
         with open(f'output_4_{T}.json', 'r') as json_f:
             output_data = json.load(json_f)
 
-
-
-
-        #inputs from json file
         data   = output_data['data']
         charge = None
         initial_guesses = output_data['initial_guesses']
         bounds = output_data['bounds']
 
-
         fig, (axes1, axes2, axes3, axes4, axes5, axes6) = plt.subplots(len(data), 1, figsize=(6, 14))
         axes = [axes1, axes2, axes3, axes4, axes5, axes6]
 
-        #texf.write(f'Compound & Charge model & charge_core & charge_shell (i) & charge_shell (ii) & zeta_shell (i) & zeta_shell (ii) & RMSE\n')
         all_params = {}
+        plot_colors = ["crimson", "black", "royalblue", "mediumseagreen"]
 
         for i, (compound, (distance_data, potential_data)) in enumerate(data.items()):
 
@@ -144,14 +135,13 @@ def doit(T:int, texf):
             else:
                     label += "+"
 
-            # Modify data to just fit to the difference, but not for the set starting at zero
             original_charge = 0
-            
             if False and distance_data[0] > 0:
                     original_charge = charge
                     for d in range(len(distance_data)):
                             potential_data[d] -= one_4pi_eps0*charge/distance_data[d]
                     charge = 0
+            
             for func_index, func in enumerate(functions):
                 if func_index == 4:
                         continue
@@ -175,7 +165,6 @@ def doit(T:int, texf):
                 popts_compound.append(popt)
                 pcovs_compound.append(pcov)
                 charge_model_compound = func(distance_data, *popt)
-
 
                 if func_index == 0 or func_index == 1:
                     q_c_opt, z2_opt = popt
@@ -205,7 +194,7 @@ def doit(T:int, texf):
                     rmse = np.sqrt(np.mean((np.array(charge_model_compound) - np.array(potential_data))**2))
                     texf.write(f"{label} & {charge_model} & {original_charge+q_c_opt:.3f} &  &  & &  & {rmse:.3f} \\\\\n")
 
-                axes[i].plot(np.array(distance_data), np.array(charge_model_compound)-np.array(potential_data), label=f'{charge_model}')
+                axes[i].plot(np.array(distance_data), np.array(charge_model_compound)-np.array(potential_data), label=f'{charge_model}', lw=3, color=plot_colors[func_index % len(plot_colors)])
                 axes[i].text(.82, .89, label, transform=axes[i].transAxes,  va='top', fontsize=18)
             all_params[compound] = params
         axes[3].set_ylabel('Residual electrostatic potential (kJ/mol e)', fontsize=18)
@@ -239,7 +228,7 @@ def tex_header(T:int, texf):
         texf.write("""
 \\begin{table}[htb]
 \\centering
-\\caption{ESP parameters for ions and charge models (CM), charge on core q$_c$ and shells q$_s$ $i$ and $ii$, respectively, distribution widths $\\zeta$ in 1/\\text{\\AA}. Charge models include a positive point charge with either one Gaussian (PC+G) or 1S Slater distributed charge (PC+1S), and a point charge with two Gaussian charges (PC+G+G), or a point charge with a 1S and a 2S Slater charge (PC+1S+2S). Root mean square error (kJ/mol e) after fitting from %s to 4.5 {\\AA}.}   
+\\caption{ESP parameters for ions and charge models (CM), charge on core q$_c$ and shells q$_s$ $i$ and $ii$, respectively, distribution widths $\\zeta$ in 1/\\text{\\AA}. Charge models include a positive point charge with either one Gaussian (PC+G) or 1S Slater distributed charge (PC+1S), and a point charge with two Gaussian charges (PC+G+G), or a point charge with a 1S and a 2S Slater charge (PC+1S+2S). Root mean square error (kJ/mol e) after fitting from %s to 4.5 {\\AA}.}
 \\label{tab:ESP%d}
 \\begin{tabular}{cccccccccccccccc}
 \\hline
