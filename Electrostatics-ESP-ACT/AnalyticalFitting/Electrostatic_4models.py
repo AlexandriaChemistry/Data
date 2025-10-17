@@ -107,7 +107,7 @@ def main(T:int):
                         # Compute RMSD
                         pcrmsd = np.sqrt(np.mean((y1-ener_pc)**2))
                         pclabel = ("PC RMSD = %.0f kJ/mol" % ( pcrmsd ))
-                        axes[i].plot(x1, ener_pc, label=pclabel, linewidth=3, color='cornflowerblue')
+                        axes[i].plot(x1, ener_pc, label=pclabel, linewidth=3, color='royalblue')
                         # Compute RMSD
                         rmsd = np.sqrt(np.mean((y1-function_values[function_name])**2))
                         flabel = ("%s RMSD = %.0f kJ/mol" % ( func_index_to_name[func_index], rmsd))
