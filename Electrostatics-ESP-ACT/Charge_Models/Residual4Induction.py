@@ -64,12 +64,12 @@ rmsd_acm = extract_rmsd("ACM-PG.log")
 
 viewxvg_command = [
     "viewxvg", "-f", "INDUCTION-SW.xvg", "INDUCTION-ACM.xvg",
-    "-mk", "o", "-res", "-ls", "None", "-color", "green",
-    "-alfs", "32", "-tfs", "32", "-lfs", "32",
+     "-mk", "o", "-res", "-ls", "None", "-color", "green",
+    "-alfs", "38", "-tfs", "38", "-lfs", "38",
     "-labels",
     f"CHARMM Drude (RMSD:{rmsd_swm4})", f"PC+GVS (RMSD:{rmsd_acm})",
-    "-tickfs", "32", "-color", "crimson", "royalblue",
-    "-legend_y", "0.3", "-legend_x", "0.2"
+    "-tickfs", "38", "-color", "crimson", "royalblue",
+    "-legend_y", "0.4", "-legend_x", "0.22"
 ]
 print("Running:", " ".join(viewxvg_command))
 subprocess.run(viewxvg_command, check=True)
