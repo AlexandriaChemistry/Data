@@ -7,27 +7,29 @@ json_dir = "../AntechamberGaussian/MBIS/"
 xml_file = "P+S.xml"
 output_xml = "P+S_updated.xml"
 
-def set_val(var, val:float):
+def set_val(var, val: float):
     var.set("value", str(val))
     var.set("minimum", str(val))
     var.set("maximum", str(val))
     var.set("mutability", "Fixed")
 
-def average_data(atomtypes:list, data:list)->list:
+def average_data(atomtypes: list, data: list) -> list:
     adict = {}
     for c in range(len(atomtypes)):
         key = atomtypes[c]
-        if not key in adict:
-            adict[key] = { "sum": data[c][0], "n": 1 }
+        if key not in adict:
+            adict[key] = {"sum": data[c][0], "n": 1}
         else:
             adict[key]["sum"] += data[c][0]
             adict[key]["n"] += 1
     alist = []
     for c in range(len(atomtypes)):
         key = atomtypes[c]
-        val = adict[key]["sum"]/adict[key]["n"]
+        val = adict[key]["sum"] / adict[key]["n"]
         alist.append([val])
     return alist
+
+
 
 obtype_updates = {
     "guanidinium": [
@@ -152,6 +154,9 @@ obtype_updates = {
     "sodium-ion": [("Na", "Na+")],
 }
 
+
+
+
 tree = ET.parse(xml_file)
 root = tree.getroot()
 
@@ -162,6 +167,16 @@ if coulomb_block is None:
 particle_block = root.find(".//particletypes")
 if particle_block is None:
     raise RuntimeError("No particletypes found in XML!")
+
+for plist in coulomb_block.findall(".//parameterlist"):
+    identifier = plist.get("identifier", "")
+    if identifier.startswith("v1"):
+        zeta = plist.find(".//parameter[@type='zeta']")
+        if zeta is not None:
+            set_val(zeta, 0.0)
+            print(f"Set zeta=0 for {identifier}")
+        else:
+            print(f"No zeta parameter found for {identifier}")
 
 for molname in obtype_updates.keys():
     json_path = os.path.join(json_dir, f"{molname}/CCSD.json")
@@ -174,23 +189,19 @@ for molname in obtype_updates.keys():
 
     atomtypes = [new for _, new in obtype_updates[molname]]
 
-    # Fetch widths
     val_widths = jdata.get("valence_widths", [])
     if not val_widths:
         print(f"no val_widths for {molname}, skipping...")
         continue
 
-    # Now fetch charges
     charges = jdata.get("charges", [])
     val_charges = jdata.get("valence_charges", [])
 
-    charges     = average_data(atomtypes, charges)
+    charges = average_data(atomtypes, charges)
     val_charges = average_data(atomtypes, val_charges)
-    val_widths  = average_data(atomtypes, val_widths)
+    val_widths = average_data(atomtypes, val_widths)
 
-    zeta_values = []
-    for v in val_widths:
-        zeta_values.append(1/(2*BOHR*float(v[0])))
+    zeta_values = [1 / (2 * BOHR * float(v[0])) for v in val_widths]
 
     if len(atomtypes) != len(zeta_values):
         print(f"mismatch in number of atomtypes ({len(atomtypes)}) and zeta values ({len(zeta_values)}) for {molname}")
@@ -203,31 +214,33 @@ for molname in obtype_updates.keys():
         if paramlist is None:
             print(f"no <parameterlist> found for {atype}_z")
             continue
-
         param_elem = paramlist.find("parameter[@type='zeta']")
         if param_elem is None:
             print(f"no <parameter> element of type='zeta' for {atype}_z")
             continue
-
-        zval_rounded = round(zval, 6)
-        set_val(param_elem, zval_rounded)
+        set_val(param_elem, round(zval, 6))
 
     for c in range(len(charges)):
         qcore = charges[c][0] - val_charges[c][0]
         atype = atomtypes[c]
-        # Change vtype
         vatype = "v1" + atype
-        paramlist = particle_block.find(f".//particletype[@identifier='{vatype}']")
-        if paramlist is None:
-            sys.exit("Cannot find particletype for %s" % vatype)
-        vcharge = paramlist.find(f".//parameter[@type='charge']")
-        set_val(vcharge, qcore)
-        # Change atom
-        paramlist = particle_block.find(f".//particletype[@identifier='{atype}']")
-        if paramlist is None:
-            sys.exit("Cannot find particletype for %s" % atype)
-        acharge = paramlist.find(f".//parameter[@type='charge']")
-        set_val(acharge, val_charges[c][0])
+
+        vpart = particle_block.find(f".//particletype[@identifier='{vatype}']")
+        if vpart is not None:
+            vcharge = vpart.find(f".//parameter[@type='charge']")
+            if vcharge is not None:
+                set_val(vcharge, qcore)
+        else:
+            print(f"Warning: cannot find particletype for {vatype}")
+
+        apart = particle_block.find(f".//particletype[@identifier='{atype}']")
+        if apart is not None:
+            acharge = apart.find(f".//parameter[@type='charge']")
+            if acharge is not None:
+                set_val(acharge, val_charges[c][0])
+        else:
+            print(f"Warning: cannot find particletype for {atype}")
 
 tree.write(output_xml, xml_declaration=True, short_empty_elements=True)
-print(f"updated XML written to {output_xml}")
+print(f"Updated XML written to {output_xml}")
+
