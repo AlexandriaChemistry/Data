@@ -80,8 +80,8 @@ def main(T: int):
             )
             diff = y_sorted - model_energies
             smooth = gaussian_filter1d(diff, sigma=1.2)
-            glow_line(ax, x_sorted, smooth, color="black", lw=3, glow_widths=[6, 12, 20], alpha_step=0.05)
-            glow_dummy = ax.plot([], [], color="black", lw=3, label="PG")[0]
+            glow_line(ax, x_sorted, smooth, color="darkred", lw=3, glow_widths=[6, 12, 20], alpha_step=0.05)
+            glow_dummy = ax.plot([], [], color="darkred", lw=3, label="PG")[0]
 
             pg_scatter = ax.scatter(
                 x_sorted, y_sorted - ener_pc,
@@ -103,7 +103,7 @@ def main(T: int):
             if col != 0:
                 ax.set_yticklabels([])
 
-            ax.tick_params(axis='both', which='major', labelsize=24)
+            ax.tick_params(axis='both', which='major', labelsize=32)
             sns.despine(ax=ax, top=False, right=False)
             idx += 1
 
@@ -113,10 +113,10 @@ def main(T: int):
         for ax in axes[0:3]:
             ax.set_ylim(y_min, y_max)
 
-    fig.text(0.5, 0.04, 'Distance ($\\mathrm{\\AA}$)', ha='center', fontsize=28)
-    fig.text(0.04, 0.5, 'Residual (kJ/mol)', va='center', rotation='vertical', fontsize=28)
+    fig.text(0.5, 0.04, 'Distance ($\\mathrm{\\AA}$)', ha='center', fontsize=32)
+    fig.text(0.04, 0.5, 'Residual (kJ/mol)', va='center', rotation='vertical', fontsize=32)
     plt.tight_layout()
-    plt.subplots_adjust(hspace=0., wspace=0., left=0.15, bottom=0.12, right=0.98, top=0.95)
+    plt.subplots_adjust(hspace=0., wspace=0., left=0.2, bottom=0.12, right=0.98, top=0.95)
     output_file = f"{FIG_DIR}/Residual-ESP_AlignedLegend.pdf"
     plt.savefig(output_file, dpi=600, bbox_inches='tight')
     plt.show()
