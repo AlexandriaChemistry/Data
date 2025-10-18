@@ -42,18 +42,18 @@ def run_one(qtype:str, qm:str) -> dict:
         molprops = "../AlexandriaFF/sapt-esp5-mbiss.xml"
 
     log_filename = f"{qtype}_{qm}.log"
-    base_command = f"alexandria train_ff -nooptimize -g {log_filename} -sel ../Selection/ac-total.dat -mp {molprops} -ff ../AlexandriaFF/{acmparm[qtype]['ff']}"
+    base_command = f"alexandria train_ff -nooptimize -g {log_filename} -sel ../Selection/ac-total.dat -mp {molprops} -ff ../AlexandriaFF/{acmparm[qtype]['ff']} -qalg SQE"
 
     qfn = f"../AlexandriaFF/{qm}-aug-cc-pvtz.xml"
     print(f"Running command for {qtype}")
     if "elec" in qtype or "esp" in qtype:
-        mycmd = base_command + f" -charges {qfn} "
+        mycmd = base_command + f" -charges {qfn} -qalg ESP"
     elif qtype == "MBIS":
-        mycmd = base_command + f" -qtype qRESP -charges ../AlexandriaFF/MBIS_MP2.xml "
+        mycmd = base_command + f" -qqm qRESP -charges ../AlexandriaFF/MBIS_MP2.xml -qalg Read "
     elif qtype == "MBIS-S":
-        mycmd = base_command + " -qtype None " #+ f" -charges ../AlexandriaFF/mbisS_ccsd.xml -qtype qRESP "        
+        mycmd = base_command + " -qqm None " #+ f" -charges ../AlexandriaFF/mbisS_ccsd.xml -qqm qRESP "
     else:
-        mycmd = base_command + f" -qtype q{qtype} -charges {qfn} "    
+        mycmd = base_command + f" -qqm q{qtype} -charges {qfn} -qalg Read "
     os.system(mycmd)
 
     if not os.path.exists(log_filename):
