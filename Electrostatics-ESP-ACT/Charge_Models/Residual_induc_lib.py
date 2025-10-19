@@ -18,7 +18,6 @@ forcefield_map = {
 }
 
 def extract_rmsd(log_filename):
-    """Extract RMSD value from log file."""
     rmsd_value = None
     with open(log_filename, "r") as file:
         for line in file:
