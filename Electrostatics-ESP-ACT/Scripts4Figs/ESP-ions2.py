@@ -65,7 +65,7 @@ with open("plus.xvg", "w") as f_plus:
 
 opts = (
     "-mk o x + . -xframe 16 -yframe 16 -noshow -panel "
-    "-legend_x 0.4 -legend_y 0.99 -ls solid "
+    "-legend_x 0.7 -legend_y 0.99 -ls solid "
     "-alfs 48 -tickfs 48 -lfs 36 "
     "-colors crimson black royalblue mediumseagreen   crimson black royalblue mediumseagreen "
 )
