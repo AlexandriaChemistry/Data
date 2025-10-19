@@ -27,8 +27,8 @@ acmparm = {
     "PC+GV-elec":    { "ff": "PC+GV-elec.xml", "nparm": 106, "label": "PC+GV", "target": "Elec" },
     "PC+GV-allelec": { "ff": "PC+GV-allelec.xml", "nparm": 106, "label": "PC+GV", "target": "Elec+Induc" },
     "PC+SV-elec":    { "ff": "PC+SV-elec.xml", "nparm": 106, "label": "PC+SV", "target": "Elec" },
-    "PC+SV-esp1":    { "ff": "PC+SV-esp1.xml", "nparm": 152, "label": "PC+SV*3", "target": "Elec" },
-    "PC+SV-esp4":    { "ff": "PC+SV-esp4.xml", "nparm": 94, "label": "PC+SV*4", "target": "Elec" },
+#    "PC+SV-esp1":    { "ff": "PC+SV-esp1.xml", "nparm": 152, "label": "PC+SV*3", "target": "Elec" },
+#    "PC+SV-esp4":    { "ff": "PC+SV-esp4.xml", "nparm": 94, "label": "PC+SV*4", "target": "Elec" },
     "PC+SV-allelec": { "ff": "PC+SV-allelec.xml", "nparm": 106, "label": "PC+SV", "target": "Elec+Induc" },
     "PC+GS-elec":    { "ff": "PC+GS-elec.xml", "nparm": 156, "label": "PC+GS", "target": "Elec,Induc", header: "Polarizable ACT models" },
     "PC+GS-allelec": { "ff": "PC+GS-allelec.xml", "nparm": 156, "label": "PC+GS", "target": "Elec+Induc" }
@@ -42,14 +42,16 @@ def run_one(qtype:str, qm:str) -> dict:
         molprops = "../AlexandriaFF/sapt-esp5-mbiss.xml"
 
     log_filename = f"{qtype}_{qm}.log"
-    base_command = f"alexandria train_ff -nooptimize -g {log_filename} -sel ../Selection/ac-total.dat -mp {molprops} -ff ../AlexandriaFF/{acmparm[qtype]['ff']} -qalg SQE"
+    base_command = f"alexandria train_ff -nooptimize -g {log_filename} -sel ../Selection/ac-total.dat -mp {molprops} -ff ../AlexandriaFF/{acmparm[qtype]['ff']} "
 
     qfn = f"../AlexandriaFF/{qm}-aug-cc-pvtz.xml"
     print(f"Running command for {qtype}")
-    if "elec" in qtype or "esp" in qtype:
+    if "elec" in qtype:
+        mycmd = base_command + f" -charges {qfn} -qalg SQE"
+    elif "esp" in qtype:
         mycmd = base_command + f" -charges {qfn} -qalg ESP"
     elif qtype == "MBIS":
-        mycmd = base_command + f" -qqm qRESP -charges ../AlexandriaFF/MBIS_MP2.xml -qalg Read "
+        mycmd = base_command + f" -qqm qMBIS -charges ../AlexandriaFF/MP2-MBIS.xml -qalg Read "
     elif qtype == "MBIS-S":
         mycmd = base_command + " -qqm None " #+ f" -charges ../AlexandriaFF/mbisS_ccsd.xml -qqm qRESP "
     else:

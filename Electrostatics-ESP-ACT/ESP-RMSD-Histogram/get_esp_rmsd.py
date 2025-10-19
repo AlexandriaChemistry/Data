@@ -4,7 +4,7 @@ import os
 
 def grep_rms(filter:str)->dict:
     filenm = ( "rmsdump-%s.txt" % filter )
-    os.system("cd compounds; zgrep 'Charges from ESP fit,' */*-%s.log.gz > ../%s" % ( filter, filenm ) )
+    #os.system("cd compounds; zgrep 'Charges from ESP fit,' */*-%s.log.gz > ../%s" % ( filter, filenm ) )
 
     mydict = {}
     with open(filenm, "r", encoding='utf-8') as inf:
@@ -56,5 +56,5 @@ if __name__ == "__main__":
             outf.write("%10g  %10g\n" % ( hartree*i*mymax/100, histo[i]*1.0/nmol))
 
     pdf = "rmsd_histo.pdf"
-    os.system("viewxvg -f %s -lfs 40 -alfs 40 -tickfs 32 -noshow -pdf %s" % ( histofn, pdf ) )
+    os.system("viewxvg -f %s -lfs 40 -alfs 40 -tickfs 32 -noshow -save %s" % ( histofn, pdf ) )
     print("Please check %s" % pdf )

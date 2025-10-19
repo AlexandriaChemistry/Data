@@ -54,7 +54,7 @@ def main(T: int):
 
             ax.scatter(
                 x_sorted, y_sorted - ener_pc,
-                color=colors[compound],
+                color="navy", #colors[compound],
                 label="PC",
                 alpha=0.8,
                 #edgecolor='k',
@@ -79,7 +79,7 @@ def main(T: int):
                 ax.plot(
                     x_sorted, diff,
                     label=func_index_to_name[func_index],
-                    color="#7B3F61",
+                    color="crimson", #"#7B3F61",
                     marker='^',
                     linestyle='None',
                     alpha=0.8,
