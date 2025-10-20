@@ -2,7 +2,7 @@
 
 import os, glob, sys
 
-debug   = True
+debug   = False
 train   = "Train"
 test    = "Test"
 header  = "header"
@@ -18,7 +18,9 @@ acmparm = {
     "RESP":          { "ref": "Bayly1993a", "nparm": nq, "ff": "coul-p.xml" },
     "MBIS":          { "ref": "Verstraelen2016a", "nparm": nq, "ff": "coul-p.xml" },
     "MBIS-S":        { "ref": "Verstraelen2016a", "nparm": nq*3, "ff": "P+S_updated.xml" },
-    "PC-elec":       { "ff": "PC-elec.xml", "nparm": 66, "label": "PC", "target": "Elec", header: "Non-polarizable ACT models" },
+    "PC+GV-esp":     { "ff": "PC+GV-esp.xml", "nparm": nq*3, "label": "PC+GV", "target": "ESP", header: "Non-polarizable ACT monomer-based models" },
+    "PC+SV-esp":     { "ff": "PC+SV-esp.xml", "nparm": nq*3, "label": "PC+SV", "target": "ESP" },
+    "PC-elec":       { "ff": "PC-elec.xml", "nparm": 66, "label": "PC", "target": "Elec", header: "Non-polarizable ACT dimer-based models" },
     "PC-allelec":    { "ff": "PC-allelec.xml", "nparm": 66, "label": "PC", "target": "Elec+Induc" },
     "GC-elec":       { "ff": "GC-elec.xml", "nparm": 85, "label": "GC", "target": "Elec" },
     "GC-allelec":    { "ff": "GC-allelec.xml", "nparm": 85, "label": "GC", "target": "Elec+Induc" },
@@ -27,12 +29,17 @@ acmparm = {
     "PC+GV-elec":    { "ff": "PC+GV-elec.xml", "nparm": 106, "label": "PC+GV", "target": "Elec" },
     "PC+GV-allelec": { "ff": "PC+GV-allelec.xml", "nparm": 106, "label": "PC+GV", "target": "Elec+Induc" },
     "PC+SV-elec":    { "ff": "PC+SV-elec.xml", "nparm": 106, "label": "PC+SV", "target": "Elec" },
-#    "PC+SV-esp1":    { "ff": "PC+SV-esp1.xml", "nparm": 152, "label": "PC+SV*3", "target": "Elec" },
-#    "PC+SV-esp4":    { "ff": "PC+SV-esp4.xml", "nparm": 94, "label": "PC+SV*4", "target": "Elec" },
     "PC+SV-allelec": { "ff": "PC+SV-allelec.xml", "nparm": 106, "label": "PC+SV", "target": "Elec+Induc" },
-    "PC+GS-elec":    { "ff": "PC+GS-elec.xml", "nparm": 156, "label": "PC+GS", "target": "Elec,Induc", header: "Polarizable ACT models" },
+    "PC+GS-elec":    { "ff": "PC+GS-elec.xml", "nparm": 156, "label": "PC+GS", "target": "Elec,Induc", header: "Polarizable ACT dimer-based models" },
     "PC+GS-allelec": { "ff": "PC+GS-allelec.xml", "nparm": 156, "label": "PC+GS", "target": "Elec+Induc" }
 }
+
+def myround(word:str)->float:
+    fff = float(word)
+    if abs(fff) >= 10:
+        return round(fff, 0)
+    else:
+        return round(fff, 1)
 
 def run_one(qtype:str, qm:str) -> dict:
     if not qtype in acmparm:
@@ -75,16 +82,16 @@ def run_one(qtype:str, qm:str) -> dict:
                 words = line.strip().split()
                 try:
                     mydict[dset]["COUL"]["N"] = int(words[2])
-                    mydict[dset]["COUL"]["RMSD"] = round(float(words[5]),1)
-                    mydict[dset]["COUL"]["MSE"] = round(float(words[6]),1)
+                    mydict[dset]["COUL"]["RMSD"] = myround(words[5])
+                    mydict[dset]["COUL"]["MSE"] = myround(words[6])
                 except ValueError:
                     sys.exit(f"Strange line {line.strip()}")
             elif "ALLELEC (kJ" in line:
                 words = line.strip().split()
                 try:
                     mydict[dset]["ALLELEC"]["N"] = int(words[2])
-                    mydict[dset]["ALLELEC"]["RMSD"] = round(float(words[5]),1)
-                    mydict[dset]["ALLELEC"]["MSE"] = round(float(words[6]),1)
+                    mydict[dset]["ALLELEC"]["RMSD"] = myround(words[5])
+                    mydict[dset]["ALLELEC"]["MSE"] = myround(words[6])
                 except ValueError:
                     sys.exit(f"Strange line {line.strip()}")
 
@@ -140,7 +147,7 @@ def do_all(qm:str):
     with open(f"legacy_{qm}.tex", "w") as outf:
         outf.write("\\begin{table}[ht]\n")
         outf.write("\\centering\n")
-        outf.write("\\caption{Root mean square deviation (RMSD) and mean signed error (MSE), both in kJ/mol of electrostatic energies (Elec) and the sum of electrostatics and induction (Elec+Induc) for popular charge models compared to SAPT2+(CCD)$\\delta$MP2 with the aug-cc-pVTZ basis set. The dataset consisted of 94 dimers (Table S6). \\#P indicates the number of parameters in the model (the number of individual charges in legacy models). Values corresponding to the training targets are indicated in {\\bf bold font}. Description of models is given in Table~\\ref{tab:models}.}\n")
+        outf.write("\\caption{Root mean square deviation (RMSD) and mean signed error (MSE), both in kJ/mol of electrostatic energies (Elec) and the sum of electrostatics and induction (Elec+Induc) for popular charge models compared to ACT models based on ESP or SAPT (Table~\\ref{tab:models}). The dataset consisted of 94 dimers (Table S6) and \\#P indicates the number of parameters in the model. Values corresponding to the training targets are indicated in {\\bf bold font}.}\n")
     
         outf.write("\\label{tab:legacy}\n")
         outf.write("\\begin{tabular}{lccccccccccc}\n")
@@ -152,7 +159,7 @@ def do_all(qm:str):
         for qtsuf in acmparm:
             if header in acmparm[qtsuf]:
                 outf.write("\\hline\n")
-                outf.write("&&&\\multicolumn{8}{c}{\\bf %s}\\\\\n" % acmparm[qtsuf][header])
+                outf.write("&&\\multicolumn{9}{c}{\\bf %s}\\\\\n" % acmparm[qtsuf][header])
             label = qtsuf
             if "label" in acmparm[qtsuf]:
                 label = acmparm[qtsuf]["label"]
@@ -190,11 +197,11 @@ def do_all(qm:str):
                                 bold = mydata == "COUL"
                         
                         if  bold:
-                            rmsd_str[mydata][dataset] = f"\\textbf{{{ttable[rmsd]}}}"
-                            mse_str[mydata][dataset]  = f"\\textbf{{{ttable[mse]}}}"
+                            rmsd_str[mydata][dataset] = f"\\textbf{{{ttable[rmsd]:g}}}"
+                            mse_str[mydata][dataset]  = f"\\textbf{{{ttable[mse]:g}}}"
                         else:
-                            rmsd_str[mydata][dataset] = f"{ttable[rmsd]}"
-                            mse_str[mydata][dataset]  = f"{ttable[mse]}"
+                            rmsd_str[mydata][dataset] = f"{ttable[rmsd]:g}"
+                            mse_str[mydata][dataset]  = f"{ttable[mse]:g}"
                     else:
                         print("Something wrong with table for %s" % qtsuf)
                         sys.exit(ttable)

@@ -217,10 +217,10 @@ def ac_mt_gaff():
     
 if __name__ == "__main__":
     files = []
-    #files.append(water_ions())
-    #files.append(water_ions_induction())
+    files.append(water_ions())
+    files.append(water_ions_induction())
     files.append(ac_mt_gaff())
-    #files.append(ah_ions())
+    files.append(ah_ions())
     print("Please check files:")
     for fn in files:
         print("  %s" % fn)
