@@ -197,17 +197,43 @@ def ah_ions():
     
 
 def ac_mt_gaff():
-    models = { "RESP": { "ff": "../AlexandriaFF/coul-p.xml", "mp": mymp, "qtype": "qRESP" },
-               "BCC": { "ff": "../AlexandriaFF/coul-p.xml", "mp": mymp, "qtype": "qBCC" },
-               "MBIS-S": { "ff": "../AlexandriaFF/P+S_updated.xml", "mp": "../AlexandriaFF/sapt-esp5-mbiss.xml"  },
-               "PC+GV": { "ff": "../AlexandriaFF/PC+GV-elec.xml", "mp": mymp },
-               "PC+GS": { "ff": "../AlexandriaFF/PC+GS-elec.xml", "mp": mymp } }
+    models = { "RESP": "RESP_MP2.log",
+               "BCC": "BCC_MP2.log",
+               "MBIS-S": "MBIS-S_MP2.log",
+               "PC+GV": "PC+GV-elec_MP2.log",
+               "PC+GS": "PC+GS-elec_MP2.log" }
     newfn = "data-sc-ions.json"
     if not os.path.exists(newfn):
         sys.exit("Cannot find %s" % newfn)
     with open(newfn, "r") as inf:
         mydata = json.load(inf)
-    add_calcs(mydata, models)
+    dimers = []
+    for i in range(len(mydata)):
+        dimers.append(mydata[i]["name"])
+    for model in models:
+        logfn     = f"../Charge_Models/{models[model]}"
+        molname   = None
+        foundEner = False
+        with open(logfn, "r") as inf:
+            print("Reading %s" % logfn)
+            for line in inf:
+                words = line.split()
+                if line.startswith("Molecule") and line.find("Name") > 0:
+                    molname = words[3][:-1]
+                    if not molname in dimers:
+                        molname = None
+                        foundEner = False
+                    else:
+                        print("Found %s" % molname)
+                elif molname and line.find("QM       ACT        QM       ACT") > 0:
+                    foundEner = True
+                elif foundEner:
+                    if len(words) == 17:
+                        index = words[16]
+                        for i in range(len(mydata)):
+                            if mydata[i]["name"] == molname and mydata[i]["index"] == index:
+                                mydata[i][model] = float(words[3])
+                                foundEner = False
 
     file_path = "AC-MA-IONS-GAFF.tex"
     caption = "Electrostatic energy (kJ/mol) between alkali ions, halides or water (oxygen) and amino acid side chain analogs, formate (oxygen), acetate (oxygen), methylammonium (nitrogen), ethylammonium (nitrogen) from SAPT2+(CCD)$\\delta$MP2/aug-cc-pVTZ, and charges determined using either RESP~\\cite{Bayly1993a} or BCC~\\cite{Jakalian2000a} as well as two models generated using the ACT."
@@ -217,10 +243,10 @@ def ac_mt_gaff():
     
 if __name__ == "__main__":
     files = []
-    files.append(water_ions())
-    files.append(water_ions_induction())
+#    files.append(water_ions())
+#    files.append(water_ions_induction())
     files.append(ac_mt_gaff())
-    files.append(ah_ions())
+#    files.append(ah_ions())
     print("Please check files:")
     for fn in files:
         print("  %s" % fn)

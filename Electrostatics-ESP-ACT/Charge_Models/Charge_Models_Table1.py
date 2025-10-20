@@ -147,19 +147,18 @@ def do_all(qm:str):
     with open(f"legacy_{qm}.tex", "w") as outf:
         outf.write("\\begin{table}[ht]\n")
         outf.write("\\centering\n")
-        outf.write("\\caption{Root mean square deviation (RMSD) and mean signed error (MSE), both in kJ/mol of electrostatic energies (Elec) and the sum of electrostatics and induction (Elec+Induc) for popular charge models compared to ACT models based on ESP or SAPT (Table~\\ref{tab:models}). The dataset consisted of 94 dimers (Table S6) and \\#P indicates the number of parameters in the model. Values corresponding to the training targets are indicated in {\\bf bold font}.}\n")
+        outf.write("\\caption{Root mean square deviation (RMSD) and mean signed error (MSE), both in kJ/mol of electrostatic energies (Elec) and the sum of electrostatics and induction (Elec+Induc) for popular charge models compared to ACT models based on ESP or SAPT (Table~\\ref{tab:models}). Values in brackets are for the test set (Table S6) and \\#P indicates the number of parameters in the model. Values corresponding to the training targets are indicated in {\\bf bold font}.}\n")
     
         outf.write("\\label{tab:legacy}\n")
-        outf.write("\\begin{tabular}{lccccccccccc}\n")
+        outf.write("\\begin{tabular}{lccccccc}\n")
         outf.write("\\hline\n")
-        outf.write(" & Training & \\#P & \\multicolumn{2}{c}{Elec}  & \\multicolumn{2}{c}{Elec+Induc}& \\multicolumn{2}{c}{Elec}  & \\multicolumn{2}{c}{Elec+Induc}\\\\\n")
-        outf.write("Model & target & & RMSD & MSE & RMSD & MSE & RMSD & MSE & RMSD & MSE \\\\\n")
-        outf.write("& & & \\multicolumn{4}{c}{Train}& \\multicolumn{4}{c}{Test}\\\\\n")
+        outf.write(" & Training & \\#P & \\multicolumn{2}{c}{Elec}  & \\multicolumn{2}{c}{Elec+Induc} \\\\\n")
+        outf.write("Model & target & & RMSD & MSE & RMSD & MSE \\\\\n")
 
         for qtsuf in acmparm:
             if header in acmparm[qtsuf]:
                 outf.write("\\hline\n")
-                outf.write("&&\\multicolumn{9}{c}{\\bf %s}\\\\\n" % acmparm[qtsuf][header])
+                outf.write("&\\multicolumn{6}{c}{\\bf %s}\\\\\n" % acmparm[qtsuf][header])
             label = qtsuf
             if "label" in acmparm[qtsuf]:
                 label = acmparm[qtsuf]["label"]
@@ -178,33 +177,32 @@ def do_all(qm:str):
             for mydata in [ "COUL", "ALLELEC" ]:
                 rmsd_str[mydata] = {}
                 mse_str[mydata]  = {}
-                for dataset in [ train, test ]:
-                    if not qtsuf in mytable:
-                        print(f"No {qtsuf} in data")
-                        continue
-                    if not dataset in mytable[qtsuf]:
-                        print(f"No {dataset} data in {qtsuf}")
-                        continue
-                    ttable = mytable[qtsuf][dataset][mydata]
-                    if rmsd in ttable and mse in ttable:
-                        bold    = False
-                        if star and "nparm" in acmparm[qtsuf] and dataset == train:
-                            if "Elec,Induc" in star:
-                                bold = True
-                            elif "Elec+Induc" in star:
-                                bold = mydata == "ALLELEC"
-                            else:
-                                bold = mydata == "COUL"
-                        
-                        if  bold:
-                            rmsd_str[mydata][dataset] = f"\\textbf{{{ttable[rmsd]:g}}}"
-                            mse_str[mydata][dataset]  = f"\\textbf{{{ttable[mse]:g}}}"
+                if not qtsuf in mytable:
+                    print(f"No {qtsuf} in data")
+                    continue
+                train_table = mytable[qtsuf][train][mydata]
+                test_table  = mytable[qtsuf][test][mydata]
+                if rmsd in train_table and mse in train_table and rmsd in test_table and mse in test_table:
+                    bold    = False
+                    if star and "nparm" in acmparm[qtsuf]:
+                        if "Elec,Induc" in star:
+                            bold = True
+                        elif "Elec+Induc" in star:
+                            bold = mydata == "ALLELEC"
                         else:
-                            rmsd_str[mydata][dataset] = f"{ttable[rmsd]:g}"
-                            mse_str[mydata][dataset]  = f"{ttable[mse]:g}"
+                            bold = mydata == "COUL"
+                        
+                    if  bold:
+                        rmsd_str[mydata] = f"\\textbf{{{train_table[rmsd]:g}}}"
+                        mse_str[mydata]  = f"\\textbf{{{train_table[mse]:g}}}"
                     else:
-                        print("Something wrong with table for %s" % qtsuf)
-                        sys.exit(ttable)
+                        rmsd_str[mydata] = f"{train_table[rmsd]:g}"
+                        mse_str[mydata]  = f"{train_table[mse]:g}"
+                    rmsd_str[mydata] += f" ({test_table[rmsd]:g})"
+                    mse_str[mydata]  += f" ({test_table[mse]:g})"
+                else:
+                    print("Something wrong with table for %s" % qtsuf)
+                    sys.exit(train_table)
             if train in mytable[qtsuf]:
                 N = mytable[qtsuf][train][mydata]["N"]
                 if debug:
@@ -214,10 +212,10 @@ def do_all(qm:str):
                 if star:
                     target = star
                 cite = ""
-                if "ref" in acmparm[qtsuf] and dataset == train:
+                if "ref" in acmparm[qtsuf]:
                     cite = f"~\\cite{{{acmparm[qtsuf]['ref']}}}"
                 thisnp = np
-                outf.write(f"{label}{cite} & {target} & {thisnp} & {rmsd_str['COUL'][train]} & {mse_str['COUL'][train]} & {rmsd_str['ALLELEC'][train]} & {mse_str['ALLELEC'][train]} & {rmsd_str['COUL'][test]} & {mse_str['COUL'][test]} & {rmsd_str['ALLELEC'][test]} & {mse_str['ALLELEC'][test]} \\\\\n")
+                outf.write(f"{label}{cite} & {target} & {thisnp} & {rmsd_str['COUL']} & {mse_str['COUL']} & {rmsd_str['ALLELEC']} & {mse_str['ALLELEC']}  \\\\\n")
 
         outf.write("\\hline\n")
         outf.write("\\end{tabular}\n")
