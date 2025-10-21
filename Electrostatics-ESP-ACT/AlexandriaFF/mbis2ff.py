@@ -29,7 +29,6 @@ def average_data(atomtypes:list, data:list)->list:
         alist.append([val])
     return alist
 
-
 obtype_updates = {
     "guanidinium": [
         ("c2", "c2g"),
@@ -127,9 +126,9 @@ obtype_updates = {
     ],
     "butanoate": [
         ("c3", "c3b1"),
-        ("o2", "o2b"),
-        ("o2", "o2b"),
         ("c2", "c2b"),
+        ("o2", "o2b"),
+        ("o2", "o2b"),
         ("c3", "c3b2"),
         ("hc", "hcb1"),
         ("hc", "hcb1"),
@@ -141,9 +140,9 @@ obtype_updates = {
         ("hc", "hcb3") 
     ],
     "water": [
-        ("O", "ow"),
-        ("H", "hw"),
-        ("H", "hw"),
+        ("ow", "ow"),
+        ("hw", "hw"),
+        ("hw", "hw"),
     ],
     "bromide": [("Br", "Br-")],
     "chloride": [("Cl", "Cl-")],
@@ -154,91 +153,91 @@ obtype_updates = {
 }
 
 
+if __name__ == "__main__":
+    tree = ET.parse(xml_file)
+    root = tree.getroot()
 
-tree = ET.parse(xml_file)
-root = tree.getroot()
+    coulomb_block = root.find(".//interaction[@type='COULOMB']")
+    if coulomb_block is None:
+        raise RuntimeError("No COULOMB interaction block found in XML!")
 
-coulomb_block = root.find(".//interaction[@type='COULOMB']")
-if coulomb_block is None:
-    raise RuntimeError("No COULOMB interaction block found in XML!")
+    particle_block = root.find(".//particletypes")
+    if particle_block is None:
+        raise RuntimeError("No particletypes found in XML!")
 
-particle_block = root.find(".//particletypes")
-if particle_block is None:
-    raise RuntimeError("No particletypes found in XML!")
+    for plist in coulomb_block.findall(".//parameterlist"):
+        identifier = plist.get("identifier", "")
+        if identifier.startswith("v1"):
+            zeta = plist.find(".//parameter[@type='zeta']")
+            if zeta is not None:
+                set_val(zeta, 0.0)
+                print(f"Set zeta=0 for {identifier}")
+            else:
+                print(f"No zeta parameter found for {identifier}")
 
-for plist in coulomb_block.findall(".//parameterlist"):
-    identifier = plist.get("identifier", "")
-    if identifier.startswith("v1"):
-        zeta = plist.find(".//parameter[@type='zeta']")
-        if zeta is not None:
-            set_val(zeta, 0.0)
-            print(f"Set zeta=0 for {identifier}")
-        else:
-            print(f"No zeta parameter found for {identifier}")
-
-for molname in obtype_updates.keys():
-    json_path = os.path.join(json_dir, f"{molname}/CCSD.json")
-    if not os.path.exists(json_path):
-        print(f"no JSON for {molname}, skipping...")
-        continue
-
-    with open(json_path) as f:
-        jdata = json.load(f)
-
-    atomtypes = [new for _, new in obtype_updates[molname]]
-
-    val_widths = jdata.get("valence_widths", [])
-    if not val_widths:
-        print(f"no val_widths for {molname}, skipping...")
-        continue
-
-    charges = jdata.get("charges", [])
-    val_charges = jdata.get("valence_charges", [])
-
-    charges = average_data(atomtypes, charges)
-    val_charges = average_data(atomtypes, val_charges)
-    val_widths = average_data(atomtypes, val_widths)
-
-    zeta_values = [1 / (2 * BOHR * float(v[0])) for v in val_widths]
-
-    if len(atomtypes) != len(zeta_values):
-        print(f"mismatch in number of atomtypes ({len(atomtypes)}) and zeta values ({len(zeta_values)}) for {molname}")
-        continue
-
-    print(f"{molname}: using {len(zeta_values)} zeta values")
-
-    for atype, zval in zip(atomtypes, zeta_values):
-        paramlist = coulomb_block.find(f".//parameterlist[@identifier='{atype}_z']")
-        if paramlist is None:
-            print(f"no <parameterlist> found for {atype}_z")
+    for molname in obtype_updates.keys():
+        json_path = os.path.join(json_dir, f"{molname}/CCSD.json")
+        if not os.path.exists(json_path):
+            print(f"no JSON for {molname}, skipping...")
             continue
-        param_elem = paramlist.find("parameter[@type='zeta']")
-        if param_elem is None:
-            print(f"no <parameter> element of type='zeta' for {atype}_z")
+
+        with open(json_path) as f:
+            jdata = json.load(f)
+
+        atomtypes = [new for _, new in obtype_updates[molname]]
+
+        val_widths = jdata.get("valence_widths", [])
+        if not val_widths:
+            print(f"no val_widths for {molname}, skipping...")
             continue
-        set_val(param_elem, round(zval, 6))
 
-    for c in range(len(charges)):
-        qcore = charges[c][0] - val_charges[c][0]
-        atype = atomtypes[c]
-        vatype = "v1" + atype
+        charges = jdata.get("charges", [])
+        val_charges = jdata.get("valence_charges", [])
 
-        vpart = particle_block.find(f".//particletype[@identifier='{vatype}']")
-        if vpart is not None:
-            vcharge = vpart.find(f".//parameter[@type='charge']")
-            if vcharge is not None:
-                set_val(vcharge, qcore)
-        else:
-            print(f"Warning: cannot find particletype for {vatype}")
+        charges = average_data(atomtypes, charges)
+        val_charges = average_data(atomtypes, val_charges)
+        val_widths = average_data(atomtypes, val_widths)
 
-        apart = particle_block.find(f".//particletype[@identifier='{atype}']")
-        if apart is not None:
-            acharge = apart.find(f".//parameter[@type='charge']")
-            if acharge is not None:
-                set_val(acharge, val_charges[c][0])
-        else:
-            print(f"Warning: cannot find particletype for {atype}")
+        zeta_values = [1 / (2 * BOHR * float(v[0])) for v in val_widths]
 
-tree.write(output_xml, xml_declaration=True, short_empty_elements=True)
-print(f"Updated XML written to {output_xml}")
+        if len(atomtypes) != len(zeta_values):
+            print(f"mismatch in number of atomtypes ({len(atomtypes)}) and zeta values ({len(zeta_values)}) for {molname}")
+            continue
+
+        print(f"{molname}: using {len(zeta_values)} zeta values")
+
+        for atype, zval in zip(atomtypes, zeta_values):
+            paramlist = coulomb_block.find(f".//parameterlist[@identifier='{atype}_z']")
+            if paramlist is None:
+                print(f"no <parameterlist> found for {atype}_z")
+                continue
+            param_elem = paramlist.find("parameter[@type='zeta']")
+            if param_elem is None:
+                print(f"no <parameter> element of type='zeta' for {atype}_z")
+                continue
+            set_val(param_elem, round(zval, 6))
+
+        for c in range(len(charges)):
+            qcore = charges[c][0] - val_charges[c][0]
+            atype = atomtypes[c]
+            vatype = "v1" + atype
+
+            vpart = particle_block.find(f".//particletype[@identifier='{vatype}']")
+            if vpart is not None:
+                vcharge = vpart.find(f".//parameter[@type='charge']")
+                if vcharge is not None:
+                    set_val(vcharge, qcore)
+            else:
+                print(f"Warning: cannot find particletype for {vatype}")
+
+            apart = particle_block.find(f".//particletype[@identifier='{atype}']")
+            if apart is not None:
+                acharge = apart.find(f".//parameter[@type='charge']")
+                if acharge is not None:
+                    set_val(acharge, val_charges[c][0])
+            else:
+                print(f"Warning: cannot find particletype for {atype}")
+
+    tree.write(output_xml, xml_declaration=True, short_empty_elements=True)
+    print(f"Updated XML written to {output_xml}")
 

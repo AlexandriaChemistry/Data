@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 
-import os
+import os, sys
 
-def run_one(ff:str, myid:str, qtype:str, charges:str)->float:
+mpdef = " -mp ../AlexandriaFF/MP2-aug-cc-pvtz.xml"
+qdef  = " -charges ../AlexandriaFF/MP2-aug-cc-pvtz.xml"
+
+def run_one(ff:str, myid:str, flags:str)->float:
     myff  = os.path.basename(ff)
     mylog = f"{myid}.log"
-    cmd = ("alexandria train_ff -ff %s -mp ../AlexandriaFF/hf-aug-cc-pvtz.xml -nooptimize -sel ../Selection/monomer.dat -g %s -v 4" % ( ff, mylog ) )
-    if qtype:
-        if not charges:
-            charges = "../AlexandriaFF/hf-aug-cc-pvtz.xml"
-        cmd += (" -qtype q%s -charges %s" % ( qtype, charges ) )
+    cmd = ("alexandria train_ff -ff %s -nooptimize -sel espmono2.dat -g '%s' -v 4 %s" % ( ff, mylog, flags ) )
+    print("Command = '%s'" % cmd)
+    sys.stdout.flush()
     os.system(cmd)
     rmsd = None
     with open(mylog, "r") as inf:
@@ -27,33 +28,31 @@ if __name__ == "__main__":
     dimer   = "Dimer"
     train   = "train"
     allffs = [
-        { "label": "Mulliken", "ff": "coul-p", "qtype": "Mulliken", train: monomer },
-        { "label": "Hirshfeld", "ff": "coul-p", "qtype": "Hirshfeld", train: monomer },
-        { "label": "ESP", "ff": "coul-p", "qtype": "ESP", train: monomer },
-        { "label": "CM5", "ff": "coul-p", "qtype": "CM5", train: monomer },
-        { "label": "BCC", "ff": "coul-p", "qtype": "BCC", train: monomer },
-        { "label": "RESP", "ff": "coul-p", "qtype": "RESP", train: monomer },
-        { "label": "MBIS", "ff": "coul-p", "qtype": "RESP", "charges": "../AlexandriaFF/mbis_ccsd.xml", train: monomer },
-        { "label": "MBIS-S", "ff": "P+S_updated", "qtype": None, train: monomer  },
-        { "label": "PC", "ff": "PC-elec", "qtype": None, train: dimer },
-        { "label": "GC", "ff": "GC-elec", "qtype": None, train: dimer },
-        { "label": "SC", "ff": "SC-elec", "qtype": None, train: dimer },
-        { "label": "PC+GV", "ff": "PC+GV-elec", "qtype": None, train: dimer },
-        { "label": "PC+SV", "ff": "PC+SV-elec", "qtype": None, train: dimer },
-        { "label": "PC+SV*4", "ff": "PC+SV-esp4", "qtype": None, train: dimer },
-        { "label": "PC+GS", "ff": "PC+GS-elec", "qtype": None, train: dimer }
+        { "label": "Mulliken", "ff": "coul-p", "flags": " -qqm qMulliken "+mpdef+qdef, train: monomer },
+        { "label": "Hirshfeld", "ff": "coul-p", "flags": " -qqm qHirshfeld "+mpdef+qdef, train: monomer },
+        { "label": "ESP", "ff": "coul-p", "flags": " -qqm qESP "+mpdef+qdef, train: monomer },
+        { "label": "CM5", "ff": "coul-p", "flags":  " -qqm qCM5 "+mpdef+qdef, train: monomer },
+        { "label": "BCC", "ff": "coul-p", "flags":  " -qqm  qBCC "+mpdef+qdef, train: monomer },
+        { "label": "RESP", "ff": "coul-p", "flags":  " -qqm qRESP "+mpdef+qdef, train: monomer },
+        { "label": "MBIS", "ff": "coul-p", "flags":  " -qqm qMBIS  -charges ../AlexandriaFF/MP2-MBIS.xml"+mpdef, train: monomer },
+        { "label": "MBIS-S", "ff": "P+S_updated", "flags": " -qalg None -mp ../AlexandriaFF/MP2-aug-cc-pvtz_Updated.xml",  train: monomer },
+        { "label": "PC+GV*", "ff": "PC+GV-esp", "flags": " -qalg ESP -mp ../AlexandriaFF/MP2-aug-cc-pvtz_Updated.xml", train: monomer },
+        { "label": "PC+SV*", "ff": "PC+SV-esp", "flags": " -qalg ESP -mp ../AlexandriaFF/MP2-aug-cc-pvtz_Updated.xml", train: monomer },
+        { "label": "PC", "ff": "PC-elec", "flags":  mpdef, train: dimer },
+        { "label": "GC", "ff": "GC-elec", "flags":  mpdef, train: dimer },
+        { "label": "SC", "ff": "SC-elec", "flags":  mpdef, train: dimer },
+        { "label": "PC+GV", "ff": "PC+GV-elec", "flags":  mpdef, train: dimer },
+        { "label": "PC+SV", "ff": "PC+SV-elec", "flags":  mpdef, train: dimer },
+        { "label": "PC+GS", "ff": "PC+GS-elec", "flags":  mpdef, train: dimer }
     ]
     myrmsd = { monomer: [], dimer: [] }
-    for qtype in allffs:
-        print("Will run %s" % qtype['label'])
-        ff = f"../AlexandriaFF/{qtype['ff']}.xml"
-        charges = None
-        if "charges" in qtype:
-            charges = qtype["charges"]
-        rmsd = run_one(ff, qtype['label'], qtype['qtype'], charges)
+    for qqm in allffs:
+        print("Will run %s" % qqm['label'])
+        ff = f"../AlexandriaFF/{qqm['ff']}.xml"
+        rmsd = run_one(ff, qqm['label'], qqm["flags"])
 
         if rmsd:
-            myrmsd[qtype[train]].append( ( qtype['label'],  rmsd ) )
+            myrmsd[qqm[train]].append( ( qqm['label'],  rmsd ) )
 
     for tt in myrmsd:
         for kv in myrmsd[tt]:
@@ -62,7 +61,7 @@ if __name__ == "__main__":
     with open(tab, "w") as outf:
         outf.write("\\begin{table}[ht]\n")
         outf.write("\\centering\n")
-        outf.write("\\caption{RMSD (kJ/mol e) of different charge models with respect to the electrostatic potential computed at the HF/aug-cc-pvtz level of theory (see Methods) for all side chain analogs in Table 1 and water. For description of the different models and training, see Methods.}\n")
+        outf.write("\\caption{RMSD (kJ/mol e) of different charge models with respect to the electrostatic potential computed at the MP2/aug-cc-pvtz level of theory (see Methods) for the side chain analogs in Table 1 and water. For description of the different models and training, see Methods.}\n")
         outf.write("\\label{tab:esprms}\n")
         outf.write("\\begin{tabular}{lclc}\n")
         outf.write("\\hline\n")

@@ -2,6 +2,8 @@
 
 import os
 
+hartree = 2625.5
+
 def grep_rms(filter:str)->dict:
     filenm = ( "rmsdump-%s.txt" % filter )
     #os.system("cd compounds; zgrep 'Charges from ESP fit,' */*-%s.log.gz > ../%s" % ( filter, filenm ) )
@@ -24,9 +26,11 @@ if __name__ == "__main__":
     filter = "HF-6-311G**"
     mydict = grep_rms(filter)
     maxrms = 0
+    sumrms = 0
     nmol   = 0
     for mol in mydict:
         rms = mydict[mol]
+        sumrms += rms
 #        print("%s  %g" % ( mol, rms ))
         maxrms  = max(maxrms, rms)
         nmol   += 1
@@ -41,10 +45,9 @@ if __name__ == "__main__":
         if index < 100:
             histo[index] += 1
         else:
-            outlier.write("Outlier %s RMSD %g\n" % ( mol, mydict[mol] ))
+            outlier.write("Outlier %s RMSD %g\n" % ( mol, hartree*mydict[mol] ))
             histo[100] += 1
     outlier.close()
-    hartree = 2625.5
     rsum /= (len(mydict.keys()) - histo[100])
     print("Please check %d outliers in outlier.txt" % (histo[100]))
     print("Average RMSD %g kJ/mol e" % (hartree*rsum))
@@ -57,4 +60,5 @@ if __name__ == "__main__":
 
     pdf = "rmsd_histo.pdf"
     os.system("viewxvg -f %s -lfs 40 -alfs 40 -tickfs 32 -noshow -save %s" % ( histofn, pdf ) )
+    print("Average RMSD = %g" % ( hartree*sumrms/nmol ))
     print("Please check %s" % pdf )
