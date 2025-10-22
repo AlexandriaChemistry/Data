@@ -49,12 +49,12 @@ def main(T: int):
             ax.text(
                 0.5, 0.5, compound,
                 transform=ax.transAxes,
-                fontsize=20, fontweight='bold', ha='center'
+                fontsize=20, ha='center'
             )
 
             ax.scatter(
                 x_sorted, y_sorted - ener_pc,
-                color="navy", #colors[compound],
+                color="cornflowerblue", #colors[compound],
                 label="PC",
                 alpha=0.8,
                 #edgecolor='k',
