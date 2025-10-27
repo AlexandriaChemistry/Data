@@ -79,7 +79,7 @@ def add_calcs(mydata:list, models:dict):
 
 def wtable(file_path:str, models:dict, mydata:list, caption:str, label:str):
     with open(file_path, "w") as file:
-        file.write("\\begin{table}[ht]\n")
+        file.write("\\begin{table}[htp]\n")
         file.write("\\centering\n")
         file.write("\\caption{%s}\n" % caption)
         file.write("\\label{%s}\n" % label)

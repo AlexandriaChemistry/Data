@@ -64,7 +64,7 @@ rmsd_acm = extract_rmsd("ACM-PG.log")
 pdfnm = "induction-water-ions.pdf"
 viewxvg_command = [
     "viewxvg", "-f", "INDUCTION-SW.xvg", "INDUCTION-ACM.xvg",
-     "-mk", "o", "-res", "-ls", "None", "-color", "green",
+     "-mk", "o", "+", "-res", "-ls", "None", "-color", "green",
     "-alfs", "38", "-tfs", "38", "-lfs", "38",
     "-labels",
     f"CHARMM Drude (RMSD:{rmsd_swm4})", f"PC+GS4 (RMSD:{rmsd_acm})",
