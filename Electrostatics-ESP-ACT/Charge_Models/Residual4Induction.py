@@ -6,7 +6,7 @@ import sys
 
 
 log_file_map = {
-    "ACM-PG.log": "PC+GS",
+    "ACM-PG.log": "PC+GS4",
     "SWM4.log": "CHARMM Drude"
 }
 
@@ -67,7 +67,7 @@ viewxvg_command = [
      "-mk", "o", "-res", "-ls", "None", "-color", "green",
     "-alfs", "38", "-tfs", "38", "-lfs", "38",
     "-labels",
-    f"CHARMM Drude (RMSD:{rmsd_swm4})", f"PC+GVS (RMSD:{rmsd_acm})",
+    f"CHARMM Drude (RMSD:{rmsd_swm4})", f"PC+GS4 (RMSD:{rmsd_acm})",
     "-tickfs", "38", "-color", "crimson", "royalblue",
     "-legend_y", "0.4", "-legend_x", "0.22"
 ]

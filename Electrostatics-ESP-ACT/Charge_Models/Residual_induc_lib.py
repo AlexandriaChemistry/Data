@@ -4,7 +4,7 @@ import subprocess
 import matplotlib.pyplot as plt
 
 log_file_map = {
-    "ACM-PG.log": "PC+GS",
+    "ACM-PG.log": "PC+GS4",
     "SWM4.log": "CHARMM Drude"
 }
 
@@ -85,7 +85,7 @@ plt.scatter(
     color='crimson', alpha=0.7,
     s=120, edgecolor='black', linewidth=0.8,
     marker='s',
-    label=f"PC+GS"
+    label=f"PC+GS4"
 )
 
 plt.xlabel("Induction (kJ/mol)", fontsize=32)

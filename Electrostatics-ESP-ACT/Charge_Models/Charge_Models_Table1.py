@@ -18,20 +18,22 @@ acmparm = {
     "RESP":          { "ref": "Bayly1993a", "nparm": nq, "ff": "coul-p.xml" },
     "MBIS":          { "ref": "Verstraelen2016a", "nparm": nq, "ff": "coul-p.xml" },
     "MBIS-S":        { "ref": "Verstraelen2016a", "nparm": nq*3, "ff": "P+S_updated.xml" },
-    "PC+GV-esp":     { "ff": "PC+GV-esp.xml", "nparm": nq*3, "label": "PC+GV", "target": "ESP", header: "Non-polarizable ACT monomer-based models" },
-    "PC+SV-esp":     { "ff": "PC+SV-esp.xml", "nparm": nq*3, "label": "PC+SV", "target": "ESP" },
+    "PC+GV-esp3":    { "ff": "PC+GV-esp3.xml", "nparm": nq*3, "label": "PC+GV3*", "target": "ESP", header: "Non-polarizable ACT monomer-based models" },
+    "PC+GV-esp4":    { "ff": "PC+GV-esp4.xml", "nparm": 2+nq*3, "label": "PC+GV4*", "target": "ESP" },
+    "PC+SV-esp3":    { "ff": "PC+SV-esp3.xml", "nparm": nq*3, "label": "PC+SV3*", "target": "ESP" },
+    "PC+SV-esp4":    { "ff": "PC+SV-esp4.xml", "nparm": 2+nq*3, "label": "PC+SV4*", "target": "ESP" },
     "PC-elec":       { "ff": "PC-elec.xml", "nparm": 66, "label": "PC", "target": "Elec", header: "Non-polarizable ACT dimer-based models" },
     "PC-allelec":    { "ff": "PC-allelec.xml", "nparm": 66, "label": "PC", "target": "Elec+Induc" },
     "GC-elec":       { "ff": "GC-elec.xml", "nparm": 85, "label": "GC", "target": "Elec" },
     "GC-allelec":    { "ff": "GC-allelec.xml", "nparm": 85, "label": "GC", "target": "Elec+Induc" },
     "SC-elec":       { "ff": "SC-elec.xml", "nparm": 85, "label": "SC", "target": "Elec" },
     "SC-allelec":    { "ff": "SC-allelec.xml", "nparm": 85, "label": "SC", "target": "Elec+Induc" },
-    "PC+GV-elec":    { "ff": "PC+GV-elec.xml", "nparm": 106, "label": "PC+GV", "target": "Elec" },
-    "PC+GV-allelec": { "ff": "PC+GV-allelec.xml", "nparm": 106, "label": "PC+GV", "target": "Elec+Induc" },
-    "PC+SV-elec":    { "ff": "PC+SV-elec.xml", "nparm": 106, "label": "PC+SV", "target": "Elec" },
-    "PC+SV-allelec": { "ff": "PC+SV-allelec.xml", "nparm": 106, "label": "PC+SV", "target": "Elec+Induc" },
-    "PC+GS-elec":    { "ff": "PC+GS-elec.xml", "nparm": 156, "label": "PC+GS", "target": "Elec,Induc", header: "Polarizable ACT dimer-based models" },
-    "PC+GS-allelec": { "ff": "PC+GS-allelec.xml", "nparm": 156, "label": "PC+GS", "target": "Elec+Induc" }
+    "PC+GV-elec":    { "ff": "PC+GV-elec.xml", "nparm": 106, "label": "PC+GV4", "target": "Elec" },
+    "PC+GV-allelec": { "ff": "PC+GV-allelec.xml", "nparm": 106, "label": "PC+GV4", "target": "Elec+Induc" },
+    "PC+SV-elec":    { "ff": "PC+SV-elec.xml", "nparm": 106, "label": "PC+SV4", "target": "Elec" },
+    "PC+SV-allelec": { "ff": "PC+SV-allelec.xml", "nparm": 106, "label": "PC+SV4", "target": "Elec+Induc" },
+    "PC+GS-elec":    { "ff": "PC+GS-elec.xml", "nparm": 156, "label": "PC+GS4", "target": "Elec,Induc", header: "Polarizable ACT dimer-based models" },
+    "PC+GS-allelec": { "ff": "PC+GS-allelec.xml", "nparm": 156, "label": "PC+GS4", "target": "Elec+Induc" }
 }
 
 def myround(word:str)->float:
@@ -45,18 +47,18 @@ def run_one(qtype:str, qm:str) -> dict:
     if not qtype in acmparm:
         sys.exit("Unknown qtype %s" % qtype)
     molprops = "../AlexandriaFF/sapt-esp5.xml"
-    if qtype == "MBIS-S":
+    if qtype in [ "MBIS-S", "PC+SV-esp3", "PC+SV-esp4", "PC+GV-esp3", "PC+GV-esp4" ]:
         molprops = "../AlexandriaFF/sapt-esp5-mbiss.xml"
 
     log_filename = f"{qtype}_{qm}.log"
     base_command = f"alexandria train_ff -nooptimize -g {log_filename} -sel ../Selection/ac-total.dat -mp {molprops} -ff ../AlexandriaFF/{acmparm[qtype]['ff']} "
 
-    qfn = f"../AlexandriaFF/{qm}-aug-cc-pvtz.xml"
+    qfn = f"../AlexandriaFF/{qm}-aug-cc-pvtz"
     print(f"Running command for {qtype}")
     if "elec" in qtype:
         mycmd = base_command + f" -charges {qfn} -qalg SQE"
     elif "esp" in qtype:
-        mycmd = base_command + f" -charges {qfn} -qalg ESP"
+        mycmd = base_command + f" -charges {qfn}_updated -qalg ESP"
     elif qtype == "MBIS":
         mycmd = base_command + f" -qqm qMBIS -charges ../AlexandriaFF/MP2-MBIS.xml -qalg Read "
     elif qtype == "MBIS-S":
@@ -145,7 +147,7 @@ def do_all(qm:str):
     ntrain, ntest = get_train_test("ESP_{qm}.log")
 
     with open(f"legacy_{qm}.tex", "w") as outf:
-        outf.write("\\begin{table}[ht]\n")
+        outf.write("\\begin{table}[p]\n")
         outf.write("\\centering\n")
         outf.write("\\caption{Root mean square deviation (RMSD) and mean signed error (MSE), both in kJ/mol of electrostatic energies (Elec) and the sum of electrostatics and induction (Elec+Induc) for popular charge models compared to ACT models based on ESP or SAPT (Table~\\ref{tab:models}). Values in brackets are for the test set (Table S6) and \\#P indicates the number of parameters in the model. Values corresponding to the training targets are indicated in {\\bf bold font}.}\n")
     

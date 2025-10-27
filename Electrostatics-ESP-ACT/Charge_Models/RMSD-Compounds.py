@@ -1,6 +1,16 @@
 #!/usr/bin/env python3
 
-import os
+import os, sys, math
+import numpy as np
+import holoviews as hv
+from holoviews import opts
+hv.extension('matplotlib')
+
+monomers = [ "water", "lithium", "potassium", "sodium",
+             "fluoride", "chloride", "bromide",
+             "formate", "acetate", "propanoate", "butanoate",
+             "ammonium", "methylammonium", "ethylammonium",
+             "guanidinium", "imidazolium" ]
 
 def get_train()->list:
     mylist = []
@@ -35,27 +45,54 @@ def run_legacy(filenm: str) -> dict:
                 mydict[words[13]] = words[2]
     return mydict
 
+def make_plot(model:dict):
+    newdata = []
+    for i in monomers:
+        for j in monomers:
+            # Making strings out of the equation to keep the
+            # boxes equal in size.
+            ij = f"{i}#{j}"
+            if not ij in model:
+                ij = f"{j}#{i}"
+            rmsd = None
+            if ij in model:
+                rmsd = float(model[ij]["RMSD"])
+            newentry = ( i, j, rmsd )
+            newdata.append(newentry)
+            if i != j:
+                newentry = ( j, i, rmsd )
+                newdata.append(newentry)
+    xx = hv.Dimension("xx", values=monomers)
+    yy = hv.Dimension("yy", values=monomers)
+    return hv.HeatMap(newdata).sort().aggregate(function=np.min)
 
 if __name__ == "__main__":
     alldata = {}
-    mydirs = { "PC": "PC-elec_MP2.log",
-               "GC": "GC-elec_MP2.log",
-               "SC": "SC-elec_MP2.log",
-               "PC+GV": "PC+GV-elec_MP2.log",
-               "PC+SV": "PC+SV-elec_MP2.log",
-               "PC+GS": "PC+GS-elec_MP2.log",
-               #"Mulliken": "Mulliken_MP2.log",
-               #"Hirshfeld": "Hirshfeld_MP2.log",
-               #"ESP": "ESP_MP2.log",
-               #"CM5": "CM5_MP2.log",
-               "BCC": "BCC_MP2.log",
-               "RESP": "RESP_MP2.log",
-               #"MBIS": "MBIS_MP2.log",
-               "MBIS-S": "MBIS-S_MP2.log"
-              }
+    mydirs = {
+        "ESP": "ESP_MP2.log",
+        "BCC": "BCC_MP2.log",
+        "RESP": "RESP_MP2.log",
+        #"MBIS": "MBIS_MP2.log",
+        "MBIS-S": "MBIS-S_MP2.log",
+        "PC+GV4*": "PC+GV-esp4_MP2.log",
+        "PC+SV4*": "PC+SV-esp4_MP2.log",
+        "PC": "PC-elec_MP2.log",
+        "GC": "GC-elec_MP2.log",
+        "SC": "SC-elec_MP2.log",
+        "PC+GV4": "PC+GV-elec_MP2.log",
+        "PC+SV4": "PC+SV-elec_MP2.log",
+        "PC+GS4": "PC+GS-elec_MP2.log",
+        #"Mulliken": "Mulliken_MP2.log",
+        #"Hirshfeld": "Hirshfeld_MP2.log",
+        #"ESP": "ESP_MP2.log",
+        #"CM5": "CM5_MP2.log",
+    }
     for mydir in mydirs.keys():
         alldata[mydir] = run_one(mydirs[mydir])
-    
+        hm = make_plot(alldata[mydir]).opts(show_values=False, title=mydir, xlabel="", xrotation=90,  ylabel="", clabel="RMSD (kJ/mol)", colorbar=True, fontsize='x-large', clim=(0, 40))
+        pdfname = ( "heatmap-%s" % ( mydir ))
+        hv.save(hm, filename=pdfname, fmt='pdf')
+
     train = get_train()
     texfn = "rmsdtable.tex"
     with open(texfn, "w") as outf:
@@ -64,7 +101,7 @@ if __name__ == "__main__":
         outf.write("\\hline\n")
         outf.write("Dimer & N ")
         for md in alldata.keys():
-            outf.write(" & %s" % md)
+            outf.write(" & \\rotatebox{90}{%s}" % md)
         outf.write("\\\\\n")
         outf.write("\\hline\n")
         for dimer in sorted(alldata["PC"].keys()):
@@ -81,3 +118,4 @@ if __name__ == "__main__":
         outf.write("\\hline\n")
         outf.write("\\end{longtable}\n")
     print("Please check %s" % texfn)
+
