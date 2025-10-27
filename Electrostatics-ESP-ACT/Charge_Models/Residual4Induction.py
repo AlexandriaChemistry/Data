@@ -61,7 +61,7 @@ for log_filename, ff_xml in forcefield_map.items():
 rmsd_swm4 = extract_rmsd("SWM4.log")
 rmsd_acm = extract_rmsd("ACM-PG.log")
 
-
+pdfnm = "induction-water-ions.pdf"
 viewxvg_command = [
     "viewxvg", "-f", "INDUCTION-SW.xvg", "INDUCTION-ACM.xvg",
      "-mk", "o", "-res", "-ls", "None", "-color", "green",
@@ -69,7 +69,10 @@ viewxvg_command = [
     "-labels",
     f"CHARMM Drude (RMSD:{rmsd_swm4})", f"PC+GS4 (RMSD:{rmsd_acm})",
     "-tickfs", "38", "-color", "crimson", "royalblue",
-    "-legend_y", "0.4", "-legend_x", "0.22"
+    "-legend_y", "0.4", "-legend_x", "0.22", 
+    "-save", pdfnm,
+    "-noshow"
 ]
 print("Running:", " ".join(viewxvg_command))
 subprocess.run(viewxvg_command, check=True)
+print("Please check %s" % pdfnm)
