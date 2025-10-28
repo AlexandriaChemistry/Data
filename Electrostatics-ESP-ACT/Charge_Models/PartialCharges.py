@@ -203,6 +203,7 @@ def save_data_as_latex(data):
             file.write("\\centering\n")
             file.write(r"\caption{Partial charges q (e) and screening widths $\zeta$ (1/nm) for " + compound + " from ESP, MBIS-S and ACT models. First line, atom, second line shell or virtual site.}")
             file.write("\n")
+            file.write("\\label{tab:q%s}\n" % compound)
             file.write("\\begin{tabular}{l")
             for c in data.keys():
                 file.write("c")

@@ -74,8 +74,8 @@ if __name__ == "__main__":
         "RESP": "RESP_MP2.log",
         #"MBIS": "MBIS_MP2.log",
         "MBIS-S": "MBIS-S_MP2.log",
-        "PC+GV4*": "PC+GV-esp4_MP2.log",
-        "PC+SV4*": "PC+SV-esp4_MP2.log",
+        "PC+GV4x": "PC+GV-esp4_MP2.log",
+        "PC+SV4x": "PC+SV-esp4_MP2.log",
         "PC": "PC-elec_MP2.log",
         "GC": "GC-elec_MP2.log",
         "SC": "SC-elec_MP2.log",
@@ -96,8 +96,9 @@ if __name__ == "__main__":
     train = get_train()
     texfn = "rmsdtable.tex"
     with open(texfn, "w") as outf:
-        outf.write("\\begin{longtable}{lcccccccccccc}\n")
-        outf.write("\\caption{Root mean square deviation (kJ/mol) from SAPT2+(CCD)$\\delta$MP2 electrostatics per compound dimer for the different ACT models and widely-used models, Mulliken, Hirshfeld, ESP, and CM5. N is the number of conformations of each dimer used. Compound dimers used in training are printed in {\\bf bold font}.}\\\\\n")
+        outf.write("\\begin{longtable}{lccccccccccccc}\n")
+        outf.write("\\caption{Root mean square deviation (kJ/mol) from SAPT2+(CCD)$\\delta$MP2 electrostatics per compound dimer for some of the ACT models and widely-used models. N is the number of conformations of each dimer used. Compound dimers used in training are printed in {\\bf bold font}.}\\\\\n")
+        outf.write("\\label{tab:saptrmsd}\\\\\n")
         outf.write("\\hline\n")
         outf.write("Dimer & N ")
         for md in alldata.keys():
