@@ -62,7 +62,7 @@ def run_one(qtype:str, qm:str) -> dict:
     elif qtype == "MBIS":
         mycmd = base_command + f" -qqm qMBIS -charges ../AlexandriaFF/MP2-MBIS.xml -qalg Read "
     elif qtype == "MBIS-S":
-        mycmd = base_command + " -qqm None " #+ f" -charges ../AlexandriaFF/mbisS_ccsd.xml -qqm qRESP "
+        mycmd = base_command + " -qqm None "
     else:
         mycmd = base_command + f" -qqm q{qtype} -charges {qfn} -qalg Read "
     os.system(mycmd)
