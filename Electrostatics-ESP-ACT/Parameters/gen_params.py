@@ -2,16 +2,26 @@
 
 import os
 
+header = "header"
+
+nq = 45
 acmparm = {
-    "ACM-esp-G":      { "ff": "esp-g.xml", "nparm": 48, "label": "GC", "target": "ESP" },
-    "ACM-esp-GV":     { "ff": "esp-gv.xml", "nparm": 54, "label": "GC+PGV", "target": "ESP" },
-    "ACM-elec-P":     { "ff": "coul-p.xml", "nparm": 32, "label": "PC", "target": "Elec" },
-    "ACM-allelec-P":  { "ff": "all-p.xml", "nparm": 32, "label": "PC", "target": "Elec+Induc" },
-    "ACM-elec-G":     { "ff": "coul-g.xml", "nparm": 48, "label": "GC", "target": "Elec" },
-    "ACM-allelec-G":  { "ff": "all-g.xml", "nparm": 48, "label": "GC", "target": "Elec+Induc" },
-    "ACM-elec-GV":    { "ff": "coul-gv.xml", "nparm": 54, "label": "GC+PGV", "target": "Elec" },
-    "ACM-allelec-GV": { "ff": "all-gv.xml", "nparm": 54, "label": "GC+PGV", "target": "Elec+Induc" },
-    "ACM-all-PG":     { "ff": "all-pg.xml", "nparm": 123, "label": "PC+GVS", "target": "Elec,Induc" }
+    "PC+GV-esp3":    { "ff": "PC+GV-esp3.xml", "nparm": nq*3, "label": "PC+GV3x", "target": "ESP", header: "Non-polarizable ACT monomer-based models" },
+    "PC+GV-esp4":    { "ff": "PC+GV-esp4.xml", "nparm": 2+nq*3, "label": "PC+GV4x", "target": "ESP" },
+    "PC+SV-esp3":    { "ff": "PC+SV-esp3.xml", "nparm": nq*3, "label": "PC+SV3x", "target": "ESP" },
+    "PC+SV-esp4":    { "ff": "PC+SV-esp4.xml", "nparm": 2+nq*3, "label": "PC+SV4x", "target": "ESP" },
+    "PC-elec":       { "ff": "PC-elec.xml", "nparm": 66, "label": "PC", "target": "Elec", header: "Non-polarizable ACT dimer-based models" },
+    "PC-allelec":    { "ff": "PC-allelec.xml", "nparm": 66, "label": "PC", "target": "Elec+Induc" },
+    "GC-elec":       { "ff": "GC-elec.xml", "nparm": 85, "label": "GC", "target": "Elec" },
+    "GC-allelec":    { "ff": "GC-allelec.xml", "nparm": 85, "label": "GC", "target": "Elec+Induc" },
+    "SC-elec":       { "ff": "SC-elec.xml", "nparm": 85, "label": "SC", "target": "Elec" },
+    "SC-allelec":    { "ff": "SC-allelec.xml", "nparm": 85, "label": "SC", "target": "Elec+Induc" },
+    "PC+GV-elec":    { "ff": "PC+GV-elec.xml", "nparm": 106, "label": "PC+GV4", "target": "Elec" },
+    "PC+GV-allelec": { "ff": "PC+GV-allelec.xml", "nparm": 106, "label": "PC+GV4", "target": "Elec+Induc" },
+    "PC+SV-elec":    { "ff": "PC+SV-elec.xml", "nparm": 106, "label": "PC+SV4", "target": "Elec" },
+    "PC+SV-allelec": { "ff": "PC+SV-allelec.xml", "nparm": 106, "label": "PC+SV4", "target": "Elec+Induc" },
+    "PC+GS-elec":    { "ff": "PC+GS-elec.xml", "nparm": 156, "label": "PC+GS4", "target": "Elec,Induc", header: "Polarizable ACT dimer-based models" },
+    "PC+GS-allelec": { "ff": "PC+GS-allelec.xml", "nparm": 156, "label": "PC+GS4", "target": "Elec+Induc" }
 }
 
 def prune_eem(tab:str):
@@ -47,7 +57,7 @@ if __name__ == "__main__":
         myinfo = ("Model: %s, training target: %s." % ( acmparm[model]["label"], acmparm[model]["target"] ) )
         myff   = acmparm[model]["ff"]
         os.system("alexandria edit_ff -ff ../AlexandriaFF/%s -o %s -del -a '%s'" % ( myff, myff, atoms ) ) 
-        if model == "ACM-all-PG":
+        if model.startswith("PC+GS"):
             os.system("grep -v a2dexp %s | grep -v hyper > koko.xml" % myff)
             os.system("mv koko.xml %s" % myff)
         
