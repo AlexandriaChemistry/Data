@@ -1,7 +1,8 @@
-# Accurate-Electrostatics-for-Biomolecular-Systems
-Scripts, force field files for widely-used and Alexandria force fields (only electrostatic part), and electrostatic potential (ESP) fitting for reproducing results in the scientific article
+# Beyond Partitioning: Using Force Field Science to Evaluate Electrostatics Models
+Scripts, force field files for widely-used and Alexandria force fields
+(only electrostatic part), and electrostatic potential (ESP) fitting for reproducing results in the scientific article
 [_Accurate Electrostatics for Biomolecular Systems through Machine Learning_].
-Here's the [preprint](https://chemrxiv.org/engage/chemrxiv/article-details/67f82e8e81d2151a02e49d35)
+Here's an oldish [preprint](https://chemrxiv.org/engage/chemrxiv/article-details/67f82e8e81d2151a02e49d35)
 
 If you find our scripts or data useful, we would greatly appreciate it if you cite our work and consider starring the repository.
 
@@ -11,15 +12,13 @@ If you find our scripts or data useful, we would greatly appreciate it if you ci
    point charge with two Gaussian charges or a point charge with a 1S and a 2S Slater charge.
 - `AnalyticalFitting/SAPT_Alkali_Halides/` - SAPT0/aug-cc-pVTZ calculations.
 - `AntechamberGaussian/` - BCC and RESP calculations from Gaussian and Antechamber for ions, water, and side-chains.
-- `Charge_Models/` - Reproduction of Table 1, Comparison of electrostatic energies from Alexandria and other popular charge models, e.g. ESP. Note that according to the definition of SAPT, we 
-   need the sum of electrostatic and induction energies from SAPT to obtain the correct electrostatic energy.  Reproduction of partial charges- Tables S9-S14.  
-- `SAPTDatabase/` - SAPT2+(CCD)-δMP2 database for training and tet.
+- `Charge_Models/` - Reproduction of Tables and figures, comparison of electrostatic energies from Alexandria and other popular charge models, e.g. ESP.  Reproduction of partial charges- Tables S9-S14.
 - `Scripts4Figs/` - Reproduction of the figure 2B,S2 presented in the article.
 - `AlexandriaFF/` - Trained force field files on SAPT2+(CCD)-δMP2 using Alexandria.esp-paper-gaussian.xml FF contains charges for Mulliken, Hirshfeld, CM5, and ESP.
 - `ForceFields/` - Available force field files such as TIP3P, TIP4P, TIP4P-2005.xml, TIP4PEW-JC.xml, Walz2018a.xml, GAFF, and SWM4-NDP.xml. 
 - `Selection/` - Train and Test sets and a script to generate random test and train compounds. 
 - `Scripts4Tabs/` - Reproduction of tables presented in the article.
-- `Parameters` -  Parameters for the PC, GC, GC+PGV, and PC+GVS  models trained on the electrostatic energy or the sum of electrostatic and induction energies from SAPT2+(CCD)-δMP2. For details please see the ACT manual.
+- `Parameters` -  Parameters for the PC, GC, PC+GV, and PC+GS  models trained on the electrostatic energy or the sum of electrostatic and induction energies from SAPT2+(CCD)-dMP2. For details please see the ACT manual.
 - `ESP-RMSD-Histogram/` - ESP at the HF/6-31G** level of theory for 5100 compounds, Fig S1.
 
 ## Requirements
@@ -27,5 +26,5 @@ If you find our scripts or data useful, we would greatly appreciate it if you ci
 - To run the scripts, you'll need Python installed on your computer, if you want to run on your own computer,
 install python using e.g. [Miniconda](https://conda.io/miniconda.html) or [Anaconda](https://docs.conda.io)).
 
-- To be able to run trainings, you need to install Alexandria Chemistry Toolkit (ACT) and its dependencies (ACT/ACT.yml).
+- To be able to run analyses, you need to install [Alexandria Chemistry Toolkit](https://github.com/AlexandriaChemistry/ACT).
 

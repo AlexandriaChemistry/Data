@@ -1,1 +1,0 @@
-readXML_ACT_EnergyC_XYZ.py reads the XML file or the reference file from SAPT2+(CCD)$\delta$MP2 and generates a CSV file containing information about all SAPT component energies, as well as an XYZ directory that includes all the XYZ files used for training.
