@@ -4,6 +4,8 @@ Scripts, force field files for widely-used and Alexandria force fields
 [_Accurate Electrostatics for Biomolecular Systems through Machine Learning_].
 Here's an oldish [preprint](https://chemrxiv.org/engage/chemrxiv/article-details/67f82e8e81d2151a02e49d35)
 
+Please check README files in the subdirectories as well.
+
 If you find our scripts or data useful, we would greatly appreciate it if you cite our work and consider starring the repository.
 
 ## Directory Layout
