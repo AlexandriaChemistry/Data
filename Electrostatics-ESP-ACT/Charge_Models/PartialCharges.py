@@ -28,9 +28,9 @@ log_files = { "ESP":        { "label": "ESP", "ncol": 1 },
               "PC-elec":    { "label": "PC$_{e}$", "ncol": 1 },
               "PC-allelec": { "label": "PC$_{ei}$", "ncol": 1 },
               "MBIS-S":     { "label": "MBIS-S", "ncol": 2 },
-              "PC+SV-elec": { "label": "PC+SV$_{e}$", "ncol": 2 },
-              "PC+GV-elec": { "label": "PC+GV$_{e}$", "ncol": 2 },
-              "PC+GS-elec": { "label": "PC+GS$_{e,i}$", "ncol": 2 },
+              "PC+SV-elec": { "label": "PC+SV4$_{e}$", "ncol": 2 },
+              "PC+GV-elec": { "label": "PC+GV4$_{e}$", "ncol": 2 },
+              "PC+GS-elec": { "label": "PC+GS4$_{e,i}$", "ncol": 2 },
               }
 
 def simplify(atype:str)->str:
@@ -168,14 +168,14 @@ def extract_data_from_log():
                         columns = line.split()
                         if len(columns) > 4 and columns[0].isdigit():
                             aindex     = 1
-                            atom_type  = simplify(columns[2]) + ( "-%d" % aindex )
+                            atom_type  = simplify(columns[2])
                             if not (guanidinium_hack and "w" in atom_type ):
                                 acm_value  = columns[3]
                                 for mypart in data[file_type][current_compound]:
                                     if mypart["type"] == atom_type:
                                         aindex   += 1
-                                        atom_type = simplify(columns[2]) + ( "-%d" % aindex )
-                                data[file_type][current_compound].append( { "type": atom_type, "value": acm_value } )
+                                        atom_type = simplify(columns[2])
+                                data[file_type][current_compound].append( { "type": atom_type, "aindex": aindex, "value": acm_value } )
             if debug:
                 print(f"file {file_type} data {data[file_type]['guanidinium']}")
         except Exception as e:
@@ -245,12 +245,13 @@ def save_data_as_latex(data):
                         if method in zeta:
                             natom = len(data[method][compound])
                             fval = None
-                            if ipart < natom:
+                            if ipart < natom and particle["type"] == data[method][compound][ipart]["type"]:
                                 fval = float(data[method][compound][ipart]["value"])
+                            if fval:
+                                total[method] += fval
+                                mystr += ( " & %s" % str(round(fval, 4)) )
                             else:
-                                sys.exit("Not enough atoms (%d, expected %d) in %s %s" % ( natom, maxpart, method, compound ) )
-                            total[method] += fval
-                            mystr += ( " & %s" % str(round(fval, 4)) )
+                                mystr += ( " & " )
                             zval = None
                             # Hardcoding stuff, sigh.
                             if method == "MBIS-S":
@@ -276,7 +277,7 @@ def save_data_as_latex(data):
                                 mystr += (" & %s" % ( str(round(zval, 2)) ))
                             else:
                                 mystr += " & - "
-                        elif ipart % 2 == 0:
+                        elif particle["type"] == data[method][compound][int(ipart/2)]["type"]:
                             fval = float(data[method][compound][int(ipart/2)]["value"])
                             total[method] += fval
                             mystr += ( " & %s " %  str(round(fval, 4)) )

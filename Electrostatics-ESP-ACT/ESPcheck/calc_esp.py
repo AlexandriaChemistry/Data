@@ -4,18 +4,19 @@ import os, sys
 
 mpdef   = " -mp ../AlexandriaFF/MP2-aug-cc-pvtz.xml"
 qdef    = " -charges ../AlexandriaFF/MP2-aug-cc-pvtz.xml"
-monomer = "Monomer"
-dimer   = "Dimer"
+legacy  = "Other"
+monomer = "ESP"
+dimer   = "Elec"
 train   = "train"
 allffs = [
-    { "label": "Mulliken", "ff": "coul-p", "flags": " -qqm qMulliken "+mpdef+qdef, train: monomer },
-    { "label": "Hirshfeld", "ff": "coul-p", "flags": " -qqm qHirshfeld "+mpdef+qdef, train: monomer },
-    { "label": "ESP", "ff": "coul-p", "flags": " -qqm qESP "+mpdef+qdef, train: monomer },
-    { "label": "CM5", "ff": "coul-p", "flags":  " -qqm qCM5 "+mpdef+qdef, train: monomer },
-    { "label": "BCC", "ff": "coul-p", "flags":  " -qqm  qBCC "+mpdef+qdef, train: monomer },
-    { "label": "RESP", "ff": "coul-p", "flags":  " -qqm qRESP "+mpdef+qdef, train: monomer },
-    { "label": "MBIS", "ff": "coul-p", "flags":  " -qqm qMBIS  -charges ../AlexandriaFF/MP2-MBIS.xml"+mpdef, train: monomer },
-    { "label": "MBIS-S", "ff": "P+S_updated", "flags": " -qalg None -mp ../AlexandriaFF/MP2-aug-cc-pvtz_Updated.xml",  train: monomer },
+    { "label": "Mulliken", "ff": "coul-p", "flags": " -qqm qMulliken "+mpdef+qdef, train: legacy },
+    { "label": "Hirshfeld", "ff": "coul-p", "flags": " -qqm qHirshfeld "+mpdef+qdef, train: legacy },
+    { "label": "ESP", "ff": "coul-p", "flags": " -qqm qESP "+mpdef+qdef, train: legacy },
+    { "label": "CM5", "ff": "coul-p", "flags":  " -qqm qCM5 "+mpdef+qdef, train: legacy },
+    { "label": "BCC", "ff": "coul-p", "flags":  " -qqm  qBCC "+mpdef+qdef, train: legacy },
+    { "label": "RESP", "ff": "coul-p", "flags":  " -qqm qRESP "+mpdef+qdef, train: legacy },
+    { "label": "MBIS", "ff": "coul-p", "flags":  " -qqm qMBIS  -charges ../AlexandriaFF/MP2-MBIS.xml"+mpdef, train: legacy },
+    { "label": "MBIS-S", "ff": "P+S_updated", "flags": " -qalg None -mp ../AlexandriaFF/MP2-aug-cc-pvtz_Updated.xml",  train: legacy },
     { "label": "PC+GV3x", "ff": "PC+GV-esp3", "flags": " -qalg ESP -mp ../AlexandriaFF/MP2-aug-cc-pvtz_Updated.xml", train: monomer },
     { "label": "PC+SV3x", "ff": "PC+SV-esp3", "flags": " -qalg ESP -mp ../AlexandriaFF/MP2-aug-cc-pvtz_Updated.xml", train: monomer },
     { "label": "PC+GV4x", "ff": "PC+GV-esp4", "flags": " -qalg ESP -mp ../AlexandriaFF/MP2-aug-cc-pvtz_Updated.xml", train: monomer },
@@ -23,9 +24,9 @@ allffs = [
     { "label": "PC", "ff": "PC-elec", "flags":  mpdef, train: dimer },
     { "label": "GC", "ff": "GC-elec", "flags":  mpdef, train: dimer },
     { "label": "SC", "ff": "SC-elec", "flags":  mpdef, train: dimer },
-    { "label": "PC+GV", "ff": "PC+GV-elec", "flags":  mpdef, train: dimer },
-    { "label": "PC+SV", "ff": "PC+SV-elec", "flags":  mpdef, train: dimer },
-    { "label": "PC+GS", "ff": "PC+GS-elec", "flags":  mpdef, train: dimer }
+    { "label": "PC+GV4", "ff": "PC+GV-elec", "flags":  mpdef, train: dimer },
+    { "label": "PC+SV4", "ff": "PC+SV-elec", "flags":  mpdef, train: dimer },
+    { "label": "PC+GS4", "ff": "PC+GS-elec", "flags":  mpdef, train: dimer }
 ]
 
 def run_one(ff:str, myid:str, flags:str)->float:
@@ -132,7 +133,7 @@ def write_table_mol(tab:str, rmsd_mol:dict):
     print("Please check %s" % tab)
 
 if __name__ == "__main__":
-    myrmsd = { monomer: [], dimer: [] }
+    myrmsd = { legacy: [], monomer: [], dimer: [] }
     rmsd_mol = {}
     for qqm in allffs:
         print("Will run %s" % qqm['label'])

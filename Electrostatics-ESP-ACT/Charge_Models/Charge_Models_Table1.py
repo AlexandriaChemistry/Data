@@ -46,7 +46,7 @@ def myround(word:str)->float:
 def run_one(qtype:str, qm:str) -> dict:
     if not qtype in acmparm:
         sys.exit("Unknown qtype %s" % qtype)
-    molprops = "../AlexandriaFF/sapt-esp5.xml"
+    molprops = "../AlexandriaFF/sapt-esp6.xml"
     if qtype in [ "MBIS-S", "PC+SV-esp3", "PC+SV-esp4", "PC+GV-esp3", "PC+GV-esp4" ]:
         molprops = "../AlexandriaFF/sapt-esp5-mbiss.xml"
 
