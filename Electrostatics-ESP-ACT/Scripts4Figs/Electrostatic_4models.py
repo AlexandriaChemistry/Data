@@ -139,7 +139,7 @@ def print_tex():
 \\centering
 \\includegraphics[width=0.98\\linewidth]{Figures/SAPT_%s_100.pdf}
 \\end{minipage}
-\\caption{Electrostatic energies from SAPT0 with the aug-cc-pVTZ basis set and different charge models based on fitting the ESP from 2.0 to 4.5 {\\AA} (left) and 0.0 to 4.5 {\\AA} (right) for %s. Note that units on the y-axis may differ between plots. RMSD is computed for the points plotted, but it should be noted the range of points does not correspond to the range used for fitting, for those numbers please see Tables S1 and S2.}
+\\caption{Electrostatic energies from SAPT0 with the aug-cc-pVTZ basis set and {\\bf four different charge models} based on fitting the ESP from 2.0 to 4.5 {\\AA} (left) and 0.0 to 4.5 {\\AA} (right) for %s. Note that units on the y-axis may differ between plots. RMSD is computed for the points plotted, but it should be noted the range of points does not correspond to the range used for fitting, for those numbers please see Tables S1 and S2.}
 \\label{fig:pot_%s}
 \\end{figure}
 """ % ( ionpair, ionpair, ionpair, ionpair ) )
