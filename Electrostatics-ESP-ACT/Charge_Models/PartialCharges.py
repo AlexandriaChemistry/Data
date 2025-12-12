@@ -13,6 +13,7 @@ compounds_of_interest = [
     "formate",
     "acetate",
     "propanoate",
+    "butanoate",
     "guanidinium",
     "imidazolium",
     "water",
@@ -156,6 +157,18 @@ def extract_data_from_log():
                 for line in file:
                     line = line.strip()
 
+                    #handle potassium#propanoate
+                    if "Name: potassium#propanoate" in line:
+                        current_compound = "propanoate"
+                        read_data = True
+                        continue
+    
+                    #handle potassium#butanoate
+                    if "Name: potassium#butanoate" in line:
+                        current_compound = "butanoate"
+                        read_data = True
+                        continue
+
                     if "Name:" in line:
                         for compound in compounds_of_interest:
                             c2 = ( "%s#%s" % ( compound, compound ) )
@@ -175,6 +188,9 @@ def extract_data_from_log():
                         read_data = False
                         guanidinium_hack = False
                     elif read_data:
+
+                        # REQUIRED ADDITION FOR PROPANOATE & BUTANOATE
+
                         columns = line.split()
                         if len(columns) > 4 and columns[0].isdigit():
                             aindex     = 1
@@ -312,3 +328,4 @@ def save_data_as_latex(data):
 
 data = extract_data_from_log()
 save_data_as_latex(data)
+
