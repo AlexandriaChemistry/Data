@@ -263,7 +263,7 @@ def save_data_as_latex(data):
             for method in data.keys():
                 total[method] = 0
             # We use homodimers for reference and therefore only one half of the atoms is sufficient.
-            if compound == "guanidinium":
+            if compound in ["guanidinium", "propanoate", "butanoate"]:
                 maxpart = npart
             else:
                 maxpart = int(npart/2)
