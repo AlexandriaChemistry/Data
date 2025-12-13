@@ -17,23 +17,36 @@ compounds_of_interest = [
     "guanidinium",
     "imidazolium",
     "water",
-    "lithium",
-    "sodium",
-    "potassium",
+    "lithium-ion",
+    "sodium-ion",
+    "potassium-ion",
     "fluoride",
     "chloride",
     "bromide"
     ]
 
 log_files = {
-    "ESP":        { "label": "ESP", "ncol": 1 },
+    "ESP":        { "label": "ESP", "ncol": 1, "ff": "PC-elec", "flags": "-qalg ESP" },
     "PC-elec":    { "label": "PC$_{e}$", "ncol": 1 },
     "PC-allelec": { "label": "PC$_{ei}$", "ncol": 1 },
-    "MBIS-S":     { "label": "MBIS-S", "ncol": 2 },
+    "MBIS-S":     { "label": "MBIS-S", "ncol": 2, "ff": "P+S_updated", "flags": "-qqm None", "mp": "MP2-aug-cc-pvtz_updated" },
     "PC+SV-elec": { "label": "PC+SV4$_{e}$", "ncol": 2 },
     "PC+GV-elec": { "label": "PC+GV4$_{e}$", "ncol": 2 },
     "PC+GS-elec": { "label": "PC+GS4$_{e,i}$", "ncol": 2 },
 }
+
+def generate_logs():
+    for lf in log_files:
+        myff = lf
+        if "ff" in log_files[lf]:
+            myff = log_files[lf]["ff"]
+        mymp = "../AlexandriaFF/MP2-aug-cc-pvtz.xml"
+        if "mp" in log_files[lf]:
+            mymp = f"../AlexandriaFF/{log_files[lf]['mp']}.xml"
+        myflags = ""
+        if "flags" in log_files[lf]:
+            myflags = log_files[lf]["flags"]
+        os.system(f"alexandria train_ff -ff ../AlexandriaFF/{myff}.xml -sel ../Selection/monomer.dat -nooptimize -mp {mymp} -g {lf} {myflags}")
 
 def simplify(atype:str)->str:
     newrep = { "hn": [ "hna1", "hna2", "hne1", "hne2", "hne3",
@@ -139,9 +152,8 @@ def get_zeta(model:str, compound:str):
         
 def extract_data_from_log():
     data = {}
-    gw   = "guanidinium#water"
     for file_type in log_files:
-        log_file        = f"{file_type}_MP2.log"
+        log_file        = f"{file_type}.log"
         data[file_type] = {compound: [] for compound in compounds_of_interest}
         if not os.path.isfile(log_file):
             print(f"File does not exist: {log_file}")
@@ -153,30 +165,12 @@ def extract_data_from_log():
                 current_compound = None
                 core_shell_dict = {}
 
-                guanidinium_hack = False
                 for line in file:
                     line = line.strip()
 
-                    #handle potassium#propanoate
-                    if "Name: potassium#propanoate" in line:
-                        current_compound = "propanoate"
-                        read_data = True
-                        continue
-    
-                    #handle potassium#butanoate
-                    if "Name: potassium#butanoate" in line:
-                        current_compound = "butanoate"
-                        read_data = True
-                        continue
-
                     if "Name:" in line:
                         for compound in compounds_of_interest:
-                            c2 = ( "%s#%s" % ( compound, compound ) )
-                            # Hack since we do not have homodimer data for guanidinium
-                            if compound == "guanidinium" and f"Name: {gw}" in line:
-                                guanidinium_hack = True
-                                c2 = gw
-                            if f"Name: {c2}" in line:
+                            if f"Name: {compound}" in line:
                                 current_compound = compound
                                 read_data = True
                                 print("Will read charges for %s from %s" % ( compound, log_file ))
@@ -184,30 +178,20 @@ def extract_data_from_log():
                         if current_compound:
                             continue  
 
-                    if "EPOT" in line:
+                    if "MP2_SC" in line:
                         read_data = False
-                        guanidinium_hack = False
                     elif read_data:
-
-                        # REQUIRED ADDITION FOR PROPANOATE & BUTANOATE
-
-                        if current_compound in ["propanoate", "butanoate"] and (" K+ " in (" " + line + " ") or " K+_s " in (" " + line + " ")):
-                           continue
                         columns = line.split()
                         if len(columns) > 4 and columns[0].isdigit():
                             aindex     = 1
                             atom_type  = columns[2]
                             if not file_type == "MBIS-S":
                                 atom_type = simplify(atom_type)
-                            if not (guanidinium_hack and "w" in atom_type ):
-                                acm_value  = columns[3]
-                                for mypart in data[file_type][current_compound]:
-                                    if mypart["type"] == atom_type:
-                                        aindex   += 1
-                                        atom_type  = columns[2]
-                                        if not file_type == "MBIS-S":
-                                            atom_type = simplify(atom_type)
-                                data[file_type][current_compound].append( { "type": atom_type, "aindex": aindex, "value": acm_value } )
+                            acm_value  = columns[3]
+                            for mypart in data[file_type][current_compound]:
+                                if mypart["type"] == atom_type:
+                                    aindex   += 1
+                            data[file_type][current_compound].append( { "type": atom_type, "aindex": aindex, "value": acm_value } )
             if debug:
                 print(f"file {file_type} data {data[file_type]['guanidinium']}")
         except Exception as e:
@@ -258,17 +242,12 @@ def save_data_as_latex(data):
             file.write("\\hline\n")
 
             # Loop over particles, best to use the polarizable model as reference
-            npart = len(data["PC+GS-elec"][compound])
+            PCGS = "PC+GS-elec"
+            npart = len(data[PCGS][compound])
             total = {}
             for method in data.keys():
                 total[method] = 0
-            # We use homodimers for reference and therefore only one half of the atoms is sufficient.
-            if compound in ["guanidinium", "propanoate", "butanoate"]:
-                maxpart = npart
-            else:
-                maxpart = int(npart/2)
-            PCGS = "PC+GS-elec"
-            for ipart in range(maxpart):
+            for ipart in range(npart):
                 # Assume PC+GC has all particles
                 particle = data[PCGS][compound][ipart]
                 ptype    = particle["type"]
@@ -292,7 +271,7 @@ def save_data_as_latex(data):
                                 qval = float(data[method][compound][ipart]["value"])
                                 zval = zeta[method][compound][ipart]["zeta"]
                         else:
-                            for j in range(min(maxpart,len(data[method][compound]))):
+                            for j in range(min(npart, len(data[method][compound]))):
                                 if (ptype == data[method][compound][j]["type"] and
                                     particle["aindex"] == data[method][compound][j]["aindex"]):
                                     qval = float(data[method][compound][j]["value"])
@@ -319,7 +298,9 @@ def save_data_as_latex(data):
             file.write("\\hline\n")
             file.write("Total")
             for method in data.keys():
-                file.write(" & \\multicolumn{%d}{c}{%g}" % ( log_files[method]["ncol"], round(total[method],2) ) )
+                file.write(" & %g " % ( round(total[method],2) ) )
+                if log_files[method]["ncol"] == 2:
+                    file.write(" & ")
             file.write("\\\\\n")
             file.write("\\hline\n")
             file.write("\\end{tabular}\n")
@@ -328,6 +309,7 @@ def save_data_as_latex(data):
     print("LaTeX file %s generated successfully!" % combined_output_file)
 
 
+generate_logs()
 data = extract_data_from_log()
 save_data_as_latex(data)
 

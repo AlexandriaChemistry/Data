@@ -1,8 +1,8 @@
 water|Train
 bromide|Train
-lithium|Train
-potassium|Train
-sodium|Train
+lithium-ion|Train
+potassium-ion|Train
+sodium-ion|Train
 chloride|Train
 acetate|Train
 fluoride|Train
@@ -10,3 +10,7 @@ methylammonium|Train
 ammonium|Train
 ethylammonium|Train
 formate|Train
+propanoate|Train
+butanoate|Train
+guanidinium|Train
+imidazolium|Train
