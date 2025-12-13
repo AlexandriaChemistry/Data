@@ -26,27 +26,41 @@ compounds_of_interest = [
     ]
 
 log_files = {
-    "ESP":        { "label": "ESP", "ncol": 1, "ff": "PC-elec", "flags": "-qalg ESP" },
+    "ESP":        { "label": "ESP", "ncol": 1, "ff": "coul-p" },
     "PC-elec":    { "label": "PC$_{e}$", "ncol": 1 },
     "PC-allelec": { "label": "PC$_{ei}$", "ncol": 1 },
-    "MBIS-S":     { "label": "MBIS-S", "ncol": 2, "ff": "P+S_updated", "flags": "-qqm None", "mp": "MP2-aug-cc-pvtz_updated" },
+    "MBIS-S":     { "label": "MBIS-S", "ncol": 2, "ff": "P+S_updated", "mp": "MP2-aug-cc-pvtz_updated" },
     "PC+SV-elec": { "label": "PC+SV4$_{e}$", "ncol": 2 },
     "PC+GV-elec": { "label": "PC+GV4$_{e}$", "ncol": 2 },
     "PC+GS-elec": { "label": "PC+GS4$_{e,i}$", "ncol": 2 },
 }
 
 def generate_logs():
+    qfn = f"../AlexandriaFF/MP2-aug-cc-pvtz"
     for lf in log_files:
+        print(f"Running command for {lf}")
         myff = lf
         if "ff" in log_files[lf]:
             myff = log_files[lf]["ff"]
         mymp = "../AlexandriaFF/MP2-aug-cc-pvtz.xml"
         if "mp" in log_files[lf]:
             mymp = f"../AlexandriaFF/{log_files[lf]['mp']}.xml"
-        myflags = ""
-        if "flags" in log_files[lf]:
-            myflags = log_files[lf]["flags"]
-        os.system(f"alexandria train_ff -ff ../AlexandriaFF/{myff}.xml -sel ../Selection/monomer.dat -nooptimize -mp {mymp} -g {lf} {myflags}")
+
+        base_command = f"alexandria train_ff -nooptimize -g {lf} -sel ../Selection/monomer.dat -mp {mymp} -ff ../AlexandriaFF/{myff} "
+
+        if "elec" in lf:
+            mycmd = base_command + f" -charges {qfn} -qalg SQE"
+        elif "esp" in lf:
+            mycmd = base_command + f" -charges {qfn}_updated -qalg ESP"
+        elif lf == "MBIS":
+            mycmd = base_command + f" -qqm qMBIS -charges ../AlexandriaFF/MP2-MBIS.xml -qalg Read "
+        elif lf == "MBIS-S":
+            mycmd = base_command + " -qqm None "
+        else:
+            mycmd = base_command + f" -qqm q{lf} -charges {qfn} -qalg Read "
+
+        
+        os.system(mycmd)
 
 def simplify(atype:str)->str:
     newrep = { "hn": [ "hna1", "hna2", "hne1", "hne2", "hne3",
@@ -217,7 +231,7 @@ def save_data_as_latex(data):
         for compound in compounds_of_interest:
             file.write("\\begin{sidewaystable}\n")
             file.write("\\centering\n")
-            file.write(r"\caption{Partial charges q (e) and screening widths $\zeta$ (1/nm) for " + compound + " from ESP, MBIS-S and ACT models. First line, atom, second line shell or virtual site.}")
+            file.write(r"\caption{Partial charges q (e) and screening widths $\zeta$ (1/nm) for " + compound + " from ESP, MBIS-S and ACT models. First line, atom, second line (X) corresponds to shell (PC+GS4) or virtual site (other models).}")
             file.write("\n")
             file.write("\\label{tab:q%s}\n" % compound)
             file.write("\\begin{tabular}{l")
@@ -252,7 +266,10 @@ def save_data_as_latex(data):
                 # Assume PC+GC has all particles
                 particle = data[PCGS][compound][ipart]
                 ptype    = particle["type"]
-                mystr    = [ ptype.replace("_", "\\_") ]
+                if ptype.find("_") > 0:
+                    mystr = [ ptype.split("_")[0] + " X" ]
+                else:
+                    mystr    = [ ptype ]
                 for method in data.keys():
                     if not compound in data[method]:
                         sys.exit("Could not find compound %s for method %s" % ( compound, method ))
