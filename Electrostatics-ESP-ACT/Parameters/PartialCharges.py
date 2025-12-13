@@ -217,7 +217,7 @@ def save_data_as_latex(data):
         for compound in compounds_of_interest:
             file.write("\\begin{sidewaystable}\n")
             file.write("\\centering\n")
-            file.write(r"\caption{Partial charges q (e) and screening widths $\zeta$ (1/nm) for " + compound + " from ESP, MBIS-S and ACT models. First line, atom, second line shell or virtual site. $\\zeta$ = 0 indicates a point charge is used.}")
+            file.write(r"\caption{Partial charges q (e) and screening widths $\zeta$ (1/nm) for " + compound + " from ESP, MBIS-S and ACT models. First line, atom, second line shell or virtual site.}")
             file.write("\n")
             file.write("\\label{tab:q%s}\n" % compound)
             file.write("\\begin{tabular}{l")
@@ -247,11 +247,12 @@ def save_data_as_latex(data):
             total = {}
             for method in data.keys():
                 total[method] = 0
+            mystrings = []
             for ipart in range(npart):
                 # Assume PC+GC has all particles
                 particle = data[PCGS][compound][ipart]
                 ptype    = particle["type"]
-                mystr    = ptype.replace("_", "\\_")
+                mystr    = [ ptype.replace("_", "\\_") ]
                 for method in data.keys():
                     if not compound in data[method]:
                         sys.exit("Could not find compound %s for method %s" % ( compound, method ))
@@ -277,9 +278,9 @@ def save_data_as_latex(data):
                                     qval = float(data[method][compound][j]["value"])
                         if qval:
                             total[method] += qval
-                            mystr += ( " & %s" % str(round(qval, 4)) )
+                            mystr.append( " & %s" % str(round(qval, 4)) )
                         else:
-                            mystr += ( " & " )
+                            mystr.append( " & " )
                         if method in zeta and not method == "MBIS-S":
                             if compound in zeta[method] and ptype in zeta[method][compound]:
                                 zval = zeta[method][compound][ptype]
@@ -287,13 +288,29 @@ def save_data_as_latex(data):
                                 sys.exit("Cannot find zeta for particle %s in compound %s method %s" %
                                          ( particle, compound, method ) )
 
-                        if zval != None:
-                            mystr += (" & %s" % ( str(round(zval, 2)) ))
+                        if zval:
+                            mystr.append(" & %s" % ( str(round(zval, 2)) ))
+                        elif method in zeta:
+                            mystr.append(" & ")
 
                     except ValueError:
                         sys.exit("Don't know how to treat charge %s for type %s" % ( mypart["value"], mypart["type"] ))
-                    
-                file.write("%s\\\\\n" % mystr)
+                mystrings.append(mystr)
+            
+            # Now we have collected all atoms for all methods in a matrix
+            # First, swap atom and shell for MBIS-S
+            for j in range(0, len(mystrings)-1, 2):
+                qatom  = mystrings[j][4]
+                zatom  = mystrings[j][5]
+                mystrings[j][4] = mystrings[j+1][4]
+                mystrings[j][5] = mystrings[j+1][5]
+                mystrings[j+1][4] = qatom
+                mystrings[j+1][5] = zatom
+            # Now print the lines
+            for mystr in mystrings:
+                for j in range(len(mystr)):
+                    file.write(" %s" % mystr[j])
+                file.write("\\\\\n")
                 
             file.write("\\hline\n")
             file.write("Total")
