@@ -191,7 +191,7 @@ def extract_data_from_log():
 
                         # REQUIRED ADDITION FOR PROPANOATE & BUTANOATE
 
-                        if current_compound in ["propanoate", "butanoate"] and " K+ " in (" " + line + " ") or " K+_s " in (" " + line + " "):
+                        if current_compound in ["propanoate", "butanoate"] and (" K+ " in (" " + line + " ") or " K+_s " in (" " + line + " ")):
                            continue
                         columns = line.split()
                         if len(columns) > 4 and columns[0].isdigit():
