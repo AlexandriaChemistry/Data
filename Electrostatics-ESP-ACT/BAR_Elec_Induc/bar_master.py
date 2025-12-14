@@ -6,7 +6,7 @@ from pathlib import Path
 lw    = 0.3
 legfs = 28
 #colors = [ "#5e3c99", "#c8f7c5", "#ffb000", "#0000cc", "#e41a1c", "#e41a1c" ]
-colors  = [ "#aaaaaa", "#00cc00",  "#00eeee", "#0000cc", "#ffff00", "#ff0000" ]
+colors  = [ "#00cc00",  "#aaaaaa", "#00eeee", "#0000cc", "#ffff00", "#ff0000" ]
 hatches = [ '+', '', '-', '', 'x', '', 'O', '.', '*', '\\' ]
 
 def readLATEX(filepath):
