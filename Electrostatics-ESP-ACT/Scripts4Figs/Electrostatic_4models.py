@@ -13,6 +13,16 @@ PARAM_DIR = os.path.join("..", "AnalyticalFitting")
 FIT_SCRIPT = os.path.join(PARAM_DIR, "Fit_ESP-4models.py")
 figs = "Figures"
 
+MODEL_COLORS = {
+    "SAPT": "#00cc00",        # green
+    "PC":   "#00eeee",        # cyan/greyish
+    "P+G":  "#FFD700",        # yellow
+    "P+1S": "#FF0000",        # red
+    "P+G+G":"#D8BFD8",        # light purple
+    "P+1S+2S":"#0000FF",      # blue
+}
+
+
 def main(T:int):
     params_path = os.path.join(PARAM_DIR, f"params_4_{T}.json")
     with open(params_path, 'r') as json_f:       
@@ -102,7 +112,7 @@ def main(T:int):
 
 
 
-                        axes[i].plot(x1, y1, label=f"SAPT", color='r')
+                        axes[i].plot(x1, y1, label=f"SAPT", color=MODEL_COLORS["SAPT"], lw=3, ls="--")
                         ener_pc = []
                         for j in range(len(x1)):
                             ener = 0
@@ -112,11 +122,12 @@ def main(T:int):
                         # Compute RMSD
                         pcrmsd = np.sqrt(np.mean((y1-ener_pc)**2))
                         pclabel = ("PC RMSD = %.0f kJ/mol" % ( pcrmsd ))
-                        axes[i].plot(x1, ener_pc, label=pclabel, color='blue')
+                        axes[i].plot(x1, ener_pc, label=pclabel,  color=MODEL_COLORS["PC"], lw=3)
                         # Compute RMSD
                         rmsd = np.sqrt(np.mean((y1-function_values[function_name])**2))
                         flabel = ("%s RMSD = %.0f kJ/mol" % ( func_index_to_name[func_index], rmsd))
-                        axes[i].plot(distances, function_values[function_name], color='black', label=flabel)
+                        model_name = func_index_to_name[func_index]
+                        axes[i].plot(distances, function_values[function_name], color=MODEL_COLORS[model_name], lw=3, label=flabel)
                         axes[i].set_xlabel('Distance ($\AA$)', fontsize=18)
                         if i == 1:
                             axes[i].set_ylabel('Electrostatic energies (kJ/mol)', fontsize=18)
