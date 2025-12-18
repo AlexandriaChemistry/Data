@@ -7,6 +7,9 @@ import json
 from enum import Enum
 from potential_elec_functions import *
 
+import os
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
 def doit(T:int, texf):
 
         def Point_core_1slater_shell_charge(distance, q_c, z2):
