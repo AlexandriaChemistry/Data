@@ -106,7 +106,7 @@ def doit(T:int, texf):
             point_core
         ]
 
-        with open(f'output_4_{T}.json', 'r') as json_f:
+        with open(f'InitialVal_ESPoutput_4_{T}.json', 'r') as json_f:
             output_data = json.load(json_f)
 
         data   = output_data['data']
@@ -119,8 +119,9 @@ def doit(T:int, texf):
 
         all_params = {}
         plot_colors = ["crimson", "black", "royalblue", "mediumseagreen"]
-
-        for i, (compound, (distance_data, potential_data)) in enumerate(data.items()):
+        ION_ORDER = ["F", "Cl", "Br", "Li", "Na", "K"]
+        ordered_items = [(ion, data[ion]) for ion in ION_ORDER if ion in data]
+        for i, (compound, (distance_data, potential_data)) in enumerate(ordered_items):
 
             params = {}
             popts_compound = []
