@@ -4,13 +4,18 @@ import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
 import json
 import math
-import os
+import os, subprocess, sys
 from potential_elec_functions import *
 
+
+
+PARAM_DIR = os.path.join("..", "AnalyticalFitting")
+FIT_SCRIPT = os.path.join(PARAM_DIR, "Fit_ESP-4models.py")
 figs = "Figures"
 
 def main(T:int):
-    with open(f'params_4_{T}.json', 'r') as json_f:
+    params_path = os.path.join(PARAM_DIR, f"params_4_{T}.json")
+    with open(params_path, 'r') as json_f:       
         params = json.load(json_f)
 
 
@@ -145,6 +150,7 @@ def print_tex():
 """ % ( ionpair, ionpair, ionpair, ionpair ) )
 
 if __name__ == "__main__":
+    subprocess.check_call([sys.executable, FIT_SCRIPT])
     print_tex()
     os.makedirs(figs, exist_ok=True)
     for T in [ 10, 100 ]:
