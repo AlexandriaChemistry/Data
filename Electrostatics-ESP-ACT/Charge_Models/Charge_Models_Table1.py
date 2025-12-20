@@ -135,11 +135,11 @@ def do_all(qm:str):
             if os.path.exists(fn):
                 os.unlink(fn)
 
-    cmd1 = f"viewxvg -f {couls} -label {labels} -ls None -mk o + x -res -noshow -save legacy_coul_{qm}.pdf -panel"
+    cmd1 = f"plotxvg -f {couls} -label {labels} -ls None -mk o + x -res -noshow -save legacy_coul_{qm}.pdf -panel"
     if debug:
         print(f"cmd1 = {cmd1}")
     os.system(cmd1)
-    cmd2 = f"viewxvg -f {allelecs} -label {labels} -ls None -mk o + x -res -noshow -save legacy_allelec_{qm}.pdf -panel"
+    cmd2 = f"plotxvg -f {allelecs} -label {labels} -ls None -mk o + x -res -noshow -save legacy_allelec_{qm}.pdf -panel"
     if debug:
         print(f"cmd2 = {cmd2}")
     os.system(cmd2)
