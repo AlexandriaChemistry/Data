@@ -58,17 +58,17 @@ for rel in plots:
 
     if "relative" == rel:
         opts += " -ymax 200"
-        os.system("viewxvg -f F-%s.xvg Cl-%s.xvg Br-%s.xvg -label Fluoride Chloride Bromide -pdf ../anion-esp-%s.pdf %s" %
+        os.system("plotxvg -f F-%s.xvg Cl-%s.xvg Br-%s.xvg -dslegends Fluoride Chloride Bromide -pdf ../anion-esp-%s.pdf %s" %
                   (rel, rel, rel, rel, opts))
-        os.system("viewxvg -f Li-%s.xvg Na-%s.xvg K-%s.xvg -label Lithium Sodium Potassium -pdf ../cation-esp-%s.pdf %s" %
+        os.system("plotxvg -f Li-%s.xvg Na-%s.xvg K-%s.xvg -dslegends Lithium Sodium Potassium -pdf ../cation-esp-%s.pdf %s" %
                   (rel, rel, rel, rel, opts))
     elif "scaled" == rel:
-        os.system("viewxvg -f F-%s.xvg Cl-%s.xvg Br-%s.xvg -label Fluoride Chloride Bromide -pdf ../anion-esp-%s.pdf %s -ymax 2" %
+        os.system("plotxvg -f F-%s.xvg Cl-%s.xvg Br-%s.xvg -dslegends Fluoride Chloride Bromide -pdf ../anion-esp-%s.pdf %s -ymax 2" %
                   (rel, rel, rel, rel, opts ))
-        os.system("viewxvg -f Li-%s.xvg Na-%s.xvg K-%s.xvg -label Lithium Sodium Potassium -pdf ../cation-esp-%s.pdf %s -ymax 4" %
+        os.system("plotxvg -f Li-%s.xvg Na-%s.xvg K-%s.xvg -dslegends Lithium Sodium Potassium -pdf ../cation-esp-%s.pdf %s -ymax 4" %
                   (rel, rel, rel, rel, opts ))
     else:
-        os.system("viewxvg -f F-%s.xvg Cl-%s.xvg Br-%s.xvg minus.xvg -label Fluoride Chloride Bromide PC -pdf ../anion-esp-%s.pdf %s" %
+        os.system("plotxvg -f F-%s.xvg Cl-%s.xvg Br-%s.xvg minus.xvg -dslegends Fluoride Chloride Bromide PC -pdf ../anion-esp-%s.pdf %s" %
                   (rel, rel, rel, rel, opts))
-        os.system("viewxvg -f Li-%s.xvg Na-%s.xvg K-%s.xvg plus.xvg -label Lithium Sodium Potassium PC -pdf ../cation-esp-%s.pdf %s" %
+        os.system("plotxvg -f Li-%s.xvg Na-%s.xvg K-%s.xvg plus.xvg -dslegends Lithium Sodium Potassium PC -pdf ../cation-esp-%s.pdf %s" %
                   (rel, rel, rel, rel, opts))

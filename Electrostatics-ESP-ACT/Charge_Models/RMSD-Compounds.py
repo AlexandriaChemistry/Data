@@ -69,17 +69,17 @@ def make_plot(model:dict):
 if __name__ == "__main__":
     alldata = {}
     mydirs = {
-        "Mulliken": "Mulliken_MP2.log",
-        "Hirshfeld": "Hirshfeld_MP2.log",
+ #       "Mulliken": "Mulliken_MP2.log",
+ #       "Hirshfeld": "Hirshfeld_MP2.log",
         "ESP": "ESP_MP2.log",
-        "CM5": "CM5_MP2.log",
+ #       "CM5": "CM5_MP2.log",
         "BCC": "BCC_MP2.log",
         "RESP": "RESP_MP2.log",
-        "MBIS": "MBIS_MP2.log",
+ #       "MBIS": "MBIS_MP2.log",
         "MBIS-S": "MBIS-S_MP2.log",
-        "PC+GV3x": "PC+GV-esp3_MP2.log",
+ #       "PC+GV3x": "PC+GV-esp3_MP2.log",
         "PC+GV4x": "PC+GV-esp4_MP2.log",
-        "PC+SV3x": "PC+SV-esp3_MP2.log",
+ #       "PC+SV3x": "PC+SV-esp3_MP2.log",
         "PC+SV4x": "PC+SV-esp4_MP2.log",
         "PC": "PC-elec_MP2.log",
         "GC": "GC-elec_MP2.log",

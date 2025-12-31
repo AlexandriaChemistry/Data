@@ -71,7 +71,7 @@ opts = (
 )
 
 os.system(
-    f"viewxvg -f minus.xvg plus.xvg "
+    f"plotxvg -f minus.xvg plus.xvg "
     f"-save ../ion-esp-absolute.pdf {opts}"
 )
 

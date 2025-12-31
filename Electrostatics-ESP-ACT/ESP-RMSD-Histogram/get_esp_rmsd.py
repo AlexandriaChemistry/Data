@@ -59,6 +59,6 @@ if __name__ == "__main__":
             outf.write("%10g  %10g\n" % ( hartree*i*mymax/100, histo[i]*1.0/nmol))
 
     pdf = "rmsd_histo.pdf"
-    os.system("viewxvg -f %s -bar -lfs 40 -alfs 40 -tickfs 32 -label HF -noshow -save %s" % ( histofn, pdf ) )
+    os.system("plotxvg -f %s -bar -lfs 40 -alfs 40 -tickfs 32 -dslegends HF -noshow -save %s" % ( histofn, pdf ) )
     print("Average RMSD = %g" % ( hartree*sumrms/nmol ))
     print("Please check %s" % pdf )
